@@ -66,6 +66,16 @@ public class Assignment: DirectoryInfo {
 
 }
 
+extension Directory {
+    var assignment: Assignment {
+        guard let assignmentInfo = self.info as! Assignment? else {
+            fatalError("directory did not have its info set")
+        }
+        
+        return assignmentInfo
+    }
+}
+
 extension NSFetchedResultsController {
     @objc func assignment(at indexPath: IndexPath) -> Assignment {
         return self.object(at: indexPath) as! Assignment

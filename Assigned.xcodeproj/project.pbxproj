@@ -24,7 +24,7 @@
 		E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */; };
 		E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */; };
 		E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */; };
-		E9D51D7F20532877006D8CEF /* Directories+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7B20532877006D8CEF /* Directories+CoreDataClass.swift */; };
+		E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +68,7 @@
 		E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
 		E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E9D51D7B20532877006D8CEF /* Directories+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directories+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +171,7 @@
 		E97DF46620530BCF0050EA21 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				E9D51D7B20532877006D8CEF /* Directories+CoreDataClass.swift */,
+				E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */,
 				E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
@@ -333,7 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9D51D7F20532877006D8CEF /* Directories+CoreDataClass.swift in Sources */,
+				E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */,
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,

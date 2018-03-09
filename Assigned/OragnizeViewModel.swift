@@ -13,6 +13,8 @@ struct OrganizeViewModel {
     
     private var persistance = PersistenceStack.shared
     
+    var currentDirectory: Directory? = nil
+    
     var managedObjectContext: NSManagedObjectContext {
         return persistance.viewContext
     }
@@ -22,12 +24,13 @@ struct OrganizeViewModel {
     // MARK: - VOID METHODS
     
     func addAssignment(with title: String) {
-        _ = Assignment(title: title, effort: 0, in: managedObjectContext)
-        
-        self.save()
+        let newAssignment = Assignment(title: title, effort: 0, in: managedObjectContext)
+        self.addAssignment(newAssignment)
     }
     
     func addAssignment(_ assignment: Assignment) {
+        _ = Directory.createDirectory(for: assignment, parent: self.currentDirectory, in: managedObjectContext)
+        self.save()
         
     }
     

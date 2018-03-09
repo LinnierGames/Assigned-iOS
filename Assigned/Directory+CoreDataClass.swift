@@ -10,18 +10,24 @@
 import Foundation
 import CoreData
 
-@objc(Directories)
+@objc(Directory)
 public class Directory: NSManagedObject {
     
     convenience init(in context: NSManagedObjectContext) {
         self.init(context: context)
     }
     
-    func createDirectory(for directoryInfo: DirectoryInfo, inside parent: Directory?, in context: NSManagedObjectContext) -> Directory {
+    static func createDirectory(for directoryInfo: DirectoryInfo, parent: Directory?, in context: NSManagedObjectContext) -> Directory {
         let newDirectory = Directory(in: context)
         newDirectory.info = directoryInfo
         newDirectory.parent = parent
         
         return newDirectory
+    }
+}
+
+extension NSFetchedResultsController {
+    @objc func directory(at indexPath: IndexPath) -> Directory {
+        return self.object(at: indexPath) as! Directory
     }
 }

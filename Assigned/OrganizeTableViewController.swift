@@ -25,7 +25,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 return UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
         
-        let assignment = fetchedResultsController.assignment(at: indexPath)
+        let directory = fetchedResultsController.directory(at: indexPath)
+        let assignment = directory.assignment
         cell.configure(assignment)
         
         return cell
@@ -38,9 +39,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     }
     
     private func updateFetch() {
-        let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
+        let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
         fetch.sortDescriptors = [
-            NSSortDescriptor(key: "title",
+            NSSortDescriptor(key: "info.title",
                              ascending: false,
                              selector: #selector(NSString.localizedStandardCompare(_:))
             )
