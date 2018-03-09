@@ -17,6 +17,7 @@
 		E97DF457205305F80050EA21 /* AssignedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF456205305F80050EA21 /* AssignedUITests.swift */; };
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
 		E97DF46E20530C2E0050EA21 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */; };
+		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		E97DF458205305F80050EA21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				E97DF46620530BCF0050EA21 /* Core Data */,
+				E9CA1C0F2053144100B8936E /* PersistenceStack.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
 				E97DF436205305F80050EA21 /* ViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
