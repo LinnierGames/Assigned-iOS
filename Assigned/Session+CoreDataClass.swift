@@ -16,7 +16,7 @@ public class Session: NSManagedObject {
     convenience init(name: String,
                      date: Date,
                      duration: TimeInterval,
-                     task: Task? = nil,
+                     assignment: Assignment? = nil,
                      in context: NSManagedObjectContext) {
         self.init(context: context)
         
@@ -24,6 +24,6 @@ public class Session: NSManagedObject {
         self.date = date
         self.duration = duration
         
-        self.task = task
+        self.assignment = assignment
     }
 }

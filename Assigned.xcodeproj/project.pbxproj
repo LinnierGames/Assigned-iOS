@@ -16,10 +16,11 @@
 		E97DF44C205305F80050EA21 /* AssignedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF44B205305F80050EA21 /* AssignedTests.swift */; };
 		E97DF457205305F80050EA21 /* AssignedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF456205305F80050EA21 /* AssignedUITests.swift */; };
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
-		E97DF46E20530C2E0050EA21 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */; };
+		E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
+		E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,10 +56,11 @@
 		E97DF456205305F80050EA21 /* AssignedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedUITests.swift; sourceTree = "<group>"; };
 		E97DF458205305F80050EA21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
+		E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,7 +162,7 @@
 		E97DF46620530BCF0050EA21 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */,
+				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
 			);
@@ -170,6 +172,7 @@
 		E97DF46720530BD80050EA21 /* Organize */ = {
 			isa = PBXGroup;
 			children = (
+				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
 			);
 			name = Organize;
 			sourceTree = "<group>";
@@ -322,8 +325,9 @@
 				E97DF436205305F80050EA21 /* ViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
-				E97DF46E20530C2E0050EA21 /* Task+CoreDataClass.swift in Sources */,
+				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,
+				E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */,
 				E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

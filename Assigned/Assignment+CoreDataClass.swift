@@ -10,8 +10,8 @@
 import Foundation
 import CoreData
 
-@objc(Task)
-public class Task: NSManagedObject {
+@objc(Assignment)
+public class Assignment: NSManagedObject {
     
     enum Priorities: Int, Equatable, CustomStringConvertible {
         case None = 0
@@ -50,7 +50,7 @@ public class Task: NSManagedObject {
     
     convenience init(title: String, effort: Float,
                      deadline: Date? = nil,
-                     priority: Task.Priorities = .None,
+                     priority: Assignment.Priorities = .None,
                      notes: String = "",
                      isCompleted: Bool = false,
                      in context: NSManagedObjectContext) {

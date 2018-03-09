@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2e3-UV-YjP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Organize-->
         <scene sceneID="3v8-XW-0Tw">
             <objects>
-                <tableViewController id="JAc-Yi-lyA" sceneMemberID="viewController">
+                <tableViewController id="JAc-Yi-lyA" customClass="OrganizeTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gi5-bt-1eR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,8 +24,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Organize" id="P3k-c9-41p">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="LZe-Sr-Re2"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2sa-YV-5Wg"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="LZe-Sr-Re2">
+                            <connections>
+                                <action selector="pressProfile:" destination="JAc-Yi-lyA" id="ZKN-Me-I73"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="2sa-YV-5Wg">
+                            <connections>
+                                <action selector="pressAdd:" destination="JAc-Yi-lyA" id="eoL-sH-cu4"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>

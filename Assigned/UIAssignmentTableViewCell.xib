@@ -34,6 +34,9 @@
                                             <constraint firstAttribute="width" secondItem="pTl-9b-QLI" secondAttribute="height" multiplier="1:1" id="opT-m0-a2M"/>
                                         </constraints>
                                         <state key="normal" image="checkbox-1"/>
+                                        <connections>
+                                            <action selector="pressCheckbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YCg-bH-7sF"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ufo-rv-yoM">
                                         <rect key="frame" x="22" y="0.0" width="8" height="22"/>
@@ -75,6 +78,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="buttonCheckbox" destination="pTl-9b-QLI" id="g6h-FY-WmM"/>
+                <outlet property="imagePriority" destination="Ufo-rv-yoM" id="vgl-ty-9vE"/>
+                <outlet property="labelDeadline" destination="iTx-14-n4o" id="WQi-IK-d38"/>
+                <outlet property="labelTasks" destination="FUp-xz-RzY" id="SPX-oB-jd6"/>
+                <outlet property="labelTitle" destination="y2V-Be-0iX" id="2sr-Zz-rIp"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
