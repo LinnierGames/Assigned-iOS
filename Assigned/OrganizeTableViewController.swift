@@ -77,6 +77,10 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
         tableView.register(UINib.assignmentCells(), forCellReuseIdentifier: UIAssignmentTableViewCell.Types.baseCell)
         
+        //TODO: Dynamic Font
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+        
         saveHandler = viewModel.save
     }
     
