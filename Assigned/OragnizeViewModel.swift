@@ -22,7 +22,7 @@ struct OrganizeViewModel {
     // MARK: - VOID METHODS
     
     func addAssignment(with title: String) {
-        let assignment = Assignment(title: title, effort: 0, in: managedObjectContext)
+        _ = Assignment(title: title, effort: 0, in: managedObjectContext)
         
         self.save()
     }

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17C205" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Assignment" representedClassName="Assignment" syncable="YES" codeGenerationType="category">
+    <entity name="Assignment" representedClassName="Assignment" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="category">
         <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="effort" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notes" attributeType="String" syncable="YES"/>
         <attribute name="priorityValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="sessions" toMany="YES" deletionRule="Nullify" destinationEntity="Sessions" inverseName="assignment" inverseEntity="Sessions" syncable="YES"/>
+    </entity>
+    <entity name="Directories" representedClassName="Directory" syncable="YES" codeGenerationType="category">
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
+        <relationship name="info" maxCount="1" deletionRule="Cascade" destinationEntity="DirectoryInfos" inverseName="directory" inverseEntity="DirectoryInfos" syncable="YES"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directories" inverseName="children" inverseEntity="Directories" syncable="YES"/>
+    </entity>
+    <entity name="DirectoryInfos" representedClassName="DirectoryInfo" syncable="YES" codeGenerationType="category">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="directory" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="info" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="Sessions" representedClassName="Session" syncable="YES" codeGenerationType="category">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -16,7 +24,9 @@
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="sessions" inverseEntity="Assignment" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Assignment" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Sessions" positionX="-54" positionY="36" width="128" height="105"/>
-        <element name="Assignment" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Directories" positionX="-63" positionY="45" width="128" height="90"/>
+        <element name="DirectoryInfos" positionX="-45" positionY="63" width="128" height="75"/>
     </elements>
 </model>

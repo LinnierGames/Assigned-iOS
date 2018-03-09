@@ -11,7 +11,7 @@ import Foundation
 import CoreData
 
 @objc(Assignment)
-public class Assignment: NSManagedObject {
+public class Assignment: DirectoryInfo {
     
     enum Priorities: Int, Equatable, CustomStringConvertible {
         case None = 0
