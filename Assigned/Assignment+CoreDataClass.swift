@@ -65,3 +65,9 @@ public class Assignment: NSManagedObject {
     }
 
 }
+
+extension NSFetchedResultsController {
+    @objc func assignment(at indexPath: IndexPath) -> Assignment {
+        return self.object(at: indexPath) as! Assignment
+    }
+}

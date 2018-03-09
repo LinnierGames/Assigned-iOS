@@ -31,6 +31,11 @@ class UIAssignmentTableViewCell: UITableViewCell {
     
     // MARK: - VOID METHODS
     
+    func configure(_ assignment: Assignment) {
+        self.labelTitle.text = assignment.title
+        //TODO: configure the assignment cell of all assignment properties
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
