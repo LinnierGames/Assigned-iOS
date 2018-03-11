@@ -12,5 +12,9 @@ import CoreData
 
 @objc(DirectoryInfo)
 public class DirectoryInfo: NSManagedObject {
+    
+    public override var description: String {
+        return "Directory Info"
+    }
 
 }

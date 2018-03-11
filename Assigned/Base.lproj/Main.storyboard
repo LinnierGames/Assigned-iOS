@@ -13,7 +13,7 @@
         <!--Organize-->
         <scene sceneID="3v8-XW-0Tw">
             <objects>
-                <tableViewController id="JAc-Yi-lyA" customClass="OrganizeTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="organize table vc" id="JAc-Yi-lyA" customClass="OrganizeTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Gi5-bt-1eR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,10 +35,21 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="315"/>
+        </scene>
+        <!--organize table vc-->
+        <scene sceneID="uX4-ik-zlK">
+            <objects>
+                <viewControllerPlaceholder referencedIdentifier="organize table vc" id="oeQ-MX-DdJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uIH-bj-ZIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1922" y="-102"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="gAW-uL-LMa">

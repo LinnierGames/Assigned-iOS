@@ -63,7 +63,10 @@ public class Assignment: DirectoryInfo {
         self.notes = notes
         self.isCompleted = isCompleted
     }
-
+    
+    public override var description: String {
+        return "Assignment"
+    }
 }
 
 extension Directory {

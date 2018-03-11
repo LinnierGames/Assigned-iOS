@@ -16,6 +16,7 @@
 		E97DF457205305F80050EA21 /* AssignedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF456205305F80050EA21 /* AssignedUITests.swift */; };
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
 		E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */; };
+		E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645A205335C100073B33 /* Folder+CoreDataClass.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
@@ -60,6 +61,7 @@
 		E97DF458205305F80050EA21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E980645A205335C100073B33 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */,
 				E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
+				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
 			);
@@ -340,6 +343,7 @@
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
+				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,

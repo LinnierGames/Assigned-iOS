@@ -31,7 +31,16 @@ struct OrganizeViewModel {
     func addAssignment(_ assignment: Assignment) {
         _ = Directory.createDirectory(for: assignment, parent: self.currentDirectory, in: managedObjectContext)
         self.save()
-        
+    }
+    
+    func addFolder(with title: String) {
+        let newFolder = Folder(title: title, in: managedObjectContext)
+        self.addFolder(newFolder)
+    }
+    
+    func addFolder(_ folder: Folder) {
+        _ = Directory.createDirectory(for: folder, parent: self.currentDirectory, in: managedObjectContext)
+        self.save()
     }
     
     func save() {

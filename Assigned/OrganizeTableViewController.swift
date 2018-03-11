@@ -11,7 +11,16 @@ import CoreData
 
 class OrganizeTableViewController: FetchedResultsTableViewController {
     
-    var viewModel = OrganizeViewModel()
+    private var viewModel = OrganizeViewModel()
+    
+    var currentDirectory: Directory? {
+        get {
+            return self.viewModel.currentDirectory
+        }
+        set {
+            self.viewModel.currentDirectory = newValue
+        }
+    }
     
     // MARK: - RETURN VALUES
     
@@ -26,8 +35,17 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
         
         let directory = fetchedResultsController.directory(at: indexPath)
-        let assignment = directory.assignment
-        cell.configure(assignment)
+        //TODO: DRY by using an interface
+        switch directory.info! {
+        case is Assignment:
+            let assignment = directory.assignment
+            cell.configure(assignment)
+        case is Folder:
+            let folder = directory.folder
+            cell.configure(folder)
+        default:
+            break
+        }
         
         return cell
     }
@@ -46,6 +64,13 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                              selector: #selector(NSString.localizedStandardCompare(_:))
             )
         ]
+        
+        if let parent = self.currentDirectory {
+            fetch.predicate = NSPredicate(format: "parent == %@", parent)
+        } else {
+            fetch.predicate = NSPredicate(format: "parent == NULL")
+        }
+        
         self.fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
             fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
             managedObjectContext: viewModel.managedObjectContext,
@@ -53,20 +78,78 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         )
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show child directory":
+                guard let vc = segue.destination as? OrganizeTableViewController else {
+                    fatalError("segue did not have a destination of OrganizeTableViewController")
+                }
+                
+                guard
+                    let indexPath = sender as? IndexPath
+                    else {
+                        fatalError("\"show child directory\" was fired by something other than a table view cell did select")
+                }
+                
+                let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
+                vc.currentDirectory = selectedDirectory
+            default: break
+            }
+        }
+    }
+    
+    // MARK: Table View Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let directory = fetchedResultsController.directory(at: indexPath)
+        if let _ = directory.info! as? Folder {
+            self.performSegue(withIdentifier: "show child directory", sender: indexPath)
+        } else if let _ = directory.info! as? Assignment {
+            //TODO: show assignment vc
+        }
+    }
+    
     // MARK: - IBACTIONS
     
     @IBAction func pressAdd(_ sender: Any) {
-        let alertAddAssignment = UIAlertController(title: "Add an Assignment", message: "enter a title", preferredStyle: .alert)
         
-        alertAddAssignment
-            .addTextField(placeholderText: "e.g. Create Project Outline")
-            .addCancelButton()
-            .addButton(title: "Add") { (action) in
-                if let newTitle = alertAddAssignment.inputField.text {
-                    self.viewModel.addAssignment(with: newTitle)
+        /** <#Lorem ipsum dolor sit amet.#> */
+        func add<T>(_ type: T.Type) where T: DirectoryInfo {
+            let alertAddTitle = UIAlertController(
+                title: String(describing: type),
+                message: "enter a title",
+                preferredStyle: .alert
+            )
+            
+            alertAddTitle
+                .addTextField()
+                .addCancelButton()
+                .addButton(title: "Add") { (action) in
+                    if let newTitle = alertAddTitle.inputField.text {
+                        switch type {
+                        case is Assignment.Type:
+                            self.viewModel.addAssignment(with: newTitle)
+                        case is Folder.Type:
+                            self.viewModel.addFolder(with: newTitle)
+                        default: break
+                        }
+                    }
                 }
-            }
+                .present(in: self)
+
+        }
+        
+        UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            .addButton(title: "Assignment", with: { (action) in
+                add(Assignment.self)
+            })
+            .addButton(title: "Folder", with: { (action) in
+                add(Folder.self)
+            })
+            .addCancelButton()
             .present(in: self)
+        
     }
     
     @IBAction func pressProfile(_ sender: Any) { }

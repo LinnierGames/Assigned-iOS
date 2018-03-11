@@ -36,6 +36,11 @@ class UIAssignmentTableViewCell: UITableViewCell {
         //TODO: configure the assignment cell of all assignment properties
     }
     
+    func configure(_ folder: Folder) {
+        self.labelTitle.text = folder.title
+        //TODO: configure the assignment cell of all assignment properties
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
