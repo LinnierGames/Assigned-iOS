@@ -6,7 +6,8 @@
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="notes" attributeType="String" syncable="YES"/>
         <attribute name="priorityValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="sessions" toMany="YES" deletionRule="Nullify" destinationEntity="Sessions" inverseName="assignment" inverseEntity="Sessions" syncable="YES"/>
+        <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Sessions" inverseName="assignment" inverseEntity="Sessions" syncable="YES"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tasks" inverseName="assignment" inverseEntity="Tasks" syncable="YES"/>
     </entity>
     <entity name="Directories" representedClassName="Directory" syncable="YES" codeGenerationType="category">
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
@@ -24,11 +25,17 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="sessions" inverseEntity="Assignment" syncable="YES"/>
     </entity>
+    <entity name="Tasks" representedClassName="Task" syncable="YES" codeGenerationType="category">
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="tasks" inverseEntity="Assignment" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Assignment" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="Assignment" positionX="-63" positionY="-18" width="128" height="150"/>
         <element name="Directories" positionX="-63" positionY="45" width="128" height="90"/>
         <element name="DirectoryInfos" positionX="-45" positionY="63" width="128" height="75"/>
-        <element name="Sessions" positionX="-54" positionY="36" width="128" height="105"/>
         <element name="Folders" positionX="-54" positionY="54" width="128" height="30"/>
+        <element name="Sessions" positionX="-54" positionY="36" width="128" height="30"/>
+        <element name="Tasks" positionX="-36" positionY="72" width="128" height="90"/>
     </elements>
 </model>

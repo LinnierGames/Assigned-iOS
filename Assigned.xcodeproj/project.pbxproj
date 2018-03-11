@@ -21,6 +21,9 @@
 		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
 		E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064612054E5F400073B33 /* AssignmentViewModel.swift */; };
 		E98064662054E68C00073B33 /* Assignment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98064652054E68C00073B33 /* Assignment.storyboard */; };
+		E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064672054FAD700073B33 /* UITaskTableViewCell.swift */; };
+		E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */; };
+		E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UITaskTableViewCell.xib */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
@@ -70,6 +73,9 @@
 		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
 		E98064612054E5F400073B33 /* AssignmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewModel.swift; sourceTree = "<group>"; };
 		E98064652054E68C00073B33 /* Assignment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assignment.storyboard; sourceTree = "<group>"; };
+		E98064672054FAD700073B33 /* UITaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskTableViewCell.swift; sourceTree = "<group>"; };
+		E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E98E2F172055065000B1624A /* UITaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITaskTableViewCell.xib; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -134,7 +140,7 @@
 				E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */,
 				E97DF46720530BD80050EA21 /* Organize */,
 				E97DF437205305F80050EA21 /* Main.storyboard */,
-				E9CA1C112053173C00B8936E /* xibs */,
+				E9CA1C112053173C00B8936E /* Table View Cells */,
 				E97DF46520530BC40050EA21 /* Services */,
 				E97DF46420530BB60050EA21 /* Supporting Files */,
 			);
@@ -184,6 +190,7 @@
 				E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */,
 				E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
+				E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */,
 				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
@@ -211,14 +218,16 @@
 			name = "Assigned Editor";
 			sourceTree = "<group>";
 		};
-		E9CA1C112053173C00B8936E /* xibs */ = {
+		E9CA1C112053173C00B8936E /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
 				E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */,
 				E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */,
 				E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */,
+				E98064672054FAD700073B33 /* UITaskTableViewCell.swift */,
+				E98E2F172055065000B1624A /* UITaskTableViewCell.xib */,
 			);
-			name = xibs;
+			name = "Table View Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +341,7 @@
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
+				E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */,
 				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +377,9 @@
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
+				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
+				E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,

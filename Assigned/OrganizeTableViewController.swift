@@ -94,9 +94,16 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = selectedDirectory
-                
             case "show detailed assignment":
-                break
+                guard let vc = segue.destination as? AssignmentViewController else {
+                    fatalError("segue did not have a destination of AssignmentViewController")
+                }
+                
+                // modifying an exsiting assignment or adding a new one?
+                if let indexPath = sender as? IndexPath {
+                    let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
+                    vc.assignment = selectedDirectory.assignment
+                }
             default: break
             }
         }
@@ -107,16 +114,15 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let directory = fetchedResultsController.directory(at: indexPath)
         if let _ = directory.info! as? Folder {
-            self.performSegue(withIdentifier: "show child directory", sender: indexPath)
+            self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
         } else if let _ = directory.info! as? Assignment {
-            //TODO: show assignment vc
+             self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedAssignment, sender: indexPath)
         }
     }
     
     // MARK: - IBACTIONS
     
     @IBAction func pressAdd(_ sender: Any) {
-        
         /** <#Lorem ipsum dolor sit amet.#> */
         func add<T>(_ type: T.Type) where T: DirectoryInfo {
             let alertAddTitle = UIAlertController(
@@ -182,4 +188,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         self.updateUI()
     }
 
+}
+
+extension UIStoryboardSegue {
+    static var ShowChildDirectory = "show child directory"
 }
