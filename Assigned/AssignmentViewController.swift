@@ -10,6 +10,8 @@ import UIKit
 
 class AssignmentViewController: UIViewController {
     
+    private var viewModel = AssignmentViewModel()
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS

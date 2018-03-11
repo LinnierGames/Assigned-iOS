@@ -38,6 +38,7 @@
                     <connections>
                         <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
                         <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
+                        <segue destination="rdH-3M-SjS" kind="showDetail" identifier="show detailed assignment" id="R6N-bP-5sD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -51,6 +52,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIH-bj-ZIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1922" y="-102"/>
+        </scene>
+        <!--Assignment-->
+        <scene sceneID="jzG-GQ-ua3">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Assignment" id="rdH-3M-SjS" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hcJ-iW-DU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2110" y="314"/>
         </scene>
         <!--Item 2-->
         <scene sceneID="gAW-uL-LMa">

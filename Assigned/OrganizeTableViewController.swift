@@ -94,6 +94,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = selectedDirectory
+                
+            case "show detailed assignment":
+                break
             default: break
             }
         }
@@ -141,8 +144,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
         
         UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            .addButton(title: "Assignment", with: { (action) in
-                add(Assignment.self)
+            .addButton(title: "Assignment", with: { [unowned self] (action) in
+                self.performSegue(withIdentifier: "show detailed assignment", sender: nil)
             })
             .addButton(title: "Folder", with: { (action) in
                 add(Folder.self)

@@ -19,6 +19,8 @@
 		E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645A205335C100073B33 /* Folder+CoreDataClass.swift */; };
 		E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */; };
 		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
+		E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064612054E5F400073B33 /* AssignmentViewModel.swift */; };
+		E98064662054E68C00073B33 /* Assignment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98064652054E68C00073B33 /* Assignment.storyboard */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
@@ -66,6 +68,8 @@
 		E980645A205335C100073B33 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCellModel.swift; sourceTree = "<group>"; };
 		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
+		E98064612054E5F400073B33 /* AssignmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewModel.swift; sourceTree = "<group>"; };
+		E98064652054E68C00073B33 /* Assignment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assignment.storyboard; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -192,9 +196,19 @@
 			children = (
 				E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */,
 				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
-				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
+				E98064602054E5E100073B33 /* Assigned Editor */,
 			);
 			name = Organize;
+			sourceTree = "<group>";
+		};
+		E98064602054E5E100073B33 /* Assigned Editor */ = {
+			isa = PBXGroup;
+			children = (
+				E98064612054E5F400073B33 /* AssignmentViewModel.swift */,
+				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
+				E98064652054E68C00073B33 /* Assignment.storyboard */,
+			);
+			name = "Assigned Editor";
 			sourceTree = "<group>";
 		};
 		E9CA1C112053173C00B8936E /* xibs */ = {
@@ -318,6 +332,7 @@
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
+				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +366,7 @@
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
+				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
