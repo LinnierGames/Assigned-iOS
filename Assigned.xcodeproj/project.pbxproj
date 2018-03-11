@@ -17,6 +17,8 @@
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
 		E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */; };
 		E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645A205335C100073B33 /* Folder+CoreDataClass.swift */; };
+		E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */; };
+		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
 		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
@@ -62,6 +64,8 @@
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E980645A205335C100073B33 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCellModel.swift; sourceTree = "<group>"; };
+		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
 		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -188,6 +192,7 @@
 			children = (
 				E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */,
 				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
+				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
 			);
 			name = Organize;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 		E9CA1C112053173C00B8936E /* xibs */ = {
 			isa = PBXGroup;
 			children = (
+				E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */,
 				E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */,
 				E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */,
 			);
@@ -341,7 +347,9 @@
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
+				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
+				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,

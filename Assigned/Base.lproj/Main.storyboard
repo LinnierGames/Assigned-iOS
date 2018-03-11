@@ -26,7 +26,7 @@
                     <navigationItem key="navigationItem" title="Organize" id="P3k-c9-41p">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="LZe-Sr-Re2">
                             <connections>
-                                <action selector="pressProfile:" destination="JAc-Yi-lyA" id="ZKN-Me-I73"/>
+                                <action selector="pressProfile:" destination="JAc-Yi-lyA" id="K8s-tb-dhq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="2sa-YV-5Wg">
@@ -36,6 +36,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
                         <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
                     </connections>
                 </tableViewController>
@@ -96,6 +97,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="FTD-Ce-SZW">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="JAc-Yi-lyA" kind="relationship" relationship="rootViewController" id="kVK-nh-ePJ"/>
                     </connections>

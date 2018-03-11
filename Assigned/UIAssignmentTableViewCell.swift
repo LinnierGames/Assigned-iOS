@@ -14,6 +14,12 @@ import UIKit
 
 class UIAssignmentTableViewCell: UITableViewCell {
     
+    private var checkboxImage = #imageLiteral(resourceName: "checkbox-1")
+    
+    private var projectImage = #imageLiteral(resourceName: "file-1")
+    
+    private var folderImage = #imageLiteral(resourceName: "folder-1")
+    
     enum Types {
         static var baseCell = "assignment"
         static var notesCell = "assignment notes"
@@ -29,15 +35,44 @@ class UIAssignmentTableViewCell: UITableViewCell {
     
     // MARK: - RETURN VALUES
     
+    private func image(for priority: Assignment.Priorities) -> UIImage? {
+        switch priority {
+        case .None:
+            return nil
+        case .Low:
+            return UIImage(named: "priority-low")
+        case .Medium:
+            return UIImage(named: "priority-medium")
+        case .High:
+            return UIImage(named: "priority-high")
+        }
+    }
+    
     // MARK: - VOID METHODS
     
     func configure(_ assignment: Assignment) {
+        self.accessoryType = .none
         self.labelTitle.text = assignment.title
+        self.buttonCheckbox.setImage(checkboxImage, for: .normal)
+        self.imagePriority.image = image(for: assignment.priority)
+        if let deadline = assignment.deadline {
+            self.labelDeadline.text = String(date: deadline, dateStyle: .short)
+            
+            //TODO: deadline formating
+//            let durationTillDeadline = deadline.timeIntervalSinceNow
+//            let unitsUntilDeadline = String(timeInterval: durationTillDeadline, options: .day)
+//
+//            self.labelDeadline.text = "in \(unitsUntilDeadline)"
+        } else {
+            self.labelDeadline.text = nil
+        }
         //TODO: configure the assignment cell of all assignment properties
     }
     
     func configure(_ folder: Folder) {
+        self.accessoryType = .disclosureIndicator
         self.labelTitle.text = folder.title
+        self.buttonCheckbox.setImage(folderImage, for: .normal)
         //TODO: configure the assignment cell of all assignment properties
     }
     

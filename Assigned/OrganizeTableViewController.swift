@@ -152,6 +152,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
     }
     
+    @IBOutlet weak var buttonProfile: UIBarButtonItem!
     @IBAction func pressProfile(_ sender: Any) { }
     
     // MARK: - LIFE CYCLE
@@ -159,11 +160,15 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // show the back button vs the profile button
+        if currentDirectory != nil {
+            navigationItem.leftBarButtonItem = nil
+        }
+        
         tableView.register(UINib.assignmentCells(), forCellReuseIdentifier: UIAssignmentTableViewCell.Types.baseCell)
         
-        //TODO: Dynamic Font
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 44
+        //TODO: Dynamic Font, user preferences of which cell to display
+        tableView.rowHeight = 44
         
         saveHandler = viewModel.save
     }
