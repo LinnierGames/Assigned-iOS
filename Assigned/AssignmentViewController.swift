@@ -27,7 +27,16 @@ class AssignmentViewController: UIViewController {
         }
     }
     
-    var editingMode: CRUD = .Create
+    var editingMode: CRUD = .Create {
+        didSet {
+            // editingMode can be set before the view is fully loaded thus,
+            //check any outlet, that is always set when the view is loaded, and
+            //invoke updateUI(..) then
+            guard self.buttonLeft != nil else { return }
+            
+            updateUI(animated: true)
+        }
+    }
     
     private var isShowingDeadlinePicker: Bool {
         set {
@@ -68,30 +77,66 @@ class AssignmentViewController: UIViewController {
     // MARK: - VOID METHODS
     
     private func updateUI(animated: Bool = false) {
+        let animationDuration = 0.35
+        
+        //TODO: update visiblity of the slide down to dismiss
+
+        if editingMode.isCreating {
+            isTrashButtonHidden = false
+            buttonLeft.setTitle("Save", for: .normal)
+            buttonDelete.setTitle("Discard", for: .normal)
+        } else if editingMode.isReading {
+            isTrashButtonHidden = true
+            buttonLeft.setTitle("Edit", for: .normal)
+        } else if editingMode.isUpdating {
+            isTrashButtonHidden = false
+            buttonLeft.setTitle("Done", for: .normal)
+        }
         
         // Update assignment properties
         buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
         textfieldTitle.text = assignment.title
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
-        buttonDeadline.setTitle(viewModel.deadlineTitle, for: .normal)
+        if editingMode.isReading {
+            buttonDeadline.setTitle(viewModel.deadlineTitle ?? "no deadline", for: .normal)
+        } else if editingMode.isCreating || editingMode.isUpdating {
+            buttonDeadline.setTitle(viewModel.deadlineTitle ?? "Add a Deadline", for: .normal)
+        }
         
+        let showEffortSliderAnimations = { [unowned self] in
+            self.viewEffortValues.isHidden = true
+            self.viewEffortSlider.isHidden = false
+        }
+        
+        let showEffortValuesAnimations = { [unowned self] in
+            self.viewEffortValues.isHidden = false
+            self.viewEffortSlider.isHidden = true
+        }
         
         // edit assignment properties
-        if self.editingMode.isEditing || self.editingMode.isCreating {
+        if self.editingMode.isUpdating || self.editingMode.isCreating {
             buttonDeadline.setTitleColor(.buttonTint, for: .normal)
+            buttonDeadline.isUserInteractionEnabled = true
             
-            viewEffortValues.isHidden = true
-            viewEffortSlider.isHidden = false
+            if animated {
+                UIView.animate(withDuration: animationDuration, animations: showEffortSliderAnimations)
+            } else {
+                showEffortSliderAnimations()
+            }
             effortSliderValue = assignment.effort
-            isTrashButtonHidden = false
             
         // reading only
         } else if self.editingMode.isReading {
             buttonDeadline.setTitleColor(.black, for: .normal)
+            buttonDeadline.isUserInteractionEnabled = false
             
-            viewEffortValues.isHidden = false
-            viewEffortSlider.isHidden = true
-            isTrashButtonHidden = true
+            if animated {
+                UIView.animate(withDuration: animationDuration, animations: showEffortValuesAnimations)
+            } else {
+                showEffortValuesAnimations()
+            }
+            
+            //TODO: update the effort chart
         }
         
         // Fetch tasks
@@ -100,8 +145,30 @@ class AssignmentViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    // MARK: View
+    
+    @IBAction func didSwipeToDismiss(_ sender: Any) {
+        //TODO: pan the whole card to dismiss
+        
+        // pan to dismiss is only when you are not editing or in the middle of
+        //creating a new assignment
+        if editingMode.isReading {
+            self.presentingViewController!.dismiss(animated: true)
+        }
+    }
+    
+    @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressEdit(_ sender: Any) {
-        self.presentingViewController?.dismiss(animated: true)
+        if editingMode.isCreating {
+            //TODO: save temp context into main context and onto disk
+            self.presentingViewController!.dismiss(animated: true)
+        } else if editingMode.isUpdating {
+            //TODO: save temp context into main context and onto disk
+            isShowingDeadlinePicker = false
+            editingMode = .Read
+        } else if editingMode.isReading {
+            editingMode = .Update
+        }
     }
     
     @IBOutlet weak var buttonDelete: UIButton!
@@ -109,6 +176,7 @@ class AssignmentViewController: UIViewController {
         
     }
     
+    // MARK: Title and breadcrum
     
     @IBOutlet weak var buttonCheckbox: UIButton!
     @IBAction func pressCheckbox(_ sender: Any) {
@@ -120,6 +188,8 @@ class AssignmentViewController: UIViewController {
         
     }
     
+    // MARK: Deadline
+    
     @IBOutlet weak var buttonDeadline: UIButton!
     @IBAction func pressDeadline(_ sender: Any) {
         if self.isShowingDeadlinePicker {
@@ -127,6 +197,9 @@ class AssignmentViewController: UIViewController {
         } else {
             if assignment.deadline == nil {
                 viewModel.setDeadlineToToday()
+                
+                //TODO: RxSwift
+                buttonDeadline.setTitle(viewModel.deadlineTitle!, for: .normal)
             }
             
             self.isShowingDeadlinePicker = true
@@ -170,7 +243,7 @@ class AssignmentViewController: UIViewController {
     @IBOutlet weak var viewEffortSlider: UIView!
     @IBOutlet weak var sliderEffort: UISlider!
     
-    /** Protected accessor to slider.value when reading and setting  */
+    /** Protected accessor to slider.value when reading and setting */
     private var effortSliderValue: Float {
         set {
             let newSliderValue: Float

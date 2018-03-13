@@ -103,6 +103,11 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 if let indexPath = sender as? IndexPath {
                     let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                     vc.assignment = selectedDirectory.assignment
+                    vc.editingMode = .Read
+                    
+                // adding a new assignment
+                } else {
+                    vc.editingMode = .Create
                 }
             default: break
             }

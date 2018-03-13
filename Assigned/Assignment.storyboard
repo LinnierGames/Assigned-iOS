@@ -40,6 +40,7 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fin-8x-4aD">
                                                 <rect key="frame" x="100" y="0.0" width="64" height="24"/>
                                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="64" id="Tjb-BX-syK"/>
                                                     <constraint firstAttribute="height" constant="24" id="zQn-Gb-rb0"/>
@@ -523,6 +524,9 @@
                                     <constraint firstItem="YHn-PW-yaV" firstAttribute="leading" secondItem="cpD-Rs-0Ht" secondAttribute="leading" constant="8" id="YzA-Cm-q8D"/>
                                     <constraint firstItem="Nni-9N-SYn" firstAttribute="leading" secondItem="cpD-Rs-0Ht" secondAttribute="leading" constant="-11" id="h0w-h8-zcn"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KsW-If-Mag" appends="YES" id="Hlx-5c-2Jo"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
@@ -539,6 +543,7 @@
                         <outlet property="buttonCheckbox" destination="4ci-48-G2u" id="gQV-5a-AjR"/>
                         <outlet property="buttonDeadline" destination="inD-5h-tlD" id="4qn-uz-A8X"/>
                         <outlet property="buttonDelete" destination="b5x-Xa-tZd" id="iyK-QI-7YW"/>
+                        <outlet property="buttonLeft" destination="xA3-ll-iQD" id="9BP-qT-MWW"/>
                         <outlet property="deadlinePicker" destination="fjt-l5-hrl" id="zaj-h5-W9c"/>
                         <outlet property="labelDeadlineSubtext" destination="Qlx-8w-lZE" id="P2F-s7-qST"/>
                         <outlet property="labelEffort" destination="MOC-mY-jNU" id="siy-iC-rwS"/>
@@ -551,6 +556,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdW-Lb-RbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="KsW-If-Mag">
+                    <connections>
+                        <action selector="didSwipeToDismiss:" destination="EUH-mU-ZxT" id="VNB-pR-mT0"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-15.199999999999999" y="184.85757121439281"/>
         </scene>

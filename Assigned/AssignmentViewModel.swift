@@ -121,11 +121,11 @@ extension AssignmentViewModel {
         }
     }
     
-    var deadlineTitle: String {
+    var deadlineTitle: String? {
         if let deadline = assignmentValue.deadline {
             return String(date: deadline, dateStyle: .medium, timeStyle: .medium)
         } else {
-            return "Add a Deadline"
+            return nil
         }
     }
     
