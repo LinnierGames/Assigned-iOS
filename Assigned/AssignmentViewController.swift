@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AssignmentViewController: UIViewController {
+class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textfieldTitle: UITextField!
     @IBOutlet weak var labelDeadlineSubtext: UILabel!
@@ -74,7 +74,23 @@ class AssignmentViewController: UIViewController {
     
     // MARK: - RETURN VALUES
     
+    // MARK: Text Field
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == textfieldTitle {
+            textfieldTitle.resignFirstResponder()
+        }
+        
+        return false
+    }
+    
     // MARK: - VOID METHODS
+    
+    private func dismiss() {
+        if textfieldTitle.isFirstResponder {
+            textfieldTitle.resignFirstResponder()
+        }
+    }
     
     private func updateUI(animated: Bool = false) {
         let animationDuration = 0.35
@@ -94,9 +110,14 @@ class AssignmentViewController: UIViewController {
         }
         
         // Update assignment properties
-        buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
+        
+        //TODO: RxSwift
+        buttonCheckbox.isChecked = assignment.isCompleted
+        imagePriorityBox.priority = assignment.priority
         textfieldTitle.text = assignment.title
+        buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
+        
         if editingMode.isReading {
             buttonDeadline.setTitle(viewModel.deadlineTitle ?? "no deadline", for: .normal)
         } else if editingMode.isCreating || editingMode.isUpdating {
@@ -105,12 +126,16 @@ class AssignmentViewController: UIViewController {
         
         let showEffortSliderAnimations = { [unowned self] in
             self.viewEffortValues.isHidden = true
+            self.viewEffortValues.alpha = 0.0
             self.viewEffortSlider.isHidden = false
+            self.viewEffortSlider.alpha = 1.0
         }
         
         let showEffortValuesAnimations = { [unowned self] in
             self.viewEffortValues.isHidden = false
+            self.viewEffortValues.alpha = 1.0
             self.viewEffortSlider.isHidden = true
+            self.viewEffortSlider.alpha = 0.0
         }
         
         // edit assignment properties
@@ -143,6 +168,12 @@ class AssignmentViewController: UIViewController {
         tableTasks.reloadData()
     }
     
+    // MARK: Text Field
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        assignment.title = textField.text
+    }
+    
     // MARK: - IBACTIONS
     
     // MARK: View
@@ -160,7 +191,9 @@ class AssignmentViewController: UIViewController {
     @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressEdit(_ sender: Any) {
         if editingMode.isCreating {
+            dismiss()
             //TODO: save temp context into main context and onto disk
+            PersistenceStack.shared.saveContext()
             self.presentingViewController!.dismiss(animated: true)
         } else if editingMode.isUpdating {
             //TODO: save temp context into main context and onto disk
@@ -178,9 +211,60 @@ class AssignmentViewController: UIViewController {
     
     // MARK: Title and breadcrum
     
-    @IBOutlet weak var buttonCheckbox: UIButton!
+//    var isAssignmentCompleted: Bool {
+//        set {
+//            if newValue {
+//                buttonCheckbox.setImage(UIImage.assignmentCheckboxCompleted, for: .normal)
+//            } else {
+//                buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
+//            }
+//
+//            assignment.isCompleted = newValue
+//        }
+//        get {
+//            return assignment.isCompleted
+//        }
+//    }
+    
+    @IBOutlet weak var buttonCheckbox: UICheckbox!
     @IBAction func pressCheckbox(_ sender: Any) {
+        //TODO: control stored property by class itself by sending custom 'Send Event'
+        buttonCheckbox.isChecked.invert()
         
+        //TODO: RxSwift
+        assignment.isCompleted = buttonCheckbox.isChecked
+    }
+    
+    var isShowingPriorityBox: Bool {
+        set {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.viewPriorityBox.isHidden = newValue.inverse
+                self.viewPriorityBox.alpha = newValue ? 1.0 : 0.0
+            }
+        }
+        get {
+            return viewPriorityBox.isHidden.inverse
+        }
+    }
+    
+    @IBOutlet weak var viewPriorityBox: UIView!
+    
+    @IBAction func pressPriorityBox(_ sender: Any) {
+        isShowingPriorityBox.invert()
+    }
+    
+    @IBOutlet weak var imagePriorityBox: UIPriorityBox!
+    @IBAction func pressA_Priority(_ sender: UIButton) {
+        guard let newPriority = Assignment.Priorities(rawValue: sender.tag) else {
+            fatalError("setting a priority to an unsupported button.tag value")
+        }
+        
+        viewModel.setPriority(to: newPriority)
+        
+        //TODO: RxSwift
+        imagePriorityBox.priority = newPriority
+        
+        isShowingPriorityBox = false
     }
     
     @IBOutlet weak var buttonBreadcrum: UIButton!
@@ -220,6 +304,9 @@ class AssignmentViewController: UIViewController {
         //TODO: RxSwift
         viewModel.updateDeadline(to: nil)
         self.isShowingDeadlinePicker = false
+        
+        //TODO: RxSwift
+        buttonDeadline.setTitle("Add a Deadline", for: .normal)
     }
     
     @IBAction func pressApplyDeadline(_ sender: Any) {
@@ -231,10 +318,10 @@ class AssignmentViewController: UIViewController {
     @IBOutlet weak var labelEffort: UILabel!
     /**
      the effort slider's max values flexes when the user taps on the add
-     effort button and reduces when the user slides below half of the max; min
-     is 15
+     effort button and reduces when the user slides below 4; min
+     is 6
      */
-    var maxEffortValue = 8 {
+    var maxEffortValue = 6 {
         didSet {
             sliderEffort.maximumValue = Float(maxEffortValue)
         }
@@ -333,6 +420,8 @@ class AssignmentViewController: UIViewController {
         
         //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
+        
+        self.isShowingPriorityBox = false
     }
 }
 
@@ -357,7 +446,6 @@ extension AssignmentViewController: UITableViewDataSource {
         
         return cell
     }
-    
     
 }
 

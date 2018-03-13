@@ -14,8 +14,6 @@ import UIKit
 
 class UIAssignmentTableViewCell: UITableViewCell {
     
-    private var checkboxImage = #imageLiteral(resourceName: "checkbox-1")
-    
     private var projectImage = #imageLiteral(resourceName: "file-1")
     
     private var folderImage = #imageLiteral(resourceName: "folder-1")
@@ -53,7 +51,11 @@ class UIAssignmentTableViewCell: UITableViewCell {
     func configure(_ assignment: Assignment) {
         self.accessoryType = .none
         self.labelTitle.text = assignment.title
-        self.buttonCheckbox.setImage(checkboxImage, for: .normal)
+        if assignment.isCompleted {
+            self.buttonCheckbox.setImage(UIImage.assignmentCheckboxCompleted, for: .normal)
+        } else {
+            self.buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
+        }
         self.imagePriority.image = image(for: assignment.priority)
         if let deadline = assignment.deadline {
             self.labelDeadline.text = String(date: deadline, dateStyle: .short)
@@ -100,5 +102,31 @@ class UIAssignmentTableViewCell: UITableViewCell {
 extension UINib {
     static func assignmentCells() -> UINib {
         return UINib(nibName: "UIAssignmentTableViewCell", bundle: Bundle.main)
+    }
+}
+
+extension UIImage {
+    static var assignmentCheckbox: UIImage {
+        return #imageLiteral(resourceName: "checkbox")
+    }
+    
+    static var assignmentCheckboxCompleted: UIImage {
+        return #imageLiteral(resourceName: "checkbox-completed")
+    }
+    
+    static var assignmentPriorityNone: UIImage {
+        return #imageLiteral(resourceName: "priority-none")
+    }
+    
+    static var assignmentPriorityLow: UIImage {
+        return #imageLiteral(resourceName: "priority-low")
+    }
+    
+    static var assignmentPriorityMedium: UIImage {
+        return #imageLiteral(resourceName: "priority-medium")
+    }
+    
+    static var assignmentPriorityHigh: UIImage {
+        return #imageLiteral(resourceName: "priority-high")
     }
 }

@@ -107,6 +107,10 @@ extension AssignmentViewModel {
         }
     }
     
+    func setPriority(to value: Assignment.Priorities) {
+        assignment.priority = value
+    }
+    
     var deadlineSubtext: String? {
         if let deadline = assignmentValue.deadline {
             let daysUntilDeadline = deadline.timeIntervalSinceNow
@@ -123,7 +127,7 @@ extension AssignmentViewModel {
     
     var deadlineTitle: String? {
         if let deadline = assignmentValue.deadline {
-            return String(date: deadline, dateStyle: .medium, timeStyle: .medium)
+            return String(date: deadline, dateStyle: .medium, timeStyle: .short)
         } else {
             return nil
         }
