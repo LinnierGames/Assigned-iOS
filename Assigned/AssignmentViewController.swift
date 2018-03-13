@@ -14,6 +14,7 @@ class AssignmentViewController: UIViewController {
     @IBOutlet weak var textfieldTitle: UITextField!
     @IBOutlet weak var labelDeadlineSubtext: UILabel!
     @IBOutlet weak var tableTasks: UITableView!
+    @IBOutlet weak var viewEffortValues: UIStackView!
     
     private lazy var viewModel = AssignmentViewModel(with: self)
     
@@ -25,6 +26,8 @@ class AssignmentViewController: UIViewController {
             viewModel.assignment = newValue
         }
     }
+    
+    var editingMode: CRUD = .Create
     
     private var isShowingDeadlinePicker: Bool {
         set {
@@ -42,17 +45,54 @@ class AssignmentViewController: UIViewController {
         }
     }
     
+    private var isTrashButtonHidden: Bool {
+        set {
+            // hide the button
+            if newValue == true {
+                buttonDelete.setTitleColor(UIColor.clear, for: .normal)
+                buttonDelete.isUserInteractionEnabled = false
+                
+            // show the button
+            } else {
+                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
+                buttonDelete.isUserInteractionEnabled = true
+            }
+        }
+        get {
+            return buttonDelete.isUserInteractionEnabled.inverse
+        }
+    }
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
-    private func updateUI() {
+    private func updateUI(animated: Bool = false) {
         
         // Update assignment properties
         buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
         textfieldTitle.text = assignment.title
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
         buttonDeadline.setTitle(viewModel.deadlineTitle, for: .normal)
+        
+        
+        // edit assignment properties
+        if self.editingMode.isEditing || self.editingMode.isCreating {
+            buttonDeadline.setTitleColor(.buttonTint, for: .normal)
+            
+            viewEffortValues.isHidden = true
+            viewEffortSlider.isHidden = false
+            effortSliderValue = assignment.effort
+            isTrashButtonHidden = false
+            
+        // reading only
+        } else if self.editingMode.isReading {
+            buttonDeadline.setTitleColor(.black, for: .normal)
+            
+            viewEffortValues.isHidden = false
+            viewEffortSlider.isHidden = true
+            isTrashButtonHidden = true
+        }
         
         // Fetch tasks
         tableTasks.reloadData()
@@ -63,6 +103,12 @@ class AssignmentViewController: UIViewController {
     @IBAction func pressEdit(_ sender: Any) {
         self.presentingViewController?.dismiss(animated: true)
     }
+    
+    @IBOutlet weak var buttonDelete: UIButton!
+    @IBAction func pressDeleteAssignment(_ sender: Any) {
+        
+    }
+    
     
     @IBOutlet weak var buttonCheckbox: UIButton!
     @IBAction func pressCheckbox(_ sender: Any) {
@@ -107,6 +153,83 @@ class AssignmentViewController: UIViewController {
         self.isShowingDeadlinePicker = false
     }
     
+    // MARK: Effort Slider
+    
+    @IBOutlet weak var labelEffort: UILabel!
+    /**
+     the effort slider's max values flexes when the user taps on the add
+     effort button and reduces when the user slides below half of the max; min
+     is 15
+     */
+    var maxEffortValue = 8 {
+        didSet {
+            sliderEffort.maximumValue = Float(maxEffortValue)
+        }
+    }
+    
+    @IBOutlet weak var viewEffortSlider: UIView!
+    @IBOutlet weak var sliderEffort: UISlider!
+    
+    /** Protected accessor to slider.value when reading and setting  */
+    private var effortSliderValue: Float {
+        set {
+            let newSliderValue: Float
+            
+            if newValue <= 0 {
+                newSliderValue = 0.0
+                labelEffort.text = "no effort"
+            } else {
+                if newValue > Float(maxEffortValue) {
+                    maxEffortValue = Int(newValue) // max effort are only represent whole hours
+                }
+                newSliderValue = newValue
+                
+                let nHours = TimeInterval(newSliderValue) * CTDateComponentHour
+                labelEffort.text = String(timeInterval: nHours, options: .hour, .minute)
+            }
+            
+            sliderEffort.value = newSliderValue
+            assignment.effort = newSliderValue
+        }
+        get {
+            return sliderEffort.value
+        }
+    }
+    
+    @IBAction func didChangeEffortSlider(_ sender: UISlider) {
+        
+        //stepper values
+        func rounded(value x: Float) -> Float {
+            if x < 0.25 {
+                return 0;
+            } else if x < 0.5 {
+                return 0.25
+            } else if x < 1.0 {
+                return 0.5
+            } else {
+                return round(x)
+            }
+        }
+        
+        effortSliderValue = rounded(value: sender.value)
+        
+        //FIXME: reducing the max value while dragging creates a glitchy drag
+        if effortSliderValue < 4 {
+            maxEffortValue = 8
+        }
+    }
+    
+    @IBAction func pressSubtractEffort(_ sender: Any) {
+        effortSliderValue -= 1
+    }
+    
+    @IBAction func pressAddEffort(_ sender: Any) {
+        effortSliderValue += 1
+    }
+    
+    
+    // MARK: Tasks
+    
     @IBAction func pressAddTask(_ sender: Any) {
         let alertAddTitle = UIAlertController(
             title: "Add a Task",
@@ -134,15 +257,10 @@ class AssignmentViewController: UIViewController {
         
         //TODO: Dynamic Font, user preferences of which cell to display
         tableTasks.rowHeight = 32
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
         
         //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
     }
-
 }
 
 extension AssignmentViewController: UITableViewDataSource {

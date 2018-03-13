@@ -76,7 +76,7 @@ class AssignmentViewModel {
 extension AssignmentViewModel {
     
     var parentTitle: String? {
-        guard let directory = assignmentValue.directory else {
+        guard let directory = assignment.directory else {
             fatalError("directory was not set")
         }
         
