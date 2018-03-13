@@ -27,23 +27,9 @@ class AssignmentViewModel {
         return persistance.viewContext
     }
     
-    var assignment: Assignment! {
-        set {
-            self.assignmentValue = newValue
-        }
-        get {
-            if self.assignmentValue == nil {
-                let newAssignment = Assignment(title: "Untitled", effort: 0, in: managedObjectContext)
-                //FIXME: get the parent directory
-                _ = Directory.createDirectory(for: newAssignment, parent: nil, in: managedObjectContext)
-                self.assignmentValue = newAssignment
-            }
-            
-            return self.assignmentValue
-        }
-    }
-    
     // MARK: - RETURN VALUES
+    
+    
     
     // MARK: - VOID METHODS
     
@@ -86,3 +72,70 @@ class AssignmentViewModel {
         return fetchedRequestController
     }()
 }
+
+extension AssignmentViewModel {
+    
+    var parentTitle: String? {
+        guard let directory = assignmentValue.directory else {
+            fatalError("directory was not set")
+        }
+        
+        if let parentDirectory = directory.parent {
+            guard let parentInfo = parentDirectory.info else {
+                fatalError("directory info was not set")
+            }
+            
+            return parentInfo.title
+        } else {
+            return "Braindump"
+        }
+    }
+    
+    var assignment: Assignment! {
+        set {
+            self.assignmentValue = newValue
+        }
+        get {
+            if self.assignmentValue == nil {
+                let newAssignment = Assignment(title: "Untitled", effort: 0, in: managedObjectContext)
+                //FIXME: get the parent directory
+                _ = Directory.createDirectory(for: newAssignment, parent: nil, in: managedObjectContext)
+                self.assignmentValue = newAssignment
+            }
+            
+            return self.assignmentValue
+        }
+    }
+    
+    var deadlineSubtext: String? {
+        if let deadline = assignmentValue.deadline {
+            let daysUntilDeadline = deadline.timeIntervalSinceNow
+            
+            //TODO: User Preferences
+            //FIXME: use largest unit, weeks, days, hours, minutes, and grammar
+            let nDays = String(timeInterval: daysUntilDeadline, options: .day)
+            
+            return "in \(nDays)days"
+        } else {
+            return nil
+        }
+    }
+    
+    var deadlineTitle: String {
+        if let deadline = assignmentValue.deadline {
+            return String(date: deadline, dateStyle: .medium, timeStyle: .medium)
+        } else {
+            return "Add a Deadline"
+        }
+    }
+    
+    func updateDeadline(to date: Date?) {
+        self.assignmentValue.deadline = date
+    }
+    
+    //TODO: Add deadline presets
+    func setDeadlineToToday() {
+        assignmentValue.deadline = Date()
+    }
+}
+

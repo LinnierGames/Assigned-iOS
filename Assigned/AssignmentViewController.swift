@@ -17,7 +17,7 @@ class AssignmentViewController: UIViewController {
     
     private lazy var viewModel = AssignmentViewModel(with: self)
     
-    var assignment: Assignment? {
+    var assignment: Assignment {
         get {
             return viewModel.assignment
         }
@@ -26,11 +26,33 @@ class AssignmentViewController: UIViewController {
         }
     }
     
+    private var isShowingDeadlinePicker: Bool {
+        set {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.viewDeadlinePicker.isHidden = newValue.inverse
+                if newValue == false {
+                    self.viewDeadlinePicker.alpha = 0.0
+                } else {
+                    self.viewDeadlinePicker.alpha = 1.0
+                }
+            }
+        }
+        get {
+            return viewDeadlinePicker.isHidden.inverse
+        }
+    }
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
     private func updateUI() {
+        
+        // Update assignment properties
+        buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
+        textfieldTitle.text = assignment.title
+        labelDeadlineSubtext.text = viewModel.deadlineSubtext
+        buttonDeadline.setTitle(viewModel.deadlineTitle, for: .normal)
         
         // Fetch tasks
         tableTasks.reloadData()
@@ -54,7 +76,35 @@ class AssignmentViewController: UIViewController {
     
     @IBOutlet weak var buttonDeadline: UIButton!
     @IBAction func pressDeadline(_ sender: Any) {
+        if self.isShowingDeadlinePicker {
+            self.isShowingDeadlinePicker = false
+        } else {
+            if assignment.deadline == nil {
+                viewModel.setDeadlineToToday()
+            }
+            
+            self.isShowingDeadlinePicker = true
+        }
+    }
+    
+    @IBOutlet weak var viewDeadlinePicker: UIStackView!
+    @IBOutlet weak var deadlinePicker: UIDatePicker!
+    @IBAction func didChangeDeadline(_ sender: Any) {
+        let newDate = deadlinePicker.date
+        viewModel.updateDeadline(to: newDate)
         
+        //TODO: RxSwift
+        buttonDeadline.setTitle(viewModel.deadlineTitle, for: .normal)
+    }
+    
+    @IBAction func pressRemoveDeadline(_ sender: Any) {
+        //TODO: RxSwift
+        viewModel.updateDeadline(to: nil)
+        self.isShowingDeadlinePicker = false
+    }
+    
+    @IBAction func pressApplyDeadline(_ sender: Any) {
+        self.isShowingDeadlinePicker = false
     }
     
     @IBAction func pressAddTask(_ sender: Any) {
@@ -89,6 +139,7 @@ class AssignmentViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
     }
 
