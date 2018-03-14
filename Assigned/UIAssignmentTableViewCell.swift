@@ -19,32 +19,30 @@ class UIAssignmentTableViewCell: UITableViewCell {
     private var folderImage = #imageLiteral(resourceName: "folder-1")
     
     enum Types {
-        static var baseCell = "assignment"
-        static var notesCell = "assignment notes"
-        static var extendedCell = "assignment extended"
+        struct Info {
+            var cellIdentifier: String
+            var nib: UINib
+            
+            init(id: String, nibTitle: String) {
+                cellIdentifier = id
+                nib = UINib(nibName: nibTitle, bundle: Bundle.main)
+            }
+        }
+        
+        static var baseCell = Info(id: "assignment", nibTitle: "UIAssignmentTableViewCell")
+        //TODO: Layout notes/extended cells in nibs
+//        static var notesCell = Info(id: "assignment notes", nibTitle: "UIAssignmentTableViewCell-Notes")
+//        static var extendedCell = Info(id: "assignment extended", nibTitle: "UIAssignmentTableViewCell-Extended")
     }
     
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDeadline: UILabel!
     @IBOutlet weak var labelTasks: UILabel!
-    @IBOutlet weak var imagePriority: UIImageView!
+    @IBOutlet weak var imagePriority: UIPriorityBox!
     
     weak var delegate: UIAssignmentTableViewCellDelegate?
     
     // MARK: - RETURN VALUES
-    
-    private func image(for priority: Assignment.Priorities) -> UIImage? {
-        switch priority {
-        case .None:
-            return nil
-        case .Low:
-            return UIImage(named: "priority-low")
-        case .Medium:
-            return UIImage(named: "priority-medium")
-        case .High:
-            return UIImage(named: "priority-high")
-        }
-    }
     
     // MARK: - VOID METHODS
     
@@ -56,7 +54,7 @@ class UIAssignmentTableViewCell: UITableViewCell {
         } else {
             self.buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
         }
-        self.imagePriority.image = image(for: assignment.priority)
+        self.imagePriority.priority = assignment.priority
         if let deadline = assignment.deadline {
             self.labelDeadline.text = String(date: deadline, dateStyle: .short)
             
@@ -96,12 +94,6 @@ class UIAssignmentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-}
-
-extension UINib {
-    static func assignmentCells() -> UINib {
-        return UINib(nibName: "UIAssignmentTableViewCell", bundle: Bundle.main)
     }
 }
 

@@ -20,22 +20,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="31.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="BFv-Ak-LLE">
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BFv-Ak-LLE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="31.5"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5L-OM-9Ma">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5L-OM-9Ma" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="31.5" height="31.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="c5L-OM-9Ma" secondAttribute="height" multiplier="1:1" id="IvB-kK-3fh"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" image="checkbox-task"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="uncheckedImage" value="checkbox-task"/>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="checkedImage" value="checkbox-task-completed"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="pressCheckbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FbU-iA-Ocd"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciD-Xq-YWy">
-                                <rect key="frame" x="39.5" y="0.0" width="280.5" height="31.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="31.5" y="0.0" width="288.5" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -51,10 +55,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="labelCheckbox" destination="c5L-OM-9Ma" id="1zA-wd-f2c"/>
+                <outlet property="buttonCheckbox" destination="c5L-OM-9Ma" id="6Qf-hS-QnB"/>
                 <outlet property="labelTitle" destination="ciD-Xq-YWy" id="srI-XP-kyJ"/>
             </connections>
             <point key="canvasLocation" x="120" y="43"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="checkbox-task" width="16" height="16"/>
+        <image name="checkbox-task-completed" width="16" height="16"/>
+    </resources>
 </document>

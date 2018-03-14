@@ -51,7 +51,7 @@ class AssignmentViewModel {
     
     // MARK: - LIFE CYCLE
     
-    lazy var assignmentTasks: NSFetchedResultsController<Task>? = {
+    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task>? = {
         let fetch: NSFetchRequest<Task> = Task.fetchRequest()
         fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
         fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title")]

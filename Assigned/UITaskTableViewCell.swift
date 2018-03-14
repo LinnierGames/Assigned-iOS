@@ -8,16 +8,34 @@
 
 import UIKit
 
+@objc protocol UITaskTableViewCellDelegate: class {
+    @objc optional func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool)
+}
+
 class UITaskTableViewCell: UITableViewCell {
     
-//    static var reuseableIdentifier = "task"
+    enum Types {
+        struct Info {
+            var cellIdentifier: String
+            var nib: UINib
+            
+            init(id: String, nibTitle: String) {
+                cellIdentifier = id
+                nib = UINib(nibName: nibTitle, bundle: Bundle.main)
+            }
+        }
+        
+        static var Basic = Info(id: "task", nibTitle: "UITaskTableViewCell")
+        
+        //TODO: layout textfield cell
+//        static var Textfield = Info(id: "task textfield", nibTitle: "UITaskTableViewCell-TextField")
+    }
+    
     @IBOutlet weak var textfield: UITextField?
     
     @IBOutlet weak var labelTitle: UILabel?
-    enum Types {
-        static var basic = "task"
-        static var textfield = "task textfield"
-    }
+    
+    weak var delegate: UITaskTableViewCellDelegate?
     
     // MARK: - RETURN VALUES
     
@@ -28,28 +46,26 @@ class UITaskTableViewCell: UITableViewCell {
             return assertionFailure("configured task without a label present")
         }
         
-        labelTitle.text = task.title
+        buttonCheckbox.isChecked = task.isCompleted
+        if task.isCompleted {
+            labelTitle.attributedText = NSMutableAttributedString(strikedOut: task.title ?? "")
+            labelTitle.textColor = .disabledGray
+        } else {
+            labelTitle.text = task.title
+            labelTitle.textColor = .black
+        }
     }
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var labelCheckbox: UIButton!
+    @IBOutlet weak var buttonCheckbox: UICheckbox!
     @IBAction func pressCheckbox(_ sender: Any) {
+        buttonCheckbox.isChecked.invert()
         
+        delegate?.task?(cell: self, didTapCheckBox: buttonCheckbox.isChecked)
     }
     
     // MARK: - LIFE CYCLE
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
 }
 
@@ -58,7 +74,7 @@ extension UITaskTableViewCell: UITextFieldDelegate {
 }
 
 extension UINib {
-    static func assignmentTaskCells() -> UINib {
+    static func assignmentTaskCell() -> UINib {
         return UINib(nibName: "UITaskTableViewCell", bundle: Bundle.main)
     }
 }

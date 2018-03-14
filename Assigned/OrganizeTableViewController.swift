@@ -27,7 +27,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     // MARK: Table View Data Source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UIAssignmentTableViewCell.Types.baseCell) as! UIAssignmentTableViewCell?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UIAssignmentTableViewCell.Types.baseCell.cellIdentifier) as! UIAssignmentTableViewCell?
             else {
                 assertionFailure("custom cell did not load")
                 
@@ -179,7 +179,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
             navigationItem.leftBarButtonItem = nil
         }
         
-        tableView.register(UINib.assignmentCells(), forCellReuseIdentifier: UIAssignmentTableViewCell.Types.baseCell)
+        let baseCell = UIAssignmentTableViewCell.Types.baseCell
+        tableView.register(baseCell.nib, forCellReuseIdentifier: baseCell.cellIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
         tableView.rowHeight = 44

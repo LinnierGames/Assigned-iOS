@@ -25,8 +25,8 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xqL-r5-PKD">
                         <rect key="frame" x="16" y="11" width="288" height="22"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-Cm-czP">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="22"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-Cm-czP">
+                                <rect key="frame" x="0.0" y="0.0" width="34" height="22"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTl-9b-QLI">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -38,8 +38,8 @@
                                             <action selector="pressCheckbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YCg-bH-7sF"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ufo-rv-yoM">
-                                        <rect key="frame" x="22" y="0.0" width="8" height="22"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priority-high" translatesAutoresizingMaskIntoConstraints="NO" id="Ufo-rv-yoM" customClass="UIPriorityBox" customModule="Assigned" customModuleProvider="target">
+                                        <rect key="frame" x="26" y="0.0" width="8" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="8" id="yQC-lL-RsE"/>
                                         </constraints>
@@ -47,7 +47,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2V-Be-0iX">
-                                <rect key="frame" x="38" y="0.0" width="208.5" height="20.5"/>
+                                <rect key="frame" x="42" y="0.0" width="204.5" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -89,5 +89,6 @@
     </objects>
     <resources>
         <image name="file-1" width="19" height="24"/>
+        <image name="priority-high" width="5" height="12"/>
     </resources>
 </document>

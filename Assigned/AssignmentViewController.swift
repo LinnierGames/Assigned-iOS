@@ -413,7 +413,8 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableTasks.register(UINib.assignmentTaskCells(), forCellReuseIdentifier: UITaskTableViewCell.Types.basic)
+        let titleCell = UITaskTableViewCell.Types.Basic
+        tableTasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
         tableTasks.rowHeight = 32
@@ -427,22 +428,23 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 
 extension AssignmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.assignmentTasks?.fetchedObjects?.count ?? 0
+        return viewModel.fetchedAssignmentTasks?.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.basic) as! UITaskTableViewCell? else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.Basic.cellIdentifier) as! UITaskTableViewCell? else {
             assertionFailure("TaskTableViewCell was not registered")
             
             return UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
         
-        guard let tasks = viewModel.assignmentTasks else {
-            fatalError("ooh shit")
+        guard let tasks = viewModel.fetchedAssignmentTasks else {
+            fatalError("ooh shit, fetchrequest controller not set")
         }
         
         let task = tasks.task(at: indexPath)
         cell.configure(task)
+        cell.delegate = self
         
         return cell
     }
@@ -479,6 +481,20 @@ extension AssignmentViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableTasks.endUpdates()
+    }
+}
+
+extension AssignmentViewController: UITaskTableViewCellDelegate {
+    func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool) {
+        guard
+            let tasks = viewModel.fetchedAssignmentTasks,
+            let indexPath = tableTasks.indexPath(for: cell)
+            else {
+            fatalError("ooh shit, fetchrequest controller not set")
+        }
+        
+        let task = tasks.task(at: indexPath)
+        task.isCompleted = newState
     }
 }
 
