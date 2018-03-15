@@ -31,10 +31,10 @@
                                         <rect key="frame" x="24" y="0.0" width="264" height="24"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xA3-ll-iQD">
-                                                <rect key="frame" x="0.0" y="0.0" width="45" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="87" height="24"/>
                                                 <state key="normal" title="Edit"/>
                                                 <connections>
-                                                    <action selector="pressEdit:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="js3-kc-wF2"/>
+                                                    <action selector="pressLeft:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="js3-kc-wF2"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fin-8x-4aD">
@@ -46,18 +46,30 @@
                                                     <constraint firstAttribute="height" constant="24" id="zQn-Gb-rb0"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-Xa-tZd">
-                                                <rect key="frame" x="219" y="0.0" width="45" height="24"/>
-                                                <state key="normal" title="Delete">
-                                                    <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="pressDeleteAssignment:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="4ur-Rt-U9S"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="aCw-Qv-n2f">
+                                                <rect key="frame" x="177" y="0.0" width="87" height="24"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBa-kk-zCl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
+                                                        <state key="normal" title="Tsh"/>
+                                                        <connections>
+                                                            <action selector="pressDeleteAssignment:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="USx-UU-sSj"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-Xa-tZd">
+                                                        <rect key="frame" x="34" y="0.0" width="53" height="24"/>
+                                                        <state key="normal" title="Discard">
+                                                            <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="pressDiscardChanges:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="n0m-J5-Nvi"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="b5x-Xa-tZd" firstAttribute="width" secondItem="xA3-ll-iQD" secondAttribute="width" id="oa6-9T-waA"/>
+                                            <constraint firstItem="xA3-ll-iQD" firstAttribute="width" secondItem="aCw-Qv-n2f" secondAttribute="width" id="c9Q-CQ-WQx"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="YHn-PW-yaV">
@@ -597,7 +609,8 @@
                         <outlet property="buttonBreadcrum" destination="lKh-KR-8ys" id="Peg-Dg-RIt"/>
                         <outlet property="buttonCheckbox" destination="4ci-48-G2u" id="gQV-5a-AjR"/>
                         <outlet property="buttonDeadline" destination="inD-5h-tlD" id="4qn-uz-A8X"/>
-                        <outlet property="buttonDelete" destination="b5x-Xa-tZd" id="iyK-QI-7YW"/>
+                        <outlet property="buttonDelete" destination="LBa-kk-zCl" id="Hcy-di-aPX"/>
+                        <outlet property="buttonDiscard" destination="b5x-Xa-tZd" id="xAY-Jf-CHb"/>
                         <outlet property="buttonLeft" destination="xA3-ll-iQD" id="9BP-qT-MWW"/>
                         <outlet property="deadlinePicker" destination="fjt-l5-hrl" id="zaj-h5-W9c"/>
                         <outlet property="imagePriorityBox" destination="AwL-4e-BgX" id="ayj-Db-Ogu"/>

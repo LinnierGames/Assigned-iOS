@@ -42,8 +42,7 @@ struct PersistenceStack {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
-        let context = self.persistentContainer.viewContext
+    func saveContext (context: NSManagedObjectContext = PersistenceStack.shared.viewContext) {
         if context.hasChanges {
             do {
                 try context.save()
@@ -54,5 +53,14 @@ struct PersistenceStack {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+}
+
+extension NSManagedObjectContext {
+    func newChildContext() -> NSManagedObjectContext {
+        let newContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        newContext.parent = self
+        
+        return newContext
     }
 }

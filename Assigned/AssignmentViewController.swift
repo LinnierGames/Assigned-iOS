@@ -43,40 +43,6 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    private var isShowingDeadlinePicker: Bool {
-        set {
-            UIView.animate(withDuration: 0.35) { [unowned self] in
-                self.viewDeadlinePicker.isHidden = newValue.inverse
-                if newValue == false {
-                    self.viewDeadlinePicker.alpha = 0.0
-                } else {
-                    self.viewDeadlinePicker.alpha = 1.0
-                }
-            }
-        }
-        get {
-            return viewDeadlinePicker.isHidden.inverse
-        }
-    }
-    
-    private var isTrashButtonHidden: Bool {
-        set {
-            // hide the button
-            if newValue == true {
-                buttonDelete.setTitleColor(UIColor.clear, for: .normal)
-                buttonDelete.isUserInteractionEnabled = false
-                
-            // show the button
-            } else {
-                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
-                buttonDelete.isUserInteractionEnabled = true
-            }
-        }
-        get {
-            return buttonDelete.isUserInteractionEnabled.inverse
-        }
-    }
-    
     // MARK: - RETURN VALUES
     
     // MARK: Text Field
@@ -97,21 +63,28 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    private func dismissViewController(completion handler: @escaping () -> () = {}) {
+        self.presentingViewController!.dismiss(animated: true, completion: handler)
+    }
+    
     private func updateUI(animated: Bool = false) {
         let animationDuration = 0.35
         
         //TODO: update visiblity of the slide down to dismiss
 
         if editingMode.isCreating {
-            isTrashButtonHidden = false
+            isDeleteButtonHidden = true
+            isDiscardButtonHidden = false
             buttonLeft.setTitle("Save", for: .normal)
-            buttonDelete.setTitle("Discard", for: .normal)
+            buttonDiscard.setTitle("Discard", for: .normal)
         } else if editingMode.isReading {
-            isTrashButtonHidden = true
+            isDeleteButtonHidden = true
+            isDiscardButtonHidden = true
             buttonLeft.setTitle("Edit", for: .normal)
         } else if editingMode.isUpdating {
-            isTrashButtonHidden = false
-            buttonLeft.setTitle("Done", for: .normal)
+            isDeleteButtonHidden = false
+            isDiscardButtonHidden = false
+            buttonLeft.setTitle("Save", for: .normal)
         }
         
         // Update assignment properties
@@ -177,41 +150,120 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         assignment.title = textField.text
+        viewModel.saveOnlyOnReading()
     }
     
     // MARK: - IBACTIONS
     
     // MARK: View
     
+    //TODO: pan the whole card to dismiss
     @IBAction func didSwipeToDismiss(_ sender: Any) {
-        //TODO: pan the whole card to dismiss
         
         // pan to dismiss is only when you are not editing or in the middle of
         //creating a new assignment
         if editingMode.isReading {
-            self.presentingViewController!.dismiss(animated: true)
+            guard viewModel.context.hasChanges == false else {
+                fatalError("context should now have any changes, instead, any changes made should be saved automatically")
+            }
+            
+            self.dismissViewController()
         }
     }
     
     @IBOutlet weak var buttonLeft: UIButton!
-    @IBAction func pressEdit(_ sender: Any) {
+    @IBAction func pressLeft(_ sender: Any) {
+        // Save new Assignment
         if editingMode.isCreating {
             dismiss()
-            //TODO: save temp context into main context and onto disk
-            PersistenceStack.shared.saveContext()
-            self.presentingViewController!.dismiss(animated: true)
+            
+            //save
+            viewModel.saveNewAssignment()
+            self.dismissViewController()
+            
+        // Save edits
         } else if editingMode.isUpdating {
-            //TODO: save temp context into main context and onto disk
             isShowingDeadlinePicker = false
+            
+            //save
+            viewModel.saveEdits()
             editingMode = .Read
+            
+        // Begin edits
         } else if editingMode.isReading {
+            
+            //begin editing
+            viewModel.beginEdits()
             editingMode = .Update
+        }
+    }
+    
+    private var isShowingDeadlinePicker: Bool {
+        set {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.viewDeadlinePicker.isHidden = newValue.inverse
+                if newValue == false {
+                    self.viewDeadlinePicker.alpha = 0.0
+                } else {
+                    self.viewDeadlinePicker.alpha = 1.0
+                }
+            }
+        }
+        get {
+            return viewDeadlinePicker.isHidden.inverse
+        }
+    }
+    
+    private var isDeleteButtonHidden: Bool {
+        set {
+            // hide the button
+            if newValue == true {
+                buttonDelete.setTitleColor(UIColor.clear, for: .normal)
+                buttonDelete.isUserInteractionEnabled = false
+                
+                // show the button
+            } else {
+                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
+                buttonDelete.isUserInteractionEnabled = true
+            }
+        }
+        get {
+            return buttonDelete.isUserInteractionEnabled.inverse
+        }
+    }
+    
+    private var isDiscardButtonHidden: Bool {
+        set {
+            // hide the button
+            if newValue == true {
+                buttonDiscard.setTitleColor(UIColor.clear, for: .normal)
+                buttonDiscard.isUserInteractionEnabled = false
+                
+                // show the button
+            } else {
+                buttonDiscard.setTitleColor(UIColor.destructive, for: .normal)
+                buttonDiscard.isUserInteractionEnabled = true
+            }
+        }
+        get {
+            return buttonDiscard.isUserInteractionEnabled.inverse
         }
     }
     
     @IBOutlet weak var buttonDelete: UIButton!
     @IBAction func pressDeleteAssignment(_ sender: Any) {
-        
+        viewModel.deleteAssignment()
+        self.dismissViewController()
+    }
+    
+    @IBOutlet weak var buttonDiscard: UIButton!
+    @IBAction func pressDiscardChanges(_ sender: Any) {
+        if editingMode.isCreating {
+            self.dismissViewController()
+        } else if editingMode.isUpdating {
+            viewModel.discardChanges()
+            editingMode = .Read
+        }
     }
     
     // MARK: Title and breadcrum
@@ -238,6 +290,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         //TODO: RxSwift
         assignment.isCompleted = buttonCheckbox.isChecked
+        viewModel.saveOnlyOnReading()
     }
     
     var isShowingPriorityBox: Bool {
@@ -268,6 +321,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         //TODO: RxSwift
         imagePriorityBox.priority = newPriority
+        viewModel.saveOnlyOnReading()
         
         isShowingPriorityBox = false
     }
@@ -500,6 +554,7 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
         
         let task = tasks.task(at: indexPath)
         task.isCompleted = newState
+        viewModel.saveOnlyOnReading()
     }
 }
 
