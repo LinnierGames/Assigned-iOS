@@ -141,6 +141,10 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             }
             
             //TODO: update the effort chart
+//            viewEffortCompleted.duration =
+//            viewEffortPlanned.duration =
+//            viewEffortUnplanned.duration =
+//            viewEffortTotal.duration =
         }
         
         // Fetch tasks
@@ -373,6 +377,13 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         self.isShowingDeadlinePicker = false
     }
     
+    // MARK: Effort View
+    
+    @IBOutlet weak var viewEffortCompleted: UITimeBox!
+    @IBOutlet weak var viewEffortPlanned: UITimeBox!
+    @IBOutlet weak var viewEffortUnplanned: UITimeBox!
+    @IBOutlet weak var viewEffortTotal: UITimeBox!
+    
     // MARK: Effort Slider
     
     @IBOutlet weak var labelEffort: UILabel!
@@ -405,7 +416,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
                 newSliderValue = newValue
                 
                 let nHours = TimeInterval(newSliderValue) * CTDateComponentHour
-                labelEffort.text = String(timeInterval: nHours, options: .hour, .minute)
+                labelEffort.text = String(timeInterval: nHours, units: .hour, .minute)
             }
             
             sliderEffort.value = newSliderValue

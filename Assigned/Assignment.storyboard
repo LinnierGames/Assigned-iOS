@@ -299,7 +299,7 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-ds-pjw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="296" height="74"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-rZ-c4D">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-rZ-c4D" customClass="UITimeBox" customModule="Assigned" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="98.5" height="74"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NRb-0r-u07">
@@ -342,8 +342,13 @@
                                                                             <constraint firstAttribute="trailing" secondItem="NRb-0r-u07" secondAttribute="trailing" id="wuu-pW-0FM"/>
                                                                             <constraint firstItem="jD0-W0-RSU" firstAttribute="leading" secondItem="GMh-rZ-c4D" secondAttribute="leading" id="yFk-wj-XNn"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <outlet property="labelCaption" destination="jD0-W0-RSU" id="579-w7-1Yf"/>
+                                                                            <outlet property="labelMajor" destination="5g7-xr-5Jn" id="Qpi-4b-g9f"/>
+                                                                            <outlet property="labelMinor" destination="7IW-6V-uxC" id="r7w-9d-OVb"/>
+                                                                        </connections>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYW-bB-O2n">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYW-bB-O2n" customClass="UITimeBox" customModule="Assigned" customModuleProvider="target">
                                                                         <rect key="frame" x="98.5" y="0.0" width="99" height="74"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6XY-3l-sR3">
@@ -386,8 +391,13 @@
                                                                             <constraint firstItem="Lz2-qJ-DR1" firstAttribute="centerY" secondItem="dYW-bB-O2n" secondAttribute="centerY" id="gxH-OE-tay"/>
                                                                             <constraint firstItem="EXf-fd-LdN" firstAttribute="leading" secondItem="dYW-bB-O2n" secondAttribute="leading" id="zDO-Rd-Sao"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <outlet property="labelCaption" destination="EXf-fd-LdN" id="EZM-5p-lr0"/>
+                                                                            <outlet property="labelMajor" destination="kFD-jW-pnh" id="yDV-pR-gUG"/>
+                                                                            <outlet property="labelMinor" destination="rwW-kP-olo" id="TW9-d4-Wdp"/>
+                                                                        </connections>
                                                                     </view>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9WN-f2-6Xa">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9WN-f2-6Xa" customClass="UITimeBox" customModule="Assigned" customModuleProvider="target">
                                                                         <rect key="frame" x="197.5" y="0.0" width="98.5" height="74"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z9G-WZ-b5H">
@@ -430,13 +440,18 @@
                                                                             <constraint firstItem="oiq-pA-Ha6" firstAttribute="centerY" secondItem="9WN-f2-6Xa" secondAttribute="centerY" id="Y0m-5l-Iwb"/>
                                                                             <constraint firstItem="5eA-0z-BiJ" firstAttribute="leading" secondItem="9WN-f2-6Xa" secondAttribute="leading" id="Zlq-qB-fpn"/>
                                                                         </constraints>
+                                                                        <connections>
+                                                                            <outlet property="labelCaption" destination="5eA-0z-BiJ" id="EY9-tT-NfA"/>
+                                                                            <outlet property="labelMajor" destination="BHL-F3-m06" id="dKf-5K-DeW"/>
+                                                                            <outlet property="labelMinor" destination="hSd-12-Qda" id="BAA-Lc-ZDk"/>
+                                                                        </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="Ur2-ds-pjw" secondAttribute="height" multiplier="4:1" id="gx6-vy-aLh"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-Ma-NS6">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-Ma-NS6" customClass="UITimeBox" customModule="Assigned" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="74" width="296" height="56"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A3-cR-Yb0">
@@ -460,7 +475,7 @@
                                                                             </label>
                                                                         </subviews>
                                                                     </stackView>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Toatl Effort" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gon-91-pht">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Effort" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gon-91-pht">
                                                                         <rect key="frame" x="0.0" y="40" width="296" height="12"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                         <nil key="textColor"/>
@@ -479,6 +494,11 @@
                                                                     <constraint firstItem="gon-91-pht" firstAttribute="leading" secondItem="hWb-Ma-NS6" secondAttribute="leading" id="vo1-DN-4RQ"/>
                                                                     <constraint firstAttribute="bottom" secondItem="gon-91-pht" secondAttribute="bottom" constant="4" id="ySU-FL-0sY"/>
                                                                 </constraints>
+                                                                <connections>
+                                                                    <outlet property="labelCaption" destination="gon-91-pht" id="OSw-ut-Mol"/>
+                                                                    <outlet property="labelMajor" destination="nyC-bb-Ycz" id="6DK-Kg-hOh"/>
+                                                                    <outlet property="labelMinor" destination="ZSj-LQ-YUG" id="LS2-E5-4ZL"/>
+                                                                </connections>
                                                             </view>
                                                         </subviews>
                                                         <constraints>
@@ -620,7 +640,11 @@
                         <outlet property="tableTasks" destination="B7N-tU-dEh" id="8Be-Rw-idO"/>
                         <outlet property="textfieldTitle" destination="DpK-Ko-kNc" id="s3x-BF-eGj"/>
                         <outlet property="viewDeadlinePicker" destination="pr0-4U-76t" id="YZH-IB-6nA"/>
+                        <outlet property="viewEffortCompleted" destination="GMh-rZ-c4D" id="ibb-x6-KDK"/>
+                        <outlet property="viewEffortPlanned" destination="dYW-bB-O2n" id="KBv-v4-lVg"/>
                         <outlet property="viewEffortSlider" destination="KRz-0e-qJ2" id="b2b-QY-ScT"/>
+                        <outlet property="viewEffortTotal" destination="hWb-Ma-NS6" id="QKu-q7-LrS"/>
+                        <outlet property="viewEffortUnplanned" destination="9WN-f2-6Xa" id="tub-6T-KAh"/>
                         <outlet property="viewEffortValues" destination="cBz-pc-voL" id="pnf-9g-8Rx"/>
                         <outlet property="viewPriorityBox" destination="47F-Yo-x6t" id="zII-Kb-6GH"/>
                     </connections>

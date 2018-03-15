@@ -173,7 +173,7 @@ extension AssignmentViewModel {
             
             //TODO: User Preferences
             //FIXME: use largest unit, weeks, days, hours, minutes, and grammar
-            let nDays = String(timeInterval: daysUntilDeadline, options: .day)
+            let nDays = String(timeInterval: daysUntilDeadline, units: .day)
             
             return "in \(nDays)days"
         } else {
