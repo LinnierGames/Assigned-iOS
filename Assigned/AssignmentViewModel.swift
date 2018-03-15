@@ -19,6 +19,8 @@ class AssignmentViewModel {
     
     private var assignmentValue: Assignment!
     
+    var editingMode: CRUD = .Create
+    
     init(with delegate: AssignedViewModelDelegate) {
         self.delegate = delegate
     }

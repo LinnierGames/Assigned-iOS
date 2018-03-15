@@ -27,14 +27,19 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    var editingMode: CRUD = .Create {
-        didSet {
+    var editingMode: CRUD {
+        set {
+            viewModel.editingMode = newValue
+            
             // editingMode can be set before the view is fully loaded thus,
             //check any outlet, that is always set when the view is loaded, and
             //invoke updateUI(..) then
             guard self.buttonLeft != nil else { return }
             
             updateUI(animated: true)
+        }
+        get {
+            return viewModel.editingMode
         }
     }
     
