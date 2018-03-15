@@ -90,11 +90,12 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         // Update assignment properties
         
         //TODO: RxSwift
+        textfieldTitle.text = assignment.title
         buttonCheckbox.isChecked = assignment.isCompleted
         imagePriorityBox.priority = assignment.priority
-        textfieldTitle.text = assignment.title
         buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
+        deadlinePicker.date = assignment.deadline ?? Date()
         
         if editingMode.isReading {
             buttonDeadline.setTitle(viewModel.deadlineTitle ?? "no deadline", for: .normal)

@@ -102,6 +102,34 @@ class AssignmentViewModel {
 }
 
 extension AssignmentViewModel {
+    private func updateContextToANewEditContext() {
+        let editContext = self.newEditsContext()
+        self.context = editContext
+    }
+    
+    private func updateContextToMainContext() {
+        guard let readingAssignment = readingAssignmentValue else {
+            fatalError("discard changes was called without an orignal returning point")
+        }
+        
+        // switch back to the main context
+        self.context = self.mainContext()
+        
+        // revert the assignment back to the readingAssignment, which was set before editing started
+        assignment = readingAssignment
+    }
+    
+    private func pushChangesToParentAndSave() {
+        
+        // push changes to parent
+        self.persistance.saveContext(context: self.context)
+        
+        // save parent changes
+        self.persistance.saveContext()
+    }
+}
+
+extension AssignmentViewModel {
     
     var assignment: Assignment {
         set {
@@ -180,19 +208,21 @@ extension AssignmentViewModel {
     func createNewAssignment() {
         
         // set context to edits context
-        let editContext = self.newEditsContext()
-        self.context = editContext
+        self.updateContextToANewEditContext()
+//        let editContext = self.newEditsContext()
+//        self.context = editContext
         
         // set assignment to blank assignment
         let newAssignment = Assignment(
             title: "Untitled Assignment",
             effort: 0,
-            in: editContext
+            in: self.context
         )
-        self.assignment = newAssignment
         
         //FIXME: get the parent directory
-        _ = Directory.createDirectory(for: self.assignment, parent: nil, in: self.context)
+        _ = Directory.createDirectory(for: newAssignment, parent: nil, in: self.context)
+        
+        self.assignment = newAssignment
     }
     
     /**
@@ -200,12 +230,13 @@ extension AssignmentViewModel {
      and saves the parent context.
      */
     func saveNewAssignment() {
+        self.pushChangesToParentAndSave()
         
-        // push changes to parent
-        self.persistance.saveContext(context: self.context)
-        
-        // save parent changes
-        self.persistance.saveContext()
+//        // push changes to parent
+//        self.persistance.saveContext(context: self.context)
+//
+//        // save parent changes
+//        self.persistance.saveContext()
     }
     
     /**
@@ -217,8 +248,9 @@ extension AssignmentViewModel {
     func beginEdits() {
         
         // create edit context
-        let newEditContext = self.newEditsContext()
-        self.context = newEditContext
+        self.updateContextToANewEditContext()
+//        let newEditContext = self.newEditsContext()
+//        self.context = newEditContext
         
         // fetch a copy of assignment, from view context, to new edit context
         readingAssignmentValue = assignment
@@ -234,23 +266,26 @@ extension AssignmentViewModel {
         self.context.delete(assignment)
         
         // push changes to parent and save the parent
-        self.persistance.saveContext(context: self.context)
-        self.persistance.saveContext()
+        self.pushChangesToParentAndSave()
+//        self.persistance.saveContext(context: self.context)
+//        self.persistance.saveContext()
     }
     
     /**
      the discard button was pressed
      */
     func discardChanges() {
-        guard let readingAssignment = readingAssignmentValue else {
-            fatalError("discard changes was called without an orignal returning point")
-        }
-        
-        // the edits context is deleted along with its changes, if any
-        self.context = self.mainContext()
-        
-        // revert the assignment back to the readingAssignment, which was set before editing started
-        assignment = readingAssignment
+        self.updateContextToMainContext()
+//        guard let readingAssignment = readingAssignmentValue else {
+//            fatalError("discard changes was called without an orignal returning point")
+//        }
+//
+//        // the edits context is deleted along with its changes, if any
+//
+//        self.context = self.mainContext()
+//
+//        // revert the assignment back to the readingAssignment, which was set before editing started
+//        assignment = readingAssignment
     }
     
     /**
@@ -260,19 +295,21 @@ extension AssignmentViewModel {
      - warning: the edit context is deleted after pushing changes up to its parent
      */
     func saveEdits() {
-        guard let readingAssignment = readingAssignmentValue else {
-            fatalError("discard changes was called without an orignal returning point")
-        }
-        
-        // push changes to parent and save the parent
-        self.persistance.saveContext(context: self.context)
-        self.persistance.saveContext()
-        
-        // switch back to the main context
-        self.context = self.mainContext()
-        
-        // revert the assignment back to the readingAssignment, which was set before editing started
-        assignment = readingAssignment
+        self.pushChangesToParentAndSave()
+        self.updateContextToMainContext()
+//        guard let readingAssignment = readingAssignmentValue else {
+//            fatalError("discard changes was called without an orignal returning point")
+//        }
+//
+//        // push changes to parent and save the parent
+//        self.persistance.saveContext(context: self.context)
+//        self.persistance.saveContext()
+//
+//        // switch back to the main context
+//        self.context = self.mainContext()
+//
+//        // revert the assignment back to the readingAssignment, which was set before editing started
+//        assignment = readingAssignment
     }
     
     /**
