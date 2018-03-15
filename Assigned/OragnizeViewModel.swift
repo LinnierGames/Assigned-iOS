@@ -24,7 +24,7 @@ struct OrganizeViewModel {
     // MARK: - VOID METHODS
     
     func addAssignment(with title: String) {
-        let newAssignment = Assignment(title: title, effort: 0, in: managedObjectContext)
+        let newAssignment = Assignment.createAssignment(title: title, effort: 0, in: managedObjectContext)
         self.addAssignment(newAssignment)
     }
     

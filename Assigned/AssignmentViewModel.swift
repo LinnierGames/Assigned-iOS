@@ -213,14 +213,14 @@ extension AssignmentViewModel {
 //        self.context = editContext
         
         // set assignment to blank assignment
-        let newAssignment = Assignment(
-            title: "Untitled Assignment",
-            effort: 0,
-            in: self.context
-        )
         
         //FIXME: get the parent directory
-        _ = Directory.createDirectory(for: newAssignment, parent: nil, in: self.context)
+        let newAssignment = Assignment.createAssignment(
+            title: "Untitled Assignment",
+            effort: 0,
+            parent: nil,
+            in: self.context
+        )
         
         self.assignment = newAssignment
     }

@@ -13,6 +13,27 @@ import CoreData
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
     
+    static func createAssignment(title: String, effort: Float,
+                                 deadline: Date? = nil,
+                                 priority: Assignment.Priorities = .None,
+                                 notes: String = "",
+                                 isCompleted: Bool = false,
+                                 parent directory: Directory? = nil,
+                                 in context: NSManagedObjectContext) -> Assignment {
+        let newAssignment = Assignment(context: context)
+        
+        newAssignment.title = title
+        newAssignment.effort = effort
+        newAssignment.deadline = deadline
+        newAssignment.priorityValue = Int16(priority.rawValue)
+        newAssignment.notes = notes
+        newAssignment.isCompleted = isCompleted
+        
+        _ = Directory.createDirectory(for: newAssignment, parent: directory, in: context)
+        
+        return newAssignment
+    }
+    
     enum Priorities: Int, Equatable, CustomStringConvertible {
         case None = 0
         case Low
@@ -46,22 +67,6 @@ public class Assignment: DirectoryInfo {
             
             return priority
         }
-    }
-    
-    convenience init(title: String, effort: Float,
-                     deadline: Date? = nil,
-                     priority: Assignment.Priorities = .None,
-                     notes: String = "",
-                     isCompleted: Bool = false,
-                     in context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.title = title
-        self.effort = effort
-        self.deadline = deadline
-        self.priorityValue = Int16(priority.rawValue)
-        self.notes = notes
-        self.isCompleted = isCompleted
     }
     
     public override var description: String {
