@@ -136,13 +136,6 @@ extension AssignmentViewModel {
             self.assignmentValue = newValue
         }
         get {
-            //            if self.assignmentValue == nil {
-            //                let newAssignment = Assignment(title: "Untitled", effort: 0, in: self.context)
-            //                //FIXME: get the parent directory
-            //                _ = Directory.createDirectory(for: newAssignment, parent: nil, in: self.context)
-            //                self.assignmentValue = newAssignment
-            //            }
-            
             return self.assignmentValue
         }
     }
@@ -197,6 +190,16 @@ extension AssignmentViewModel {
     func setDeadlineToToday() {
         assignmentValue.deadline = Date()
     }
+    
+    var effortTitle: String {
+        if assignment.effortValue == 0 {
+            return "no effort"
+        } else {
+            let nHours = TimeInterval(assignment.effortValue)
+            
+            return String(timeInterval: nHours, units: .day, .hour, .minute)
+        }
+    }
 
     // MARK: - RETURN VALUES
     
@@ -209,10 +212,6 @@ extension AssignmentViewModel {
         
         // set context to edits context
         self.updateContextToANewEditContext()
-//        let editContext = self.newEditsContext()
-//        self.context = editContext
-        
-        // set assignment to blank assignment
         
         //FIXME: get the parent directory
         let newAssignment = Assignment.createAssignment(
@@ -231,12 +230,6 @@ extension AssignmentViewModel {
      */
     func saveNewAssignment() {
         self.pushChangesToParentAndSave()
-        
-//        // push changes to parent
-//        self.persistance.saveContext(context: self.context)
-//
-//        // save parent changes
-//        self.persistance.saveContext()
     }
     
     /**
@@ -249,8 +242,6 @@ extension AssignmentViewModel {
         
         // create edit context
         self.updateContextToANewEditContext()
-//        let newEditContext = self.newEditsContext()
-//        self.context = newEditContext
         
         // fetch a copy of assignment, from view context, to new edit context
         readingAssignmentValue = assignment
@@ -267,8 +258,6 @@ extension AssignmentViewModel {
         
         // push changes to parent and save the parent
         self.pushChangesToParentAndSave()
-//        self.persistance.saveContext(context: self.context)
-//        self.persistance.saveContext()
     }
     
     /**
@@ -276,16 +265,6 @@ extension AssignmentViewModel {
      */
     func discardChanges() {
         self.updateContextToMainContext()
-//        guard let readingAssignment = readingAssignmentValue else {
-//            fatalError("discard changes was called without an orignal returning point")
-//        }
-//
-//        // the edits context is deleted along with its changes, if any
-//
-//        self.context = self.mainContext()
-//
-//        // revert the assignment back to the readingAssignment, which was set before editing started
-//        assignment = readingAssignment
     }
     
     /**
@@ -297,19 +276,6 @@ extension AssignmentViewModel {
     func saveEdits() {
         self.pushChangesToParentAndSave()
         self.updateContextToMainContext()
-//        guard let readingAssignment = readingAssignmentValue else {
-//            fatalError("discard changes was called without an orignal returning point")
-//        }
-//
-//        // push changes to parent and save the parent
-//        self.persistance.saveContext(context: self.context)
-//        self.persistance.saveContext()
-//
-//        // switch back to the main context
-//        self.context = self.mainContext()
-//
-//        // revert the assignment back to the readingAssignment, which was set before editing started
-//        assignment = readingAssignment
     }
     
     /**
@@ -319,10 +285,6 @@ extension AssignmentViewModel {
     func saveOnlyOnReading() {
         self.save()
     }
-    
-    // MARK: - IBACTIONS
-    
-    // MARK: - LIFE CYCLE
 
 }
 

@@ -597,6 +597,10 @@
                                                     </tableView>
                                                 </subviews>
                                             </stackView>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6Q-RE-6Yg">
+                                                <rect key="frame" x="0.0" y="505" width="296" height="0.0"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -646,7 +650,9 @@
                         <outlet property="viewEffortTotal" destination="hWb-Ma-NS6" id="QKu-q7-LrS"/>
                         <outlet property="viewEffortUnplanned" destination="9WN-f2-6Xa" id="tub-6T-KAh"/>
                         <outlet property="viewEffortValues" destination="cBz-pc-voL" id="pnf-9g-8Rx"/>
+                        <outlet property="viewNonTasks" destination="P6Q-RE-6Yg" id="ivF-Qj-BEi"/>
                         <outlet property="viewPriorityBox" destination="47F-Yo-x6t" id="zII-Kb-6GH"/>
+                        <outlet property="viewTasks" destination="WLk-Bn-Lge" id="i27-wr-X4I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rdW-Lb-RbP" userLabel="First Responder" sceneMemberID="firstResponder"/>

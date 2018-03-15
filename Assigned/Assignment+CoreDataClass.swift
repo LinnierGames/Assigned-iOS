@@ -13,6 +13,19 @@ import CoreData
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
     
+    /**
+     effortValue is stored in seconds, thus this computed var, effort, will return
+     effortValue in hours
+     */
+    var effort: Float {
+        set {
+            self.effortValue = TimeInterval(newValue) * CTDateComponentHour
+        }
+        get {
+            return Float(self.effortValue / CTDateComponentHour)
+        }
+    }
+    
     static func createAssignment(title: String, effort: Float,
                                  deadline: Date? = nil,
                                  priority: Assignment.Priorities = .None,

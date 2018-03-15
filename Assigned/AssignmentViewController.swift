@@ -11,11 +11,6 @@ import CoreData
 
 class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var textfieldTitle: UITextField!
-    @IBOutlet weak var labelDeadlineSubtext: UILabel!
-    @IBOutlet weak var tableTasks: UITableView!
-    @IBOutlet weak var viewEffortValues: UIStackView!
-    
     private lazy var viewModel = AssignmentViewModel(with: self)
     
     var assignment: Assignment {
@@ -75,15 +70,18 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         if editingMode.isCreating {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = false
+            isShowingTasksTable = true
             buttonLeft.setTitle("Save", for: .normal)
             buttonDiscard.setTitle("Discard", for: .normal)
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
+            isShowingTasksTable = true
             buttonLeft.setTitle("Edit", for: .normal)
         } else if editingMode.isUpdating {
             isDeleteButtonHidden = false
             isDiscardButtonHidden = false
+            isShowingTasksTable = false
             buttonLeft.setTitle("Save", for: .normal)
         }
         
@@ -103,6 +101,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             buttonDeadline.setTitle(viewModel.deadlineTitle ?? "Add a Deadline", for: .normal)
         }
         
+        //TODO: DRY
         let showEffortSliderAnimations = { [unowned self] in
             self.viewEffortValues.isHidden = true
             self.viewEffortValues.alpha = 0.0
@@ -144,7 +143,8 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 //            viewEffortCompleted.duration =
 //            viewEffortPlanned.duration =
 //            viewEffortUnplanned.duration =
-//            viewEffortTotal.duration =
+            viewEffortTotal.duration = TimeInterval(assignment.effortValue)
+            labelEffort.text = viewModel.effortTitle
         }
         
         // Fetch tasks
@@ -288,6 +288,8 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 //        }
 //    }
     
+    @IBOutlet weak var textfieldTitle: UITextField!
+    
     @IBOutlet weak var buttonCheckbox: UICheckbox!
     @IBAction func pressCheckbox(_ sender: Any) {
         //TODO: control stored property by class itself by sending custom 'Send Event'
@@ -337,6 +339,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: Deadline
+    @IBOutlet weak var labelDeadlineSubtext: UILabel!
     
     @IBOutlet weak var buttonDeadline: UIButton!
     @IBAction func pressDeadline(_ sender: Any) {
@@ -379,6 +382,8 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Effort View
     
+    @IBOutlet weak var viewEffortValues: UIStackView!
+    
     @IBOutlet weak var viewEffortCompleted: UITimeBox!
     @IBOutlet weak var viewEffortPlanned: UITimeBox!
     @IBOutlet weak var viewEffortUnplanned: UITimeBox!
@@ -408,19 +413,16 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             
             if newValue <= 0 {
                 newSliderValue = 0.0
-                labelEffort.text = "no effort"
             } else {
                 if newValue > Float(maxEffortValue) {
                     maxEffortValue = Int(newValue) // max effort are only represent whole hours
                 }
                 newSliderValue = newValue
-                
-                let nHours = TimeInterval(newSliderValue) * CTDateComponentHour
-                labelEffort.text = String(timeInterval: nHours, units: .hour, .minute)
             }
             
             sliderEffort.value = newSliderValue
             assignment.effort = newSliderValue
+            labelEffort.text = viewModel.effortTitle
         }
         get {
             return sliderEffort.value
@@ -438,7 +440,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             } else if x < 1.0 {
                 return 0.5
             } else {
-                return round(x)
+                return round(x*2)/2
             }
         }
         
@@ -460,6 +462,27 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
     
     // MARK: Tasks
+    
+    @IBOutlet weak var viewTasks: UIStackView!
+    @IBOutlet weak var viewNonTasks: UIView!
+    @IBOutlet weak var tableTasks: UITableView!
+    
+    private var isShowingTasksTable: Bool {
+        set {
+            UIView.animate(withDuration: 0.35) { [unowned self] in
+                self.tableTasks.isHidden = newValue.inverse
+                self.viewNonTasks.isHidden = self.tableTasks.isHidden.inverse
+                if newValue == false {
+                    self.tableTasks.alpha = 0.0
+                } else {
+                    self.tableTasks.alpha = 1.0
+                }
+            }
+        }
+        get {
+            return tableTasks.isHidden.inverse
+        }
+    }
     
     @IBAction func pressAddTask(_ sender: Any) {
         let alertAddTitle = UIAlertController(
@@ -489,6 +512,8 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         //TODO: Dynamic Font, user preferences of which cell to display
         tableTasks.rowHeight = 32
+        
+        viewEffortTotal.calendarUnits = [.day, .hour, .minute]
         
         //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
