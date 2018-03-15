@@ -25,6 +25,7 @@
 		E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */; };
 		E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UITaskTableViewCell.xib */; };
 		E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */; };
+		E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */; };
 		E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CD20588A0800C42821 /* UICheckbox.swift */; };
 		E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
@@ -80,6 +81,7 @@
 		E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E98E2F172055065000B1624A /* UITaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITaskTableViewCell.xib; sourceTree = "<group>"; };
 		E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITimeBox.swift; sourceTree = "<group>"; };
+		E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UITaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
 		E9C5D5CD20588A0800C42821 /* UICheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICheckbox.swift; sourceTree = "<group>"; };
 		E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriorityBox.swift; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */,
 				E98064672054FAD700073B33 /* UITaskTableViewCell.swift */,
 				E98E2F172055065000B1624A /* UITaskTableViewCell.xib */,
+				E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */,
 				E9C5D5CD20588A0800C42821 /* UICheckbox.swift */,
 				E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */,
 				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
@@ -351,6 +354,7 @@
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
 				E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */,
+				E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */,
 				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

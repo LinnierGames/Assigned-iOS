@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol UITaskTableViewCellDelegate: class {
     @objc optional func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool)
+    @objc optional func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String?)
 }
 
 class UITaskTableViewCell: UITableViewCell {
@@ -27,32 +28,54 @@ class UITaskTableViewCell: UITableViewCell {
         
         static var Basic = Info(id: "task", nibTitle: "UITaskTableViewCell")
         
-        //TODO: layout textfield cell
-//        static var Textfield = Info(id: "task textfield", nibTitle: "UITaskTableViewCell-TextField")
+        static var Textfield = Info(id: "task textfield", nibTitle: "UITaskTableViewCell-TextField")
     }
     
     @IBOutlet weak var textfield: UITextField?
     
     @IBOutlet weak var labelTitle: UILabel?
     
-    weak var delegate: UITaskTableViewCellDelegate?
+    weak var delegate: (UITaskTableViewCellDelegate)?
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
+    private(set) var task: Task?
+    
     func configure(_ task: Task) {
-        guard let labelTitle = self.labelTitle else {
+        guard let textfield = self.textfield else {
             return assertionFailure("configured task without a label present")
         }
         
         buttonCheckbox.isChecked = task.isCompleted
         if task.isCompleted {
-            labelTitle.attributedText = NSMutableAttributedString(strikedOut: task.title ?? "")
-            labelTitle.textColor = .disabledGray
+            textfield.attributedText = NSMutableAttributedString(strikedOut: task.title ?? "")
+            textfield.textColor = .disabledGray
         } else {
-            labelTitle.text = task.title
-            labelTitle.textColor = .black
+            textfield.text = task.title
+            textfield.textColor = .black
+        }
+        
+        self.task = task
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        guard
+            let task = self.task,
+            task.isCompleted == false
+            else {
+                return
+        }
+        
+        if selected {
+            textfield?.isUserInteractionEnabled = true
+            textfield?.becomeFirstResponder()
+        } else {
+            textfield?.isUserInteractionEnabled = false
+            textfield?.resignFirstResponder()
         }
     }
     
@@ -70,11 +93,15 @@ class UITaskTableViewCell: UITableViewCell {
 }
 
 extension UITaskTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textfield?.resignFirstResponder()
+        
+        return false
+    }
     
-}
-
-extension UINib {
-    static func assignmentTaskCell() -> UINib {
-        return UINib(nibName: "UITaskTableViewCell", bundle: Bundle.main)
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let task = self.task {
+            delegate?.task?(cell: self, didChangeTask: task, to: textField.text)
+        }
     }
 }

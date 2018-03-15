@@ -470,17 +470,17 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     private var isShowingTasksTable: Bool {
         set {
             UIView.animate(withDuration: 0.35) { [unowned self] in
-                self.tableTasks.isHidden = newValue.inverse
-                self.viewNonTasks.isHidden = self.tableTasks.isHidden.inverse
+                self.viewTasks.isHidden = newValue.inverse
                 if newValue == false {
-                    self.tableTasks.alpha = 0.0
+                    self.viewTasks.alpha = 0.0
                 } else {
-                    self.tableTasks.alpha = 1.0
+                    self.viewTasks.alpha = 1.0
                 }
             }
+            self.viewNonTasks.isHidden = newValue
         }
         get {
-            return tableTasks.isHidden.inverse
+            return viewTasks.isHidden.inverse
         }
     }
     
@@ -507,7 +507,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let titleCell = UITaskTableViewCell.Types.Basic
+        let titleCell = UITaskTableViewCell.Types.Textfield
         tableTasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
@@ -524,27 +524,39 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 
 extension AssignmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.fetchedAssignmentTasks?.fetchedObjects?.count ?? 0
+        return viewModel.fetchedAssignmentTasks.fetchedObjects?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.Basic.cellIdentifier) as! UITaskTableViewCell? else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.Textfield.cellIdentifier) as! UITaskTableViewCell? else {
             assertionFailure("TaskTableViewCell was not registered")
             
             return UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
         
-        guard let tasks = viewModel.fetchedAssignmentTasks else {
-            fatalError("ooh shit, fetchrequest controller not set")
-        }
-        
-        let task = tasks.task(at: indexPath)
+        let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
         cell.configure(task)
         cell.delegate = self
         
         return cell
     }
-    
+}
+
+
+extension AssignmentViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch editingStyle {
+        case .delete:
+            viewModel.deleteTask(at: indexPath)
+            viewModel.saveOnlyOnReading()
+        default: break
+        }
+    }
+
 }
 
 extension AssignmentViewController: NSFetchedResultsControllerDelegate {
@@ -583,14 +595,18 @@ extension AssignmentViewController: NSFetchedResultsControllerDelegate {
 extension AssignmentViewController: UITaskTableViewCellDelegate {
     func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool) {
         guard
-            let tasks = viewModel.fetchedAssignmentTasks,
             let indexPath = tableTasks.indexPath(for: cell)
             else {
             fatalError("ooh shit, fetchrequest controller not set")
         }
         
-        let task = tasks.task(at: indexPath)
+        let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
         task.isCompleted = newState
+        viewModel.saveOnlyOnReading()
+    }
+    
+    func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String?) {
+        task.title = newTitle
         viewModel.saveOnlyOnReading()
     }
 }

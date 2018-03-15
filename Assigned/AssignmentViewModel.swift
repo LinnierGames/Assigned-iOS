@@ -68,7 +68,11 @@ class AssignmentViewModel {
     
     func addTask(_ task: Task) {
         task.assignment = assignment
-        self.save()
+    }
+    
+    func deleteTask(at indexPath: IndexPath) {
+        let task = fetchedAssignmentTasks.task(at: indexPath)
+        self.context.delete(task)
     }
     
     func save() {
@@ -79,7 +83,7 @@ class AssignmentViewModel {
     
     // MARK: - LIFE CYCLE
     
-    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task>? = {
+    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task> = {
         let fetch: NSFetchRequest<Task> = Task.fetchRequest()
         fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
         fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title")]
