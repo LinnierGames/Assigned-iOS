@@ -224,7 +224,7 @@ extension AssignmentViewModel {
         
         //FIXME: get the parent directory
         let newAssignment = Assignment.createAssignment(
-            title: "Untitled Assignment",
+            title: "",
             effort: 0,
             parent: nil,
             in: self.context

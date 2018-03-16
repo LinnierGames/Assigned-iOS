@@ -37,11 +37,14 @@
                                     <action selector="pressCheckbox:" destination="EhE-JB-nQR" eventType="touchUpInside" id="RV5-le-PlK"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRi-Dn-aYg">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subtask Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SRi-Dn-aYg" customClass="UIValidatedTextField" customModule="Assigned" customModuleProvider="target">
                                 <rect key="frame" x="31.5" y="0.0" width="288.5" height="31.5"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="defaultText" value="Untitled Subtask"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="delegate" destination="EhE-JB-nQR" id="5il-0S-Lof"/>
                                 </connections>

@@ -12,7 +12,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Assignment View Controller-->
+        <!--Text Field Delegate-->
         <scene sceneID="j4u-jd-b9r">
             <objects>
                 <viewController modalPresentationStyle="overFullScreen" id="EUH-mU-ZxT" customClass="AssignmentViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
@@ -31,7 +31,7 @@
                                         <rect key="frame" x="24" y="0.0" width="264" height="24"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xA3-ll-iQD">
-                                                <rect key="frame" x="0.0" y="0.0" width="87" height="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="82" height="24"/>
                                                 <state key="normal" title="Edit"/>
                                                 <connections>
                                                     <action selector="pressLeft:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="js3-kc-wF2"/>
@@ -47,7 +47,7 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="aCw-Qv-n2f">
-                                                <rect key="frame" x="177" y="0.0" width="87" height="24"/>
+                                                <rect key="frame" x="182" y="0.0" width="82" height="24"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LBa-kk-zCl">
                                                         <rect key="frame" x="0.0" y="0.0" width="30" height="24"/>
@@ -57,8 +57,8 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5x-Xa-tZd">
-                                                        <rect key="frame" x="34" y="0.0" width="53" height="24"/>
-                                                        <state key="normal" title="Discard">
+                                                        <rect key="frame" x="34" y="0.0" width="48" height="24"/>
+                                                        <state key="normal" title="Cancel">
                                                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
                                                         <connections>
@@ -99,16 +99,19 @@
                                                             </imageView>
                                                         </subviews>
                                                     </stackView>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Untitled Assignment" placeholder="Assignment Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DpK-Ko-kNc">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Assignment Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DpK-Ko-kNc" customClass="UIValidatedTextField" customModule="Assigned" customModuleProvider="target">
                                                         <rect key="frame" x="42" y="0.0" width="200" height="32"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="32" id="CsT-ji-rux"/>
                                                         </constraints>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" spellCheckingType="yes" returnKeyType="done"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="string" keyPath="defaultText" value="Untitled Assignment"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
-                                                            <outlet property="delegate" destination="EUH-mU-ZxT" id="p4O-d7-MdX"/>
+                                                            <outlet property="textFieldDelegate" destination="EUH-mU-ZxT" id="gJU-LM-E6R"/>
                                                         </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36Q-XT-1Md">
@@ -223,7 +226,7 @@
                                                             </label>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inD-5h-tlD">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inD-5h-tlD">
                                                         <rect key="frame" x="0.0" y="8" width="296" height="34"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="34" id="kx6-sA-vQh"/>
@@ -562,34 +565,52 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3tz-3q-iHz">
                                                         <rect key="frame" x="0.0" y="0.0" width="296" height="0.0"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Tasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-ff-9YM">
-                                                                <rect key="frame" x="0.0" y="0.0" width="266" height="0.0"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Subtasks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzb-ff-9YM">
+                                                                <rect key="frame" x="0.0" y="0.0" width="296" height="0.0"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djI-0o-V7y">
                                                                 <rect key="frame" x="266" y="0.0" width="30" height="0.0"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Add"/>
                                                                 <connections>
                                                                     <action selector="pressAddTask:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="fc5-YU-QIK"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <variation key="default">
+                                                            <mask key="subviews">
+                                                                <exclude reference="djI-0o-V7y"/>
+                                                            </mask>
+                                                        </variation>
                                                     </stackView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B7N-tU-dEh">
                                                         <rect key="frame" x="0.0" y="8" width="296" height="127"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9B3-2G-Uac">
-                                                                <rect key="frame" x="0.0" y="28" width="296" height="44"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9B3-2G-Uac" id="baY-Au-QuX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="296" height="43.5"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
-                                                                </tableViewCellContentView>
-                                                            </tableViewCell>
-                                                        </prototypes>
+                                                        <view key="tableHeaderView" contentMode="scaleToFill" id="xHR-Pz-KNn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="296" height="38"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <subviews>
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a New Subtask" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c0O-ko-vUu">
+                                                                    <rect key="frame" x="15" y="4" width="266" height="30"/>
+                                                                    <nil key="textColor"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                                                    <connections>
+                                                                        <outlet property="delegate" destination="EUH-mU-ZxT" id="PiR-Ip-G1t"/>
+                                                                    </connections>
+                                                                </textField>
+                                                            </subviews>
+                                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="c0O-ko-vUu" secondAttribute="bottom" constant="4" id="2MJ-Tg-EYd"/>
+                                                                <constraint firstItem="c0O-ko-vUu" firstAttribute="top" secondItem="xHR-Pz-KNn" secondAttribute="top" constant="4" id="GOL-rd-MNS"/>
+                                                                <constraint firstAttribute="trailing" secondItem="c0O-ko-vUu" secondAttribute="trailing" constant="15" id="MaI-D4-w6s"/>
+                                                                <constraint firstItem="c0O-ko-vUu" firstAttribute="leading" secondItem="xHR-Pz-KNn" secondAttribute="leading" constant="15" id="p4x-8s-bCK"/>
+                                                            </constraints>
+                                                        </view>
                                                         <connections>
                                                             <outlet property="dataSource" destination="EUH-mU-ZxT" id="PuZ-ta-2oU"/>
                                                             <outlet property="delegate" destination="EUH-mU-ZxT" id="g2A-qG-q4D"/>
@@ -642,6 +663,7 @@
                         <outlet property="labelEffort" destination="MOC-mY-jNU" id="siy-iC-rwS"/>
                         <outlet property="sliderEffort" destination="6R9-fr-CAf" id="cBN-5I-u9S"/>
                         <outlet property="tableTasks" destination="B7N-tU-dEh" id="8Be-Rw-idO"/>
+                        <outlet property="textfieldAddTasks" destination="c0O-ko-vUu" id="MXn-wb-0fF"/>
                         <outlet property="textfieldTitle" destination="DpK-Ko-kNc" id="s3x-BF-eGj"/>
                         <outlet property="viewDeadlinePicker" destination="pr0-4U-76t" id="YZH-IB-6nA"/>
                         <outlet property="viewEffortCompleted" destination="GMh-rZ-c4D" id="ibb-x6-KDK"/>

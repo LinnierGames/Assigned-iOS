@@ -31,7 +31,13 @@ class UITaskTableViewCell: UITableViewCell {
         static var Textfield = Info(id: "task textfield", nibTitle: "UITaskTableViewCell-TextField")
     }
     
-    @IBOutlet weak var textfield: UITextField?
+    @IBOutlet weak var textfield: UIValidatedTextField? {
+        didSet {
+            textfield?.textFieldDelegate = self
+            textfield?.resultValidation = UIValidatedTextField.Validations.cannotBeEmpty
+            textfield?.enablesReturnKeyAutomatically = true
+        }
+    }
     
     @IBOutlet weak var labelTitle: UILabel?
     
@@ -85,6 +91,8 @@ class UITaskTableViewCell: UITableViewCell {
     @IBAction func pressCheckbox(_ sender: Any) {
         buttonCheckbox.isChecked.invert()
         
+        textfield?.resignFirstResponder()
+        
         delegate?.task?(cell: self, didTapCheckBox: buttonCheckbox.isChecked)
     }
     
@@ -93,15 +101,26 @@ class UITaskTableViewCell: UITableViewCell {
 }
 
 extension UITaskTableViewCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textfield?.resignFirstResponder()
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        return false
+        // if the button is already checked, return false
+        return buttonCheckbox.isChecked.inverse
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        // check if the cell was configured with a task
+        guard let task = self.task else { return }
+        
+        textField.placeholder = task.title
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if let task = self.task {
-            delegate?.task?(cell: self, didChangeTask: task, to: textField.text)
-        }
+        
+        // check if the cell was configured with a task
+        guard let task = self.task else { return }
+        
+        delegate?.task?(cell: self, didChangeTask: task, to: textField.text)
     }
 }

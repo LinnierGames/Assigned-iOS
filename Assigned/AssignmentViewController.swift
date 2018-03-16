@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AssignmentViewController: UIViewController, UITextFieldDelegate {
+class AssignmentViewController: UIViewController {
     
     private lazy var viewModel = AssignmentViewModel(with: self)
     
@@ -39,16 +39,6 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - RETURN VALUES
-    
-    // MARK: Text Field
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == textfieldTitle {
-            textfieldTitle.resignFirstResponder()
-        }
-        
-        return false
-    }
     
     // MARK: - VOID METHODS
     
@@ -88,7 +78,6 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             isDiscardButtonHidden = false
             isShowingTasksTable = true
             buttonLeft.setTitle("Save", for: .normal)
-            buttonDiscard.setTitle("Discard", for: .normal)
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
@@ -166,13 +155,6 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         // Fetch tasks
         tableTasks.reloadData()
-    }
-    
-    // MARK: Text Field
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        assignment.title = textField.text
-        viewModel.saveOnlyOnReading()
     }
     
     // MARK: - IBACTIONS
@@ -306,7 +288,11 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 //        }
 //    }
     
-    @IBOutlet weak var textfieldTitle: UITextField!
+    @IBOutlet weak var textfieldTitle: UIValidatedTextField! {
+        didSet {
+            textfieldTitle.resultValidation = UIValidatedTextField.Validations.cannotBeEmpty
+        }
+    }
     
     @IBOutlet weak var buttonCheckbox: UICheckbox!
     @IBAction func pressCheckbox(_ sender: Any) {
@@ -369,6 +355,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
                 
                 //TODO: RxSwift
                 buttonDeadline.setTitle(viewModel.deadlineTitle!, for: .normal)
+                labelDeadlineSubtext.text = viewModel.deadlineSubtext
             }
             
             self.isShowingDeadlinePicker = true
@@ -393,6 +380,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         //TODO: RxSwift
         buttonDeadline.setTitle("Add a Deadline", for: .normal)
+        labelDeadlineSubtext.text = viewModel.deadlineSubtext
     }
     
     @IBAction func pressApplyDeadline(_ sender: Any) {
@@ -485,6 +473,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var viewTasks: UIStackView!
     @IBOutlet weak var viewNonTasks: UIView!
     @IBOutlet weak var tableTasks: UITableView!
+    @IBOutlet weak var textfieldAddTasks: UITextField!
     
     private var isShowingTasksTable: Bool {
         set {
@@ -530,7 +519,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         tableTasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
-        tableTasks.rowHeight = 32
+        tableTasks.rowHeight = 44
         
         viewEffortTotal.calendarUnits = [.day, .hour, .minute]
         
@@ -538,6 +527,14 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         self.updateUI()
         
         self.isShowingPriorityBox = false
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if editingMode.isCreating {
+            textfieldTitle.becomeFirstResponder()
+        }
     }
 }
 
@@ -628,6 +625,45 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
         task.title = newTitle
         viewModel.saveOnlyOnReading()
     }
+}
+
+extension AssignmentViewController: UITextFieldDelegate {
+    
+    // MARK: - RETURN VALUES
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField === textfieldTitle {
+            
+            //TODO: validation
+            textfieldTitle.resignFirstResponder()
+        } else if textField === textfieldAddTasks {
+            textfieldTitle.resignFirstResponder()
+            
+            // is empty?
+            if let newTitle = textfieldAddTasks.text, newTitle != "" {
+                viewModel.addTask(with: newTitle)
+                textfieldAddTasks.text = ""
+            } else {
+                textfieldAddTasks.resignFirstResponder()
+            }
+        }
+        
+        return false
+    }
+    
+    // MARK: - VOID METHODS
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField === textfieldTitle {
+            assignment.title = textField.text
+            viewModel.saveOnlyOnReading()
+        }
+    }
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
+    
 }
 
 extension UIStoryboardSegue {
