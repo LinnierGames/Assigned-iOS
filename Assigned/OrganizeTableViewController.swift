@@ -108,6 +108,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 // adding a new assignment
                 } else {
                     vc.editingMode = .Create
+                    vc.assignmentParentDirectory = currentDirectory
                 }
             default: break
             }
@@ -174,9 +175,10 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // show the back button vs the profile button
+        // show the back button vs the profile button, and update title
         if currentDirectory != nil {
             navigationItem.leftBarButtonItem = nil
+            self.title = currentDirectory!.info!.title
         }
         
         let baseCell = UIAssignmentTableViewCell.Types.baseCell

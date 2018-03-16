@@ -52,10 +52,26 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - VOID METHODS
     
+    var assignmentParentDirectory: Directory? {
+        set {
+            if let parent = newValue {
+                let newParent = viewModel.context.object(with: parent.objectID) as! Directory
+                assignment.parent = newParent
+            } else {
+                assignment.parent = nil
+            }
+        }
+        get {
+            return assignment.parent
+        }
+    }
+    
     private func dismiss() {
         if textfieldTitle.isFirstResponder {
             textfieldTitle.resignFirstResponder()
         }
+        isShowingDeadlinePicker = false
+        isShowingPriorityBox = false
     }
     
     private func dismissViewController(completion handler: @escaping () -> () = {}) {
@@ -127,6 +143,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
                 showEffortSliderAnimations()
             }
             effortSliderValue = assignment.effort
+            labelEffort.text = viewModel.effortTitle
             
         // reading only
         } else if self.editingMode.isReading {
@@ -144,7 +161,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
 //            viewEffortPlanned.duration =
 //            viewEffortUnplanned.duration =
             viewEffortTotal.duration = TimeInterval(assignment.effortValue)
-            labelEffort.text = viewModel.effortTitle
+            labelEffort.text = nil
         }
         
         // Fetch tasks
@@ -188,7 +205,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             
         // Save edits
         } else if editingMode.isUpdating {
-            isShowingDeadlinePicker = false
+            dismiss()
             
             //save
             viewModel.saveEdits()
@@ -196,6 +213,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
             
         // Begin edits
         } else if editingMode.isReading {
+            dismiss()
             
             //begin editing
             viewModel.beginEdits()
@@ -365,6 +383,7 @@ class AssignmentViewController: UIViewController, UITextFieldDelegate {
         
         //TODO: RxSwift
         buttonDeadline.setTitle(viewModel.deadlineTitle, for: .normal)
+        labelDeadlineSubtext.text = viewModel.deadlineSubtext
     }
     
     @IBAction func pressRemoveDeadline(_ sender: Any) {

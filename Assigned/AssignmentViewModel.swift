@@ -44,6 +44,27 @@ class AssignmentViewModel {
     
     private var readingAssignmentValue: Assignment?
     
+    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task> = {
+        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
+        fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
+        fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title", ascending: true)]
+        
+        let fetchedRequestController = NSFetchedResultsController<Task>(
+            fetchRequest: fetch,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: nil, cacheName: nil
+        )
+        
+        do {
+            try fetchedRequestController.performFetch()
+            fetchedRequestController.delegate = self.delegate
+        } catch let error {
+            assertionFailure(String(describing: error))
+        }
+        
+        return fetchedRequestController
+    }()
+    
     // MARK: - RETURN VALUES
     
     /**
@@ -82,27 +103,6 @@ class AssignmentViewModel {
     // MARK: - IBACTIONS
     
     // MARK: - LIFE CYCLE
-    
-    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task> = {
-        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
-        fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
-        fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title")]
-        
-        let fetchedRequestController = NSFetchedResultsController<Task>(
-            fetchRequest: fetch,
-            managedObjectContext: self.context,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
-        
-        do {
-            try fetchedRequestController.performFetch()
-            fetchedRequestController.delegate = self.delegate
-        } catch let error {
-            assertionFailure(String(describing: error))
-        }
-        
-        return fetchedRequestController
-    }()
 }
 
 extension AssignmentViewModel {
@@ -170,9 +170,14 @@ extension AssignmentViewModel {
             
             //TODO: User Preferences
             //FIXME: use largest unit, weeks, days, hours, minutes, and grammar
-            let nDays = String(timeInterval: daysUntilDeadline, units: .day)
+            let text = String(timeInterval: daysUntilDeadline, options: .largestTwoUnits)
             
-            return "in \(nDays)days"
+            // is the deadline overdue
+            if daysUntilDeadline >= 0 {
+                return "in \(text)"
+            } else {
+                return "overdue by \(text)"
+            }
         } else {
             return nil
         }

@@ -82,6 +82,15 @@ public class Assignment: DirectoryInfo {
         }
     }
     
+    var parent: Directory? {
+        set {
+            self.directory?.parent = newValue
+        }
+        get {
+            return self.directory?.parent
+        }
+    }
+    
     public override var description: String {
         return "Assignment"
     }
