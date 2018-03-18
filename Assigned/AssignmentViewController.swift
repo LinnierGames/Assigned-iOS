@@ -153,12 +153,33 @@ class AssignmentViewController: UIViewController {
             labelEffort.text = nil
         }
         
+        // bounce only when reading
+        scrollView.alwaysBounceVertical = editingMode.isReading
+        
         // Fetch tasks
         tableTasks.reloadData()
     }
     
     // MARK: - IBACTIONS
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        guard let keyPath = keyPath else { return }
+//
+//        if keyPath == "alwaysBounceVertical" {
+//            if scrollView.alwaysBounceVertical {
+//                constraintCardTop.constant -= 20
+//            } else {
+//                constraintCardTop.constant += 20
+//            }
+//        }
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+//            scrollView.addObserver(self, forKeyPath: "alwaysBounceVertical", options: .new, context: nil)
+        }
+    }
+    @IBOutlet weak var constraintCardTop: NSLayoutConstraint!
     // MARK: View
     
     //TODO: pan the whole card to dismiss
@@ -664,6 +685,22 @@ extension AssignmentViewController: UITextFieldDelegate {
     
     // MARK: - LIFE CYCLE
     
+}
+
+extension AssignmentViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        guard editingMode.isReading else { return }
+        if scrollView.contentOffset.y < -96 {
+            
+            // dismiss the card
+            UIView.animate(withDuration: 0.25) {
+                self.constraintCardTop.constant = self.view.frame.size.height
+                self.view.layoutIfNeeded()
+            }
+            
+            self.dismissViewController()
+        }
+    }
 }
 
 extension UIStoryboardSegue {

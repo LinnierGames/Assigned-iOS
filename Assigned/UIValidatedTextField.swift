@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+//@IBDesignable
 class UIValidatedTextField: UITextField {
     
     typealias StringValidation = (String?) -> Bool
