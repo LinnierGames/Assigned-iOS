@@ -20,7 +20,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vww-p9-MnS">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vww-p9-MnS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNP-qO-LYP">
@@ -600,7 +600,7 @@
                                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                             <subviews>
                                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add a New Subtask" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c0O-ko-vUu">
-                                                                                    <rect key="frame" x="15" y="4" width="290" height="30"/>
+                                                                                    <rect key="frame" x="15" y="4" width="281" height="30"/>
                                                                                     <nil key="textColor"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
@@ -685,8 +685,9 @@
                         <outlet property="buttonDelete" destination="LBa-kk-zCl" id="Hcy-di-aPX"/>
                         <outlet property="buttonDiscard" destination="b5x-Xa-tZd" id="xAY-Jf-CHb"/>
                         <outlet property="buttonLeft" destination="xA3-ll-iQD" id="9BP-qT-MWW"/>
-                        <outlet property="constraintCardTop" destination="3Gp-b3-ZNT" id="cVT-ij-cNU"/>
+                        <outlet property="constraintCardTopMargin" destination="3Gp-b3-ZNT" id="cVT-ij-cNU"/>
                         <outlet property="deadlinePicker" destination="fjt-l5-hrl" id="zaj-h5-W9c"/>
+                        <outlet property="imageDraggable" destination="fin-8x-4aD" id="LjV-j9-CZ0"/>
                         <outlet property="imagePriorityBox" destination="AwL-4e-BgX" id="ayj-Db-Ogu"/>
                         <outlet property="labelDeadlineSubtext" destination="Qlx-8w-lZE" id="P2F-s7-qST"/>
                         <outlet property="labelEffort" destination="MOC-mY-jNU" id="siy-iC-rwS"/>

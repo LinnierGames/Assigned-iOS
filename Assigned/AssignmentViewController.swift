@@ -38,12 +38,24 @@ class AssignmentViewController: UIViewController {
         }
     }
     
+    private enum ViewStates {
+        case Hidden
+        case Presented
+    }
+    
+    private var viewState: ViewStates = .Hidden
+    
+    private let TOP_MARGIN = CGFloat(48.0)
+    private let BOTTOM_MARGIN = CGFloat(58.0)
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
     var assignmentParentDirectory: Directory? {
         set {
+            
+            // fetch the same parent in the different context
             if let parent = newValue {
                 let newParent = viewModel.context.object(with: parent.objectID) as! Directory
                 assignment.parent = newParent
@@ -56,16 +68,65 @@ class AssignmentViewController: UIViewController {
         }
     }
     
+    private func setViewState(to newValue: ViewStates, animated: Bool, completion: (() -> Void)? = nil) {
+        viewState = newValue
+        guard let screenSize = AppDelegate.shared.window?.bounds.size
+            else {
+                fatalError("no app delegate window")
+        }
+        
+        let animationBlock: () -> Void
+        let animationCurve: UIViewAnimationOptions
+        
+        switch viewState {
+        case .Hidden:
+            animationBlock = { [weak self] in
+                self?.constraintCardTopMargin.constant = screenSize.height
+                self?.view.layoutIfNeeded()
+            }
+            animationCurve = .curveEaseOut
+        case .Presented:
+            animationBlock = { [weak self] in
+                guard let unwrappedSelf = self else { return }
+                
+                unwrappedSelf.constraintCardTopMargin.constant = unwrappedSelf.TOP_MARGIN
+                unwrappedSelf.view.layoutIfNeeded()
+            }
+            animationCurve = .curveEaseIn
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.3, delay: 0.0, options: animationCurve, animations: animationBlock, completion: { _ in
+                completion?()
+            })
+        } else {
+            animationBlock()
+            completion?()
+        }
+    }
+    
     private func dismiss() {
+        dismissKeyboardOnly()
+        dismissPickersOnly()
+    }
+    
+    private func dismissKeyboardOnly() {
         if textfieldTitle.isFirstResponder {
             textfieldTitle.resignFirstResponder()
         }
+    }
+    
+    private func dismissPickersOnly() {
         isShowingDeadlinePicker = false
         isShowingPriorityBox = false
     }
     
     private func dismissViewController(completion handler: @escaping () -> () = {}) {
-        self.presentingViewController!.dismiss(animated: true, completion: handler)
+        dismiss()
+        
+        setViewState(to: .Hidden, animated: true) { [unowned self] in
+            self.presentingViewController!.dismiss(animated: true, completion: handler)
+        }
     }
     
     private func updateUI(animated: Bool = false) {
@@ -77,17 +138,17 @@ class AssignmentViewController: UIViewController {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = false
             isShowingTasksTable = true
-            buttonLeft.setTitle("Save", for: .normal)
+            buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
             isShowingTasksTable = true
-            buttonLeft.setTitle("Edit", for: .normal)
+            buttonLeft.setTitleWithoutAnimation("Edit", for: .normal)
         } else if editingMode.isUpdating {
             isDeleteButtonHidden = false
             isDiscardButtonHidden = false
             isShowingTasksTable = false
-            buttonLeft.setTitle("Save", for: .normal)
+            buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
         }
         
         // Update assignment properties
@@ -96,14 +157,14 @@ class AssignmentViewController: UIViewController {
         textfieldTitle.text = assignment.title
         buttonCheckbox.isChecked = assignment.isCompleted
         imagePriorityBox.priority = assignment.priority
-        buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
+        buttonBreadcrum.setTitleWithoutAnimation(viewModel.parentTitle, for: .normal)
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
         deadlinePicker.date = assignment.deadline ?? Date()
         
         if editingMode.isReading {
-            buttonDeadline.setTitle(viewModel.deadlineTitle ?? "no deadline", for: .normal)
+            buttonDeadline.setTitleWithoutAnimation(viewModel.deadlineTitle ?? "no deadline", for: .normal)
         } else if editingMode.isCreating || editingMode.isUpdating {
-            buttonDeadline.setTitle(viewModel.deadlineTitle ?? "Add a Deadline", for: .normal)
+            buttonDeadline.setTitleWithoutAnimation(viewModel.deadlineTitle ?? "Add a Deadline", for: .normal)
         }
         
         //TODO: DRY
@@ -112,6 +173,8 @@ class AssignmentViewController: UIViewController {
             self.viewEffortValues.alpha = 0.0
             self.viewEffortSlider.isHidden = false
             self.viewEffortSlider.alpha = 1.0
+            
+            self.imageDraggable.alpha = 0.0
         }
         
         let showEffortValuesAnimations = { [unowned self] in
@@ -119,6 +182,8 @@ class AssignmentViewController: UIViewController {
             self.viewEffortValues.alpha = 1.0
             self.viewEffortSlider.isHidden = true
             self.viewEffortSlider.alpha = 0.0
+            
+            self.imageDraggable.alpha = 1.0
         }
         
         // edit assignment properties
@@ -153,48 +218,19 @@ class AssignmentViewController: UIViewController {
             labelEffort.text = nil
         }
         
-        // bounce only when reading
-        scrollView.alwaysBounceVertical = editingMode.isReading
-        
         // Fetch tasks
         tableTasks.reloadData()
     }
     
     // MARK: - IBACTIONS
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        guard let keyPath = keyPath else { return }
-//
-//        if keyPath == "alwaysBounceVertical" {
-//            if scrollView.alwaysBounceVertical {
-//                constraintCardTop.constant -= 20
-//            } else {
-//                constraintCardTop.constant += 20
-//            }
-//        }
-    }
-    
-    @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-//            scrollView.addObserver(self, forKeyPath: "alwaysBounceVertical", options: .new, context: nil)
-        }
-    }
-    @IBOutlet weak var constraintCardTop: NSLayoutConstraint!
     // MARK: View
     
-    //TODO: pan the whole card to dismiss
-    @IBAction func didSwipeToDismiss(_ sender: Any) {
-        
-        // pan to dismiss is only when you are not editing or in the middle of
-        //creating a new assignment
-        if editingMode.isReading {
-            guard viewModel.context.hasChanges == false else {
-                fatalError("context should now have any changes, instead, any changes made should be saved automatically")
-            }
-            
-            self.dismissViewController()
-        }
-    }
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var constraintCardTopMargin: NSLayoutConstraint!
+    
+    @IBOutlet weak var imageDraggable: UIImageView!
     
     @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressLeft(_ sender: Any) {
@@ -287,6 +323,7 @@ class AssignmentViewController: UIViewController {
         if editingMode.isCreating {
             self.dismissViewController()
         } else if editingMode.isUpdating {
+            self.dismiss()
             viewModel.discardChanges()
             editingMode = .Read
         }
@@ -544,15 +581,34 @@ class AssignmentViewController: UIViewController {
         
         viewEffortTotal.calendarUnits = [.day, .hour, .minute]
         
+        // set card at the bottom and animate to the top
+        setViewState(to: .Hidden, animated: false)
+        
         //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
         
         self.isShowingPriorityBox = false
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // animate to presented
+        setViewState(to: .Presented, animated: true, completion: { [unowned self] in
+            self.theViewDidAppear(animated)
+        })
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+    }
+    
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     */
+    private func theViewDidAppear(_ animated: Bool) {
         
+        // present the keyboard on new assignments
         if editingMode.isCreating {
             textfieldTitle.becomeFirstResponder()
         }
@@ -650,8 +706,6 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
 
 extension AssignmentViewController: UITextFieldDelegate {
     
-    // MARK: - RETURN VALUES
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === textfieldTitle {
             
@@ -672,8 +726,6 @@ extension AssignmentViewController: UITextFieldDelegate {
         return false
     }
     
-    // MARK: - VOID METHODS
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField === textfieldTitle {
             assignment.title = textField.text
@@ -681,24 +733,25 @@ extension AssignmentViewController: UITextFieldDelegate {
         }
     }
     
-    // MARK: - IBACTIONS
-    
-    // MARK: - LIFE CYCLE
-    
 }
 
 extension AssignmentViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        dismissKeyboardOnly()
+    }
+    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard editingMode.isReading else { return }
-        if scrollView.contentOffset.y < -96 {
-            
-            // dismiss the card
-            UIView.animate(withDuration: 0.25) {
-                self.constraintCardTop.constant = self.view.frame.size.height
-                self.view.layoutIfNeeded()
-            }
+        if scrollView.contentOffset.y < -48 {
             
             self.dismissViewController()
+            
+//            // dismiss the card
+//            UIView.animate(withDuration: 0.25) {
+//                self.constraintCardTopMargin.constant = self.view.frame.size.height
+//                self.view.layoutIfNeeded()
+//            }
+//
         }
     }
 }
