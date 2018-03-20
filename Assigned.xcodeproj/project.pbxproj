@@ -126,6 +126,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E972ADB7206189CF00B26980 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				E9CA1C112053173C00B8936E /* Table View Cells */,
+				E9C5D5CD20588A0800C42821 /* UICheckbox.swift */,
+				E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */,
+				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
+				E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */,
+			);
+			name = "Custom Views";
+			sourceTree = "<group>";
+		};
 		E97DF427205305F80050EA21 = {
 			isa = PBXGroup;
 			children = (
@@ -154,7 +166,7 @@
 				E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */,
 				E97DF46720530BD80050EA21 /* Organize */,
 				E97DF437205305F80050EA21 /* Main.storyboard */,
-				E9CA1C112053173C00B8936E /* Table View Cells */,
+				E972ADB7206189CF00B26980 /* Custom Views */,
 				E97DF46520530BC40050EA21 /* Services */,
 				E97DF46420530BB60050EA21 /* Supporting Files */,
 			);
@@ -243,10 +255,6 @@
 				E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */,
 				E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */,
 				E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */,
-				E9C5D5CD20588A0800C42821 /* UICheckbox.swift */,
-				E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */,
-				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
-				E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
