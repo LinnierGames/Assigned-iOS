@@ -95,20 +95,20 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = selectedDirectory
             case "show detailed assignment":
-                guard let vc = segue.destination as? AssignmentViewController else {
-                    fatalError("segue did not have a destination of AssignmentViewController")
+                guard let navVc = segue.destination as? AssignmentNavigationViewController else {
+                    fatalError("segue did not have a destination of AssignmentNavigationViewController")
                 }
                 
                 // modifying an exsiting assignment or adding a new one?
                 if let indexPath = sender as? IndexPath {
                     let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
-                    vc.assignment = selectedDirectory.assignment
-                    vc.editingMode = .Read
+                    navVc.assignment = selectedDirectory.assignment
+                    navVc.editingMode = .Read
                     
                 // adding a new assignment
                 } else {
-                    vc.editingMode = .Create
-                    vc.assignmentParentDirectory = currentDirectory
+                    navVc.editingMode = .Create
+                    navVc.assignmentParentDirectory = self.currentDirectory
                 }
             default: break
             }

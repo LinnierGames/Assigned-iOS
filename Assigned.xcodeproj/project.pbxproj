@@ -10,6 +10,13 @@
 		E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */; };
 		E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */; };
 		E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */; };
+		E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */; };
+		E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */; };
+		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
+		E972ADBF20618EC500B26980 /* Temp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADBE20618EC500B26980 /* Temp.xib */; };
+		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
+		E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */; };
+		E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */; };
 		E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF433205305F80050EA21 /* AppDelegate.swift */; };
 		E97DF439205305F80050EA21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97DF437205305F80050EA21 /* Main.storyboard */; };
 		E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */; };
@@ -63,6 +70,13 @@
 		E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIValidatedTextField.swift; sourceTree = "<group>"; };
+		E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewController.swift; sourceTree = "<group>"; };
+		E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedViewController.xib; sourceTree = "<group>"; };
+		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
+		E972ADBE20618EC500B26980 /* Temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Temp.xib; sourceTree = "<group>"; };
+		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
+		E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewController.swift; sourceTree = "<group>"; };
+		E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNotesViewController.swift; sourceTree = "<group>"; };
 		E97DF430205305F80050EA21 /* Assigned.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assigned.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97DF433205305F80050EA21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97DF438205305F80050EA21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -134,6 +148,10 @@
 				E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */,
 				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
 				E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */,
+				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
+				E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */,
+				E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */,
+				E972ADBE20618EC500B26980 /* Temp.xib */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -237,8 +255,11 @@
 		E98064602054E5E100073B33 /* Assigned Editor */ = {
 			isa = PBXGroup;
 			children = (
+				E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */,
 				E98064612054E5F400073B33 /* AssignmentViewModel.swift */,
 				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
+				E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */,
+				E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */,
 				E98064652054E68C00073B33 /* Assignment.storyboard */,
 			);
 			name = "Assigned Editor";
@@ -366,6 +387,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */,
+				E972ADBF20618EC500B26980 /* Temp.xib in Resources */,
 				E97DF441205305F80050EA21 /* LaunchScreen.storyboard in Resources */,
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
@@ -401,20 +424,25 @@
 				E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */,
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
+				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
 				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
+				E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
 				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
+				E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */,
 				E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
+				E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
+				E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,
 				E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */,
 				E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */,
