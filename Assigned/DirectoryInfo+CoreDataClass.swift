@@ -13,6 +13,18 @@ import CoreData
 @objc(DirectoryInfo)
 public class DirectoryInfo: NSManagedObject {
     
+    var parent: DirectoryInfo? {
+        return self.directory!.parent?.info!
+    }
+    
+    var children: Set<DirectoryInfo> {
+        guard let children = self.directory!.children as? Set<DirectoryInfo> else {
+            fatalError("could not cast children into a set of DirectoryInfos")
+        }
+        
+        return children
+    }
+    
     public override var description: String {
         return "Directory Info"
     }
