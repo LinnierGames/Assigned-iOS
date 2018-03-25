@@ -58,13 +58,13 @@ class AssignmentViewController: UIViewController {
             // fetch the same parent in the different context
             if let parent = newValue {
                 let newParent = viewModel.context.object(with: parent.objectID) as! Directory
-                assignment.parent = newParent
+                assignment.parentDirectory = newParent
             } else {
-                assignment.parent = nil
+                assignment.parentDirectory = nil
             }
         }
         get {
-            return assignment.parent
+            return assignment.parentDirectory
         }
     }
     

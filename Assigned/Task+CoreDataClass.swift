@@ -20,6 +20,16 @@ public class Task: NSManagedObject {
     }
 }
 
+extension Directory {
+    var task: Task {
+        guard let taskInfo = self.info as! Task? else {
+            fatalError("directory did not have its info set")
+        }
+        
+        return taskInfo
+    }
+}
+
 extension NSFetchedResultsController {
     @objc func task(at indexPath: IndexPath) -> Task {
         return self.object(at: indexPath) as! Task

@@ -81,6 +81,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
+                
+            /** A folder */
             case "show child directory":
                 guard let vc = segue.destination as? OrganizeTableViewController else {
                     fatalError("segue did not have a destination of OrganizeTableViewController")
@@ -94,6 +96,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = selectedDirectory
+                
+            /** an assignment Vc */
             case "show detailed assignment":
                 guard let vc = segue.destination as? AssignmentViewController else {
                     fatalError("segue did not have a destination of AssignmentViewController")

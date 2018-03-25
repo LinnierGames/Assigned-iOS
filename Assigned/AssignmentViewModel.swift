@@ -135,6 +135,11 @@ extension AssignmentViewModel {
 
 extension AssignmentViewModel {
     
+    /**
+     - warning: read this value only after you've set the editingMode
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     */
     var assignment: Assignment {
         set {
             self.assignmentValue = newValue
