@@ -22,11 +22,11 @@ class MoveTableViewController: UITableViewController {
 //    }()
     
     private struct DepthFolder {
-        let depth: Int
         let folder: Folder
+        let depth: Int
     }
     
-    private lazy var foldersInDepth: [Folder] = {
+    private lazy var foldersInDepth: [DepthFolder] = {
         
         //TODO: move assignments into projects (use DirectoryInfo instead of Folder)
         let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
@@ -36,23 +36,19 @@ class MoveTableViewController: UITableViewController {
             fatalError("could not fetch folders")
         }
         
-        func childrenFolders(in directory: Folder, forCurrent depthValue: Int = 0) -> [Folder] {
-            func aux(currentDirectory directory: Folder) -> [Folder] {
-                var folders = [directory]
-                
-                for aChild in directory.children {
-                    if let folder = aChild as? Folder {
-                        folders += aux(currentDirectory: folder)
-                    }
+        func childrenFolders(in directory: Folder, forCurrent depthValue: Int = 0) -> [DepthFolder] {
+            var folders = [DepthFolder(folder: directory, depth: depthValue)]
+            
+            for aChild in directory.children {
+                if let folder = aChild as? Folder {
+                    folders += childrenFolders(in: folder, forCurrent: depthValue + 1)
                 }
-                
-                return folders
             }
             
-            return aux(currentDirectory: directory)
+            return folders
         }
         
-        var collectionOfFolders: [Folder] = []
+        var collectionOfFolders: [DepthFolder] = []
         for aFolder in rootFolders {
             collectionOfFolders += childrenFolders(in: aFolder)
         }
@@ -80,10 +76,18 @@ class MoveTableViewController: UITableViewController {
         return foldersInDepth.count
     }
     
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        let depthFolder = foldersInDepth[indexPath.row]
+        
+        return depthFolder.depth
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let folder = foldersInDepth[indexPath.row]
+        let depthFolder = foldersInDepth[indexPath.row]
+        let folder = depthFolder.folder
+        
         cell.textLabel!.text = folder.title
         
         return cell
