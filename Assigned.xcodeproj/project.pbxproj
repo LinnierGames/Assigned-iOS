@@ -217,9 +217,9 @@
 			children = (
 				E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */,
 				E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */,
+				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
 				E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */,
-				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
 			);

@@ -11,12 +11,12 @@
     </entity>
     <entity name="Directories" representedClassName="Directory" syncable="YES" codeGenerationType="category">
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
-        <relationship name="info" maxCount="1" deletionRule="Cascade" destinationEntity="DirectoryInfos" inverseName="directory" inverseEntity="DirectoryInfos" syncable="YES"/>
+        <relationship name="infoValue" maxCount="1" deletionRule="Cascade" destinationEntity="DirectoryInfos" inverseName="directoryValue" inverseEntity="DirectoryInfos" syncable="YES"/>
         <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Directories" inverseName="children" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="DirectoryInfos" representedClassName="DirectoryInfo" syncable="YES" codeGenerationType="category">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="directory" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="info" inverseEntity="Directories" syncable="YES"/>
+        <relationship name="directoryValue" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="infoValue" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="Folders" representedClassName="Folder" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="category"/>
     <entity name="Sessions" representedClassName="Session" syncable="YES" codeGenerationType="category">

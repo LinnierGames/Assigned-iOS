@@ -25,11 +25,11 @@ public class Folder: DirectoryInfo {
 
 extension Directory {
     var folder: Folder {
-        guard let folderInfo = self.info as! Folder? else {
-            fatalError("directory did not have its info set")
-        }
-        
-        return folderInfo
+        return self.info as! Folder
+    }
+    
+    var isFolder: Bool {
+        return self.info is Folder
     }
 }
 

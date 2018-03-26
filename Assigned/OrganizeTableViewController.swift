@@ -36,13 +36,13 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
         let directory = fetchedResultsController.directory(at: indexPath)
         //TODO: DRY by using an interface
-        switch directory.info! {
-        case is Assignment:
-            let assignment = directory.assignment
-            cell.configure(assignment)
+        switch directory.info {
         case is Folder:
             let folder = directory.folder
             cell.configure(folder)
+        case is Assignment:
+            let assignment = directory.assignment
+            cell.configure(assignment)
         default:
             break
         }
@@ -59,7 +59,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     private func updateFetch() {
         let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
         fetch.sortDescriptors = [
-            NSSortDescriptor(key: "info.title",
+            NSSortDescriptor(key: "infoValue.title",
                              ascending: false,
                              selector: #selector(NSString.localizedStandardCompare(_:))
             )
@@ -123,9 +123,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let directory = fetchedResultsController.directory(at: indexPath)
-        if let _ = directory.info! as? Folder {
+        if directory.isFolder {
             self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
-        } else if let _ = directory.info! as? Assignment {
+        } else if directory.isAssignment {
              self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedAssignment, sender: indexPath)
         }
     }
@@ -182,7 +182,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         // show the back button vs the profile button, and update title
         if currentDirectory != nil {
             navigationItem.leftBarButtonItem = nil
-            self.title = currentDirectory!.info!.title
+            self.title = currentDirectory!.info.title
         }
         
         let baseCell = UIAssignmentTableViewCell.Types.baseCell

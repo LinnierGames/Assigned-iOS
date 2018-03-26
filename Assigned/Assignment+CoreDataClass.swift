@@ -89,11 +89,11 @@ public class Assignment: DirectoryInfo {
 
 extension Directory {
     var assignment: Assignment {
-        guard let assignmentInfo = self.info as! Assignment? else {
-            fatalError("directory did not have its info set")
-        }
-        
-        return assignmentInfo
+        return self.info as! Assignment
+    }
+    
+    var isAssignment: Bool {
+        return self.info is Assignment
     }
 }
 

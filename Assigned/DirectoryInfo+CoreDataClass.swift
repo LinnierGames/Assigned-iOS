@@ -13,28 +13,36 @@ import CoreData
 @objc(DirectoryInfo)
 public class DirectoryInfo: NSManagedObject {
     
+    var directory: Directory {
+        guard let directory = self.directoryValue else {
+            fatalError("directory was not set")
+        }
+        
+        return directory
+    }
+    
     var parentInfo: DirectoryInfo? {
         get {
-            return self.directory!.parent?.info!
+            return self.parentDirectory?.info
         }
     }
     
     var parentDirectory: Directory? {
         set {
-            self.directory?.parent = newValue
+            self.directory.parent = newValue
         }
         get {
-            return self.directory?.parent
+            return self.directory.parent
         }
     }
     
     var children: [DirectoryInfo] {
-        guard let childrenDirectories = self.directory!.children as! Set<Directory>? else {
+        guard let childrenDirectories = self.directory.children as! Set<Directory>? else {
             fatalError("could not cast children into a set of Directory")
         }
         
         let children = childrenDirectories.map { (directory) -> DirectoryInfo in
-            return directory.info!
+            return directory.info
         }
         
         return children

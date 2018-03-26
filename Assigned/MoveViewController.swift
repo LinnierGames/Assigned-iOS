@@ -36,7 +36,7 @@ class MoveViewController: UITableViewController {
         
         //TODO: move assignments into projects (use DirectoryInfo instead of Folder)
         let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
-        fetch.predicate = NSPredicate(format: "directory.parent == nil")
+        fetch.predicate = NSPredicate(format: "directoryValue.parent == nil")
         
         guard let rootFolders = try? context.fetch(fetch) else {
             fatalError("could not fetch folders")
@@ -95,7 +95,7 @@ class MoveViewController: UITableViewController {
             let folder = depthFolder.folder
             
             cell.textLabel!.text = folder.title
-            if item.parentDirectory?.objectID == folder.directory!.objectID {
+            if item.parentDirectory?.objectID == folder.directory.objectID {
                 cell.detailTextLabel!.text = "current folder"
             }
         }
@@ -149,11 +149,11 @@ class MoveViewController: UITableViewController {
             let selectedRow = selectedIndexPath.row - 1
             let selectedDestination = foldersInDepth[selectedRow].folder
             
-            newDestination = selectedDestination.directory!
+            newDestination = selectedDestination.directory
         }
         item.parentDirectory = newDestination
         
-        self.delegate?.move?(viewController: self, didMove: item, to: newDestination?.info!)
+        self.delegate?.move?(viewController: self, didMove: item, to: newDestination?.info)
         self.presentingViewController!.dismiss(animated: true)
     }
     

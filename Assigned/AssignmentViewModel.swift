@@ -150,16 +150,8 @@ extension AssignmentViewModel {
     }
     
     var parentTitle: String? {
-        guard let directory = assignment.directory else {
-            fatalError("directory was not set")
-        }
-        
-        if let parentDirectory = directory.parent {
-            guard let parentInfo = parentDirectory.info else {
-                fatalError("directory info was not set")
-            }
-            
-            return parentInfo.title
+        if let parentDirectoryInfo = assignment.parentInfo {
+            return parentDirectoryInfo.title
         } else {
             return "Braindump"
         }
