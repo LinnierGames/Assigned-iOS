@@ -297,8 +297,9 @@ extension AssignmentViewModel {
      than isReading
      */
     func saveOnlyOnReading() {
-        self.save()
+        if editingMode.isReading {
+            self.save()
+        }
     }
-
 }
 

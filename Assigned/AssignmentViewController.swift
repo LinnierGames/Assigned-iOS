@@ -58,12 +58,13 @@ class AssignmentViewController: UIViewController {
             case "show move":
                 guard
                     let navVc = segue.destination as? UINavigationController,
-                    let moveVc = navVc.topViewController! as? MoveTableViewController
+                    let moveVc = navVc.topViewController! as? MoveViewController
                     else {
                         fatalError("MoveTableViewController was not set in storyboard")
                 }
                 
                 moveVc.item = assignment
+                moveVc.delegate = self
             default: break
             }
         }
@@ -348,21 +349,6 @@ class AssignmentViewController: UIViewController {
     
     // MARK: Title and breadcrum
     
-//    var isAssignmentCompleted: Bool {
-//        set {
-//            if newValue {
-//                buttonCheckbox.setImage(UIImage.assignmentCheckboxCompleted, for: .normal)
-//            } else {
-//                buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
-//            }
-//
-//            assignment.isCompleted = newValue
-//        }
-//        get {
-//            return assignment.isCompleted
-//        }
-//    }
-    
     @IBOutlet weak var textfieldTitle: UIValidatedTextField! {
         didSet {
             textfieldTitle.resultValidation = UIValidatedTextField.Validations.cannotBeEmpty
@@ -474,6 +460,7 @@ class AssignmentViewController: UIViewController {
     // MARK: Effort Slider
     
     @IBOutlet weak var labelEffort: UILabel!
+    
     /**
      the effort slider's max values flexes when the user taps on the add
      effort button and reduces when the user slides below 4; min
@@ -616,10 +603,6 @@ class AssignmentViewController: UIViewController {
         })
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     /**
      <#Lorem ipsum dolor sit amet.#>
      */
@@ -654,9 +637,6 @@ extension AssignmentViewController: UITableViewDataSource {
 
 
 extension AssignmentViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
@@ -762,14 +742,16 @@ extension AssignmentViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y < -48 {
             
             self.dismissViewController()
-            
-//            // dismiss the card
-//            UIView.animate(withDuration: 0.25) {
-//                self.constraintCardTopMargin.constant = self.view.frame.size.height
-//                self.view.layoutIfNeeded()
-//            }
-//
         }
+    }
+}
+
+extension AssignmentViewController: MoveViewControllerDelegate {
+    
+    func move(viewController: MoveViewController, didMove item: DirectoryInfo, to destination: DirectoryInfo?) {
+        //TODO: RxSwift
+        buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
+        viewModel.saveOnlyOnReading()
     }
 }
 

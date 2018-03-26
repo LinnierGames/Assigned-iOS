@@ -11,15 +11,21 @@
 import UIKit
 import CoreData
 
-class MoveTableViewController: UITableViewController {
+@objc protocol MoveViewControllerDelegate: class {
+    @objc optional func move(viewController: MoveViewController, didMove item: DirectoryInfo, to destination: DirectoryInfo?)
+}
+
+class MoveViewController: UITableViewController {
     
     /** this is the item that will have its parent updated to */
     var item: DirectoryInfo!
     
-//    private var persistence = PersistenceStack.shared
+    weak var delegate: MoveViewControllerDelegate?
     
-//    private lazy var rootFolders: [Folder] = {
-//    }()
+    /** take the context from the given item */
+    private var context: NSManagedObjectContext! {
+        return item.managedObjectContext
+    }
     
     private struct DepthFolder {
         let folder: Folder
@@ -32,7 +38,7 @@ class MoveTableViewController: UITableViewController {
         let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
         fetch.predicate = NSPredicate(format: "directory.parent == nil")
         
-        guard let rootFolders = try? PersistenceStack.shared.viewContext.fetch(fetch) else {
+        guard let rootFolders = try? context.fetch(fetch) else {
             fatalError("could not fetch folders")
         }
         
@@ -74,15 +80,24 @@ class MoveTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.detailTextLabel!.text = nil
         
         // Root destination
         if indexPath.row == 0 {
             cell.textLabel!.text = "Top Directory"
+            if item.parentDirectory == nil {
+                cell.detailTextLabel!.text = "current folder"
+            }
+            
+        // All folders
         } else {
             let depthFolder = foldersInDepth[indexPath.row - 1]
             let folder = depthFolder.folder
             
             cell.textLabel!.text = folder.title
+            if item.parentDirectory?.objectID == folder.directory!.objectID {
+                cell.detailTextLabel!.text = "current folder"
+            }
         }
         
         return cell
@@ -97,28 +112,23 @@ class MoveTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    private func backgroundUpdateUI() {
-        
-    }
+    // MARK: Table View Delegate
     
-    override func didChange(_ changeKind: NSKeyValueChange, valuesAt indexes: IndexSet, forKey key: String) {
-        switch key {
-        case "indexPathForSelectedRow":
-            
-            // enable the confirm button
-            if let indexPaths = tableView.indexPathForSelectedRow, indexPaths.count > 0 {
-                buttonConfirm.isEnabled = false
-                
-            // disable
-            } else {
-                buttonConfirm.isEnabled = false
-            }
-        default:
-            break
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // enable the confirm button
+        if let indexPaths = tableView.indexPathForSelectedRow, indexPaths.count > 0 {
+            buttonConfirm.isEnabled = true
         }
     }
     
-    // MARK: Table View Delegate
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        // disable the confirm button
+        if tableView.indexPathForSelectedRow?.count == 0 {
+            buttonConfirm.isEnabled = false
+        }
+    }
     
     // MARK: - IBACTIONS
     
@@ -128,18 +138,22 @@ class MoveTableViewController: UITableViewController {
             fatalError("this button should not be enabled if no row is selected")
         }
         
+        let newDestination: Directory?
+        
         // set parent to root directory
         if selectedIndexPath.row == 0 {
-            item.parentDirectory = nil
+            newDestination = nil
             
         // set parent to selected row
         } else {
             let selectedRow = selectedIndexPath.row - 1
             let selectedDestination = foldersInDepth[selectedRow].folder
             
-            item.parentDirectory = selectedDestination.directory!
+            newDestination = selectedDestination.directory!
         }
+        item.parentDirectory = newDestination
         
+        self.delegate?.move?(viewController: self, didMove: item, to: newDestination?.info!)
         self.presentingViewController!.dismiss(animated: true)
     }
     
@@ -149,12 +163,6 @@ class MoveTableViewController: UITableViewController {
     
     // MARK: - LIFE CYCLE
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.addObserver(self, forKeyPath: "indexPathForSelectedRow", options: .new, context: nil)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -163,8 +171,5 @@ class MoveTableViewController: UITableViewController {
         }
         
         updateUI()
-        
-        backgroundUpdateUI()
     }
-
 }
