@@ -52,6 +52,23 @@ class AssignmentViewController: UIViewController {
     
     // MARK: - VOID METHODS
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show move":
+                guard
+                    let navVc = segue.destination as? UINavigationController,
+                    let moveVc = navVc.topViewController! as? MoveTableViewController
+                    else {
+                        fatalError("MoveTableViewController was not set in storyboard")
+                }
+                
+                moveVc.item = assignment
+            default: break
+            }
+        }
+    }
+    
     var assignmentParentDirectory: Directory? {
         set {
             
