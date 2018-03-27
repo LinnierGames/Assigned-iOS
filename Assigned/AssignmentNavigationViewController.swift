@@ -18,7 +18,12 @@ class AssignmentNavigationViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private var assignmentVc: AssignmentViewController!
+    private var assignmentVc: AssignmentViewController! {
+        didSet {
+            //assignmentVc.assignment = assignment
+            assignmentVc.editingMode = self.editingMode
+        }
+    }
     
     private var sessionVc: AssignmentSessionViewController!
     
@@ -37,7 +42,7 @@ class AssignmentNavigationViewController: UIViewController {
                 }
                 
                 assignmentVc = vc
-                assignmentVc.assignment = self.assignment
+                assignmentVc.assignment = assignmentVc.assignment
                 assignmentVc.assignmentParentDirectory = self.assignmentParentDirectory
                 assignmentVc.editingMode = self.editingMode
             case "embedded sessions vc":

@@ -38,7 +38,7 @@
                     <connections>
                         <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
                         <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
-                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed assignment" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
+                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed assignment" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
