@@ -10,7 +10,7 @@ import UIKit
 
 class SessionDetailedViewController: UIViewController {
     
-    var viewModel = SessionViewModel()
+    var viewModel = SessionDetailedViewModel()
     
     public var session: Session {
         set {

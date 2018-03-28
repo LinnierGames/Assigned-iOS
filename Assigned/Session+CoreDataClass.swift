@@ -16,7 +16,7 @@ public class Session: NSManagedObject {
     convenience init(name: String,
                      date: Date,
                      duration: TimeInterval,
-                     assignment: Assignment? = nil,
+                     assignment: Assignment,
                      in context: NSManagedObjectContext) {
         self.init(context: context)
         
@@ -25,5 +25,11 @@ public class Session: NSManagedObject {
         self.duration = duration
         
         self.assignment = assignment
+    }
+}
+
+extension NSFetchedResultsController {
+    @objc func session(at indexPath: IndexPath) -> Session {
+        return self.object(at: indexPath) as! Session
     }
 }

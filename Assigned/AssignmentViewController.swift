@@ -13,8 +13,6 @@ class AssignmentViewController: UIViewController {
     
     private lazy var viewModel = AssignmentViewModel(with: self)
     
-    var parent 
-    
     var assignment: Assignment {
         get {
             return viewModel.assignment

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class SessionViewModel {
+class SessionDetailedViewModel {
     
     private var sessionValue: Session!
     
