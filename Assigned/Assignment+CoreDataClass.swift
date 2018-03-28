@@ -33,6 +33,7 @@ public class Assignment: DirectoryInfo {
                                  isCompleted: Bool = false,
                                  parent directory: Directory? = nil,
                                  in context: NSManagedObjectContext) -> Assignment {
+        
         let newAssignment = Assignment(context: context)
         
         newAssignment.title = title
