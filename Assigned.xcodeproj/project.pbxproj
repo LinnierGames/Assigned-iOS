@@ -11,6 +11,7 @@
 		E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */; };
 		E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */; };
 		E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961D6662065F62800AD6EFC /* MoveViewController.swift */; };
+		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
 		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
 		E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */; };
 		E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */; };
@@ -74,6 +75,7 @@
 		E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIValidatedTextField.swift; sourceTree = "<group>"; };
 		E961D6662065F62800AD6EFC /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
+		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
 		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
 		E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewController.swift; sourceTree = "<group>"; };
 		E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedViewController.xib; sourceTree = "<group>"; };
@@ -146,6 +148,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E96DC337206B35A2000BB60A /* Assignment */ = {
+			isa = PBXGroup;
+			children = (
+				E98064612054E5F400073B33 /* AssignmentViewModel.swift */,
+				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
+			);
+			name = Assignment;
+			sourceTree = "<group>";
+		};
+		E96DC338206B35AD000BB60A /* Sessions */ = {
+			isa = PBXGroup;
+			children = (
+				E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */,
+				E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */,
+			);
+			name = Sessions;
+			sourceTree = "<group>";
+		};
+		E96DC339206B35B6000BB60A /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */,
+			);
+			name = Notes;
+			sourceTree = "<group>";
+		};
 		E972ADB7206189CF00B26980 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +283,7 @@
 				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
 				E98064602054E5E100073B33 /* Assigned Editor */,
 				E961D6662065F62800AD6EFC /* MoveViewController.swift */,
+				E96DC33A206B35CF000BB60A /* Move.storyboard */,
 			);
 			name = Organize;
 			sourceTree = "<group>";
@@ -262,14 +291,12 @@
 		E98064602054E5E100073B33 /* Assigned Editor */ = {
 			isa = PBXGroup;
 			children = (
-				E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */,
-				E98064612054E5F400073B33 /* AssignmentViewModel.swift */,
-				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
-				E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */,
-				E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */,
-				E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */,
-				E98064652054E68C00073B33 /* Assignment.storyboard */,
 				E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */,
+				E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */,
+				E96DC337206B35A2000BB60A /* Assignment */,
+				E96DC338206B35AD000BB60A /* Sessions */,
+				E96DC339206B35B6000BB60A /* Notes */,
+				E98064652054E68C00073B33 /* Assignment.storyboard */,
 			);
 			name = "Assigned Editor";
 			sourceTree = "<group>";
@@ -402,6 +429,7 @@
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
+				E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */,
 				E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */,
 				E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */,
 				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,

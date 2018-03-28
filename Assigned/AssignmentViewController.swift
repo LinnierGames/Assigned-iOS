@@ -11,13 +11,19 @@ import CoreData
 
 class AssignmentViewController: UIViewController {
 
-    private lazy var viewModel = AssignmentViewModel(with: self.parentNavigationViewController!.viewModel, delegate: self)
+    private lazy var viewModel: AssignmentViewModel = {
+        guard let model = self.parentNavigationViewController?.viewModel else {
+            fatalError("parent navigation view controller was not set")
+        }
+        
+        return AssignmentViewModel(with: model, delegate: self)
+    }()
 
     var dataModel: AssignmentNavigationViewModel {
         return self.viewModel.parentModel
     }
 
-    var parentNavigationViewController: AssignmentNavigationViewController?
+    weak var parentNavigationViewController: AssignmentNavigationViewController?
 
     var assignment: Assignment {
         return viewModel.assignment

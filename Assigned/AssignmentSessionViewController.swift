@@ -11,28 +11,26 @@ import CoreData
 
 class AssignmentSessionViewController: UIViewController {
     
-    private var viewModel = SessionViewModel()
+    private lazy var viewModel: SessionViewModel = {
+        guard let model = self.parentNavigationViewController?.viewModel else {
+            fatalError("parent navigation view controller was not set")
+        }
+        
+        return SessionViewModel(with: model, delegate: self)
+    }()
+    
+    private var dataModel: AssignmentNavigationViewModel {
+        return viewModel.parentModel
+    }
+    
+    weak var parentNavigationViewController: AssignmentNavigationViewController?
     
     var assignment: Assignment {
         set {
-            viewModel.assignment = newValue
+            dataModel.assignment = newValue
         }
         get {
-            return viewModel.assignment
-        }
-    }
-    
-    private var fetchedResultsController: NSFetchedResultsController<Session>! {
-        didSet {
-            if let controller = fetchedResultsController {
-                controller.delegate = self
-                do {
-                    try controller.performFetch()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            tableSessions.reloadData()
+            return dataModel.assignment
         }
     }
 
@@ -41,17 +39,6 @@ class AssignmentSessionViewController: UIViewController {
     // MARK: - VOID METHODS
     
     private func updateUI() {
-        
-        // Fetch the sessions
-        let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
-        fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
-        
-        fetchedResultsController = NSFetchedResultsController<Session>(
-            fetchRequest: fetch,
-            managedObjectContext: self.viewModel.context,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
     }
     
     // MARK: - IBACTIONS
@@ -59,9 +46,8 @@ class AssignmentSessionViewController: UIViewController {
     @IBOutlet weak var tableSessions: UITableView!
     
     @IBAction func pressAddSession(_ sender: Any) {
-        let newSession = viewModel.addSession()
-        
-        
+        dataModel.addSession()
+        dataModel.saveOnlyOnReading()
     }
     // MARK: - LIFE CYCLE
     
@@ -86,7 +72,7 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.fetchedResultsController.sections?[section].objects?.count ?? 0
+        return viewModel.fetchedAssignmentSessions.sections?[section].objects?.count ?? 0
     }
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -109,7 +95,7 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        let session = self.fetchedResultsController.session(at: indexPath)
+        let session = viewModel.fetchedAssignmentSessions.session(at: indexPath)
         cell.textLabel!.text = session.name
         cell.detailTextLabel!.text = String(date: session.date!, dateStyle: .none, timeStyle: .short)
         

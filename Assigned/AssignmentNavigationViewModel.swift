@@ -51,24 +51,6 @@ class AssignmentNavigationViewModel {
     
     // MARK: - VOID METHODS
     
-    func addTask(with title: String) {
-        let newTask = Task(title: title, in: self.context)
-        self.addTask(newTask)
-    }
-    
-    func addTask(_ task: Task) {
-        task.assignment = assignment
-    }
-    
-    func delete(task: Task) {
-        self.context.delete(task)
-    }
-    
-    func save() {
-        PersistenceStack.shared.saveContext()
-    }
-    
-    
     private func updateContextToANewEditContext() {
         let editContext = self.newEditsContext()
         self.context = editContext
@@ -93,6 +75,48 @@ class AssignmentNavigationViewModel {
         
         // save parent changes
         PersistenceStack.shared.saveContext()
+    }
+    
+    // MARK: Subtasks
+    
+    @discardableResult
+    func addTask(with title: String) -> Task {
+        let newTask = Task(title: title, in: self.context)
+        self.addTask(newTask)
+        
+        return newTask
+    }
+    
+    func addTask(_ task: Task) {
+        task.assignment = self.assignment
+    }
+    
+    func delete(task: Task) {
+        self.context.delete(task)
+    }
+    
+    func save() {
+        PersistenceStack.shared.saveContext()
+    }
+    
+    // MARK: Sessions
+    
+    @discardableResult
+    func addSession(with date: Date = Date()) -> Session {
+        //TODO: remove assignement.title as an optional
+        let sessionTitle = assignment.title ?? "Untitled Assignment"
+        
+        let newSession = Session(
+            name: sessionTitle,
+            date: date,
+            duration: 1,
+            assignment: self.assignment, in: self.context)
+        
+        return newSession
+    }
+    
+    func addSession(session: Session) {
+        session.assignment = self.assignment
     }
     
     // MARK: - IBACTIONS

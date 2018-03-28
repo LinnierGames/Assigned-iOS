@@ -62,10 +62,11 @@ class AssignmentNavigationViewController: UIViewController {
                 
                 vc.parentNavigationViewController = self
             case "embedded sessions vc":
-                guard let _ = segue.destination as? AssignmentSessionViewController else {
+                guard let vc = segue.destination as? AssignmentSessionViewController else {
                     fatalError("AssignmentSessionViewController not set up in storyboard")
                 }
                 
+                vc.parentNavigationViewController = self
             case "embedded notes vc":
                 guard let _ = segue.destination as? AssignmentNotesViewController else {
                     fatalError("AssignmentNotesViewController not set up in storyboard")

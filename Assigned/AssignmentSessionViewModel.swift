@@ -7,26 +7,51 @@
 //
 
 import Foundation
+import CoreData
 
 class SessionViewModel {
     
-    lazy var assignment: Assignment = Assignment.createAssignment(title: "", effort: 0, in: self.context)
+    typealias SessionViewModelDelegate = NSFetchedResultsControllerDelegate
     
-    var context = PersistenceStack.shared.viewContext.newChildContext()
+    weak var delegate: SessionViewModelDelegate?
+        
+    unowned var parentModel: AssignmentNavigationViewModel
+    
+    init(with parentModel: AssignmentNavigationViewModel, delegate: SessionViewModelDelegate) {
+        self.parentModel = parentModel
+        self.delegate = delegate
+    }
+    
+    var context: NSManagedObjectContext {
+        return self.parentModel.context
+    }
+    
+    var assignment: Assignment {
+        return self.parentModel.assignment
+    }
+    
+    lazy var fetchedAssignmentSessions: NSFetchedResultsController<Session> = {
+        let fetch: NSFetchRequest<Session> = Session.fetchRequest()
+        fetch.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetch.predicate = NSPredicate(format: "assignment == %@", self.assignment)
+        
+        let fetchedRequestController = NSFetchedResultsController<Session>(
+            fetchRequest: fetch,
+            managedObjectContext: self.context,
+            sectionNameKeyPath: nil, cacheName: nil
+        )
+        
+        do {
+            try fetchedRequestController.performFetch()
+            fetchedRequestController.delegate = self.delegate
+        } catch let error {
+            assertionFailure(String(describing: error))
+        }
+        
+        return fetchedRequestController
+    }()
     
 }
 
 extension SessionViewModel {
-    func addSession(date: Date = Date()) -> Session {
-        //TODO: remove assignement.title as an optional
-        let sessionTitle = assignment.title ?? "Untitled Assignment"
-        
-        let newSession = Session(
-            name: sessionTitle,
-            date: date,
-            duration: 1,
-            assignment: assignment, in: context)
-        
-        return newSession
-    }
 }
