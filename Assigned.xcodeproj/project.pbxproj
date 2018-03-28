@@ -10,6 +10,7 @@
 		E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */; };
 		E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */; };
 		E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */; };
+		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
 		E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */; };
 		E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */; };
 		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
@@ -71,6 +72,7 @@
 		E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIValidatedTextField.swift; sourceTree = "<group>"; };
+		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
 		E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewController.swift; sourceTree = "<group>"; };
 		E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedViewController.xib; sourceTree = "<group>"; };
 		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */,
 				E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */,
 				E98064652054E68C00073B33 /* Assignment.storyboard */,
+				E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */,
 			);
 			name = "Assigned Editor";
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
+				E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */,
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
 				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,

@@ -10,24 +10,43 @@ import UIKit
 
 class AssignmentNavigationViewController: UIViewController {
     
-    var assignment: Assignment!
-    
-    var assignmentParentDirectory: Directory?
-    
-    var editingMode: CRUD = .Create
+    private(set) var viewModel = AssignmentNavigationViewModel()
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private var assignmentVc: AssignmentViewController! {
-        didSet {
-            //assignmentVc.assignment = assignment
-            assignmentVc.editingMode = self.editingMode
+    var assignment: Assignment {
+        set {
+            self.viewModel.assignment = newValue
+        }
+        get {
+            return self.viewModel.assignment
         }
     }
     
-    private var sessionVc: AssignmentSessionViewController!
+    var assignmentParentDirectory: Directory? {
+        set {
+            
+            // fetch the same parent in the different context
+            if let parent = newValue {
+                let newParent = viewModel.context.object(with: parent.objectID) as! Directory
+                assignment.parent = newParent
+            } else {
+                assignment.parent = nil
+            }
+        }
+        get {
+            return assignment.parent
+        }
+    }
     
-    private var notesVc: AssignmentNotesViewController!
+    var editingMode: CRUD {
+        set {
+            self.viewModel.editingMode = newValue
+        }
+        get {
+            return self.viewModel.editingMode
+        }
+    }
     
     // MARK: - RETURN VALUES
     
@@ -41,22 +60,17 @@ class AssignmentNavigationViewController: UIViewController {
                     fatalError("AssignmentViewController not set up in storyboard")
                 }
                 
-                assignmentVc = vc
-                assignmentVc.assignment = assignmentVc.assignment
-                assignmentVc.assignmentParentDirectory = self.assignmentParentDirectory
-                assignmentVc.editingMode = self.editingMode
+                vc.parentNavigationViewController = self
             case "embedded sessions vc":
-                guard let vc = segue.destination as? AssignmentSessionViewController else {
+                guard let _ = segue.destination as? AssignmentSessionViewController else {
                     fatalError("AssignmentSessionViewController not set up in storyboard")
                 }
                 
-                sessionVc = vc
             case "embedded notes vc":
-                guard let vc = segue.destination as? AssignmentNotesViewController else {
+                guard let _ = segue.destination as? AssignmentNotesViewController else {
                     fatalError("AssignmentNotesViewController not set up in storyboard")
                 }
                 
-                notesVc = vc
             default: break
             }
         }
@@ -68,10 +82,5 @@ class AssignmentNavigationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let screenSize = self.view.frame.size
-        scrollView.contentSize.width = screenSize.width * 3
-        scrollView.contentSize.height = screenSize.height
-        scrollView.layoutIfNeeded()
     }
 }

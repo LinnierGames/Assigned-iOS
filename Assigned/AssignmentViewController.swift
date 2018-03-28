@@ -11,15 +11,16 @@ import CoreData
 
 class AssignmentViewController: UIViewController {
     
-    private lazy var viewModel = AssignmentViewModel(with: self)
+    private lazy var viewModel = AssignmentViewModel(with: self.parentNavigationViewController!.viewModel, delegate: self)
+    
+    var dataModel: AssignmentNavigationViewModel {
+        return self.viewModel.parentModel
+    }
+    
+    var parentNavigationViewController: AssignmentNavigationViewController?
     
     var assignment: Assignment {
-        get {
-            return viewModel.assignment
-        }
-        set {
-            viewModel.assignment = newValue
-        }
+        return viewModel.assignment
     }
     
     var editingMode: CRUD {
@@ -51,22 +52,6 @@ class AssignmentViewController: UIViewController {
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
-    
-    var assignmentParentDirectory: Directory? {
-        set {
-            
-            // fetch the same parent in the different context
-            if let parent = newValue {
-                let newParent = viewModel.context.object(with: parent.objectID) as! Directory
-                assignment.parent = newParent
-            } else {
-                assignment.parent = nil
-            }
-        }
-        get {
-            return assignment.parent
-        }
-    }
     
     private func setViewState(to newValue: ViewStates, animated: Bool, completion: (() -> Void)? = nil) {
         viewState = newValue
@@ -239,7 +224,7 @@ class AssignmentViewController: UIViewController {
             dismiss()
             
             //save
-            viewModel.saveNewAssignment()
+            dataModel.saveNewAssignment()
             self.dismissViewController()
             
         // Save edits
@@ -247,7 +232,7 @@ class AssignmentViewController: UIViewController {
             dismiss()
             
             //save
-            viewModel.saveEdits()
+            dataModel.saveEdits()
             editingMode = .Read
             
         // Begin edits
@@ -255,7 +240,7 @@ class AssignmentViewController: UIViewController {
             dismiss()
             
             //begin editing
-            viewModel.beginEdits()
+            dataModel.beginEdits()
             editingMode = .Update
         }
     }
@@ -314,7 +299,7 @@ class AssignmentViewController: UIViewController {
     
     @IBOutlet weak var buttonDelete: UIButton!
     @IBAction func pressDeleteAssignment(_ sender: Any) {
-        viewModel.deleteAssignment()
+        dataModel.deleteAssignment()
         self.dismissViewController()
     }
     
@@ -324,27 +309,12 @@ class AssignmentViewController: UIViewController {
             self.dismissViewController()
         } else if editingMode.isUpdating {
             self.dismiss()
-            viewModel.discardChanges()
+            dataModel.discardChanges()
             editingMode = .Read
         }
     }
     
     // MARK: Title and breadcrum
-    
-//    var isAssignmentCompleted: Bool {
-//        set {
-//            if newValue {
-//                buttonCheckbox.setImage(UIImage.assignmentCheckboxCompleted, for: .normal)
-//            } else {
-//                buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
-//            }
-//
-//            assignment.isCompleted = newValue
-//        }
-//        get {
-//            return assignment.isCompleted
-//        }
-//    }
     
     @IBOutlet weak var textfieldTitle: UIValidatedTextField! {
         didSet {
@@ -359,7 +329,7 @@ class AssignmentViewController: UIViewController {
         
         //TODO: RxSwift
         assignment.isCompleted = buttonCheckbox.isChecked
-        viewModel.saveOnlyOnReading()
+        dataModel.saveOnlyOnReading()
     }
     
     var isShowingPriorityBox: Bool {
@@ -390,7 +360,7 @@ class AssignmentViewController: UIViewController {
         
         //TODO: RxSwift
         imagePriorityBox.priority = newPriority
-        viewModel.saveOnlyOnReading()
+        dataModel.saveOnlyOnReading()
         
         isShowingPriorityBox = false
     }
@@ -562,7 +532,7 @@ class AssignmentViewController: UIViewController {
             .addCancelButton()
             .addButton(title: "Add") { [unowned self] (action) in
                 if let newTitle = alertAddTitle.inputField.text {
-                    self.viewModel.addTask(with: newTitle)
+                    self.dataModel.addTask(with: newTitle)
                 }
             }
             .present(in: self)
@@ -644,12 +614,12 @@ extension AssignmentViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            viewModel.deleteTask(at: indexPath)
-            viewModel.saveOnlyOnReading()
+            let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
+            dataModel.delete(task: task)
+            dataModel.saveOnlyOnReading()
         default: break
         }
     }
-
 }
 
 extension AssignmentViewController: NSFetchedResultsControllerDelegate {
@@ -690,17 +660,17 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
         guard
             let indexPath = tableTasks.indexPath(for: cell)
             else {
-            fatalError("ooh shit, fetchrequest controller not set")
+            return assertionFailure("index path for cell not found")
         }
         
         let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
         task.isCompleted = newState
-        viewModel.saveOnlyOnReading()
+        dataModel.saveOnlyOnReading()
     }
     
     func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String?) {
         task.title = newTitle
-        viewModel.saveOnlyOnReading()
+        dataModel.saveOnlyOnReading()
     }
 }
 
@@ -716,7 +686,7 @@ extension AssignmentViewController: UITextFieldDelegate {
             
             // is empty?
             if let newTitle = textfieldAddTasks.text, newTitle != "" {
-                viewModel.addTask(with: newTitle)
+                dataModel.addTask(with: newTitle)
                 textfieldAddTasks.text = ""
             } else {
                 textfieldAddTasks.resignFirstResponder()
@@ -729,7 +699,7 @@ extension AssignmentViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField === textfieldTitle {
             assignment.title = textField.text
-            viewModel.saveOnlyOnReading()
+            dataModel.saveOnlyOnReading()
         }
     }
     
@@ -745,13 +715,6 @@ extension AssignmentViewController: UIScrollViewDelegate {
         if scrollView.contentOffset.y < -48 {
             
             self.dismissViewController()
-            
-//            // dismiss the card
-//            UIView.animate(withDuration: 0.25) {
-//                self.constraintCardTopMargin.constant = self.view.frame.size.height
-//                self.view.layoutIfNeeded()
-//            }
-//
         }
     }
 }

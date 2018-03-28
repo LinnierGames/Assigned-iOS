@@ -68,32 +68,7 @@
                     <view key="view" contentMode="scaleToFill" id="pyJ-YA-aYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2o7-N6-bIj">
-                                <rect key="frame" x="200" y="214" width="100" height="20.5"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gw-ys-bFX">
-                                        <rect key="frame" x="0.0" y="0.0" width="21.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qbO-Dz-qys">
-                                        <rect key="frame" x="21.5" y="0.0" width="78.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="PiL-5Z-e7A" firstAttribute="bottom" secondItem="2o7-N6-bIj" secondAttribute="bottom" constant="383.5" id="5t0-hG-AEL"/>
-                            <constraint firstItem="PiL-5Z-e7A" firstAttribute="trailing" secondItem="2o7-N6-bIj" secondAttribute="trailing" constant="75" id="EKH-Zg-zOf"/>
-                            <constraint firstItem="2o7-N6-bIj" firstAttribute="leading" secondItem="PiL-5Z-e7A" secondAttribute="leading" constant="200" id="W8t-RO-o0G"/>
-                            <constraint firstItem="2o7-N6-bIj" firstAttribute="top" secondItem="PiL-5Z-e7A" secondAttribute="top" constant="194" id="pvu-Ic-ibe"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PiL-5Z-e7A"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 2" id="pOg-c2-n06"/>
