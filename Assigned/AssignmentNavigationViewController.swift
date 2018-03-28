@@ -79,9 +79,25 @@ class AssignmentNavigationViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var constraintScrollViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var stackView: UIStackView!
+    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let screenWidth = self.view.bounds.width
+//        let pageWidth = screenWidth - 24.0
+//        let mutiplier = pageWidth / screenWidth * 3
+//
+//        NSLayoutConstraint(item: stackView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: scrollView, attribute: NSLayoutAttribute.width, multiplier: mutiplier, constant: 0).isActive = true
+//        self.view.layoutIfNeeded()
+    }
+}
+
+extension AssignmentNavigationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
