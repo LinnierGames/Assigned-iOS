@@ -20,6 +20,8 @@
 		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
 		E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */; };
 		E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */; };
+		E97AE1FF206D9B7D0014CE18 /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97AE1FD206D9B7C0014CE18 /* UniversalExtentions.swift */; };
+		E97AE200206D9B7D0014CE18 /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97AE1FE206D9B7C0014CE18 /* FetchedResultsTableViewController.swift */; };
 		E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF433205305F80050EA21 /* AppDelegate.swift */; };
 		E97DF439205305F80050EA21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97DF437205305F80050EA21 /* Main.storyboard */; };
 		E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */; };
@@ -47,8 +49,6 @@
 		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
 		E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */; };
 		E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */; };
-		E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */; };
-		E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */; };
 		E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */; };
 		E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +84,8 @@
 		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
 		E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewController.swift; sourceTree = "<group>"; };
 		E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNotesViewController.swift; sourceTree = "<group>"; };
+		E97AE1FD206D9B7C0014CE18 /* UniversalExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversalExtentions.swift; sourceTree = "<group>"; };
+		E97AE1FE206D9B7C0014CE18 /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableViewController.swift; sourceTree = "<group>"; };
 		E97DF430205305F80050EA21 /* Assigned.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assigned.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97DF433205305F80050EA21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97DF438205305F80050EA21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -117,8 +119,6 @@
 		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
 		E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeTableViewController.swift; sourceTree = "<group>"; };
 		E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OragnizeViewModel.swift; sourceTree = "<group>"; };
-		E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
-		E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataClass.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,8 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				E97DF433205305F80050EA21 /* AppDelegate.swift */,
-				E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */,
-				E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */,
+				E97AE1FE206D9B7C0014CE18 /* FetchedResultsTableViewController.swift */,
+				E97AE1FD206D9B7C0014CE18 /* UniversalExtentions.swift */,
 				E97DF46720530BD80050EA21 /* Organize */,
 				E97DF437205305F80050EA21 /* Main.storyboard */,
 				E972ADB7206189CF00B26980 /* Custom Views */,
@@ -460,11 +460,11 @@
 			files = (
 				E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */,
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
+				E97AE1FF206D9B7D0014CE18 /* UniversalExtentions.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */,
-				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
 				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
@@ -478,7 +478,7 @@
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
 				E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */,
-				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
+				E97AE200206D9B7D0014CE18 /* FetchedResultsTableViewController.swift in Sources */,
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
 				E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */,
 				E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */,
