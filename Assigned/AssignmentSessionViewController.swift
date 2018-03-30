@@ -68,36 +68,40 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     func numberOfSections(in tableView: UITableView) -> Int {
         
         //TODO: create sections for each day of the week
-        return 1
+        return viewModel.fetchedAssignmentSessions.sections?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.fetchedAssignmentSessions.sections?[section].objects?.count ?? 0
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if let fetchedSections = self.fetchedResultsController.sections {
-//            guard
-//                let fetchedSessions = fetchedSections[section].objects as? [Session]?,
-//                let sessions = fetchedSessions,
-//                let aSession = sessions.first else {
-//                fatalError("fetched results controller did not fetch Sessions")
-//            }
-//
-//            let formattedDate = String(date: aSession.date!, dateStyle: .short)
-//
-//            return formattedDate
-//        } else {
-//            return nil
-//        }
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if let fetchedSections = self.viewModel.fetchedAssignmentSessions.sections {
+            guard
+                let fetchedSessions = fetchedSections[section].objects as? [Session]?,
+                let sessions = fetchedSessions,
+                let aSession = sessions.first else {
+                fatalError("fetched results controller did not fetch Sessions")
+            }
+
+            let formattedDate = String(date: aSession.date!, dateStyle: .long)
+
+            return formattedDate
+        } else {
+            return nil
+        }
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         let session = viewModel.fetchedAssignmentSessions.session(at: indexPath)
+        
         cell.textLabel!.text = session.name
-        cell.detailTextLabel!.text = String(date: session.date!, dateStyle: .none, timeStyle: .short)
+        
+        let startingDate = String(date: session.startDate, dateStyle: .none, timeStyle: .short)
+        let endingDate = String(date: session.startDate.addingTimeInterval(session.duration), dateStyle: .none, timeStyle: .short)
+        cell.detailTextLabel!.text = "\(startingDate) till \(endingDate)"
         
         //TODO: session location from the calendar event
 //        cell.detailTextLabel!.text = session.lcoation

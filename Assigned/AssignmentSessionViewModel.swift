@@ -32,13 +32,13 @@ class SessionViewModel {
     
     lazy var fetchedAssignmentSessions: NSFetchedResultsController<Session> = {
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        fetch.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
         fetch.predicate = NSPredicate(format: "assignment == %@", self.assignment)
         
         let fetchedRequestController = NSFetchedResultsController<Session>(
             fetchRequest: fetch,
             managedObjectContext: self.context,
-            sectionNameKeyPath: nil, cacheName: nil
+            sectionNameKeyPath: "date", cacheName: nil
         )
         
         do {

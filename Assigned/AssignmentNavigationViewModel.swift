@@ -108,7 +108,7 @@ class AssignmentNavigationViewModel {
         
         let newSession = Session(
             name: sessionTitle,
-            date: date,
+            startDate: date,
             duration: 1,
             assignment: self.assignment, in: self.context)
         

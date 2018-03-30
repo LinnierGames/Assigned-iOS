@@ -19,10 +19,11 @@
         <relationship name="directoryValue" maxCount="1" deletionRule="Cascade" destinationEntity="Directories" inverseName="infoValue" inverseEntity="Directories" syncable="YES"/>
     </entity>
     <entity name="Folders" representedClassName="Folder" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="category"/>
-    <entity name="Sessions" representedClassName="Session" syncable="YES" codeGenerationType="category">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+    <entity name="Sessions" representedClassName="Session" syncable="YES">
+        <attribute name="date" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="sessions" inverseEntity="Assignment" syncable="YES"/>
     </entity>
     <entity name="Tasks" representedClassName="Task" syncable="YES" codeGenerationType="category">
@@ -35,7 +36,7 @@
         <element name="Directories" positionX="-63" positionY="45" width="128" height="90"/>
         <element name="DirectoryInfos" positionX="-45" positionY="63" width="128" height="75"/>
         <element name="Folders" positionX="-54" positionY="54" width="128" height="30"/>
-        <element name="Sessions" positionX="-54" positionY="36" width="128" height="30"/>
+        <element name="Sessions" positionX="-54" positionY="36" width="128" height="120"/>
         <element name="Tasks" positionX="-36" positionY="72" width="128" height="90"/>
     </elements>
 </model>
