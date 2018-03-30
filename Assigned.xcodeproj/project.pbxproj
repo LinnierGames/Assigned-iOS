@@ -13,8 +13,8 @@
 		E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961D6662065F62800AD6EFC /* MoveViewController.swift */; };
 		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
 		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
-		E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */; };
-		E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */; };
+		E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedController.swift */; };
+		E972ADBB20618A3D00B26980 /* SessionDetailedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedController.xib */; };
 		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
 		E972ADBF20618EC500B26980 /* Temp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADBE20618EC500B26980 /* Temp.xib */; };
 		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
@@ -77,8 +77,8 @@
 		E961D6662065F62800AD6EFC /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
 		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
 		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
-		E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewController.swift; sourceTree = "<group>"; };
-		E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedViewController.xib; sourceTree = "<group>"; };
+		E972ADB820618A3D00B26980 /* SessionDetailedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedController.swift; sourceTree = "<group>"; };
+		E972ADB920618A3D00B26980 /* SessionDetailedController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedController.xib; sourceTree = "<group>"; };
 		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
 		E972ADBE20618EC500B26980 /* Temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Temp.xib; sourceTree = "<group>"; };
 		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
 				E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */,
 				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
-				E972ADB820618A3D00B26980 /* SessionDetailedViewController.swift */,
-				E972ADB920618A3D00B26980 /* SessionDetailedViewController.xib */,
+				E972ADB820618A3D00B26980 /* SessionDetailedController.swift */,
+				E972ADB920618A3D00B26980 /* SessionDetailedController.xib */,
 				E972ADBE20618EC500B26980 /* Temp.xib */,
 			);
 			name = "Custom Views";
@@ -423,7 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E972ADBB20618A3D00B26980 /* SessionDetailedViewController.xib in Resources */,
+				E972ADBB20618A3D00B26980 /* SessionDetailedController.xib in Resources */,
 				E972ADBF20618EC500B26980 /* Temp.xib in Resources */,
 				E97DF441205305F80050EA21 /* LaunchScreen.storyboard in Resources */,
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
@@ -469,7 +469,7 @@
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
-				E972ADBA20618A3D00B26980 /* SessionDetailedViewController.swift in Sources */,
+				E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
 				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,

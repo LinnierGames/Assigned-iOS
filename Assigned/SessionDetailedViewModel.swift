@@ -13,10 +13,12 @@ class SessionDetailedViewModel {
     
     private var sessionValue: Session!
     
-    private var persistance = PersistenceStack.shared
-    
     lazy var context: NSManagedObjectContext = {
-        return persistance.viewContext
+        guard let context = session.managedObjectContext else {
+            fatalError("context was not set")
+        }
+        
+        return context
     }()
     
     var session: Session {
