@@ -291,19 +291,20 @@ class AssignmentViewController: UIViewController {
 
     private var isDeleteButtonHidden: Bool {
         set {
-            // hide the button
-            if newValue == true {
-                buttonDelete.setTitleColor(UIColor.clear, for: .normal)
-                buttonDelete.isUserInteractionEnabled = false
-
-                // show the button
-            } else {
-                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
-                buttonDelete.isUserInteractionEnabled = true
-            }
+            buttonDelete.isHidden = newValue
+//            // hide the button
+//            if newValue == true {
+//                buttonDelete.isHidden = true
+//                buttonDelete.isUserInteractionEnabled = false
+//
+//                // show the button
+//            } else {
+//                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
+//                buttonDelete.isUserInteractionEnabled = true
+//            }
         }
         get {
-            return buttonDelete.isUserInteractionEnabled.inverse
+            return buttonDelete.isHidden
         }
     }
 
