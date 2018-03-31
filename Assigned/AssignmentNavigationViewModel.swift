@@ -109,7 +109,6 @@ class AssignmentNavigationViewModel {
         let newSession = Session(
             name: sessionTitle,
             startDate: date,
-            duration: 1,
             assignment: self.assignment, in: self.context)
         
         return newSession
@@ -117,6 +116,10 @@ class AssignmentNavigationViewModel {
     
     func addSession(session: Session) {
         session.assignment = self.assignment
+    }
+    
+    func delete(session: Session) {
+        self.context.delete(session)
     }
     
     // MARK: - IBACTIONS

@@ -20,8 +20,8 @@
     </entity>
     <entity name="Folders" representedClassName="Folder" parentEntity="DirectoryInfos" syncable="YES" codeGenerationType="category"/>
     <entity name="Sessions" representedClassName="Session" syncable="YES">
-        <attribute name="date" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="dayOfStartDate" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="durationValue" optional="YES" attributeType="Double" defaultValueString="3600" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="sessions" inverseEntity="Assignment" syncable="YES"/>

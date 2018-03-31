@@ -471,15 +471,19 @@ class AssignmentViewController: UIViewController {
         set {
             let newSliderValue: Float
 
+            // can't be smaller than zero
             if newValue <= 0 {
                 newSliderValue = 0.0
             } else {
+                newSliderValue = newValue
+                
+                // update the slider's max value?
                 if newValue > Float(maxEffortValue) {
                     maxEffortValue = Int(newValue) // max effort are only represent whole hours
                 }
-                newSliderValue = newValue
             }
-
+            
+            // update slider and assignment
             sliderEffort.value = newSliderValue
             assignment.effort = newSliderValue
             labelEffort.text = viewModel.effortTitle

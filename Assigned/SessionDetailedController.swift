@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol SessionDetailedControllerDelegate: class {
+    func session(controller: SessionDetailedController, didDelete session: Session)
+}
+
 class SessionDetailedController: UIViewController {
     
     var viewModel = SessionDetailedViewModel()
+    
+    weak var delegate: SessionDetailedControllerDelegate?
     
     public var session: Session {
         set {
@@ -25,22 +31,74 @@ class SessionDetailedController: UIViewController {
     
     // MARK: - VOID METHODS
     
+    private func updateUI() {
+        //TODO: refactor to model
+        
+        // Title
+        let sessionTask = session.assignment
+        
+        labelTaskTitle.text = sessionTask.title
+        
+        sessionStartDate = session.startDate
+        sessionDuration = session.duration
+        
+        // Start Date
+        labelStartDate.text = viewModel.textStartDate
+        
+        //TODO: RxSwift
+        labelEndDate.text = viewModel.textEndDate
+        labelDuration.text = viewModel.textDuration
+        
+        // Duration
+//        let anHour = CTDateComponentHour
+        //TODO: implement duration slider
+    }
+    
+    private func dismissViewController() {
+        guard let presentingVc = self.presentingViewController else {
+            fatalError("no parent vc presented this vc")
+        }
+        
+        presentingVc.dismiss(animated: true)
+    }
+    
     // MARK: - IBACTIONS
     
     @IBAction func pressDone(_ sender: Any) {
-        
+        dismissViewController()
     }
     
     @IBAction func pressTrash(_ sender: Any) {
+        delegate?.session(controller: self, didDelete: self.session)
         
+        dismissViewController()
     }
     
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelTaskTitle: UILabel!
-    @IBOutlet weak var labelDateRanges: UILabel!
+    @IBOutlet weak var labelStartDate: UILabel!
+    @IBOutlet weak var labelEndDate: UILabel!
+    
+    private var sessionStartDate: Date {
+        set {
+            session.startDate = newValue
+            datePicker.setDate(newValue, animated: true)
+            
+            // Start Date
+            labelStartDate.text = viewModel.textStartDate
+            
+            //TODO: RxSwift
+            labelEndDate.text = viewModel.textEndDate
+            
+        }
+        get {
+            return datePicker.date
+        }
+    }
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBAction func didChangeDatePicker(_ sender: Any) {
-        
+        sessionStartDate = datePicker.date
     }
     
     @IBOutlet weak var labelDuration: UILabel!
@@ -48,13 +106,52 @@ class SessionDetailedController: UIViewController {
         
     }
     
+    /**
+     - warning: newValue is sent as 1.0 as 1 hour and not 3600.0
+     
+     - returns: duration in the for of hours (e.g. 3,600 is returned as 1.0)
+     */
+    private var sessionDuration: TimeInterval {
+        set {
+            session.duration = newValue
+            sliderDuration.value = Float(newValue)
+            
+            //TODO: RxSwift
+            labelEndDate.text = viewModel.textEndDate
+            labelDuration.text = viewModel.textDuration
+        }
+        get {
+            return session.duration
+        }
+    }
+    
     @IBOutlet weak var sliderDuration: UISlider!
     @IBAction func didChangeDurationSlider(_ sender: Any) {
         
+        //stepper values
+        func rounded(value x: Float) -> Float {
+            if x < 0.25 {
+                return 0;
+            } else if x < 0.5 {
+                return 0.25
+            } else if x < 1.0 {
+                return 0.5
+            } else {
+                return round(x*2)/2
+            }
+        }
+        
+        sessionDuration = TimeInterval(rounded(value: sliderDuration.value))
     }
     
     @IBOutlet weak var pressPlusDuration: UIButton!
     
     // MARK: - LIFE CYCLE
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        updateUI()
+    }
 
 }

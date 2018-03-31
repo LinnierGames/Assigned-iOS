@@ -34,3 +34,30 @@ class SessionDetailedViewModel {
         }
     }
 }
+
+extension SessionDetailedViewModel {
+    
+    var textStartDate: String {
+        return String(date: session.startDate, dateStyle: .full, timeStyle: .short)
+    }
+    
+    var textEndDate: String {
+        let endDate = session.startDate.addingTimeInterval(session.durationValue)
+        let text: String
+        
+        //only print the time
+        if session.startDate.isSameDay(as: endDate) {
+            text = String(date: endDate, dateStyle: .none, timeStyle: .short)
+            
+            //also print the day along with the time
+        } else {
+            text = String(date: endDate, dateStyle: .full, timeStyle: .short)
+        }
+        
+        return text
+    }
+    
+    var textDuration: String {
+        return String(timeInterval: session.durationValue)
+    }
+}

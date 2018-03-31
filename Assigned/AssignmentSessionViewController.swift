@@ -39,6 +39,30 @@ class AssignmentSessionViewController: UIViewController {
     // MARK: - VOID METHODS
     
     private func updateUI() {
+        
+    }
+    
+    private func presentSessionDetail(for session: Session) {
+        self.performSegue(withIdentifier: "show session details", sender: session)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "show session details":
+                guard let vc = segue.destination as? SessionDetailedController else {
+                    fatalError("destination is not set up as a SessionDetailedController")
+                }
+                
+                guard let session = sender as? Session else {
+                    fatalError("a session was not sent as the sender")
+                }
+                
+                vc.session = session
+                vc.delegate = self
+            default: break
+            }
+        }
     }
     
     // MARK: - IBACTIONS
@@ -46,8 +70,9 @@ class AssignmentSessionViewController: UIViewController {
     @IBOutlet weak var tableSessions: UITableView!
     
     @IBAction func pressAddSession(_ sender: Any) {
-        dataModel.addSession()
+        let newSession = dataModel.addSession()
         dataModel.saveOnlyOnReading()
+        self.presentSessionDetail(for: newSession)
     }
     // MARK: - LIFE CYCLE
     
@@ -84,7 +109,7 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
                 fatalError("fetched results controller did not fetch Sessions")
             }
 
-            let formattedDate = String(date: aSession.date!, dateStyle: .long)
+            let formattedDate = String(date: aSession.dayOfStartDate, dateStyle: .long)
 
             return formattedDate
         } else {
@@ -99,14 +124,19 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
         
         cell.textLabel!.text = session.name
         
-        let startingDate = String(date: session.startDate, dateStyle: .none, timeStyle: .short)
-        let endingDate = String(date: session.startDate.addingTimeInterval(session.duration), dateStyle: .none, timeStyle: .short)
+        let startingDate = String(date: session.startDate, dateStyle: .short, timeStyle: .short)
+        let endingDate = String(date: session.startDate.addingTimeInterval(session.durationValue), dateStyle: .none, timeStyle: .short)
         cell.detailTextLabel!.text = "\(startingDate) till \(endingDate)"
         
         //TODO: session location from the calendar event
 //        cell.detailTextLabel!.text = session.lcoation
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let session = self.viewModel.fetchedAssignmentSessions.session(at: indexPath)
+        self.presentSessionDetail(for: session)
     }
 }
 
@@ -140,5 +170,12 @@ extension AssignmentSessionViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableSessions.endUpdates()
+    }
+}
+
+extension AssignmentSessionViewController: SessionDetailedControllerDelegate {
+    func session(controller: SessionDetailedController, didDelete session: Session) {
+        dataModel.delete(session: session)
+        dataModel.saveOnlyOnReading()
     }
 }

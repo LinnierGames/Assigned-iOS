@@ -17,14 +17,26 @@ public class Session: NSManagedObject {
         return NSFetchRequest<Session>(entityName: "Sessions")
     }
     
-    @NSManaged public var duration: TimeInterval
-    @NSManaged public var name: String?
+    /** stored as seconds */
+    @NSManaged public var durationValue: TimeInterval
+    
+    /** represented in hours (e.g. 3,600 seconds is 1.0 hours) */
+    public var duration: Double {
+        set {
+            self.durationValue = newValue * CTDateComponentHour
+        }
+        get {
+            return self.durationValue / CTDateComponentHour
+        }
+    }
+    
+    @NSManaged public var name: String
     @NSManaged public var startDate: Date
-    @NSManaged public var assignment: Assignment?
+    @NSManaged public var assignment: Assignment
     
     convenience init(name: String,
                      startDate: Date,
-                     duration: TimeInterval,
+                     duration: TimeInterval = 1,
                      assignment: Assignment,
                      in context: NSManagedObjectContext) {
         self.init(context: context)
@@ -36,8 +48,12 @@ public class Session: NSManagedObject {
         self.assignment = assignment
     }
     
-    var date: Date? {
+    var dayOfStartDate: Date {
         return startDate.midnight
+    }
+    
+    enum StringProperties {
+        static let dayOfStartDate = "dayOfStartDate"
     }
 }
 
