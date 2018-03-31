@@ -36,7 +36,7 @@ class MoveViewController: UITableViewController {
         
         //TODO: move assignments into projects (use DirectoryInfo instead of Folder)
         let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
-        fetch.predicate = NSPredicate(format: "directoryValue.parent == nil")
+        fetch.predicate = NSPredicate(format: "\(Folder.StringKeys.directory).\(Directory.StringKeys.parent) == nil")
         
         guard let rootFolders = try? context.fetch(fetch) else {
             fatalError("could not fetch folders")

@@ -9,9 +9,9 @@
 import Foundation
 import CoreData
 
-class AssignmentNavigationViewModel {
+class AssignmentNavigationViewModel: NSObject {
     
-    var editingMode: CRUD = .Create {
+    @objc dynamic var editingMode: CRUD = .Create {
         didSet {
             switch editingMode {
             case .Create:

@@ -48,9 +48,48 @@ class AssignmentNavigationViewController: UIViewController {
         }
     }
     
+    deinit {
+        viewModel.removeObserver(self, forKeyPath: "editingMode")
+    }
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
+    
+    private func updateUI(animated: Bool = true) {
+        
+        let showCards = { [unowned self] in
+            self.scrollView?.isScrollEnabled = true
+            self.scrollView?.alwaysBounceHorizontal = true
+            
+            self.viewSessions?.alpha = 1.0
+            self.viewNotes?.alpha = 1.0
+        }
+        
+        let hideCards = { [unowned self] in
+            self.scrollView?.isScrollEnabled = false
+            self.scrollView?.alwaysBounceHorizontal = false
+            
+            self.viewSessions?.alpha = 0.0
+            self.viewNotes?.alpha = 0.0
+        }
+        
+        if animated {
+            UIView.animate(withDuration: UIViewPropertyAnimator.transitionAnimationDuration) {
+                if self.editingMode.isReading {
+                    showCards()
+                } else {
+                    hideCards()
+                }
+            }
+        } else {
+            if self.editingMode.isReading {
+                showCards()
+            } else {
+                hideCards()
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -77,22 +116,32 @@ class AssignmentNavigationViewController: UIViewController {
         }
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if let model = object as? AssignmentNavigationViewModel, model === viewModel, keyPath! == "editingMode" {
+            updateUI()
+        }
+    }
+    
     // MARK: - IBACTIONS
+    
+    @IBOutlet weak var viewAssignment: UIView!
+    @IBOutlet weak var viewSessions: UIView!
+    @IBOutlet weak var viewNotes: UIView!
     
     @IBOutlet weak var constraintScrollViewWidth: NSLayoutConstraint!
     @IBOutlet weak var stackView: UIStackView!
     
     // MARK: - LIFE CYCLE
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let screenWidth = self.view.bounds.width
-//        let pageWidth = screenWidth - 24.0
-//        let mutiplier = pageWidth / screenWidth * 3
-//
-//        NSLayoutConstraint(item: stackView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: scrollView, attribute: NSLayoutAttribute.width, multiplier: mutiplier, constant: 0).isActive = true
-//        self.view.layoutIfNeeded()
+        viewModel.addObserver(self, forKeyPath: "editingMode", options: .new, context: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateUI(animated: false)
     }
 }
 
