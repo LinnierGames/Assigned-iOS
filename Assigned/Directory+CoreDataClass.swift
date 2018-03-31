@@ -19,18 +19,10 @@ public class Directory: NSManagedObject {
     
     static func createDirectory(for directoryInfo: DirectoryInfo, parent: Directory?, in context: NSManagedObjectContext) -> Directory {
         let newDirectory = Directory(in: context)
-        newDirectory.infoValue = directoryInfo
+        newDirectory.info = directoryInfo
         newDirectory.parent = parent
         
         return newDirectory
-    }
-    
-    var info: DirectoryInfo {
-        guard let info = self.infoValue else {
-            fatalError("info was not set")
-        }
-        
-        return info
     }
 }
 

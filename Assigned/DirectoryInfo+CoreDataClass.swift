@@ -13,14 +13,6 @@ import CoreData
 @objc(DirectoryInfo)
 public class DirectoryInfo: NSManagedObject {
     
-    var directory: Directory {
-        guard let directory = self.directoryValue else {
-            fatalError("directory was not set")
-        }
-        
-        return directory
-    }
-    
     var parentInfo: DirectoryInfo? {
         get {
             return self.parentDirectory?.info

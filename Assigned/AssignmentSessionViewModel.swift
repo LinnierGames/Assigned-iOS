@@ -38,7 +38,7 @@ class SessionViewModel {
         let fetchedRequestController = NSFetchedResultsController<Session>(
             fetchRequest: fetch,
             managedObjectContext: self.context,
-            sectionNameKeyPath: Session.StringProperties.dayOfStartDate, cacheName: nil
+            sectionNameKeyPath: Session.StringKeys.dayOfStartDate, cacheName: nil
         )
         
         do {

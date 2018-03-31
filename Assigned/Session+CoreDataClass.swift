@@ -13,12 +13,29 @@ import CoreData
 @objc(Session)
 public class Session: NSManagedObject {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Session> {
-        return NSFetchRequest<Session>(entityName: "Sessions")
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    public var title: String {
+        set {
+            self.titleValue = newValue
+        }
+        get {
+            if let sessionTitle = self.titleValue {
+                return sessionTitle
+            } else {
+                return self.assignment.title
+            }
+        }
     }
     
-    /** stored as seconds */
-    @NSManaged public var durationValue: TimeInterval
+    func clearTitle() {
+        self.titleValue = nil
+    }
     
     /** represented in hours (e.g. 3,600 seconds is 1.0 hours) */
     public var duration: Double {
@@ -29,28 +46,7 @@ public class Session: NSManagedObject {
             return self.durationValue / CTDateComponentHour
         }
     }
-    
-    @NSManaged public var titleValue: String?
-    public var title: String {
-        set {
-            self.titleValue = newValue
-        }
-        get {
-            if let sessionTitle = self.titleValue {
-                return sessionTitle
-            } else {
-                return self.assignment.title!
-            }
-        }
-    }
-    
-    func clearTitle() {
-        self.titleValue = nil
-    }
-    
-    @NSManaged public var startDate: Date
-    @NSManaged public var assignment: Assignment
-    
+        
     convenience init(title: String?,
                      startDate: Date,
                      duration: TimeInterval = 1,
@@ -63,14 +59,6 @@ public class Session: NSManagedObject {
         self.duration = duration
         
         self.assignment = assignment
-    }
-    
-    var dayOfStartDate: Date {
-        return self.startDate.midnight
-    }
-    
-    enum StringProperties {
-        static let dayOfStartDate = "dayOfStartDate"
     }
 }
 

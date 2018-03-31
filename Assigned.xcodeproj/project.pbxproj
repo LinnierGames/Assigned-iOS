@@ -51,6 +51,12 @@
 		E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */; };
 		E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */; };
 		E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */; };
+		E9E6C9D9206F2FDD00566149 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */; };
+		E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */; };
+		E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */; };
+		E9E6C9E520701FF200566149 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */; };
+		E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */; };
+		E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +127,12 @@
 		E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,11 +278,17 @@
 			isa = PBXGroup;
 			children = (
 				E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */,
+				E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */,
 				E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */,
+				E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */,
 				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
+				E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
+				E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */,
 				E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */,
+				E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
+				E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -458,9 +476,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9E6C9E520701FF200566149 /* Session+CoreDataProperties.swift in Sources */,
 				E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */,
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
+				E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */,
 				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */,
@@ -468,12 +488,14 @@
 				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
 				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
+				E9E6C9D9206F2FDD00566149 /* Assignment+CoreDataProperties.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
 				E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
 				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */,
+				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,
 				E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
@@ -488,7 +510,9 @@
 				E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */,
 				E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */,
 				E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */,
+				E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */,
 				E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */,
+				E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

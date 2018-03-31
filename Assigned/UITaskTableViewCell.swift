@@ -10,7 +10,7 @@ import UIKit
 
 @objc protocol UITaskTableViewCellDelegate: class {
     @objc optional func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool)
-    @objc optional func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String?)
+    @objc optional func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String)
 }
 
 class UITaskTableViewCell: UITableViewCell {
@@ -56,7 +56,7 @@ class UITaskTableViewCell: UITableViewCell {
         
         buttonCheckbox.isChecked = task.isCompleted
         if task.isCompleted {
-            textfield.attributedText = NSMutableAttributedString(strikedOut: task.title ?? "")
+            textfield.attributedText = NSMutableAttributedString(strikedOut: task.title)
             textfield.textColor = .disabledGray
         } else {
             textfield.text = task.title
@@ -121,6 +121,6 @@ extension UITaskTableViewCell: UITextFieldDelegate {
         // check if the cell was configured with a task
         guard let task = self.task else { return }
         
-        delegate?.task?(cell: self, didChangeTask: task, to: textField.text)
+        delegate?.task?(cell: self, didChangeTask: task, to: textField.text ?? "")
     }
 }

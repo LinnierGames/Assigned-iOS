@@ -694,7 +694,7 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
         dataModel.saveOnlyOnReading()
     }
 
-    func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String?) {
+    func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String) {
         task.title = newTitle
         dataModel.saveOnlyOnReading()
     }
@@ -724,8 +724,10 @@ extension AssignmentViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField === textfieldTitle {
-            assignment.title = textField.text
-            dataModel.saveOnlyOnReading()
+            if let text = textField.text {
+                assignment.title = text
+                dataModel.saveOnlyOnReading()
+            }
         }
     }
 

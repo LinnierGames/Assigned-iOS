@@ -59,7 +59,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     private func updateFetch() {
         let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
         fetch.sortDescriptors = [
-            NSSortDescriptor(key: "infoValue.title",
+            NSSortDescriptor(key: "\(Directory.StringKeys.info).title",
                              ascending: false,
                              selector: #selector(NSString.localizedStandardCompare(_:))
             )

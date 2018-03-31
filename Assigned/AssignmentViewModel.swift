@@ -40,7 +40,7 @@ class AssignmentViewModel {
 
     lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task> = {
         let fetch: NSFetchRequest<Task> = Task.fetchRequest()
-        fetch.predicate = NSPredicate(format: "assignment == %@", assignment)
+        fetch.predicate = NSPredicate(format: "\(Task.StringKeys.assignment) == %@", assignment)
         fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title", ascending: true)]
 
         let fetchedRequestController = NSFetchedResultsController<Task>(
