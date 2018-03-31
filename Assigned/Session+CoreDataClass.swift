@@ -30,18 +30,35 @@ public class Session: NSManagedObject {
         }
     }
     
-    @NSManaged public var name: String
+    @NSManaged public var titleValue: String?
+    public var title: String {
+        set {
+            self.titleValue = newValue
+        }
+        get {
+            if let sessionTitle = self.titleValue {
+                return sessionTitle
+            } else {
+                return self.assignment.title!
+            }
+        }
+    }
+    
+    func clearTitle() {
+        self.titleValue = nil
+    }
+    
     @NSManaged public var startDate: Date
     @NSManaged public var assignment: Assignment
     
-    convenience init(name: String,
+    convenience init(title: String?,
                      startDate: Date,
                      duration: TimeInterval = 1,
                      assignment: Assignment,
                      in context: NSManagedObjectContext) {
         self.init(context: context)
         
-        self.name = name
+        self.titleValue = title
         self.startDate = startDate
         self.duration = duration
         
@@ -49,7 +66,7 @@ public class Session: NSManagedObject {
     }
     
     var dayOfStartDate: Date {
-        return startDate.midnight
+        return self.startDate.midnight
     }
     
     enum StringProperties {

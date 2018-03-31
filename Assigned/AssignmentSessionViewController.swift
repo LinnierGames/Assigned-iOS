@@ -122,7 +122,8 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
         
         let session = viewModel.fetchedAssignmentSessions.session(at: indexPath)
         
-        cell.textLabel!.text = session.name
+        //TODO: udpate if the assignment title gets updated
+        cell.textLabel!.text = session.title
         
         let startingDate = String(date: session.startDate, dateStyle: .short, timeStyle: .short)
         let endingDate = String(date: session.startDate.addingTimeInterval(session.durationValue), dateStyle: .none, timeStyle: .short)
@@ -174,6 +175,10 @@ extension AssignmentSessionViewController: NSFetchedResultsControllerDelegate {
 }
 
 extension AssignmentSessionViewController: SessionDetailedControllerDelegate {
+    func session(controller: SessionDetailedController, didFinishEditing session: Session) {
+        dataModel.saveOnlyOnReading()
+    }
+    
     func session(controller: SessionDetailedController, didDelete session: Session) {
         dataModel.delete(session: session)
         dataModel.saveOnlyOnReading()

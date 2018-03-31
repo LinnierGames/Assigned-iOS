@@ -5,6 +5,8 @@
 //  Created by Erick Sanchez on 3/15/18.
 //  Copyright © 2018 LinnierGames. All rights reserved.
 //
+//  Usage: update the .textFielDelegate and do not use the .delegate from
+//  UITextField
 
 import UIKit
 
@@ -102,7 +104,7 @@ extension UIValidatedTextField: UITextFieldDelegate {
                     textField.text = defaultText
                 }
             } else {
-                assertionFailure("validation failed but no previous text was found")
+                textField.text = defaultText
             }
         }
         

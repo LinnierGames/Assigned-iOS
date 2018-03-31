@@ -9,6 +9,7 @@
 import UIKit
 
 protocol SessionDetailedControllerDelegate: class {
+    func session(controller: SessionDetailedController, didFinishEditing session: Session)
     func session(controller: SessionDetailedController, didDelete session: Session)
 }
 
@@ -37,6 +38,7 @@ class SessionDetailedController: UIViewController {
         // Title
         let sessionTask = session.assignment
         
+        textfieldTitle.text = session.title
         labelTaskTitle.text = sessionTask.title
         
         sessionStartDate = session.startDate
@@ -65,6 +67,8 @@ class SessionDetailedController: UIViewController {
     // MARK: - IBACTIONS
     
     @IBAction func pressDone(_ sender: Any) {
+        delegate?.session(controller: self, didFinishEditing: self.session)
+        
         dismissViewController()
     }
     
@@ -74,7 +78,7 @@ class SessionDetailedController: UIViewController {
         dismissViewController()
     }
     
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var textfieldTitle: UITextField!
     @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var labelStartDate: UILabel!
     @IBOutlet weak var labelEndDate: UILabel!
@@ -113,7 +117,6 @@ class SessionDetailedController: UIViewController {
      */
     private var sessionDuration: TimeInterval {
         set {
-            session.duration = newValue
             sliderDuration.value = Float(newValue)
             
             //TODO: RxSwift
@@ -141,7 +144,9 @@ class SessionDetailedController: UIViewController {
             }
         }
         
-        sessionDuration = TimeInterval(rounded(value: sliderDuration.value))
+        let newValue = TimeInterval(rounded(value: sliderDuration.value))
+        session.duration = newValue
+        sessionDuration = newValue
     }
     
     @IBOutlet weak var pressPlusDuration: UIButton!
@@ -153,5 +158,21 @@ class SessionDetailedController: UIViewController {
         
         updateUI()
     }
+}
 
+extension SessionDetailedController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return false
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text, text != "" {
+            session.title = text
+        } else {
+            session.clearTitle()
+            textField.text = session.title
+        }
+    }
 }

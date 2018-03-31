@@ -103,11 +103,8 @@ class AssignmentNavigationViewModel {
     
     @discardableResult
     func addSession(with date: Date = Date()) -> Session {
-        //TODO: remove assignement.title as an optional
-        let sessionTitle = assignment.title ?? "Untitled Assignment"
-        
         let newSession = Session(
-            name: sessionTitle,
+            title: nil,
             startDate: date,
             assignment: self.assignment, in: self.context)
         

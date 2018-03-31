@@ -132,6 +132,10 @@ class AssignmentViewController: UIViewController {
 
     private func dismissViewController(completion handler: @escaping () -> () = {}) {
         dismiss()
+        
+        if dataModel.editingMode.isReading, dataModel.context.hasChanges == true {
+            fatalError("unsaved changes during dismissing on reading")
+        }
 
         setViewState(to: .Hidden, animated: true) { [unowned self] in
             self.presentingViewController!.dismiss(animated: true, completion: handler)
