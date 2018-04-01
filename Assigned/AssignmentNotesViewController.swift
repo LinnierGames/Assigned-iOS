@@ -9,27 +9,46 @@
 import UIKit
 
 class AssignmentNotesViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    weak var parentModel: AssignmentNavigationViewModel!
+    
+    private var assignment: Assignment {
+        get {
+            return parentModel.assignment
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
+    // MARK: - IBACTIONS
+    
+    @IBOutlet weak var labelAssignmentTitle: UILabel!
+    @IBOutlet weak var textviewNotes: UITextView!
+    
+    // MARK: - LIFE CYCLE
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        textviewNotes.inputAccessoryView = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
     }
-    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //TODO: RxSwift
+        self.textviewNotes.text = assignment.notes
+        self.labelAssignmentTitle.text = assignment.title
+    }
+}
 
+extension AssignmentNotesViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+        //TODO: RxSwift
+        assignment.notes = textView.text
+        parentModel.saveOnlyOnReading()
+    }
 }

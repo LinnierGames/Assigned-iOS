@@ -107,10 +107,11 @@ class AssignmentNavigationViewController: UIViewController {
                 
                 vc.parentNavigationViewController = self
             case "embedded notes vc":
-                guard let _ = segue.destination as? AssignmentNotesViewController else {
+                guard let vc = segue.destination as? AssignmentNotesViewController else {
                     fatalError("AssignmentNotesViewController not set up in storyboard")
                 }
                 
+                vc.parentModel = self.viewModel
             default: break
             }
         }

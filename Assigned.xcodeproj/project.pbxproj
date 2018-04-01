@@ -14,7 +14,6 @@
 		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
 		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
 		E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedController.swift */; };
-		E972ADBB20618A3D00B26980 /* SessionDetailedController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADB920618A3D00B26980 /* SessionDetailedController.xib */; };
 		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
 		E972ADBF20618EC500B26980 /* Temp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADBE20618EC500B26980 /* Temp.xib */; };
 		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
@@ -40,6 +39,8 @@
 		E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UITaskTableViewCell.xib */; };
 		E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */; };
 		E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */; };
+		E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */; };
+		E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */; };
 		E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CD20588A0800C42821 /* UICheckbox.swift */; };
 		E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
@@ -84,7 +85,6 @@
 		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
 		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
 		E972ADB820618A3D00B26980 /* SessionDetailedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedController.swift; sourceTree = "<group>"; };
-		E972ADB920618A3D00B26980 /* SessionDetailedController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SessionDetailedController.xib; sourceTree = "<group>"; };
 		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
 		E972ADBE20618EC500B26980 /* Temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Temp.xib; sourceTree = "<group>"; };
 		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +116,8 @@
 		E98E2F172055065000B1624A /* UITaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITaskTableViewCell.xib; sourceTree = "<group>"; };
 		E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITimeBox.swift; sourceTree = "<group>"; };
 		E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UITaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
+		E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputAccessoryView.swift; sourceTree = "<group>"; };
+		E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIInputAccessoryView.xib; sourceTree = "<group>"; };
 		E9C5D5CD20588A0800C42821 /* UICheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICheckbox.swift; sourceTree = "<group>"; };
 		E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriorityBox.swift; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
@@ -194,9 +196,8 @@
 				E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */,
 				E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */,
 				E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */,
-				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
-				E972ADB820618A3D00B26980 /* SessionDetailedController.swift */,
-				E972ADB920618A3D00B26980 /* SessionDetailedController.xib */,
+				E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */,
+				E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */,
 				E972ADBE20618EC500B26980 /* Temp.xib */,
 			);
 			name = "Custom Views";
@@ -302,6 +303,8 @@
 				E98064602054E5E100073B33 /* Assigned Editor */,
 				E961D6662065F62800AD6EFC /* MoveViewController.swift */,
 				E96DC33A206B35CF000BB60A /* Move.storyboard */,
+				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
+				E972ADB820618A3D00B26980 /* SessionDetailedController.swift */,
 			);
 			name = Organize;
 			sourceTree = "<group>";
@@ -441,13 +444,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E972ADBB20618A3D00B26980 /* SessionDetailedController.xib in Resources */,
 				E972ADBF20618EC500B26980 /* Temp.xib in Resources */,
 				E97DF441205305F80050EA21 /* LaunchScreen.storyboard in Resources */,
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
 				E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */,
+				E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */,
 				E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */,
 				E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */,
 				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
@@ -498,6 +501,7 @@
 				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,
 				E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
+				E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
 				E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,

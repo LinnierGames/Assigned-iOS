@@ -11,7 +11,7 @@ import CoreData
 
 class SessionDetailedViewModel {
     
-    private var sessionValue: Session!
+    var session: Session!
     
     lazy var context: NSManagedObjectContext = {
         guard let context = session.managedObjectContext else {
@@ -20,19 +20,6 @@ class SessionDetailedViewModel {
         
         return context
     }()
-    
-    var session: Session {
-        get {
-            if sessionValue == nil {
-//                sessionValue = Session(name: <#T##String#>, date: <#T##Date#>, duration: <#T##TimeInterval#>, assignment: <#T##Assignment?#>, in: <#T##NSManagedObjectContext#>)
-            }
-            
-            return sessionValue
-        }
-        set {
-            sessionValue = newValue
-        }
-    }
 }
 
 extension SessionDetailedViewModel {
