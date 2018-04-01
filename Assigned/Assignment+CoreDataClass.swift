@@ -24,7 +24,7 @@ public class Assignment: DirectoryInfo {
         let newAssignment = Assignment(context: context)
         
         newAssignment.title = title
-        newAssignment.effort = effort
+        newAssignment.duration = effort
         newAssignment.deadline = deadline
         newAssignment.priorityValue = Int16(priority.rawValue)
         newAssignment.notes = notes
@@ -71,16 +71,42 @@ public class Assignment: DirectoryInfo {
     }
     
     /**
-     effortValue is stored in seconds, thus this computed var, effort, will return
-     effortValue in hours
+     durationValue is stored in seconds, thus this computed var, effort, will return
+     durationValue in hours
      */
-    var effort: Float {
+    var duration: Float {
         set {
-            self.effortValue = TimeInterval(newValue) * CTDateComponentHour
+            self.durationValue = TimeInterval(newValue) * CTDateComponentHour
         }
         get {
-            return Float(self.effortValue / CTDateComponentHour)
+            return Float(self.durationValue / CTDateComponentHour)
         }
+    }
+    
+    /** number of seconds of completed sessions in the past of today's time */
+    var completedDurationOfSessions: TimeInterval {
+        if let sessions = self.sessions?.allObjects as! [Session]? {
+            return sessions.reduce(0, { $0 + $1.completedDuration })
+        } else {
+            return 0
+        }
+    }
+    
+    /** number of seconds of planned sessions in the future of today's time */
+    var plannedDurationOfSessions: TimeInterval {
+        if let sessions = self.sessions?.allObjects as! [Session]? {
+            return sessions.reduce(0, { $0 + $1.plannedDuration })
+        } else {
+            return 0
+        }
+    }
+    
+    /** number of seconds of unplanned sessions */
+    var unplannedDuration: TimeInterval {
+        return max(
+            0,
+            self.durationValue - ( self.completedDurationOfSessions + self.plannedDurationOfSessions )
+        )
     }
     
     public override var description: String {

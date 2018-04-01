@@ -23,7 +23,9 @@ extension Assignment {
     }
 
     @NSManaged public var deadline: Date?
-    @NSManaged public var effortValue: Double
+    
+    /** stored in seconds */
+    @NSManaged public var durationValue: Double
     @NSManaged public var isCompleted: Bool
     @NSManaged public var priorityValue: Int16
     @NSManaged public var notes: String?

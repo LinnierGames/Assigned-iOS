@@ -145,8 +145,6 @@ class AssignmentViewController: UIViewController {
     private func updateUI(animated: Bool = false) {
         let animationDuration = 0.35
 
-        //TODO: update visiblity of the slide down to dismiss
-
         if editingMode.isCreating {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = false
@@ -209,7 +207,7 @@ class AssignmentViewController: UIViewController {
             } else {
                 showEffortSliderAnimations()
             }
-            effortSliderValue = assignment.effort
+            effortSliderValue = assignment.duration
             labelEffort.text = viewModel.effortTitle
 
         // reading only
@@ -224,10 +222,11 @@ class AssignmentViewController: UIViewController {
             }
 
             //TODO: update the effort chart
-//            viewEffortCompleted.duration =
-//            viewEffortPlanned.duration =
-//            viewEffortUnplanned.duration =
-            viewEffortTotal.duration = TimeInterval(assignment.effortValue)
+            viewEffortCompleted.duration = assignment.completedDurationOfSessions
+            viewEffortPlanned.duration = assignment.plannedDurationOfSessions
+            viewEffortUnplanned.duration = assignment.unplannedDuration
+            print(assignment.completedDurationOfSessions, assignment.plannedDurationOfSessions, assignment.unplannedDuration, assignment.durationValue)
+            viewEffortTotal.duration = assignment.durationValue
             labelEffort.text = nil
         }
 
@@ -490,7 +489,7 @@ class AssignmentViewController: UIViewController {
             
             // update slider and assignment
             sliderEffort.value = newSliderValue
-            assignment.effort = newSliderValue
+            assignment.duration = newSliderValue
             labelEffort.text = viewModel.effortTitle
         }
         get {

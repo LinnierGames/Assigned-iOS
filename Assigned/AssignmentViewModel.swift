@@ -128,10 +128,10 @@ extension AssignmentViewModel {
     }
 
     var effortTitle: String {
-        if assignment.effortValue == 0 {
+        if assignment.durationValue == 0 {
             return "no effort"
         } else {
-            let nHours = TimeInterval(assignment.effortValue)
+            let nHours = TimeInterval(assignment.durationValue)
 
             return String(timeInterval: nHours, units: .day, .hour, .minute)
         }

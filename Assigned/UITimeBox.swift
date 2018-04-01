@@ -10,9 +10,10 @@ import UIKit
 
 class UITimeBox: UIView {
     
+    /** legnth in seconds */
     public var duration: TimeInterval = 0.0 { didSet { self.updateUI() }}
     
-    public var calendarUnits: [Calendar.Component] = [.day, .hour, .minute]
+    public var calendarUnits: [Calendar.Component] = [.weekday, .day, .hour, .minute]
     
     // MARK: - RETURN VALUES
     

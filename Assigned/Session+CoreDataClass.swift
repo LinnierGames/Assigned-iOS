@@ -12,6 +12,22 @@ import CoreData
 
 @objc(Session)
 public class Session: NSManagedObject {
+        
+    convenience init(title: String?,
+                     startDate: Date,
+                     duration: TimeInterval = 1,
+                     assignment: Assignment,
+                     in context: NSManagedObjectContext) {
+        self.init(context: context)
+        
+        self.titleValue = title
+        self.startDate = startDate
+        self.duration = duration
+        
+        self.assignment = assignment
+    }
+    
+    // MARK: - RETURN VALUES
     
     /**
      <#Lorem ipsum dolor sit amet.#>
@@ -46,20 +62,50 @@ public class Session: NSManagedObject {
             return self.durationValue / CTDateComponentHour
         }
     }
-        
-    convenience init(title: String?,
-                     startDate: Date,
-                     duration: TimeInterval = 1,
-                     assignment: Assignment,
-                     in context: NSManagedObjectContext) {
-        self.init(context: context)
-        
-        self.titleValue = title
-        self.startDate = startDate
-        self.duration = duration
-        
-        self.assignment = assignment
+    
+    /** addes the duration, in seconds, to the start date to return the end date */
+    public var endDate: Date {
+        return self.startDate.addingTimeInterval(self.durationValue)
     }
+    
+    /** true if the session's end date is behind the today's time */
+    var isA_CompletedSession: Bool {
+        return self.endDate < Date()
+    }
+    
+    /** <#Lorem ipsum dolor sit amet.#> */
+    var completedDuration: TimeInterval {
+        if isA_CompletedSession {
+            return self.durationValue
+        } else {
+            let todaysDate = Date()
+            
+            // return how long the session has been in progress since the startDate and today's time
+            return max(0, todaysDate.timeIntervalSince(self.startDate))
+        }
+    }
+    
+    /** true if the session's start date is ahead of today's time */
+    var isA_PlannedSession: Bool {
+        return self.startDate > Date()
+    }
+    
+    var plannedDuration: TimeInterval {
+        if isA_PlannedSession {
+            return self.durationValue
+        } else {
+            let todaysDate = Date()
+            
+            // return how long much more is remaining from today's time till the end date
+            return max(0, self.endDate.timeIntervalSince(todaysDate))
+        }
+    }
+    
+    // MARK: - VOID METHODS
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
 }
 
 extension NSFetchedResultsController {
