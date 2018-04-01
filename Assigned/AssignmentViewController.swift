@@ -224,7 +224,16 @@ class AssignmentViewController: UIViewController {
             //TODO: update the effort chart
             viewEffortCompleted.duration = assignment.completedDurationOfSessions
             viewEffortPlanned.duration = assignment.plannedDurationOfSessions
-            viewEffortUnplanned.duration = assignment.unplannedDuration
+            
+            // Hide the unplanned section if no duration is set
+            if assignment.duration <= 0 {
+                viewEffortUnplanned.isHidden = true
+                viewEffortTotal.isHidden = true
+            } else {
+                viewEffortUnplanned.isHidden = false
+                viewEffortTotal.isHidden = false
+                viewEffortUnplanned.duration = assignment.unplannedDuration
+            }
             print(assignment.completedDurationOfSessions, assignment.plannedDurationOfSessions, assignment.unplannedDuration, assignment.durationValue)
             viewEffortTotal.duration = assignment.durationValue
             labelEffort.text = nil

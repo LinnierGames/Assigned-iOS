@@ -15,6 +15,19 @@ class UITimeBox: UIView {
     
     public var calendarUnits: [Calendar.Component] = [.weekday, .day, .hour, .minute]
     
+    let digits: (Character) -> (Bool) = { aCharacter in
+        return Int(String(aCharacter)) != nil
+    }
+    
+    lazy var digitsAttributes: [NSAttributedStringKey: Any] = {
+        let currentLabelSize = self.label.font.pointSize
+        
+        return [
+            //TODO: dynamic font
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: currentLabelSize * 1.75, weight: UIFont.Weight.bold)
+        ]
+    }()
+
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
@@ -22,26 +35,26 @@ class UITimeBox: UIView {
     private func updateUI() {
         let options = String.TimeIntervalOptions(
             units: calendarUnits,
-            unitWindowSize: 1,
+            unitWindowSize: 2,
             textInterpolation: { (count, descriptor) -> (String) in
-                return "\(count)$\(descriptor.short!)"
-        }
+                return "\(count)\(descriptor.short!)"
+            }
         )
         
-        let combinedTextDuration = String(timeInterval: duration, options: options).split(separator: "$")
-        if combinedTextDuration.count == 2 {
-            let durationNumber = combinedTextDuration[0]
-            let unitText = combinedTextDuration[1]
-
-            labelMajor.text = String(durationNumber)
-            labelMinor.text = String(unitText)
-        }
+        let textDuration = String(timeInterval: duration, options: options)
+        label.attributedText = NSAttributedString(string: textDuration, for: digits, with: digitsAttributes)
+//        if combinedTextDuration.count == 2 {
+//            let durationNumber = combinedTextDuration[0]
+//            let unitText = combinedTextDuration[1]
+//
+//            labelMajor.text = String(durationNumber)
+//            labelMinor.text = String(unitText)
+//        }
     }
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var labelMajor: UILabel!
-    @IBOutlet weak var labelMinor: UILabel!
+    @IBOutlet weak var label: UILabel!
     
     @IBOutlet weak var labelCaption: UILabel!
     
