@@ -31,8 +31,11 @@ class AssignmentNotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        textviewNotes.inputAccessoryView = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
+        let inputView = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
+        inputView.addActionToRightButton(action: { [unowned self] (_) in
+            self.textviewNotes.resignFirstResponder()
+        })
+        textviewNotes.inputAccessoryView = inputView
     }
     
     override func viewWillAppear(_ animated: Bool) {

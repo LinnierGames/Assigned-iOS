@@ -22,22 +22,16 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dF2-ND-u51">
                             <rect key="frame" x="0.0" y="0.0" width="45" height="30"/>
                             <state key="normal" title="button"/>
-                            <connections>
-                                <action selector="pressLeftButton:" destination="gnG-Sd-pkO" eventType="touchUpInside" id="NMK-kz-nCu"/>
-                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6X-1u-fGy">
-                            <rect key="frame" x="154.5" y="0.0" width="36.5" height="30"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
+                            <rect key="frame" x="154.5" y="0.0" width="36" height="30"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nHL-I1-hdD">
                             <rect key="frame" x="300" y="0.0" width="45" height="30"/>
                             <state key="normal" title="button"/>
-                            <connections>
-                                <action selector="pressRightButton:" destination="gnG-Sd-pkO" eventType="touchUpInside" id="XVV-HK-qB7"/>
-                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -51,8 +45,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="BVw-rX-drA"/>
             <connections>
-                <outlet property="buttonLeft" destination="dF2-ND-u51" id="qC6-z3-MoX"/>
                 <outlet property="labelCaption" destination="Q6X-1u-fGy" id="HCt-1t-i6T"/>
+                <outlet property="leftButton" destination="dF2-ND-u51" id="qC6-z3-MoX"/>
                 <outlet property="rightButton" destination="nHL-I1-hdD" id="CEb-8e-VeB"/>
             </connections>
             <point key="canvasLocation" x="-88" y="-16"/>
