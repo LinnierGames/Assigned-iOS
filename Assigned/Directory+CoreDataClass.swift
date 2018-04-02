@@ -21,9 +21,16 @@ public class Directory: NSManagedObject {
             context = directory.managedObjectContext!
         }
         
-        if let folder = 
         
-        self.init(for: directoryInfo, parent: directory.parent, in: context)
+        self.init(for: directory.info.copy() as! DirectoryInfo, parent: directory.parent, in: context)
+        
+//        if let folder = directory.info as? Folder {
+//            self.init(for: folder, parent: directory.parent, in: context)
+//        } else if let assignment = directory.info as? Assignment {
+//            self.init(for: assignment, parent: directory.parent, in: context)
+//        } else {
+//            self.init(for: directory.info, parent: directory.parent, in: context)
+//        }
     }
     
     convenience init(for directoryInfo: DirectoryInfo, parent: Directory?, in context: NSManagedObjectContext) {

@@ -163,7 +163,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 })
                 
                 self.directoryManager.duplicate(directories: directoriesToCopy, to: self.currentDirectory)
-                self.viewModel.save()
+//                self.viewModel.save()
             }
             .addButton(title: "Move to..") { (action) in
                 

@@ -40,6 +40,8 @@ public class DirectoryInfo: NSManagedObject {
         return children
     }
     
+    
+    
     public override var description: String {
         return "Directory Info"
     }

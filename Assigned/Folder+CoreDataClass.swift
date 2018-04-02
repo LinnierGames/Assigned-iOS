@@ -10,12 +10,20 @@ import Foundation
 import CoreData
 
 @objc(Folder)
-public class Folder: DirectoryInfo {
+public class Folder: DirectoryInfo, NSCopying {
     
     convenience init(title: String, in context: NSManagedObjectContext) {
         self.init(context: context)
         
         self.title = title
+    }
+    
+    public func copy(with zone: NSZone? = nil) -> Any {
+        var copied = super.copy() as! Folder
+        
+        
+        var parent = DirectoryInfo()
+        var child: Folder = parent as! Folder
     }
     
     public override var description: String {

@@ -10,8 +10,76 @@
 import Foundation
 import CoreData
 
+protocol Copyable: class {
+    func copy() -> Self
+    init(copy: Self)
+}
+
+class Creature: Copyable {
+    
+    var creatureType: String
+    var size: Int = 0
+    
+    func copy() -> Self {
+        return type(of: self).init(copy: self)
+    }
+    
+    required init(copy: Creature) {
+        self.size = copy.size
+        self.creatureType = copy.creatureType
+    }
+    
+    init(type: String) {
+        self.creatureType = type
+        self.size = 0
+    }
+}
+
+class Human: Creature {
+    var isMale: Bool
+    
+    override func copy() -> Self {
+        return type(of: self).init(copy: self)
+    }
+    
+    required init(copy: Creature) {
+        fatalError("init(copy:) has not been implemented")
+    }
+    
+    required init(copy: Human) {
+        self.isMale = copy.isMale
+        super.init(copy: copy)
+    }
+    
+    init(isMale: Bool) {
+        self.isMale = isMale
+        
+        super.init(type: "Human")
+    }
+}
+
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
+    
+    convenience init(title: String, effort: Float,
+             deadline: Date? = nil,
+             priority: Assignment.Priorities = .None,
+             notes: String = "",
+             isCompleted: Bool = false,
+             parent directory: Directory? = nil,
+             in context: NSManagedObjectContext) {
+        
+        self.init(context: context)
+        
+        self.title = title
+        self.duration = effort
+        self.deadline = deadline
+        self.priorityValue = Int16(priority.rawValue)
+        self.notes = notes
+        self.isCompleted = isCompleted
+        
+        _ = Directory.createDirectory(for: self, parent: directory, in: context)
+    }
     
     //TODO: remove "init" helper
     static func createAssignment(title: String, effort: Float,
