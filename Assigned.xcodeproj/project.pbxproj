@@ -41,6 +41,7 @@
 		E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */; };
 		E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */; };
 		E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */; };
+		E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5B25B2072715600621B8C /* DirectoryManager.swift */; };
 		E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CD20588A0800C42821 /* UICheckbox.swift */; };
 		E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
@@ -118,6 +119,7 @@
 		E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UITaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
 		E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputAccessoryView.swift; sourceTree = "<group>"; };
 		E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIInputAccessoryView.xib; sourceTree = "<group>"; };
+		E9C5B25B2072715600621B8C /* DirectoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryManager.swift; sourceTree = "<group>"; };
 		E9C5D5CD20588A0800C42821 /* UICheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICheckbox.swift; sourceTree = "<group>"; };
 		E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriorityBox.swift; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				E97DF46620530BCF0050EA21 /* Core Data */,
 				E9CA1C0F2053144100B8936E /* PersistenceStack.swift */,
+				E9C5B25B2072715600621B8C /* DirectoryManager.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
+				E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */,
 				E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */,
 				E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,

@@ -13,6 +13,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     private var viewModel = OrganizeViewModel()
     
+    private var directoryManager = DirectoryManager()
+    
     var currentDirectory: Directory? {
         get {
             return self.viewModel.currentDirectory
@@ -78,6 +80,17 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         )
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        buttonAdd.isEnabled = editing.inverse
+        if editing {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(OrganizeTableViewController.pressActionTools(_:)))
+        } else {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "item", style: .plain, target: self, action: #selector(OrganizeTableViewController.pressProfile(_:)))
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
@@ -122,21 +135,47 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     // MARK: Table View Delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let directory = fetchedResultsController.directory(at: indexPath)
-        if directory.isFolder {
-            self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
-        } else if directory.isAssignment {
-             self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedAssignment, sender: indexPath)
+        if tableView.isEditing == false {
+            let directory = fetchedResultsController.directory(at: indexPath)
+            if directory.isFolder {
+                self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
+            } else if directory.isAssignment {
+                self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedAssignment, sender: indexPath)
+            }
         }
     }
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var buttonProfile: UIBarButtonItem!
+    @IBAction func pressProfile(_ sender: Any) {
+        
+    }
+    
+    @IBAction func pressActionTools(_ sender: Any) {
+        UIAlertController(title: nil, message: "select an action", preferredStyle: .actionSheet)
+            .addButton(title: "Duplicate") { (action) in
+                
+            }
+            .addButton(title: "Move to..") { (action) in
+                
+            }
+            .addButton(title: "Delete..", style: .destructive) { (action) in
+                
+            }
+            .addCancelButton()
+            .present(in: self)
+        
+    }
+    
+    @IBOutlet weak var buttonEdit: UIBarButtonItem!
+    
+    @IBOutlet weak var buttonAdd: UIBarButtonItem!
     @IBAction func pressAdd(_ sender: Any) {
         /** <#Lorem ipsum dolor sit amet.#> */
         func add<T>(_ type: T.Type) where T: DirectoryInfo {
             let alertAddTitle = UIAlertController(
-                title: String(describing: type),
+                title: type.description(),
                 message: "enter a title",
                 preferredStyle: .alert
             )
@@ -171,9 +210,6 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
     }
     
-    @IBOutlet weak var buttonProfile: UIBarButtonItem!
-    @IBAction func pressProfile(_ sender: Any) { }
-    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
@@ -192,6 +228,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         tableView.rowHeight = 44
         
         saveHandler = viewModel.save
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewWillAppear(_ animated: Bool) {
