@@ -13,12 +13,28 @@ import CoreData
 @objc(Directory)
 public class Directory: NSManagedObject {
     
-    convenience init(in context: NSManagedObjectContext) {
-        self.init(context: context)
+    convenience init(copy directory: Directory, in contextValue: NSManagedObjectContext? = nil) {
+        let context: NSManagedObjectContext
+        if let newContext = contextValue {
+            context = newContext
+        } else {
+            context = directory.managedObjectContext!
+        }
+        
+        if let folder = 
+        
+        self.init(for: directoryInfo, parent: directory.parent, in: context)
     }
     
+    convenience init(for directoryInfo: DirectoryInfo, parent: Directory?, in context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.info = directoryInfo
+        self.parent = parent
+    }
+    
+    //TODO: remove "init" helper
     static func createDirectory(for directoryInfo: DirectoryInfo, parent: Directory?, in context: NSManagedObjectContext) -> Directory {
-        let newDirectory = Directory(in: context)
+        let newDirectory = Directory(context: context)
         newDirectory.info = directoryInfo
         newDirectory.parent = parent
         

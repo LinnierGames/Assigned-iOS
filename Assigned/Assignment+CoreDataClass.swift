@@ -13,6 +13,7 @@ import CoreData
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
     
+    //TODO: remove "init" helper
     static func createAssignment(title: String, effort: Float,
                                  deadline: Date? = nil,
                                  priority: Assignment.Priorities = .None,

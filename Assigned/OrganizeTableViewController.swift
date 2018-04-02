@@ -154,8 +154,16 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     @IBAction func pressActionTools(_ sender: Any) {
         UIAlertController(title: nil, message: "select an action", preferredStyle: .actionSheet)
-            .addButton(title: "Duplicate") { (action) in
+            .addButton(title: "Duplicate") { [unowned self] (action) in
+                guard let selectedIndexPaths = self.tableView.indexPathsForSelectedRows else {
+                    return //no rows selected TODO: disable the action tool button if none are selected
+                }
+                let directoriesToCopy = selectedIndexPaths.map({ [unowned self]  (indexPath) -> Directory in
+                    return self.fetchedResultsController.directory(at: indexPath)
+                })
                 
+                self.directoryManager.duplicate(directories: directoriesToCopy, to: self.currentDirectory)
+                self.viewModel.save()
             }
             .addButton(title: "Move to..") { (action) in
                 
