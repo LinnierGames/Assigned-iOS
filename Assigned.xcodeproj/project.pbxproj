@@ -17,6 +17,7 @@
 		E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226C42073D0D500A021B4 /* RootTabBarController.swift */; };
 		E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226C62073D43E00A021B4 /* PlanViewController.swift */; };
 		E97226C92073D45B00A021B4 /* Plan.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97226C82073D45B00A021B4 /* Plan.storyboard */; };
+		E97226CE2073E1D500A021B4 /* TaskPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226CD2073E1D500A021B4 /* TaskPanelViewController.swift */; };
 		E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedController.swift */; };
 		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
 		E972ADBF20618EC500B26980 /* Temp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADBE20618EC500B26980 /* Temp.xib */; };
@@ -93,6 +94,7 @@
 		E97226C42073D0D500A021B4 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		E97226C62073D43E00A021B4 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
 		E97226C82073D45B00A021B4 /* Plan.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Plan.storyboard; sourceTree = "<group>"; };
+		E97226CD2073E1D500A021B4 /* TaskPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPanelViewController.swift; sourceTree = "<group>"; };
 		E972ADB820618A3D00B26980 /* SessionDetailedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedController.swift; sourceTree = "<group>"; };
 		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
 		E972ADBE20618EC500B26980 /* Temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Temp.xib; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				E97226C62073D43E00A021B4 /* PlanViewController.swift */,
+				E97226CD2073E1D500A021B4 /* TaskPanelViewController.swift */,
 				E97226C82073D45B00A021B4 /* Plan.storyboard */,
 			);
 			name = Plan;
@@ -524,6 +527,7 @@
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */,
+				E97226CE2073E1D500A021B4 /* TaskPanelViewController.swift in Sources */,
 				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */,
