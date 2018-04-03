@@ -34,7 +34,7 @@ struct DirectoryManager {
     func duplicate(directories: [Directory], to destination: Directory?) -> [Directory] {
         var newDirectories = [Directory]()
         for aDirectoryToCopy in directories {
-            let newDirectory = Directory(copy: aDirectoryToCopy)
+            let newDirectory = aDirectoryToCopy.copying()
             newDirectories.append(newDirectory)
         }
         

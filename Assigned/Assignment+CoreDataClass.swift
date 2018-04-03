@@ -10,54 +10,6 @@
 import Foundation
 import CoreData
 
-protocol Copyable: class {
-    func copy() -> Self
-    init(copy: Self)
-}
-
-class Creature: Copyable {
-    
-    var creatureType: String
-    var size: Int = 0
-    
-    func copy() -> Self {
-        return type(of: self).init(copy: self)
-    }
-    
-    required init(copy: Creature) {
-        self.size = copy.size
-        self.creatureType = copy.creatureType
-    }
-    
-    init(type: String) {
-        self.creatureType = type
-        self.size = 0
-    }
-}
-
-class Human: Creature {
-    var isMale: Bool
-    
-    override func copy() -> Self {
-        return type(of: self).init(copy: self)
-    }
-    
-    required init(copy: Creature) {
-        fatalError("init(copy:) has not been implemented")
-    }
-    
-    required init(copy: Human) {
-        self.isMale = copy.isMale
-        super.init(copy: copy)
-    }
-    
-    init(isMale: Bool) {
-        self.isMale = isMale
-        
-        super.init(type: "Human")
-    }
-}
-
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
     
@@ -69,7 +21,7 @@ public class Assignment: DirectoryInfo {
              parent directory: Directory? = nil,
              in context: NSManagedObjectContext) {
         
-        self.init(context: context)
+        self.init(in: context)
         
         self.title = title
         self.duration = effort
@@ -81,6 +33,23 @@ public class Assignment: DirectoryInfo {
         _ = Directory.createDirectory(for: self, parent: directory, in: context)
     }
     
+    public override func copying() -> Assignment {
+        let copied = super.copying() as! Assignment
+        
+        // Copy self's properties to copied
+        copied.deadline = self.deadline
+        copied.durationValue = self.durationValue
+        copied.isCompleted = self.isCompleted
+        copied.priorityValue = self.priorityValue
+        copied.notes = self.notes
+        
+        //TODO: copy sessions and tasks
+//        sessions
+//        tasks
+        
+        return copied
+    }
+    
     //TODO: remove "init" helper
     static func createAssignment(title: String, effort: Float,
                                  deadline: Date? = nil,
@@ -90,7 +59,7 @@ public class Assignment: DirectoryInfo {
                                  parent directory: Directory? = nil,
                                  in context: NSManagedObjectContext) -> Assignment {
         
-        let newAssignment = Assignment(context: context)
+        let newAssignment = Assignment(in: context)
         
         newAssignment.title = title
         newAssignment.duration = effort
