@@ -29,8 +29,23 @@ class PlanViewController: UIViewController {
         }
     }
     
-    @objc private func didPanTaskPanel(_ sender: Any) {
-        print("AAAAAA")
+    private var touchOffset: CGFloat?
+    @objc private func didPanTaskPanel(_ gesture: UIPanGestureRecognizer) {
+        switch gesture.state {
+        case .began:
+            let location = gesture.location(in: self.view)
+            touchOffset = location.y - viewTaskPanel.frame.origin.y
+        case .changed:
+            guard let touchOffset = self.touchOffset else {
+                return assertionFailure("No touch offset was made in the .began state of this gesture")
+            }
+            let newPoint = gesture.location(in: self.view)
+            viewTaskPanel.frame.origin.y = newPoint.y - touchOffset
+        case .ended:
+            break
+        default:
+            break
+        }
     }
     
     // MARK: - IBACTIONS
@@ -39,6 +54,8 @@ class PlanViewController: UIViewController {
     @IBAction func pressFinish(_ sender: Any) {
         self.presentingViewController!.dismiss(animated: true)
     }
+    
+    @IBOutlet weak var viewTaskPanel: UIView!
     
     // MARK: - LIFE CYCLE
     

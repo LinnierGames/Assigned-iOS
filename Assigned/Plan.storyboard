@@ -32,6 +32,12 @@
                                     <action selector="pressFinish:" destination="mAr-hZ-3af" eventType="touchUpInside" id="Edv-MI-3a3"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayx-f1-0VL">
+                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="YRW-3Z-c38"/>
+                                </items>
+                            </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CP8-i5-z5p">
                                 <rect key="frame" x="0.0" y="568" width="375" height="637"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -39,12 +45,6 @@
                                     <segue destination="hHZ-6t-x1H" kind="embed" identifier="embed task panel" id="rhn-5C-MG4"/>
                                 </connections>
                             </containerView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayx-f1-0VL">
-                                <rect key="frame" x="0.0" y="60" width="375" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="YRW-3Z-c38"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -59,6 +59,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonFinish" destination="Hm5-t7-nT8" id="9MX-mD-vm7"/>
+                        <outlet property="viewTaskPanel" destination="CP8-i5-z5p" id="CwQ-Ar-DXf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qg2-TX-FQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,7 +77,7 @@
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="61C-JG-MgR"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="25"/>
                             </userDefinedRuntimeAttribute>
