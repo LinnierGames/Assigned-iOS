@@ -40,6 +40,20 @@ public class Directory: NSManagedObject {
         
         return copiedDirectory
     }
+    
+    func isA_DescendantOf(directory: Directory) -> Bool {
+        var currentDirectory = self.parent
+        
+        while currentDirectory != nil {
+            if currentDirectory!.objectID == directory.objectID {
+                return true
+            }
+            
+            currentDirectory = currentDirectory!.parent
+        }
+        
+        return false
+    }
 }
 
 extension NSFetchedResultsController {

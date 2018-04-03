@@ -282,6 +282,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
 
 extension OrganizeTableViewController: MoveViewControllerDelegate {
     func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?) {
+        self.viewModel.save()
         self.setEditing(false, animated: true)
     }
 }

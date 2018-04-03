@@ -95,6 +95,16 @@ class MoveViewController: UITableViewController {
             let folder = depthFolder.folder
             
             cell.textLabel!.text = folder.title
+            
+            if items.contains(where: { (directory) -> Bool in
+                return directory.objectID == folder.directory.objectID || folder.directory.isA_DescendantOf(directory: directory)
+            }) {
+                cell.textLabel?.textColor = UIColor.disabledGray
+                cell.isUserInteractionEnabled = false
+            } else {
+                cell.textLabel?.textColor = UIColor.black
+                cell.isUserInteractionEnabled = true
+            }
 //            if item.parentDirectory?.objectID == folder.directory.objectID {
 //                cell.detailTextLabel!.text = "current folder"
 //            }
