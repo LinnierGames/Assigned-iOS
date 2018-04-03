@@ -22,23 +22,4 @@ struct TaskPanelViewModel {
     var context: NSManagedObjectContext = {
         return PersistenceStack.shared.viewContext
     }()
-    
-    lazy var fetchedTasks: NSFetchedResultsController<Assignment> = {
-        let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
-        
-        let fetchedRequestController = NSFetchedResultsController<Assignment>(
-            fetchRequest: fetch,
-            managedObjectContext: self.context,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
-        
-        do {
-            try fetchedRequestController.performFetch()
-            fetchedRequestController.delegate = self.delegate
-        } catch let error {
-            assertionFailure(String(describing: error))
-        }
-        
-        return fetchedRequestController
-    }()
 }
