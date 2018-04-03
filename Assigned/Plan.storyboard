@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mAr-hZ-3af">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Plan View Controller-->
+        <scene sceneID="ioP-uk-aRJ">
+            <objects>
+                <viewController id="mAr-hZ-3af" customClass="PlanViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="oox-cc-Ae0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hm5-t7-nT8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <color key="backgroundColor" red="0.24966003465315245" green="0.80205902199529666" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="HfL-Ke-duy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <state key="normal" title="Finish">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressFinish:" destination="mAr-hZ-3af" eventType="touchUpInside" id="Edv-MI-3a3"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="trailing" secondItem="Hm5-t7-nT8" secondAttribute="trailing" id="3iu-FV-syg"/>
+                            <constraint firstItem="Hm5-t7-nT8" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="DzN-6z-QOF"/>
+                            <constraint firstItem="Hm5-t7-nT8" firstAttribute="top" secondItem="oox-cc-Ae0" secondAttribute="top" id="MaJ-sb-nF0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EaC-Jf-Zja"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonFinish" destination="Hm5-t7-nT8" id="9MX-mD-vm7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qg2-TX-FQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="157.59999999999999" y="229.83508245877064"/>
+        </scene>
+    </scenes>
+</document>
