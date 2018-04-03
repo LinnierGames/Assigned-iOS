@@ -26,10 +26,12 @@ public class Directory: NSManagedObject {
     }
     
     func copying() -> Directory {
-        let copied = type(of: self).init(in: self.managedObjectContext!)
+        let copiedInfo = self.info.copying()
+        let copied = copiedInfo.directory
         
-        // Copy self's properties to copied
-        copied.info = self.info.copying()
+        copied.parent = self.parent
+        //TODO: copy children
+        //        copied.children = self.children?.copy()
         
         return copied
     }
