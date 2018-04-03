@@ -39,6 +39,7 @@ class PlanViewController: UIViewController {
             guard let touchOffset = self.touchOffset else {
                 return assertionFailure("No touch offset was made in the .began state of this gesture")
             }
+            
             let newPoint = gesture.location(in: self.view)
             viewTaskPanel.frame.origin.y = newPoint.y - touchOffset
         case .ended:

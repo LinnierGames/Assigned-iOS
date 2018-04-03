@@ -73,13 +73,68 @@
                     <view key="view" contentMode="scaleToFill" id="HEE-W1-BKl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="637"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CcX-pj-KIZ">
+                                <rect key="frame" x="16" y="72" width="343" height="489"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Pw-Tq-mYu">
+                                    <size key="itemSize" width="343" height="48"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hHZ-6t-x1H" id="wwP-hY-F39"/>
+                                    <outlet property="delegate" destination="hHZ-6t-x1H" id="LWE-9L-Mnc"/>
+                                </connections>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold to create a new session" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA9-BI-IYB">
+                                <rect key="frame" x="8" y="28" width="359" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag" translatesAutoresizingMaskIntoConstraints="NO" id="vU5-tC-tm3">
+                                <rect key="frame" x="169.5" y="4" width="36" height="7"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="fmd-Rg-sMy"/>
+                                    <constraint firstAttribute="height" constant="7" id="iMP-fF-ptx"/>
+                                </constraints>
+                            </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
+                                <rect key="frame" x="16" y="577" width="343" height="29"/>
+                                <segments>
+                                    <segment title="Selected Day"/>
+                                    <segment title="All Tasks"/>
+                                    <segment title=""/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeFilter:" destination="hHZ-6t-x1H" eventType="valueChanged" id="giV-ja-Vp2"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
                         <color key="backgroundColor" red="0.99942404029999998" green="0.98016564919705851" blue="0.90584416719048444" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="top" secondItem="CcX-pj-KIZ" secondAttribute="bottom" constant="16" id="159-lt-5nn"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="32" id="4mM-2S-hRU"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="CcX-pj-KIZ" secondAttribute="trailing" constant="16" id="7vr-ut-UFy"/>
+                            <constraint firstItem="CcX-pj-KIZ" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="ORk-4O-lE7"/>
+                            <constraint firstItem="vU5-tC-tm3" firstAttribute="centerX" secondItem="HEE-W1-BKl" secondAttribute="centerX" id="Ogr-ZZ-sA9"/>
+                            <constraint firstItem="vU5-tC-tm3" firstAttribute="top" secondItem="HEE-W1-BKl" secondAttribute="top" constant="4" id="WuZ-9V-8Sd"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="TA9-BI-IYB" secondAttribute="trailing" constant="8" id="Wxc-dI-arP"/>
+                            <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" constant="17" id="aFV-bh-1aZ"/>
+                            <constraint firstItem="CcX-pj-KIZ" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="24" id="fAp-tD-GfM"/>
+                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gcb-6z-CTe"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="16" id="gr3-Ox-uvt"/>
+                            <constraint firstItem="TA9-BI-IYB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="8" id="wsZ-fJ-ipt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="61C-JG-MgR"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="25"/>
+                                <integer key="value" value="12"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
                                 <real key="value" value="0.69999999999999996"/>
@@ -93,10 +148,17 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="CcX-pj-KIZ" id="nIO-J0-2OI"/>
+                        <outlet property="segmentFilter" destination="sTg-G5-Mqf" id="hUN-vu-fHW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKt-DV-z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="425"/>
+            <point key="canvasLocation" x="868" y="424.13793103448279"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="misc_drag" width="36" height="7"/>
+    </resources>
 </document>
