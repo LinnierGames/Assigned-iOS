@@ -27,13 +27,19 @@ public class Directory: NSManagedObject {
     
     func copying() -> Directory {
         let copiedInfo = self.info.copying()
-        let copied = copiedInfo.directory
+        let copiedDirectory = copiedInfo.directory
         
-        copied.parent = self.parent
+        copiedDirectory.parent = self.parent
+        
         //TODO: copy children
-        //        copied.children = self.children?.copy()
+        if let selfChildren = self.children {
+            for aChild in selfChildren {
+                let copiedChild = aChild.copying()
+                copiedDirectory.addToChildren(copiedChild)
+            }
+        }
         
-        return copied
+        return copiedDirectory
     }
 }
 

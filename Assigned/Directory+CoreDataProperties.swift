@@ -24,7 +24,7 @@ extension Directory {
         return NSFetchRequest<Directory>(entityName: "Directories")
     }
 
-    @NSManaged public var children: NSSet?
+    @NSManaged public var children: Set<Directory>?
     @NSManaged public var info: DirectoryInfo
     @NSManaged public var parent: Directory?
 
