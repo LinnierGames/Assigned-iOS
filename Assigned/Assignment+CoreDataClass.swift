@@ -13,24 +13,36 @@ import CoreData
 @objc(Assignment)
 public class Assignment: DirectoryInfo {
     
-    convenience init(title: String, effort: Float,
-             deadline: Date? = nil,
-             priority: Assignment.Priorities = .None,
-             notes: String = "",
-             isCompleted: Bool = false,
-             parent directory: Directory? = nil,
-             in context: NSManagedObjectContext) {
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    required public init(title: String, parent: Directory?, in context: NSManagedObjectContext) {
+        super.init(title: title, parent: parent, in: context)
         
-        self.init(in: context)
+        // Self's default values
+        self.duration = 0.0
+        self.deadline = nil
+        self.priority = .None
+        self.notes = nil
+        self.isCompleted = false
+    }
+    
+    init(title: String, effort: Float,
+                     deadline: Date? = nil,
+                     priority: Assignment.Priorities = .None,
+                     notes: String = "",
+                     isCompleted: Bool = false,
+                     parent directory: Directory?,
+                     in context: NSManagedObjectContext) {
         
-        self.title = title
+        super.init(title: title, parent: directory, in: context)
+        
         self.duration = effort
         self.deadline = deadline
         self.priorityValue = Int16(priority.rawValue)
         self.notes = notes
         self.isCompleted = isCompleted
-        
-        _ = Directory.createDirectory(for: self, parent: directory, in: context)
     }
     
     public override func copying() -> Assignment {
@@ -48,29 +60,6 @@ public class Assignment: DirectoryInfo {
 //        tasks
         
         return copied
-    }
-    
-    //TODO: remove "init" helper
-    static func createAssignment(title: String, effort: Float,
-                                 deadline: Date? = nil,
-                                 priority: Assignment.Priorities = .None,
-                                 notes: String = "",
-                                 isCompleted: Bool = false,
-                                 parent directory: Directory? = nil,
-                                 in context: NSManagedObjectContext) -> Assignment {
-        
-        let newAssignment = Assignment(in: context)
-        
-        newAssignment.title = title
-        newAssignment.duration = effort
-        newAssignment.deadline = deadline
-        newAssignment.priorityValue = Int16(priority.rawValue)
-        newAssignment.notes = notes
-        newAssignment.isCompleted = isCompleted
-        
-        _ = Directory.createDirectory(for: newAssignment, parent: directory, in: context)
-        
-        return newAssignment
     }
     
     enum Priorities: Int, Equatable, CustomStringConvertible {

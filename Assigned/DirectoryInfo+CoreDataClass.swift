@@ -13,12 +13,17 @@ import CoreData
 @objc(DirectoryInfo)
 public class DirectoryInfo: NSManagedObject {
     
-    public required init(in context: NSManagedObjectContext) {
+    public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
+    }
+    
+    required public init(title: String, parent: Directory?, in context: NSManagedObjectContext) {
+        super.init(entity: type(of: self).entity(), insertInto: context)
         
         // self's properties
-        // ...
-        
-        super.init(entity: DirectoryInfo.entity(), insertInto: context)
+        self.title = title
+        self.directory = Directory(in: context)
+        self.parentDirectory = parent
     }
     
     var parentInfo: DirectoryInfo? {
@@ -49,10 +54,10 @@ public class DirectoryInfo: NSManagedObject {
     }
     
     func copying() -> DirectoryInfo {
-        let copied = type(of: self).init(in: self.managedObjectContext!)
+        let copied = type(of: self).init(title: self.title, parent: self.parentDirectory, in: self.managedObjectContext!)
         
         // Copy self's properties to copied
-        copied.title = self.title
+        // ...
         
         return copied
     }

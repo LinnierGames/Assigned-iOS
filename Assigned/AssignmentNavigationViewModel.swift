@@ -135,7 +135,7 @@ extension AssignmentNavigationViewModel {
         self.updateContextToANewEditContext()
         
         //FIXME: get the parent directory
-        let newAssignment = Assignment.createAssignment(
+        let newAssignment = Assignment(
             title: "",
             effort: 0,
             parent: nil,

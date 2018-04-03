@@ -24,22 +24,20 @@ struct OrganizeViewModel {
     // MARK: - VOID METHODS
     
     func addAssignment(with title: String) {
-        let newAssignment = Assignment.createAssignment(title: title, effort: 0, in: managedObjectContext)
+        let newAssignment = Assignment(title: title, effort: 0, parent: self.currentDirectory, in: managedObjectContext)
         self.addAssignment(newAssignment)
     }
     
     func addAssignment(_ assignment: Assignment) {
-        _ = Directory.createDirectory(for: assignment, parent: self.currentDirectory, in: managedObjectContext)
         self.save()
     }
     
     func addFolder(with title: String) {
-        let newFolder = Folder(title: title, in: managedObjectContext)
+        let newFolder = Folder(title: title, parent: self.currentDirectory, in: managedObjectContext)
         self.addFolder(newFolder)
     }
     
     func addFolder(_ folder: Folder) {
-        _ = Directory.createDirectory(for: folder, parent: self.currentDirectory, in: managedObjectContext)
         self.save()
     }
     

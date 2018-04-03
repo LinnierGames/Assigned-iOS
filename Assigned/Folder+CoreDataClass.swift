@@ -12,12 +12,6 @@ import CoreData
 @objc(Folder)
 public class Folder: DirectoryInfo {
     
-    convenience init(title: String, in context: NSManagedObjectContext) {
-        self.init(in: context)
-        
-        self.title = title
-    }
-    
     public override func copying() -> Folder {
         let copied = super.copying() as! Folder
         
