@@ -13,6 +13,8 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
     // MARK: - RETURN VALUES
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
+        // is the selected view controller the AgendaViewController or OranizerTableViewController?
         if
             viewController is AgendaViewController == true ||
             (viewController is UINavigationController == true && (viewController as! UINavigationController).topViewController! is OrganizeTableViewController == true) {
@@ -22,6 +24,7 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
         // Present PlanViewController
         self.performSegue(withIdentifier: "show plan", sender: nil)
         
+        // Prevent selecting the placeholder UIViewController linked in the storyboard
         return false
     }
     
