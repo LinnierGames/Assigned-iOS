@@ -138,6 +138,19 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                     navVc.editingMode = .Create
                     navVc.assignmentParentDirectory = self.currentDirectory
                 }
+                
+            /** move vc */
+            case "show move":
+                guard
+                    let navVc = segue.destination as? UINavigationController,
+                    let moveVc = navVc.topViewController! as? MoveViewController,
+                    let selectedDirectories = sender as? [Directory]
+                    else {
+                        fatalError("MoveTableViewController was not set in storyboard")
+                }
+                
+                moveVc.items = selectedDirectories
+                moveVc.delegate = self
             default: break
             }
         }
@@ -172,9 +185,14 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 self.directoryManager.duplicate(directories: directoriesToCopy, to: self.currentDirectory)
                 self.viewModel.save()
+                self.setEditing(false, animated: true)
             }
             .addButton(title: "Move to..") { (action) in
+                guard let directoriesToMove = self.directoriesForSelectedIndexPaths() else {
+                    fatalError("action button should be disabled if no rows are selected")
+                }
                 
+                self.performSegue(withIdentifier: "show move", sender: directoriesToMove)
             }
             .addButton(title: "Delete..", style: .destructive) { (action) in
                 guard let directoriesToDelete = self.directoriesForSelectedIndexPaths() else {
@@ -183,6 +201,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 self.directoryManager.delete(directories: directoriesToDelete)
                 self.viewModel.save()
+                self.setEditing(false, animated: true)
             }
             .addCancelButton()
             .present(in: self)
@@ -259,6 +278,12 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         self.updateUI()
     }
 
+}
+
+extension OrganizeTableViewController: MoveViewControllerDelegate {
+    func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?) {
+        self.setEditing(false, animated: true)
+    }
 }
 
 extension UIStoryboardSegue {

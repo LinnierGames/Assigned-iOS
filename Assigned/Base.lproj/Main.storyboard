@@ -45,6 +45,7 @@
                         <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
                         <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
                         <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed assignment" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
+                        <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="TfI-52-Dm8"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -58,6 +59,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIH-bj-ZIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1922" y="-102"/>
+        </scene>
+        <!--Move-->
+        <scene sceneID="kwE-98-FiM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Move" id="yKp-vJ-YdW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CjZ-vz-ED0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1948" y="-35"/>
         </scene>
         <!--Assignment-->
         <scene sceneID="jzG-GQ-ua3">

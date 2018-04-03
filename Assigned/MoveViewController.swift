@@ -12,19 +12,19 @@ import UIKit
 import CoreData
 
 @objc protocol MoveViewControllerDelegate: class {
-    @objc optional func move(viewController: MoveViewController, didMove item: DirectoryInfo, to destination: DirectoryInfo?)
+    @objc optional func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?)
 }
 
 class MoveViewController: UITableViewController {
     
     /** this is the item that will have its parent updated to */
-    var item: DirectoryInfo!
+    var items: [Directory]!
     
     weak var delegate: MoveViewControllerDelegate?
     
     /** take the context from the given item */
     private var context: NSManagedObjectContext! {
-        return item.managedObjectContext
+        return items.first!.managedObjectContext
     }
     
     private struct DepthFolder {
@@ -85,9 +85,9 @@ class MoveViewController: UITableViewController {
         // Root destination
         if indexPath.row == 0 {
             cell.textLabel!.text = "Top Directory"
-            if item.parentDirectory == nil {
-                cell.detailTextLabel!.text = "current folder"
-            }
+//            if item.parentDirectory == nil {
+//                cell.detailTextLabel!.text = "current folder"
+//            }
             
         // All folders
         } else {
@@ -95,9 +95,9 @@ class MoveViewController: UITableViewController {
             let folder = depthFolder.folder
             
             cell.textLabel!.text = folder.title
-            if item.parentDirectory?.objectID == folder.directory.objectID {
-                cell.detailTextLabel!.text = "current folder"
-            }
+//            if item.parentDirectory?.objectID == folder.directory.objectID {
+//                cell.detailTextLabel!.text = "current folder"
+//            }
         }
         
         return cell
@@ -151,9 +151,11 @@ class MoveViewController: UITableViewController {
             
             newDestination = selectedDestination.directory
         }
-        item.parentDirectory = newDestination
+        for anItem in self.items {
+            anItem.parent = newDestination
+        }
         
-        self.delegate?.move?(viewController: self, didMove: item, to: newDestination?.info)
+        self.delegate?.move?(viewController: self, didMove: self.items, to: newDestination)
         self.presentingViewController!.dismiss(animated: true)
     }
     
@@ -166,7 +168,7 @@ class MoveViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard item != nil else {
+        guard items != nil else {
             return assertionFailure("item was not set when this view was presented")
         }
         

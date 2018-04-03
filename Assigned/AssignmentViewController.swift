@@ -70,7 +70,7 @@ class AssignmentViewController: UIViewController {
                         fatalError("MoveTableViewController was not set in storyboard")
                 }
 
-                moveVc.item = assignment
+                moveVc.items = [assignment.directory]
                 moveVc.delegate = self
             default: break
             }
@@ -623,6 +623,7 @@ class AssignmentViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension AssignmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.fetchedAssignmentTasks.fetchedObjects?.count ?? 0
@@ -643,7 +644,7 @@ extension AssignmentViewController: UITableViewDataSource {
     }
 }
 
-
+// MARK: - UITableViewDelegate
 extension AssignmentViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -657,6 +658,7 @@ extension AssignmentViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - NSFetchedResultsControllerDelegate
 extension AssignmentViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
@@ -690,6 +692,7 @@ extension AssignmentViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - UITaskTableViewCellDelegate
 extension AssignmentViewController: UITaskTableViewCellDelegate {
     func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool) {
         guard
@@ -709,6 +712,7 @@ extension AssignmentViewController: UITaskTableViewCellDelegate {
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension AssignmentViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -743,6 +747,7 @@ extension AssignmentViewController: UITextFieldDelegate {
 
 }
 
+// MARK: - UIScrollViewDelegate
 extension AssignmentViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dismissKeyboardOnly()
@@ -757,15 +762,16 @@ extension AssignmentViewController: UIScrollViewDelegate {
     }
 }
 
+// MARK: - MoveViewControllerDelegate
 extension AssignmentViewController: MoveViewControllerDelegate {
-
-    func move(viewController: MoveViewController, didMove item: DirectoryInfo, to destination: DirectoryInfo?) {
+    func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?) {
         //TODO: RxSwift
         buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
         dataModel.saveOnlyOnReading()
     }
 }
 
+// MARK: - UIStoryboardSegue
 extension UIStoryboardSegue {
     static var ShowDetailedAssignment = "show detailed assignment"
 }
