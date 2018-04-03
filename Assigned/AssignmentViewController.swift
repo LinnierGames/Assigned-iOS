@@ -722,6 +722,7 @@ extension AssignmentViewController: UITextFieldDelegate {
             // is empty?
             if let newTitle = textfieldAddTasks.text, newTitle != "" {
                 dataModel.addTask(with: newTitle)
+                dataModel.saveOnlyOnReading()
                 textfieldAddTasks.text = ""
             } else {
                 textfieldAddTasks.resignFirstResponder()

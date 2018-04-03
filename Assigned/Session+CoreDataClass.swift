@@ -13,7 +13,7 @@ import CoreData
 @objc(Session)
 public class Session: NSManagedObject {
         
-    convenience init(title: String?,
+    required public convenience init(title: String?,
                      startDate: Date,
                      duration: TimeInterval = 1,
                      assignment: Assignment,
@@ -25,6 +25,12 @@ public class Session: NSManagedObject {
         self.duration = duration
         
         self.assignment = assignment
+    }
+    
+    public func copying() -> Session {
+        let copiedSession = type(of: self).init(title: self.title, startDate: self.startDate, duration: self.duration, assignment: self.assignment, in: self.managedObjectContext!)
+        
+        return copiedSession
     }
     
     // MARK: - RETURN VALUES

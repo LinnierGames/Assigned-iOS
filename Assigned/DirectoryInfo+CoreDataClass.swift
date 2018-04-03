@@ -42,7 +42,7 @@ public class DirectoryInfo: NSManagedObject {
     }
     
     var children: [DirectoryInfo] {
-        guard let childrenDirectories = self.directory.children as! Set<Directory>? else {
+        guard let childrenDirectories = self.directory.children else {
             fatalError("could not cast children into a set of Directory")
         }
         

@@ -46,20 +46,30 @@ public class Assignment: DirectoryInfo {
     }
     
     public override func copying() -> Assignment {
-        let copied = super.copying() as! Assignment
+        let copiedAssignment = super.copying() as! Assignment
         
         // Copy self's properties to copied
-        copied.deadline = self.deadline
-        copied.durationValue = self.durationValue
-        copied.isCompleted = self.isCompleted
-        copied.priorityValue = self.priorityValue
-        copied.notes = self.notes
+        copiedAssignment.deadline = self.deadline
+        copiedAssignment.durationValue = self.durationValue
+        copiedAssignment.isCompleted = self.isCompleted
+        copiedAssignment.priorityValue = self.priorityValue
+        copiedAssignment.notes = self.notes
         
-        //TODO: copy sessions and tasks
-//        sessions
-//        tasks
+        if let selfSessions = self.sessions {
+            for aSession in selfSessions {
+                let copiedSession = aSession.copying()
+                copiedAssignment.addToSessions(copiedSession)
+            }
+        }
         
-        return copied
+        if let selfTasks = self.tasks {
+            for aTask in selfTasks {
+                let copiedTask = aTask.copying()
+                copiedAssignment.addToTasks(copiedTask)
+            }
+        }
+        
+        return copiedAssignment
     }
     
     enum Priorities: Int, Equatable, CustomStringConvertible {
@@ -112,7 +122,7 @@ public class Assignment: DirectoryInfo {
     
     /** number of seconds of completed sessions in the past of today's time */
     var completedDurationOfSessions: TimeInterval {
-        if let sessions = self.sessions?.allObjects as! [Session]? {
+        if let sessions = self.sessions {
             return sessions.reduce(0, { $0 + $1.completedDuration })
         } else {
             return 0
@@ -121,7 +131,7 @@ public class Assignment: DirectoryInfo {
     
     /** number of seconds of planned sessions in the future of today's time */
     var plannedDurationOfSessions: TimeInterval {
-        if let sessions = self.sessions?.allObjects as! [Session]? {
+        if let sessions = self.sessions {
             return sessions.reduce(0, { $0 + $1.plannedDuration })
         } else {
             return 0

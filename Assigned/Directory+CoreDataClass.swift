@@ -31,7 +31,6 @@ public class Directory: NSManagedObject {
         
         copiedDirectory.parent = self.parent
         
-        //TODO: copy children
         if let selfChildren = self.children {
             for aChild in selfChildren {
                 let copiedChild = aChild.copying()

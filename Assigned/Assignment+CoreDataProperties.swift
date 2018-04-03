@@ -29,8 +29,8 @@ extension Assignment {
     @NSManaged public var isCompleted: Bool
     @NSManaged public var priorityValue: Int16
     @NSManaged public var notes: String?
-    @NSManaged public var sessions: NSSet?
-    @NSManaged public var tasks: NSSet?
+    @NSManaged public var sessions: Set<Session>?
+    @NSManaged public var tasks: Set<Task>?
 
 }
 
