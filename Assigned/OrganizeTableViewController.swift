@@ -26,6 +26,17 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     // MARK: - RETURN VALUES
     
+    private func directoriesForSelectedIndexPaths() -> [Directory]? {
+        guard let selectedIndexPaths = self.tableView.indexPathsForSelectedRows else {
+            return nil
+        }
+        let directories = selectedIndexPaths.map({ [unowned self] (indexPath) -> Directory in
+            return self.fetchedResultsController.directory(at: indexPath)
+        })
+        
+        return directories
+    }
+    
     // MARK: Table View Data Source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,12 +166,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     @IBAction func pressActionTools(_ sender: Any) {
         UIAlertController(title: nil, message: "select an action", preferredStyle: .actionSheet)
             .addButton(title: "Duplicate") { [unowned self] (action) in
-                guard let selectedIndexPaths = self.tableView.indexPathsForSelectedRows else {
-                    return //no rows selected TODO: disable the action tool button if none are selected
+                guard let directoriesToCopy = self.directoriesForSelectedIndexPaths() else {
+                    fatalError("action button should be disabled if no rows are selected")
                 }
-                let directoriesToCopy = selectedIndexPaths.map({ [unowned self]  (indexPath) -> Directory in
-                    return self.fetchedResultsController.directory(at: indexPath)
-                })
                 
                 self.directoryManager.duplicate(directories: directoriesToCopy, to: self.currentDirectory)
                 self.viewModel.save()
@@ -169,7 +177,12 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
             }
             .addButton(title: "Delete..", style: .destructive) { (action) in
+                guard let directoriesToDelete = self.directoriesForSelectedIndexPaths() else {
+                    fatalError("action button should be disabled if no rows are selected")
+                }
                 
+                self.directoryManager.delete(directories: directoriesToDelete)
+                self.viewModel.save()
             }
             .addCancelButton()
             .present(in: self)
