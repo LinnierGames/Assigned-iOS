@@ -28,9 +28,19 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     
     // MARK: - VOID METHODS
     
+    func configure(_ assignment: Assignment) {
+        self.imagePriority.priority = assignment.priority
+        self.labelTitle.text = assignment.title
+        if let deadline = assignment.deadline {
+            self.labelSubtitle.text = String(timeInterval: Date().timeIntervalSince(deadline))
+        } else {
+            self.labelSubtitle.text = nil
+        }
+    }
+    
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var imagePriority: UIImageView!
+    @IBOutlet weak var imagePriority: UIPriorityBox!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
     

@@ -23,7 +23,7 @@ class PlanViewController: UIViewController {
                 }
                 
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlanViewController.didPanTaskPanel(_:)))
-                vc.view.addGestureRecognizer(panGesture)
+                vc.panGesture = panGesture
             default: break
             }
         }

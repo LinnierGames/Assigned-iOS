@@ -95,13 +95,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag" translatesAutoresizingMaskIntoConstraints="NO" id="vU5-tC-tm3">
-                                <rect key="frame" x="169.5" y="4" width="36" height="7"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Hx-KG-2gk">
+                                <rect key="frame" x="16" y="0.0" width="343" height="20"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag" translatesAutoresizingMaskIntoConstraints="NO" id="vU5-tC-tm3">
+                                        <rect key="frame" x="153.5" y="8" width="36" height="7"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="36" id="UCa-nP-Y2U"/>
+                                            <constraint firstAttribute="height" constant="7" id="lpC-aU-q71"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="fmd-Rg-sMy"/>
-                                    <constraint firstAttribute="height" constant="7" id="iMP-fF-ptx"/>
+                                    <constraint firstItem="vU5-tC-tm3" firstAttribute="centerX" secondItem="4Hx-KG-2gk" secondAttribute="centerX" id="2GE-Kc-Cn1"/>
+                                    <constraint firstItem="vU5-tC-tm3" firstAttribute="top" secondItem="4Hx-KG-2gk" secondAttribute="top" constant="8" id="54e-dF-2vh"/>
+                                    <constraint firstAttribute="height" constant="20" id="pD3-kc-pTp"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
                                 <rect key="frame" x="16" y="577" width="343" height="29"/>
                                 <segments>
@@ -121,14 +131,15 @@
                             <constraint firstItem="sTg-G5-Mqf" firstAttribute="top" secondItem="CcX-pj-KIZ" secondAttribute="bottom" constant="16" id="159-lt-5nn"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="32" id="4mM-2S-hRU"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="CcX-pj-KIZ" secondAttribute="trailing" constant="16" id="7vr-ut-UFy"/>
+                            <constraint firstItem="4Hx-KG-2gk" firstAttribute="top" secondItem="HEE-W1-BKl" secondAttribute="top" id="Ks6-We-zht"/>
                             <constraint firstItem="CcX-pj-KIZ" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="ORk-4O-lE7"/>
-                            <constraint firstItem="vU5-tC-tm3" firstAttribute="centerX" secondItem="HEE-W1-BKl" secondAttribute="centerX" id="Ogr-ZZ-sA9"/>
-                            <constraint firstItem="vU5-tC-tm3" firstAttribute="top" secondItem="HEE-W1-BKl" secondAttribute="top" constant="4" id="WuZ-9V-8Sd"/>
+                            <constraint firstItem="4Hx-KG-2gk" firstAttribute="leading" secondItem="HEE-W1-BKl" secondAttribute="leading" constant="16" id="SUo-1q-fT6"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="TA9-BI-IYB" secondAttribute="trailing" constant="8" id="Wxc-dI-arP"/>
-                            <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" constant="17" id="aFV-bh-1aZ"/>
                             <constraint firstItem="CcX-pj-KIZ" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="24" id="fAp-tD-GfM"/>
                             <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gcb-6z-CTe"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="16" id="gr3-Ox-uvt"/>
+                            <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="4Hx-KG-2gk" secondAttribute="bottom" constant="8" id="hza-rO-mPX"/>
+                            <constraint firstAttribute="trailing" secondItem="4Hx-KG-2gk" secondAttribute="trailing" constant="16" id="sao-oV-XWz"/>
                             <constraint firstItem="TA9-BI-IYB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="8" id="wsZ-fJ-ipt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="61C-JG-MgR"/>
@@ -152,6 +163,7 @@
                     <connections>
                         <outlet property="collectionView" destination="CcX-pj-KIZ" id="nIO-J0-2OI"/>
                         <outlet property="segmentFilter" destination="sTg-G5-Mqf" id="hUN-vu-fHW"/>
+                        <outlet property="viewHitbox" destination="4Hx-KG-2gk" id="SEa-ti-cb9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKt-DV-z7G" userLabel="First Responder" sceneMemberID="firstResponder"/>

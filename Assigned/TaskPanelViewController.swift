@@ -11,7 +11,18 @@ import CoreData
 
 class TaskPanelViewController: UIViewController {
     
-    var fetchedResultsController: NSFetchedResultsController<Assignment>! {
+    var panGesture: UIPanGestureRecognizer!
+    
+    lazy private(set) var viewModel = TaskPanelViewModel(delegate: self)
+
+    enum SearchFilter: Int {
+        case SelectedDay = 0
+        case Priority
+        case AllTasks
+        case None
+    }
+    
+    private(set) var fetchedResultsController: NSFetchedResultsController<Assignment>! {
         didSet {
             if let controller = fetchedResultsController {
                 controller.delegate = self
@@ -23,15 +34,6 @@ class TaskPanelViewController: UIViewController {
             }
             collectionView.reloadData()
         }
-    }
-    
-    lazy var viewModel = TaskPanelViewModel(delegate: self)
-
-    enum SearchFilter: Int {
-        case SelectedDay = 0
-        case Priority
-        case AllTasks
-        case None
     }
     
     var selectedFilter = SearchFilter.SelectedDay {
@@ -50,18 +52,36 @@ class TaskPanelViewController: UIViewController {
     private func updateUI() {
         
         let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
+        
+        let sortDeadline = NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: false)
+        let sortPriority = NSSortDescriptor(key: Assignment.StringKeys.priorityValue, ascending: false)
+        let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Assignment.StringKeys.title, ascending: false)
         switch selectedFilter {
         case .SelectedDay:
             fetch.predicate = NSPredicate(date: Date(), for: "deadline")
-            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
+            fetch.sortDescriptors = [
+                sortDeadline,
+                sortPriority,
+                sortTitle
+            ]
         case .Priority:
             fetch.predicate = nil
-            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.priorityValue, ascending: true)]
+            fetch.sortDescriptors = [
+                sortPriority,
+                sortDeadline,
+                sortTitle
+            ]
         case .AllTasks:
             fetch.predicate = nil
-            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
+            fetch.sortDescriptors = [
+                sortDeadline,
+                sortPriority,
+                sortTitle
+            ]
         case .None:
-            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
+            fetch.sortDescriptors = [
+                sortDeadline
+            ]
         }
         
         self.fetchedResultsController = NSFetchedResultsController<Assignment>(
@@ -74,6 +94,7 @@ class TaskPanelViewController: UIViewController {
     // MARK: - IBACTIONS
     
     @IBOutlet weak var collectionView: UIBatchableCollectView!
+    @IBOutlet weak var viewHitbox: UIView!
     @IBOutlet weak var segmentFilter: UISegmentedControl!
     @IBAction func didChangeFilter(_ sender: Any) {
         guard let newFilter = SearchFilter(rawValue: segmentFilter.selectedSegmentIndex) else {
@@ -90,6 +111,8 @@ class TaskPanelViewController: UIViewController {
         
         let cell = UITaskCollectionViewCell.Types.baseCell
         collectionView.register(cell.nib, forCellWithReuseIdentifier: cell.cellIdentifier)
+        
+        viewHitbox.addGestureRecognizer(self.panGesture)
     }
 
 }
@@ -110,12 +133,7 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UITaskCollectionViewCell.Types.baseCell.cellIdentifier, for: indexPath) as! UITaskCollectionViewCell
         
         let task = self.fetchedResultsController.assignment(at: indexPath)
-        cell.labelTitle.text = task.title
-        if let deadline = task.deadline {
-            cell.labelSubtitle.text = String(date: deadline, dateStyle: .short, timeStyle: .short)
-        } else {
-            cell.labelSubtitle.text = nil
-        }
+        cell.configure(task)
         
         return cell
     }
