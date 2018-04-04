@@ -34,8 +34,6 @@ class PlanViewController: UIViewController {
     private var touchOffset: CGFloat?
     private var originPoint: CGPoint?
     
-    /** top spacing between the task panel and the safe area */
-    @IBOutlet weak var constraintTopSpacing: NSLayoutConstraint!
     @objc private func didPanTaskPanel(_ gesture: UIPanGestureRecognizer) {
         switch gesture.state {
         case .began:
@@ -72,28 +70,36 @@ class PlanViewController: UIViewController {
         }
     }
     
-    private let TOP_VERTICAL_SPACING: CGFloat = 48.0
+    /** top spacing between the task panel and the safe area */
+    @IBOutlet weak var constraintTopSpacing: NSLayoutConstraint!
+    
+    /** height of the task panel view */
+    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+    
+    private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
     private let BOTTOM_VERTICAL_MARGIN: CGFloat = 128.0
-    private func setView(to newState: ViewState) {
-        guard let windowSize = self.view.window?.frame.size else {
-            return print("no window was set")
+    private func setView(to newState: ViewState, animated: Bool = true) {
+        guard let windowSize = self.view?.frame.size else {
+            return print("self.view was not set")
         }
         
         switch newState {
         case .Hidden:
-            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [unowned self] in
-                self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
-                self.viewTaskPanel.layoutIfNeeded()
-                
-//                self.viewTaskPanel.frame.origin.y = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
-            })
+            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
         case .Shown:
-            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [unowned self] in
-                self.constraintTopSpacing.constant = self.TOP_VERTICAL_SPACING
-                self.viewTaskPanel.layoutIfNeeded()
-//                self.viewTaskPanel.frame.origin.y = self.TOP_VERTICAL_SPACING
-            })
+            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         }
+        
+        if animated {
+            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [unowned self] in
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            self.view.layoutIfNeeded()
+        }
+        
+        // Adjust the height of the task panel
+        self.constraintHeight.constant = windowSize.height
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,12 +121,15 @@ class PlanViewController: UIViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
-        let windowSize = size
+        // Adjust the y posistion
         if self.isShowingTaskPanel {
-            self.constraintTopSpacing.constant = self.TOP_VERTICAL_SPACING
+            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         } else {
-            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
+            self.constraintTopSpacing.constant = size.height - self.BOTTOM_VERTICAL_MARGIN
         }
+        
+        // Adjust the height of the task panel
+        self.constraintHeight.constant = size.height
     }
     
     // MARK: - IBACTIONS
@@ -134,18 +143,13 @@ class PlanViewController: UIViewController {
     
     // MARK: - LIFE CYCLE
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        guard let windowSize = self.view?.frame.size else {
-            return print("no window was set")
-        }
-        
-        if self.isShowingTaskPanel {
-            self.constraintTopSpacing.constant = self.TOP_VERTICAL_SPACING
-        } else {
-            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
-        }
-        self.viewTaskPanel.layoutIfNeeded()
+        self.setView(to: .Hidden, animated: false)
     }
 }

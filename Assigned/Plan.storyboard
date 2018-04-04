@@ -64,6 +64,7 @@
                     </view>
                     <connections>
                         <outlet property="buttonFinish" destination="Hm5-t7-nT8" id="9MX-mD-vm7"/>
+                        <outlet property="constraintHeight" destination="lgu-bJ-dRc" id="v78-RV-FgP"/>
                         <outlet property="constraintTopSpacing" destination="g7E-sG-VDe" id="cIF-EU-5F2"/>
                         <outlet property="viewTaskPanel" destination="CP8-i5-z5p" id="CwQ-Ar-DXf"/>
                     </connections>
@@ -81,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CcX-pj-KIZ" customClass="UIBatchableCollectView" customModule="Assigned" customModuleProvider="target">
-                                <rect key="frame" x="16" y="72" width="343" height="489"/>
+                                <rect key="frame" x="16" y="76" width="343" height="453"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Pw-Tq-mYu">
                                     <size key="itemSize" width="343" height="48"/>
@@ -96,13 +97,13 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold to create a new session" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA9-BI-IYB">
-                                <rect key="frame" x="8" y="28" width="359" height="19.5"/>
+                                <rect key="frame" x="8" y="32" width="359" height="19.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Hx-KG-2gk">
-                                <rect key="frame" x="16" y="0.0" width="343" height="20"/>
+                                <rect key="frame" x="16" y="0.0" width="343" height="32"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag" translatesAutoresizingMaskIntoConstraints="NO" id="vU5-tC-tm3">
                                         <rect key="frame" x="153.5" y="8" width="36" height="7"/>
@@ -115,11 +116,11 @@
                                 <constraints>
                                     <constraint firstItem="vU5-tC-tm3" firstAttribute="centerX" secondItem="4Hx-KG-2gk" secondAttribute="centerX" id="2GE-Kc-Cn1"/>
                                     <constraint firstItem="vU5-tC-tm3" firstAttribute="top" secondItem="4Hx-KG-2gk" secondAttribute="top" constant="8" id="54e-dF-2vh"/>
-                                    <constraint firstAttribute="height" constant="20" id="pD3-kc-pTp"/>
+                                    <constraint firstAttribute="height" constant="32" id="pD3-kc-pTp"/>
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
-                                <rect key="frame" x="16" y="577" width="343" height="29"/>
+                                <rect key="frame" x="16" y="545" width="343" height="29"/>
                                 <segments>
                                     <segment title="Selected Day"/>
                                     <segment title="By Priority"/>
@@ -135,7 +136,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="sTg-G5-Mqf" firstAttribute="top" secondItem="CcX-pj-KIZ" secondAttribute="bottom" constant="16" id="159-lt-5nn"/>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="32" id="4mM-2S-hRU"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="64" id="4mM-2S-hRU"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="CcX-pj-KIZ" secondAttribute="trailing" constant="16" id="7vr-ut-UFy"/>
                             <constraint firstItem="4Hx-KG-2gk" firstAttribute="top" secondItem="HEE-W1-BKl" secondAttribute="top" id="Ks6-We-zht"/>
                             <constraint firstItem="CcX-pj-KIZ" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="ORk-4O-lE7"/>
@@ -144,7 +145,7 @@
                             <constraint firstItem="CcX-pj-KIZ" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="24" id="fAp-tD-GfM"/>
                             <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gcb-6z-CTe"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="16" id="gr3-Ox-uvt"/>
-                            <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="4Hx-KG-2gk" secondAttribute="bottom" constant="8" id="hza-rO-mPX"/>
+                            <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="4Hx-KG-2gk" secondAttribute="bottom" id="hza-rO-mPX"/>
                             <constraint firstAttribute="trailing" secondItem="4Hx-KG-2gk" secondAttribute="trailing" constant="16" id="sao-oV-XWz"/>
                             <constraint firstItem="TA9-BI-IYB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="8" id="wsZ-fJ-ipt"/>
                         </constraints>
