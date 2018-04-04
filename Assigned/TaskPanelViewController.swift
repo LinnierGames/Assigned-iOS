@@ -36,6 +36,21 @@ class TaskPanelViewController: UIViewController {
         }
     }
     
+    private enum ViewState {
+        case Hidden
+        case Shown
+    }
+    
+    var isShowingPanel: Bool = true {
+        didSet {
+            if isShowingPanel {
+                self.setView(to: .Shown)
+            } else {
+                self.setView(to: .Hidden)
+            }
+        }
+    }
+    
     var selectedFilter = SearchFilter.SelectedDay {
         willSet {
             segmentFilter.selectedSegmentIndex = newValue.rawValue
@@ -89,6 +104,33 @@ class TaskPanelViewController: UIViewController {
             managedObjectContext: self.viewModel.context,
             sectionNameKeyPath: nil, cacheName: nil
         )
+    }
+    
+    private let TOP_VERTICAL_SPACING: CGFloat = 48.0
+    private let BOTTOM_VERTICAL_MARGIN: CGFloat = 128.0
+    private func setView(to newState: ViewState) {
+        guard let windowSize = self.view?.window?.frame.size else {
+            return print("no view was set")
+        }
+        
+        switch newState {
+        case .Hidden:
+            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [weak self] in
+                guard let unwrappedSelf = self else {
+                    return
+                }
+                
+                unwrappedSelf.view.superview!.frame.origin.y = windowSize.height - unwrappedSelf.BOTTOM_VERTICAL_MARGIN
+            })
+        case .Shown:
+            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [weak self] in
+                guard let unwrappedSelf = self else {
+                    return
+                }
+                
+                unwrappedSelf.view.superview!.frame.origin.y = unwrappedSelf.TOP_VERTICAL_SPACING
+            })
+        }
     }
     
     // MARK: - IBACTIONS
