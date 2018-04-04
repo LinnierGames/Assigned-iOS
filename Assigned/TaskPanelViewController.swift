@@ -29,6 +29,7 @@ class TaskPanelViewController: UIViewController {
 
     enum SearchFilter: Int {
         case SelectedDay = 0
+        case Priority
         case AllTasks
         case None
     }
@@ -51,15 +52,17 @@ class TaskPanelViewController: UIViewController {
         let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
         switch selectedFilter {
         case .SelectedDay:
+            fetch.predicate = NSPredicate(date: Date(), for: "deadline")
+            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
+        case .Priority:
             fetch.predicate = nil
-//            fetch.predicate = NSPredicate(for: Date())
-//            fetch.predicate = fetch.predicate!.withSubstitutionVariables(["date": Date()])
+            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.priorityValue, ascending: true)]
         case .AllTasks:
             fetch.predicate = nil
+            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
         case .None:
-            fetch.predicate = nil
+            fetch.sortDescriptors = [NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: true)]
         }
-        fetch.sortDescriptors = [NSSortDescriptor(key: "deadline", ascending: true)]
         
         self.fetchedResultsController = NSFetchedResultsController<Assignment>(
             fetchRequest: fetch,

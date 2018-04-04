@@ -12,7 +12,13 @@ import CoreData
 
 extension Assignment {
     enum StringKeys {
-        static let subtasks = "subtasks"
+        static let title = "title"
+        static let durationValue = "durationValue"
+        static let deadline = "deadline"
+        static let isCompleted = "isCompleted"
+        static let priorityValue = "priorityValue"
+        static let notes = "notes"
+        static let tasks = "tasks"
     }
 }
 

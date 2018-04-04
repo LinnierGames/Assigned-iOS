@@ -106,6 +106,7 @@
                                 <rect key="frame" x="16" y="577" width="343" height="29"/>
                                 <segments>
                                     <segment title="Selected Day"/>
+                                    <segment title="By Priority"/>
                                     <segment title="All Tasks"/>
                                     <segment title=""/>
                                 </segments>
