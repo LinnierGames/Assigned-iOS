@@ -36,6 +36,14 @@ class TaskPanelViewController: UIViewController {
         }
     }
     
+    var selectedDay: Date = Date() {
+        didSet {
+            if self.selectedFilter == .SelectedDay {
+                self.updateUI()
+            }
+        }
+    }
+    
     var selectedFilter = SearchFilter.SelectedDay {
         willSet {
             segmentFilter.selectedSegmentIndex = newValue.rawValue
@@ -58,7 +66,7 @@ class TaskPanelViewController: UIViewController {
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Assignment.StringKeys.title, ascending: false)
         switch selectedFilter {
         case .SelectedDay:
-            fetch.predicate = NSPredicate(date: Date(), for: "deadline")
+            fetch.predicate = NSPredicate(date: self.selectedDay, for: "deadline")
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortPriority,

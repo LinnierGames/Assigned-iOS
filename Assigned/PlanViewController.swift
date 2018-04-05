@@ -215,19 +215,20 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-extension PlanViewController: EKEventViewDelegate {
+extension PlanViewController: PlannerDayViewControllerDelegate {
+    func planner(controller: PlannerDayViewController, didChangeTo date: Date) {
+        self.taskPanelViewController.selectedDay = date
+    }
+    
     func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
         //TODO: switch on action (.done, .responded, .deleted)
         self.dismiss(animated: true)
     }
-}
-
-extension PlanViewController: EKEventEditViewDelegate {
+    
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         //TODO: switch on action (.canceled, .saved, .deleted)
         controller.dismiss(animated: true)
     }
-    
     //    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
     //
     //        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {

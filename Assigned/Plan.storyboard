@@ -45,7 +45,7 @@
                                 </items>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-6d-U3H">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="104" width="375" height="531"/>
                                 <connections>
                                     <segue destination="1Zb-1a-INK" kind="embed" identifier="embed day planner" id="80N-NY-Mzp"/>
                                 </connections>
@@ -71,7 +71,7 @@
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="top" secondItem="Ayx-f1-0VL" secondAttribute="bottom" id="Qph-Fw-oWo"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="top" secondItem="Hm5-t7-nT8" secondAttribute="bottom" id="RrU-o7-kv8"/>
                             <constraint firstItem="CP8-i5-z5p" firstAttribute="top" secondItem="oox-cc-Ae0" secondAttribute="top" constant="568" id="g7E-sG-VDe"/>
-                            <constraint firstItem="8FM-6d-U3H" firstAttribute="bottom" secondItem="EaC-Jf-Zja" secondAttribute="bottom" id="qX9-kc-oTi"/>
+                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="bottom" secondItem="8FM-6d-U3H" secondAttribute="bottom" constant="32" id="qX9-kc-oTi"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="tlZ-GV-qu7"/>
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="zBc-rX-hZt"/>
                             <constraint firstItem="CP8-i5-z5p" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="zbp-6c-Anw"/>
@@ -95,7 +95,7 @@
             <objects>
                 <viewController id="1Zb-1a-INK" customClass="PlannerDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlw-po-ZP0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="563"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2lb-nn-puC"/>

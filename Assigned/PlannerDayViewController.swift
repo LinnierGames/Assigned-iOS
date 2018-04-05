@@ -11,6 +11,10 @@ import CalendarKit
 import EventKit
 import EventKitUI
 
+@objc protocol PlannerDayViewControllerDelegate: class, EKEventViewDelegate, EKEventEditViewDelegate {
+    @objc optional func planner(controller: PlannerDayViewController, didChangeTo date: Date)
+}
+
 class PlannerDayViewController: DayViewController {
     
     private lazy var calendar: CalendarStack = {
@@ -23,7 +27,9 @@ class PlannerDayViewController: DayViewController {
     
     private(set) var events: [EKEvent] = []
     
-    @IBOutlet weak var calendarDelegate: (UIViewController & EKEventViewDelegate & EKEventEditViewDelegate)?
+    @IBOutlet weak var calendarDelegate: (PlannerDayViewControllerDelegate & UIViewController)?
+    
+    private(set) var selectedDate: Date!
     
     // MARK: - RETURN VALUES
     
@@ -64,10 +70,13 @@ class PlannerDayViewController: DayViewController {
         //TODO: insert event longpressing the timeline
     }
     
-    override func dayView(dayView: DayView, willMoveTo date: Date) {
-    }
+//    override func dayView(dayView: DayView, willMoveTo date: Date) {
+//
+//    }
     
     override func dayView(dayView: DayView, didMoveTo date: Date) {
+        self.selectedDate = date
+        self.calendarDelegate?.planner?(controller: self, didChangeTo: date)
     }
     
     // MARK: - IBACTIONS
@@ -77,7 +86,10 @@ class PlannerDayViewController: DayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Planner"
+        
         dayView.autoScrollToFirstEvent = true
+//        dayView.timelinePagerView.timelinePager.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,5 +98,18 @@ class PlannerDayViewController: DayViewController {
         PrivacyService.Calendar.authorize(successfulHandler: { [unowned self] in
             self.reloadData()
         })
+    }
+}
+
+extension PlannerDayViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yOffset = scrollView.contentOffset.y
+        let scrollHeight = scrollView.contentSize.height
+        let scrollFrameHeight = scrollView.frame.height
+        
+        if yOffset < scrollHeight - scrollFrameHeight {
+//            self.calendarDelegate?.
+        }
     }
 }
