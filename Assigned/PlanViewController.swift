@@ -115,12 +115,6 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlanViewController.didPanTaskPanel(_:)))
                 vc.panGesture = panGesture
                 self.taskPanelViewController = vc
-            case "embed calendar table":
-                guard let vc = segue.destination as? CalendarTableView else {
-                    fatalError("CalendarTableView was not set correctly in the storyboard")
-                }
-                
-                vc.calendarDelegate = self
             default: break
             }
         }
