@@ -16,20 +16,13 @@ class PlanViewController: UIViewController {
     
     // MARK: - VOID METHODS
     
-    private enum ViewState {
-        case Hidden
+    enum ViewState {
+        case Hidden //TODO: implement hidden task panel
+        case Minimized
         case Shown
     }
     
-    var isShowingTaskPanel: Bool = false {
-        didSet {
-            if isShowingTaskPanel {
-                self.setView(to: .Shown)
-            } else {
-                self.setView(to: .Hidden)
-            }
-        }
-    }
+    var isShowingTaskPanel: ViewState = .Minimized
     
     private var touchOffset: CGFloat?
     private var originPoint: CGPoint?
@@ -54,13 +47,10 @@ class PlanViewController: UIViewController {
             
             let location = gesture.location(in: self.view)
             
-            // hide the task panel
             if location.y > originPoint.y {
-                self.isShowingTaskPanel = false
-                
-                // show the task panel
+                self.setView(to: .Minimized)
             } else {
-                self.isShowingTaskPanel = true
+                self.setView(to: .Shown)
             }
             
             self.originPoint = nil
@@ -85,17 +75,20 @@ class PlanViewController: UIViewController {
         
         switch newState {
         case .Hidden:
+            break
+        case .Minimized:
             self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
         case .Shown:
             self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         }
+        self.isShowingTaskPanel = newState
         
         if animated {
-            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, animations: { [unowned self] in
+            UIView.animate(withDuration: TimeInterval.transitionImmediatelyAnimationDuration, delay: 0.0, options: .curveEaseOut, animations: { [unowned self] in
                 self.view.layoutIfNeeded()
             })
         } else {
-            self.view.layoutIfNeeded()
+            self.view.setNeedsLayout()
         }
         
         // Adjust the height of the task panel
@@ -122,10 +115,13 @@ class PlanViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         
         // Adjust the y posistion
-        if self.isShowingTaskPanel {
-            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
-        } else {
+        switch self.isShowingTaskPanel {
+        case .Hidden:
+            break
+        case .Minimized:
             self.constraintTopSpacing.constant = size.height - self.BOTTOM_VERTICAL_MARGIN
+        case .Shown:
+            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         }
         
         // Adjust the height of the task panel
@@ -143,13 +139,9 @@ class PlanViewController: UIViewController {
     
     // MARK: - LIFE CYCLE
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setView(to: .Hidden, animated: false)
+        self.setView(to: self.isShowingTaskPanel, animated: false)
     }
 }
