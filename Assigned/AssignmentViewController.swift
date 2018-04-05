@@ -122,6 +122,8 @@ class AssignmentViewController: UIViewController {
     private func dismissKeyboardOnly() {
         if textfieldTitle.isFirstResponder {
             textfieldTitle.resignFirstResponder()
+        } else if textfieldAddTasks.isFirstResponder {
+            textfieldAddTasks.resignFirstResponder()
         }
     }
 
@@ -590,6 +592,14 @@ class AssignmentViewController: UIViewController {
 
         //TODO: Dynamic Font, user preferences of which cell to display
         tableTasks.rowHeight = 44
+        
+        let inputAccessory = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
+        inputAccessory.labelCaption.text = "hit return to add"
+        inputAccessory.addActionToRightButton(action: { [unowned self] (button) in
+            self.dismissKeyboardOnly()
+        })
+        
+        textfieldAddTasks.inputAccessoryView = inputAccessory
 
         viewEffortTotal.calendarUnits = [.day, .hour, .minute]
 
