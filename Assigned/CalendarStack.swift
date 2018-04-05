@@ -62,6 +62,7 @@ struct CalendarStack {
     @discardableResult
     func createEvent(with title: String, startDate: Date, endDate: Date) -> EKEvent {
         //TODO: http://irekasoft.com/blog/ios-user-data-calendar
+        fatalError("not implemented")
     }
     
     // MARK: - VOID METHODS
