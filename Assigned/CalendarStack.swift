@@ -61,6 +61,11 @@ struct CalendarStack {
     
     // MARK: - VOID METHODS
     
+    /**
+     Present an editor view controller view w new event
+     
+     - warning: the new EKEvent is stored to this model's event store
+     */
     func presentNewEvent(for viewController: UIViewController & EKEventEditViewDelegate) {
         
         let eventVC = EKEventEditViewController()
@@ -72,11 +77,17 @@ struct CalendarStack {
         
     }
     
+    /**
+     Present a detailed view of the given event
+     */
     func present(event: EKEvent?, for viewController: UIViewController & EKEventViewDelegate) {
         
         let eventVC = EKEventViewController()
         eventVC.event = event
         eventVC.delegate = viewController
+        
+        //FIXME: Double edit buttons
+        eventVC.allowsEditing = true
         
         let navCon = UINavigationController(rootViewController: eventVC)
         navCon.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
