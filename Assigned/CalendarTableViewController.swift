@@ -73,51 +73,6 @@ class CalendarTableViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    private
-    func authenticateCalendarPrivacy() {
-        //TODO: refactor to PrivacyService
-        
-        //TODO: revise Info.plist - Privacy – Calendars Usage Description
-        let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
-        
-        switch (status) {
-        case EKAuthorizationStatus.notDetermined:
-            // This happens on first-run
-            requestAccessToCalendar()
-        case EKAuthorizationStatus.authorized:
-            // Things are in line with being able to show the calendars in the table view
-            loadCalendars()
-            loadEvents()
-            refreshTableView()
-        case EKAuthorizationStatus.restricted, EKAuthorizationStatus.denied:
-            // We need to help them give us permission
-            //TODO: prompt user to open settings app to allow permission
-            break
-        }
-    }
-    
-    private
-    func requestAccessToCalendar() {
-        eventStore.requestAccess(to: EKEntityType.event, completion: {
-            (accessGranted: Bool, error: Error?) in
-            
-            if accessGranted == true {
-                DispatchQueue.main.async(execute: {
-                    self.loadCalendars()
-                    self.refreshTableView()
-                })
-            } else {
-                DispatchQueue.main.async(execute: {
-                    //TODO: prompt user to open settings app to allow permission
-//                    url to open settings
-//                    let openSettingsUrl = URL(string: UIApplicationOpenSettingsURLString)
-//                    UIApplication.shared.openURL(openSettingsUrl!)
-//                    self.needPermissionView.fadeIn()
-                })
-            }
-        })
-    }
-    
     // MARK: - IBACTIONS
     
     // MARK: - LIFE CYCLE
@@ -125,6 +80,18 @@ class CalendarTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.authenticateCalendarPrivacy()
+        PrivacyService.Calendar.authorize(successfulHandler: {
+            self.loadCalendars()
+            self.loadEvents()
+            self.refreshTableView()
+        }) {
+            UIAlertController(title: "Access to iCal", message: "Assigned needs to have access to your calendar. Please open the Settings app and enable Calendar", preferredStyle: .alert)
+                .addConfirmationButton(title: "Open Settings", with: { (action) in
+                    
+                    // url to open settings
+                    UIApplication.shared.openAppSettings()
+                })
+                .present(in: self)
+        }
     }
 }
