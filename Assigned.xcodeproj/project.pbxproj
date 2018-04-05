@@ -14,6 +14,7 @@
 		E95E137A2073EBC300BF4276 /* UITaskCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */; };
 		E95E137C2073F3EF00BF4276 /* TaskPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */; };
 		E95E137E2073FBDE00BF4276 /* UIBatchableCollectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E137D2073FBDE00BF4276 /* UIBatchableCollectView.swift */; };
+		E95E13992075BB3B00BF4276 /* CalendarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13982075BB3B00BF4276 /* CalendarTableViewController.swift */; };
 		E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961D6662065F62800AD6EFC /* MoveViewController.swift */; };
 		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
 		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
@@ -95,6 +96,7 @@
 		E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITaskCollectionViewCell.xib; sourceTree = "<group>"; };
 		E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPanelViewModel.swift; sourceTree = "<group>"; };
 		E95E137D2073FBDE00BF4276 /* UIBatchableCollectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBatchableCollectView.swift; sourceTree = "<group>"; };
+		E95E13982075BB3B00BF4276 /* CalendarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableViewController.swift; sourceTree = "<group>"; };
 		E961D6662065F62800AD6EFC /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
 		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
 		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				E97226C62073D43E00A021B4 /* PlanViewController.swift */,
 				E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */,
 				E97226CD2073E1D500A021B4 /* TaskPanelViewController.swift */,
+				E95E13982075BB3B00BF4276 /* CalendarTableViewController.swift */,
 				E97226C82073D45B00A021B4 /* Plan.storyboard */,
 			);
 			name = Plan;
@@ -581,6 +584,7 @@
 				E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */,
 				E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */,
 				E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */,
+				E95E13992075BB3B00BF4276 /* CalendarTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
