@@ -29,9 +29,38 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         case Hidden //TODO: implement hidden task panel
         case Minimized
         case Shown
+        
+        /**
+         decrement to a smaller state
+         */
+        mutating func colaspe() {
+            switch self {
+            case .Shown:
+                self = .Minimized
+            case .Minimized:
+                self = .Hidden
+            case .Hidden:
+                break
+            }
+        }
+        
+        /**
+         increment to a smaller state
+         */
+        mutating func expand() {
+            switch self {
+            case .Shown:
+                break
+            case .Minimized:
+                self = .Shown
+            case .Hidden:
+                self = .Minimized
+            }
+        }
     }
     
-    var isShowingTaskPanel: ViewState = .Minimized
+    //TODO: OFL - animate from hidden to minized and back to hidden
+    var taskPanelViewState: ViewState = .Minimized
     
     private var touchOffset: CGFloat?
     private var originPoint: CGPoint?
@@ -57,10 +86,11 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
             let location = gesture.location(in: self.view)
             
             if location.y > originPoint.y {
-                self.setView(to: .Minimized)
+                self.taskPanelViewState.colaspe()
             } else {
-                self.setView(to: .Shown)
+                self.taskPanelViewState.expand()
             }
+            self.setView(to: self.taskPanelViewState)
             
             self.originPoint = nil
             self.touchOffset = nil
@@ -77,6 +107,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
     private let BOTTOM_VERTICAL_MARGIN: CGFloat = 128.0
+    private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 32.0
     private func setView(to newState: ViewState, animated: Bool = true) {
         guard let windowSize = self.view?.frame.size else {
             return print("self.view was not set")
@@ -84,13 +115,13 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         
         switch newState {
         case .Hidden:
-            break
+            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
         case .Minimized:
             self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
         case .Shown:
             self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         }
-        self.isShowingTaskPanel = newState
+        self.taskPanelViewState = newState
         
         if animated {
             UIView.animate(withDuration: TimeInterval.transitionImmediatelyAnimationDuration, delay: 0.0, options: .curveEaseOut, animations: { [unowned self] in
@@ -130,9 +161,9 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         super.viewWillTransition(to: size, with: coordinator)
         
         // Adjust the y posistion
-        switch self.isShowingTaskPanel {
+        switch self.taskPanelViewState {
         case .Hidden:
-            break
+            self.constraintTopSpacing.constant = size.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
         case .Minimized:
             self.constraintTopSpacing.constant = size.height - self.BOTTOM_VERTICAL_MARGIN
         case .Shown:
@@ -161,7 +192,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setView(to: self.isShowingTaskPanel, animated: false)
+        self.setView(to: self.taskPanelViewState, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
