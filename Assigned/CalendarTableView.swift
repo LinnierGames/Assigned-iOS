@@ -8,12 +8,20 @@
 
 import UIKit
 import EventKit
+import EventKitUI
 
-class CalendarTableViewController: UITableViewController {
+//TODO: refactor into a UITableView vs a UITableViewController
+class CalendarTableView: UITableViewController {
     
-    lazy var calendar = {
-        return try! CalendarStack()
+    lazy var calendar: CalendarStack = {
+        do {
+            return try CalendarStack()
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
     }()
+    
+    @IBOutlet weak var calendarDelegate: (UIViewController & EKEventViewDelegate & EKEventEditViewDelegate)?
     
     var events: [EKEvent]?
     
@@ -46,6 +54,18 @@ class CalendarTableViewController: UITableViewController {
     func refreshTableView() {
         self.events = calendar.events(for: Date())
         self.tableView.reloadData()
+    }
+    
+    // MARK: Table View
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedEvent = self.events?[indexPath.row] else {
+            fatalError("invalid indexPath to fetch the selected event")
+        }
+        
+        if let delegate = self.calendarDelegate {
+            calendar.present(event: selectedEvent, for: delegate)
+        }
     }
     
     // MARK: - IBACTIONS

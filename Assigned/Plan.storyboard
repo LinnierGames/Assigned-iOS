@@ -89,10 +89,10 @@
             </objects>
             <point key="canvasLocation" x="157.59999999999999" y="229.83508245877064"/>
         </scene>
-        <!--Calendar Table View Controller-->
+        <!--Calendar Table View-->
         <scene sceneID="I9F-be-wkJ">
             <objects>
-                <tableViewController id="skv-Ek-dea" customClass="CalendarTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="skv-Ek-dea" customClass="CalendarTableView" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ocv-a9-FhP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="563"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

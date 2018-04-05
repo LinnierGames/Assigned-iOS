@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import EventKitUI
 
-class PlanViewController: UIViewController {
+class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private weak var taskPanelViewController: TaskPanelViewController!
+    
+    private lazy var calendar: CalendarStack = {
+        do {
+            return try CalendarStack()
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
+    }()
     
     // MARK: - RETURN VALUES
     
@@ -106,6 +115,12 @@ class PlanViewController: UIViewController {
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlanViewController.didPanTaskPanel(_:)))
                 vc.panGesture = panGesture
                 self.taskPanelViewController = vc
+            case "embed calendar table":
+                guard let vc = segue.destination as? CalendarTableView else {
+                    fatalError("CalendarTableView was not set correctly in the storyboard")
+                }
+                
+                vc.calendarDelegate = self
             default: break
             }
         }
@@ -137,7 +152,7 @@ class PlanViewController: UIViewController {
     
     @IBOutlet weak var viewTaskPanel: UIView!
     @IBAction func addCalendar(_ sender: Any) {
-    
+        calendar.presentNewEvent(for: self)
     }
     
     // MARK: - LIFE CYCLE
@@ -146,5 +161,31 @@ class PlanViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.setView(to: self.isShowingTaskPanel, animated: false)
+    }
+}
+
+extension PlanViewController: EKEventViewDelegate {
+    func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
+        //TODO: switch on action (.done, .responded, .deleted)
+        self.dismiss(animated: true)
+    }
+}
+
+extension PlanViewController: EKEventEditViewDelegate {
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        //TODO: switch on action (.canceled, .saved, .deleted)
+        controller.dismiss(animated: true)
+    }
+    
+    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
+        
+        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {
+            fatalError("no default calendar")
+        }
+        
+//        controller.title = "Event for \(calendar.title)"
+        
+        return calendar
+        
     }
 }

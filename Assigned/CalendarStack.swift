@@ -7,9 +7,11 @@
 //
 
 import Foundation
-import EventKit
+import EventKitUI
 
 struct CalendarStack {
+    
+    //TODO: listen for changes made in the calendar and notify anyone listening
     
     private(set) var eventStore = EKEventStore()
     
@@ -58,6 +60,29 @@ struct CalendarStack {
     }
     
     // MARK: - VOID METHODS
+    
+    func presentNewEvent(for viewController: UIViewController & EKEventEditViewDelegate) {
+        
+        let eventVC = EKEventEditViewController()
+        eventVC.event = EKEvent(eventStore: self.eventStore)
+        eventVC.editViewDelegate = viewController
+        eventVC.eventStore = self.eventStore
+        
+        viewController.present(eventVC, animated: true)
+        
+    }
+    
+    func present(event: EKEvent?, for viewController: UIViewController & EKEventViewDelegate) {
+        
+        let eventVC = EKEventViewController()
+        eventVC.event = event
+        eventVC.delegate = viewController
+        
+        let navCon = UINavigationController(rootViewController: eventVC)
+        navCon.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        
+        viewController.present(navCon, animated: true)
+    }
     
     // MARK: - IBACTIONS
     
