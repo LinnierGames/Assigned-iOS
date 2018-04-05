@@ -177,15 +177,12 @@ extension PlanViewController: EKEventEditViewDelegate {
         controller.dismiss(animated: true)
     }
     
-    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
-        
-        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {
-            fatalError("no default calendar")
-        }
-        
-//        controller.title = "Event for \(calendar.title)"
-        
-        return calendar
-        
-    }
+//    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
+//        
+//        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {
+//            fatalError("no default calendar")
+//        }
+//        
+//        return calendar
+//    }
 }
