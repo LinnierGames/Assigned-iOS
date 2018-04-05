@@ -20,7 +20,7 @@
 		E95E13992075BB3B00BF4276 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13982075BB3B00BF4276 /* CalendarTableView.swift */; };
 		E95E139B207675EB00BF4276 /* PrivacyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E139A207675EB00BF4276 /* PrivacyService.swift */; };
 		E95E139D207682CE00BF4276 /* CalendarStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E139C207682CE00BF4276 /* CalendarStack.swift */; };
-		E95E139F2076A21A00BF4276 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E139E2076A21A00BF4276 /* TableViewController.swift */; };
+		E95E139F2076A21A00BF4276 /* PlannerDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E139E2076A21A00BF4276 /* PlannerDayViewController.swift */; };
 		E95E13A22076A39D00BF4276 /* RTEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13A12076A39D00BF4276 /* RTEvent.swift */; };
 		E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961D6662065F62800AD6EFC /* MoveViewController.swift */; };
 		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
@@ -115,7 +115,7 @@
 		E95E13982075BB3B00BF4276 /* CalendarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableView.swift; sourceTree = "<group>"; };
 		E95E139A207675EB00BF4276 /* PrivacyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyService.swift; sourceTree = "<group>"; };
 		E95E139C207682CE00BF4276 /* CalendarStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarStack.swift; sourceTree = "<group>"; };
-		E95E139E2076A21A00BF4276 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		E95E139E2076A21A00BF4276 /* PlannerDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannerDayViewController.swift; sourceTree = "<group>"; };
 		E95E13A12076A39D00BF4276 /* RTEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTEvent.swift; sourceTree = "<group>"; };
 		E961D6662065F62800AD6EFC /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
 		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
@@ -276,11 +276,10 @@
 			isa = PBXGroup;
 			children = (
 				E97226C62073D43E00A021B4 /* PlanViewController.swift */,
+				E95E139E2076A21A00BF4276 /* PlannerDayViewController.swift */,
 				E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */,
 				E97226CD2073E1D500A021B4 /* TaskPanelViewController.swift */,
-				E95E13982075BB3B00BF4276 /* CalendarTableView.swift */,
 				E97226C82073D45B00A021B4 /* Plan.storyboard */,
-				E95E139E2076A21A00BF4276 /* TableViewController.swift */,
 			);
 			name = Plan;
 			sourceTree = "<group>";
@@ -312,6 +311,7 @@
 				E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */,
 				E972ADBE20618EC500B26980 /* Temp.xib */,
 				E95E137D2073FBDE00BF4276 /* UIBatchableCollectView.swift */,
+				E95E13982075BB3B00BF4276 /* CalendarTableView.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -784,7 +784,7 @@
 				E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
 				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
-				E95E139F2076A21A00BF4276 /* TableViewController.swift in Sources */,
+				E95E139F2076A21A00BF4276 /* PlannerDayViewController.swift in Sources */,
 				E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */,

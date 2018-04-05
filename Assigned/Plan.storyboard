@@ -38,7 +38,7 @@
                                     <navigationItem title="Title" id="YRW-3Z-c38">
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bDO-SD-RcV">
                                             <connections>
-                                                <action selector="addCalendar:" destination="mAr-hZ-3af" id="lYy-LD-EY4"/>
+                                                <action selector="addEventCalendar:" destination="mAr-hZ-3af" id="lYy-LD-EY4"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -47,7 +47,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-6d-U3H">
                                 <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <connections>
-                                    <segue destination="1Zb-1a-INK" kind="embed" identifier="embed calendar kit" id="80N-NY-Mzp"/>
+                                    <segue destination="1Zb-1a-INK" kind="embed" identifier="embed day planner" id="80N-NY-Mzp"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CP8-i5-z5p">
@@ -79,6 +79,7 @@
                         <viewLayoutGuide key="safeArea" id="EaC-Jf-Zja"/>
                     </view>
                     <connections>
+                        <outlet property="buttonAddEvent" destination="bDO-SD-RcV" id="Bgl-UT-MNk"/>
                         <outlet property="buttonFinish" destination="Hm5-t7-nT8" id="9MX-mD-vm7"/>
                         <outlet property="constraintHeight" destination="lgu-bJ-dRc" id="v78-RV-FgP"/>
                         <outlet property="constraintTopSpacing" destination="g7E-sG-VDe" id="cIF-EU-5F2"/>
@@ -133,10 +134,10 @@
             </objects>
             <point key="canvasLocation" x="-938" y="1021"/>
         </scene>
-        <!--Single Day View Controller-->
+        <!--Planner Day View Controller-->
         <scene sceneID="U8s-ye-Cdm">
             <objects>
-                <viewController id="1Zb-1a-INK" customClass="SingleDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Zb-1a-INK" customClass="PlannerDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlw-po-ZP0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="563"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

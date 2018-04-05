@@ -10,9 +10,13 @@ import Foundation
 import EventKit
 import CalendarKit
 
-extension CalendarKit.Event {
-    convenience init(event: EKEvent) {
-        self.init()
+class AAEvent: CalendarKit.Event {
+    var eventData: EKEvent
+    
+    init(event: EKEvent) {
+        self.eventData = event
+        
+        super.init()
         
         self.startDate = event.startDate
         self.endDate = event.endDate

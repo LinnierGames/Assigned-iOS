@@ -115,6 +115,12 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlanViewController.didPanTaskPanel(_:)))
                 vc.panGesture = panGesture
                 self.taskPanelViewController = vc
+            case "embed day planner":
+                guard let vc = segue.destination as? PlannerDayViewController else {
+                    fatalError("PlannerDayViewController was not set correctly in the storyboard")
+                }
+                
+                vc.calendarDelegate = self
             default: break
             }
         }
@@ -145,7 +151,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBOutlet weak var viewTaskPanel: UIView!
-    @IBAction func addCalendar(_ sender: Any) {
+    @IBOutlet weak var buttonAddEvent: UIBarButtonItem!
+    @IBAction func addEventCalendar(_ sender: Any) {
         calendar.presentNewEvent(for: self)
     }
     
@@ -155,6 +162,25 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         super.viewWillAppear(animated)
         
         self.setView(to: self.isShowingTaskPanel, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        PrivacyService.Calendar.authorize(
+            successfulHandler: { [unowned self] in
+                self.buttonAddEvent.isEnabled = true
+            },
+            failureHandler: { [unowned self] in
+                self.buttonAddEvent.isEnabled = false
+                UIAlertController(title: "Access to iCal", message: "Assigned needs to have access to your calendar. Please open the Settings app and enable Calendar", preferredStyle: .alert)
+                    .addConfirmationButton(title: "Open Settings", with: { (action) in
+                        
+                        // url to open settings
+                        UIApplication.shared.openAppSettings()
+                    })
+                    .present(in: self)
+        })
     }
 }
 
@@ -171,12 +197,13 @@ extension PlanViewController: EKEventEditViewDelegate {
         controller.dismiss(animated: true)
     }
     
-//    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
-//        
-//        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {
-//            fatalError("no default calendar")
-//        }
-//        
-//        return calendar
-//    }
+    //    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {
+    //
+    //        guard let calendar = self.calendar.eventStore.defaultCalendarForNewEvents else {
+    //            fatalError("no default calendar")
+    //        }
+    //
+    //        return calendar
+    //    }
 }
+
