@@ -11,9 +11,11 @@ import EventKit
 
 class CalendarTableViewController: UITableViewController {
     
-    let eventStore = EKEventStore()
+    lazy var calendar = {
+        return try! CalendarStack()
+    }()
     
-    private var calendars: [EKCalendar]?
+    var events: [EKEvent]?
     
     // MARK: - RETURN VALUES
     
@@ -41,35 +43,8 @@ class CalendarTableViewController: UITableViewController {
     // MARK: - VOID METHODS
     
     private
-    func loadCalendars() {
-        self.calendars = eventStore.calendars(for: EKEntityType.event)
-    }
-    
-    var selectedCalendar: EKCalendar! // Passed in from previous view controller
-    var events: [EKEvent]?
-    
-    func loadEvents() {
-        
-        // Create start and end date NSDate instances to build a predicate for which events to select
-        let startDate = Date().midnight
-        let endDate = Date().endOfDay
-        
-        if let calendars = self.calendars {
-            let eventStore = EKEventStore()
-            
-            // Use an event store instance to create and properly configure an NSPredicate
-            let eventsPredicate = eventStore.predicateForEvents(withStart: startDate, end: endDate, calendars: calendars)
-            
-            // Use the configured NSPredicate to find and return events in the store that match
-            self.events = eventStore.events(matching: eventsPredicate).sorted() {
-                (e1: EKEvent, e2: EKEvent) -> Bool in
-                return e1.startDate.compare(e2.startDate) == ComparisonResult.orderedAscending
-            }
-        }
-    }
-    
-    private
     func refreshTableView() {
+        self.events = calendar.events(for: Date())
         self.tableView.reloadData()
     }
     
@@ -81,13 +56,11 @@ class CalendarTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         
         PrivacyService.Calendar.authorize(successfulHandler: {
-            self.loadCalendars()
-            self.loadEvents()
             self.refreshTableView()
         }) {
             UIAlertController(title: "Access to iCal", message: "Assigned needs to have access to your calendar. Please open the Settings app and enable Calendar", preferredStyle: .alert)
                 .addConfirmationButton(title: "Open Settings", with: { (action) in
-                    
+
                     // url to open settings
                     UIApplication.shared.openAppSettings()
                 })
