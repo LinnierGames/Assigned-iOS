@@ -64,7 +64,7 @@ class CalendarTableView: UITableViewController {
         }
         
         if let delegate = self.calendarDelegate {
-            calendar.present(event: selectedEvent, for: delegate)
+            calendar.present(event: selectedEvent, in: delegate)
         }
     }
     

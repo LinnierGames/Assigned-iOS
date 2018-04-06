@@ -13,7 +13,9 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private weak var taskPanelViewController: TaskPanelViewController!
     
-    private lazy var calendar: CalendarStack = {
+    private lazy var viewModel = PlanViewModel()
+    
+    private(set) lazy var calendar: CalendarStack = {
         do {
             return try CalendarStack()
         } catch let err {
@@ -184,7 +186,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var viewTaskPanel: UIView!
     @IBOutlet weak var buttonAddEvent: UIBarButtonItem!
     @IBAction func addEventCalendar(_ sender: Any) {
-        calendar.presentNewEvent(for: self)
+        self.calendar.presentNewEvent(in: self)
     }
     
     // MARK: - LIFE CYCLE

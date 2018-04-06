@@ -72,7 +72,7 @@ struct CalendarStack {
      
      - warning: the new EKEvent is stored to this model's event store
      */
-    func presentNewEvent(for viewController: UIViewController & EKEventEditViewDelegate) {
+    func presentNewEvent(in viewController: UIViewController & EKEventEditViewDelegate) {
         
         let eventVC = EKEventEditViewController()
         eventVC.event = EKEvent(eventStore: self.eventStore)
@@ -86,7 +86,7 @@ struct CalendarStack {
     /**
      Present a detailed view of the given event
      */
-    func present(event: EKEvent?, for viewController: UIViewController & EKEventViewDelegate) {
+    func present(event: EKEvent?, in viewController: UIViewController & EKEventViewDelegate) {
         
         let eventVC = EKEventViewController()
         eventVC.event = event

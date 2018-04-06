@@ -13,6 +13,7 @@
 		E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */; };
 		E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */; };
 		E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */; };
+		E947DE4E20772F340006D141 /* PlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947DE4D20772F340006D141 /* PlanViewModel.swift */; };
 		E95E13792073EBC300BF4276 /* UITaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */; };
 		E95E137A2073EBC300BF4276 /* UITaskCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */; };
 		E95E137C2073F3EF00BF4276 /* TaskPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */; };
@@ -108,6 +109,7 @@
 		E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIValidatedTextField.swift; sourceTree = "<group>"; };
+		E947DE4D20772F340006D141 /* PlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewModel.swift; sourceTree = "<group>"; };
 		E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITaskCollectionViewCell.xib; sourceTree = "<group>"; };
 		E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPanelViewModel.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		E97226CB2073D53C00A021B4 /* Plan */ = {
 			isa = PBXGroup;
 			children = (
+				E947DE4D20772F340006D141 /* PlanViewModel.swift */,
 				E97226C62073D43E00A021B4 /* PlanViewController.swift */,
 				E95E139E2076A21A00BF4276 /* PlannerDayViewController.swift */,
 				E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */,
@@ -806,6 +809,7 @@
 				E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */,
 				E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */,
 				E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */,
+				E947DE4E20772F340006D141 /* PlanViewModel.swift in Sources */,
 				E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */,
 				E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */,
 				E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */,

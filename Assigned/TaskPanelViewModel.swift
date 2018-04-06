@@ -36,6 +36,10 @@ struct TaskPanelViewModel {
     
     var fetchedTasks: NSFetchedResultsController<Assignment>?
     
+    // MARK: - RETURN VALUES
+    
+    // MARK: - VOID METHODS
+    
     mutating func reloadTasks() {
         let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
         
@@ -83,4 +87,8 @@ struct TaskPanelViewModel {
             assertionFailure(String(describing: error))
         }
     }
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
 }

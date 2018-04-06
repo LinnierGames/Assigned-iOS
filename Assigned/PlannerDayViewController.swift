@@ -55,7 +55,7 @@ class PlannerDayViewController: DayViewController {
         }
         
         if let delegate = self.calendarDelegate {
-            calendar.present(event: event.eventData, for: delegate)
+            calendar.present(event: event.eventData, in: delegate)
         }
     }
     
@@ -98,15 +98,15 @@ class PlannerDayViewController: DayViewController {
         })
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yOffset = scrollView.contentOffset.y
-        let scrollHeight = scrollView.contentSize.height
-        let scrollFrameHeight = scrollView.frame.height
-        
-        if yOffset < scrollHeight - scrollFrameHeight {
-            //            self.calendarDelegate?.
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let yOffset = scrollView.contentOffset.y
+//        let scrollHeight = scrollView.contentSize.height
+//        let scrollFrameHeight = scrollView.frame.height
+//        
+//        if yOffset < scrollHeight - scrollFrameHeight {
+//            //            self.calendarDelegate?.
+//        }
+//    }
 }
 
 extension PlannerDayViewController: UIScrollViewDelegate {
