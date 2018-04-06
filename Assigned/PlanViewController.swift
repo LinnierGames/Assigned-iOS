@@ -149,7 +149,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
                 vc.panGesture = panGesture
                 self.taskPanelViewController = vc
             case "embed day planner":
-                guard let vc = segue.destination as? PlannerDayViewController else {
+                guard let vc = segue.destination as? CalendarDayViewController else {
                     fatalError("PlannerDayViewController was not set correctly in the storyboard")
                 }
                 
@@ -217,8 +217,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     }
 }
 
-extension PlanViewController: PlannerDayViewControllerDelegate {
-    func planner(controller: PlannerDayViewController, didChangeTo date: Date) {
+extension PlanViewController: CalendarDayViewControllerDelegate {
+    func planner(controller: CalendarDayViewController, didChangeTo date: Date) {
         
         // updates the selected date in the task panel, and reloads its data
         self.taskPanelViewController.selectedDay = date

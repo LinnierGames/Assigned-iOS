@@ -91,10 +91,10 @@
             </objects>
             <point key="canvasLocation" x="157.59999999999999" y="229.83508245877064"/>
         </scene>
-        <!--Planner Day View Controller-->
+        <!--Calendar Day View Controller-->
         <scene sceneID="U8s-ye-Cdm">
             <objects>
-                <viewController id="1Zb-1a-INK" customClass="PlannerDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1Zb-1a-INK" customClass="CalendarDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlw-po-ZP0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

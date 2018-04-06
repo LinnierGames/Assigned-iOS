@@ -11,11 +11,11 @@ import CalendarKit
 import EventKit
 import EventKitUI
 
-@objc protocol PlannerDayViewControllerDelegate: class, EKEventViewDelegate, EKEventEditViewDelegate {
-    @objc optional func planner(controller: PlannerDayViewController, didChangeTo date: Date)
+@objc protocol CalendarDayViewControllerDelegate: class, EKEventViewDelegate, EKEventEditViewDelegate {
+    @objc optional func planner(controller: CalendarDayViewController, didChangeTo date: Date)
 }
 
-class PlannerDayViewController: DayViewController {
+class CalendarDayViewController: DayViewController {
     
     private lazy var calendar: CalendarStack = {
         do {
@@ -27,7 +27,7 @@ class PlannerDayViewController: DayViewController {
     
     private(set) var events: [EKEvent] = []
     
-    @IBOutlet weak var calendarDelegate: (PlannerDayViewControllerDelegate & UIViewController)?
+    @IBOutlet weak var calendarDelegate: (CalendarDayViewControllerDelegate & UIViewController)?
     
     private(set) var selectedDate: Date!
     
@@ -102,12 +102,12 @@ class PlannerDayViewController: DayViewController {
 //        let yOffset = scrollView.contentOffset.y
 //        let scrollHeight = scrollView.contentSize.height
 //        let scrollFrameHeight = scrollView.frame.height
-//        
+//
 //        if yOffset < scrollHeight - scrollFrameHeight {
 //            //            self.calendarDelegate?.
 //        }
 //    }
 }
 
-extension PlannerDayViewController: UIScrollViewDelegate {
+extension CalendarDayViewController: UIScrollViewDelegate {
 }
