@@ -26,6 +26,8 @@
 	<string>Main</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>Add sessions to user&apos;s calendar</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Read and update contact usage</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
