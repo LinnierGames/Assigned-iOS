@@ -38,5 +38,6 @@ extension Session {
     @NSManaged public var startDate: Date
     @NSManaged public var titleValue: String?
     @NSManaged public var assignment: Assignment
+    @NSManaged public var eventIdentifier: String?
 
 }

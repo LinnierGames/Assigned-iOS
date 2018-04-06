@@ -22,6 +22,7 @@
     <entity name="Sessions" representedClassName="Session" syncable="YES">
         <attribute name="dayOfStartDate" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="durationValue" attributeType="Double" defaultValueString="3600" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="eventIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="titleValue" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignments" inverseName="sessions" inverseEntity="Assignments" syncable="YES"/>
@@ -36,7 +37,7 @@
         <element name="Directories" positionX="-63" positionY="45" width="128" height="90"/>
         <element name="DirectoryInfos" positionX="-45" positionY="63" width="128" height="75"/>
         <element name="Folders" positionX="-54" positionY="54" width="128" height="45"/>
-        <element name="Sessions" positionX="-54" positionY="36" width="128" height="120"/>
+        <element name="Sessions" positionX="-54" positionY="36" width="128" height="135"/>
         <element name="Tasks" positionX="-36" positionY="72" width="128" height="90"/>
     </elements>
 </model>

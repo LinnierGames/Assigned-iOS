@@ -29,6 +29,13 @@ struct CalendarStack {
     }
     
     /**
+     - precondition: Be sure to check if the user has granted access to the calendar.
+     Thus, initalizing this struct is best in a lazy var and only needed AFTER
+     access has been checked with PrivacyService.Calendar.authorize(..)
+     
+     - postcondition: Use any of this struct's methods in insurance that privacy
+     will not be restricted after this initalizer
+     
      - throws: due to user privacy
      */
     init() throws {
@@ -62,7 +69,14 @@ struct CalendarStack {
     @discardableResult
     func createEvent(with title: String, startDate: Date, endDate: Date) -> EKEvent {
         //TODO: http://irekasoft.com/blog/ios-user-data-calendar
-        fatalError("not implemented")
+        
+        let newEvent = EKEvent(eventStore: self.eventStore)
+        newEvent.title = title
+        newEvent.startDate = startDate
+        newEvent.endDate = endDate
+        newEvent.calendar = self.eventStore.defaultCalendarForNewEvents
+        
+        return newEvent
     }
     
     // MARK: - VOID METHODS
@@ -73,21 +87,18 @@ struct CalendarStack {
      - warning: the new EKEvent is stored to this model's event store
      */
     func presentNewEvent(in viewController: UIViewController & EKEventEditViewDelegate) {
-        
         let eventVC = EKEventEditViewController()
         eventVC.event = EKEvent(eventStore: self.eventStore)
         eventVC.editViewDelegate = viewController
         eventVC.eventStore = self.eventStore
         
         viewController.present(eventVC, animated: true)
-        
     }
     
     /**
      Present a detailed view of the given event
      */
     func present(event: EKEvent?, in viewController: UIViewController & EKEventViewDelegate) {
-        
         let eventVC = EKEventViewController()
         eventVC.event = event
         eventVC.delegate = viewController

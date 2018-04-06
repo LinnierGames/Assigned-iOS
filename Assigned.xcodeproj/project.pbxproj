@@ -37,6 +37,8 @@
 		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
 		E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */; };
 		E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */; };
+		E976BD532077CA430071B13F /* CalendarStack+Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976BD522077CA430071B13F /* CalendarStack+Session.swift */; };
+		E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976BD542077CC870071B13F /* Session+EKEvent.swift */; };
 		E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF433205305F80050EA21 /* AppDelegate.swift */; };
 		E97DF439205305F80050EA21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97DF437205305F80050EA21 /* Main.storyboard */; };
 		E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */; };
@@ -133,6 +135,8 @@
 		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
 		E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewController.swift; sourceTree = "<group>"; };
 		E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNotesViewController.swift; sourceTree = "<group>"; };
+		E976BD522077CA430071B13F /* CalendarStack+Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarStack+Session.swift"; sourceTree = "<group>"; };
+		E976BD542077CC870071B13F /* Session+EKEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+EKEvent.swift"; sourceTree = "<group>"; };
 		E97DF430205305F80050EA21 /* Assigned.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assigned.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97DF433205305F80050EA21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E97DF438205305F80050EA21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -319,6 +323,15 @@
 			name = "Custom Views";
 			sourceTree = "<group>";
 		};
+		E976BD512077C9CF0071B13F /* EventKit */ = {
+			isa = PBXGroup;
+			children = (
+				E95E139C207682CE00BF4276 /* CalendarStack.swift */,
+				E976BD522077CA430071B13F /* CalendarStack+Session.swift */,
+			);
+			name = EventKit;
+			sourceTree = "<group>";
+		};
 		E97DF427205305F80050EA21 = {
 			isa = PBXGroup;
 			children = (
@@ -388,7 +401,7 @@
 			children = (
 				E97DF46620530BCF0050EA21 /* Core Data */,
 				E9CA1C0F2053144100B8936E /* PersistenceStack.swift */,
-				E95E139C207682CE00BF4276 /* CalendarStack.swift */,
+				E976BD512077C9CF0071B13F /* EventKit */,
 				E9C5B25B2072715600621B8C /* DirectoryManager.swift */,
 				E95E139A207675EB00BF4276 /* PrivacyService.swift */,
 			);
@@ -410,6 +423,7 @@
 				E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */,
+				E976BD542077CC870071B13F /* Session+EKEvent.swift */,
 				E97DF43A205305F80050EA21 /* Assigned.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -768,6 +782,7 @@
 				E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */,
 				E95E137E2073FBDE00BF4276 /* UIBatchableCollectView.swift in Sources */,
 				E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */,
+				E976BD532077CA430071B13F /* CalendarStack+Session.swift in Sources */,
 				E95E137C2073F3EF00BF4276 /* TaskPanelViewModel.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */,
@@ -804,6 +819,7 @@
 				E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */,
 				E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */,
 				E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */,
+				E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */,
 				E97226C32073D02B00A021B4 /* AgendaViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,
 				E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */,
