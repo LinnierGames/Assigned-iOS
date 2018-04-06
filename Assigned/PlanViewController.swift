@@ -217,6 +217,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
 
 extension PlanViewController: PlannerDayViewControllerDelegate {
     func planner(controller: PlannerDayViewController, didChangeTo date: Date) {
+        
+        // updates the selected date in the task panel, and reloads its data
         self.taskPanelViewController.selectedDay = date
     }
     

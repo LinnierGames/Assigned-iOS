@@ -11,45 +11,44 @@ import CoreData
 
 class TaskPanelViewController: UIViewController {
     
+    /** assigned by the parent view controller */
     var panGesture: UIPanGestureRecognizer!
     
     lazy private(set) var viewModel = TaskPanelViewModel(delegate: self)
-
-    enum SearchFilter: Int {
-        case SelectedDay = 0
-        case Priority
-        case AllTasks
-        case None
-    }
     
-    private(set) var fetchedResultsController: NSFetchedResultsController<Assignment>! {
-        didSet {
-            if let controller = fetchedResultsController {
-                controller.delegate = self
-                do {
-                    try controller.performFetch()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            collectionView.reloadData()
+    var fetchedResultsController: NSFetchedResultsController<Assignment>? {
+        get {
+            return viewModel.fetchedTasks
         }
     }
     
-    var selectedDay: Date = Date() {
-        didSet {
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - warning: if selected filter is set to day, updating this value will reload
+     the table
+     */
+    var selectedDay: Date {
+        set {
+            viewModel.selectedDate = newValue
             if self.selectedFilter == .SelectedDay {
-                self.updateUI()
+                self.reloadData()
             }
+        }
+        get {
+            return viewModel.selectedDate
         }
     }
     
-    var selectedFilter = SearchFilter.SelectedDay {
-        willSet {
+    var selectedFilter: TaskPanelViewModel.SearchFilter {
+        set {
+            viewModel.selectedFilter = newValue
+            
             segmentFilter.selectedSegmentIndex = newValue.rawValue
+            reloadData()
         }
-        didSet {
-            updateUI()
+        get {
+            return viewModel.selectedFilter
         }
     }
     
@@ -57,46 +56,13 @@ class TaskPanelViewController: UIViewController {
     
     // MARK: - VOID METHODS
     
+    func reloadData() {
+        self.viewModel.reloadTasks()
+        self.updateUI()
+    }
+    
     private func updateUI() {
-        
-        let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
-        
-        let sortDeadline = NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: false)
-        let sortPriority = NSSortDescriptor(key: Assignment.StringKeys.priorityValue, ascending: false)
-        let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Assignment.StringKeys.title, ascending: false)
-        switch selectedFilter {
-        case .SelectedDay:
-            fetch.predicate = NSPredicate(date: self.selectedDay, for: "deadline")
-            fetch.sortDescriptors = [
-                sortDeadline,
-                sortPriority,
-                sortTitle
-            ]
-        case .Priority:
-            fetch.predicate = nil
-            fetch.sortDescriptors = [
-                sortPriority,
-                sortDeadline,
-                sortTitle
-            ]
-        case .AllTasks:
-            fetch.predicate = nil
-            fetch.sortDescriptors = [
-                sortDeadline,
-                sortPriority,
-                sortTitle
-            ]
-        case .None:
-            fetch.sortDescriptors = [
-                sortDeadline
-            ]
-        }
-        
-        self.fetchedResultsController = NSFetchedResultsController<Assignment>(
-            fetchRequest: fetch,
-            managedObjectContext: self.viewModel.context,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
+        collectionView.reloadData()
     }
     
     // MARK: - IBACTIONS
@@ -105,7 +71,7 @@ class TaskPanelViewController: UIViewController {
     @IBOutlet weak var viewHitbox: UIView!
     @IBOutlet weak var segmentFilter: UISegmentedControl!
     @IBAction func didChangeFilter(_ sender: Any) {
-        guard let newFilter = SearchFilter(rawValue: segmentFilter.selectedSegmentIndex) else {
+        guard let newFilter = TaskPanelViewModel.SearchFilter(rawValue: segmentFilter.selectedSegmentIndex) else {
             fatalError("segment for undefined enum case")
         }
         
@@ -140,7 +106,7 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UITaskCollectionViewCell.Types.baseCell.cellIdentifier, for: indexPath) as! UITaskCollectionViewCell
         
-        let task = self.fetchedResultsController.assignment(at: indexPath)
+        let task = self.fetchedResultsController!.assignment(at: indexPath)
         cell.configure(task)
         
         return cell
@@ -155,7 +121,7 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.updateUI()
+        self.reloadData()
     }
 }
 

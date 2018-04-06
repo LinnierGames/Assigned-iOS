@@ -25,6 +25,7 @@
                                     <constraint firstAttribute="height" constant="60" id="HfL-Ke-duy"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="22" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -35,7 +36,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayx-f1-0VL">
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="YRW-3Z-c38">
+                                    <navigationItem title="Planner" id="YRW-3Z-c38">
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bDO-SD-RcV">
                                             <connections>
                                                 <action selector="addEventCalendar:" destination="mAr-hZ-3af" id="lYy-LD-EY4"/>

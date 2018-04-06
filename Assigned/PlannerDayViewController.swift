@@ -86,8 +86,6 @@ class PlannerDayViewController: DayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Planner"
-        
         dayView.autoScrollToFirstEvent = true
 //        dayView.timelinePagerView.timelinePager.delegate = self
     }
@@ -99,9 +97,6 @@ class PlannerDayViewController: DayViewController {
             self.reloadData()
         })
     }
-}
-
-extension PlannerDayViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yOffset = scrollView.contentOffset.y
@@ -109,7 +104,10 @@ extension PlannerDayViewController: UIScrollViewDelegate {
         let scrollFrameHeight = scrollView.frame.height
         
         if yOffset < scrollHeight - scrollFrameHeight {
-//            self.calendarDelegate?.
+            //            self.calendarDelegate?.
         }
     }
+}
+
+extension PlannerDayViewController: UIScrollViewDelegate {
 }
