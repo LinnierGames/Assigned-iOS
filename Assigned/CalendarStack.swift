@@ -52,6 +52,15 @@ struct CalendarStack {
     
     // MARK: - RETURN VALUES
     
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - postcondition: events are saved
+     
+     - returns: the newly created event
+     */
     @discardableResult
     func createEvent(with title: String, startDate: Date, endDate: Date) -> EKEvent {
         //TODO: http://irekasoft.com/blog/ios-user-data-calendar
@@ -61,6 +70,8 @@ struct CalendarStack {
         newEvent.startDate = startDate
         newEvent.endDate = endDate
         newEvent.calendar = self.eventStore.defaultCalendarForNewEvents
+        
+        self.save(event: newEvent)
         
         return newEvent
     }

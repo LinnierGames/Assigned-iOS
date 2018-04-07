@@ -71,7 +71,12 @@ public class Session: NSManagedObject {
     
     /** addes the duration, in seconds, to the start date to return the end date */
     public var endDate: Date {
-        return self.startDate.addingTimeInterval(self.durationValue)
+        set {
+            fatalError("not implemented")
+        }
+        get {
+            return self.startDate.addingTimeInterval(self.durationValue)
+        }
     }
     
     /** true if the session's end date is behind the today's time */

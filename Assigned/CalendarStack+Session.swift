@@ -34,6 +34,8 @@ extension CalendarStack {
      
      - parameter session: that will be linked to the new calendar event
      
+     - postcondition: events are saved
+     
      - returns: the new calendar event
      */
     @discardableResult
@@ -41,6 +43,8 @@ extension CalendarStack {
         
         // create the event and udpate the session's event id
         let newSessionEvent = self.createEvent(with: session.title, startDate: session.startDate, endDate: session.endDate)
+        newSessionEvent.
+        newSessionEvent.setValuesFor(session: session) //updating values that were not updated in the CalendarStack.createEvent(with:, startDate:, endDate:)
         session.eventIdentifier = newSessionEvent.eventIdentifier
         
         return newSessionEvent

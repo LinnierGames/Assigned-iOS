@@ -123,8 +123,7 @@ class AssignmentNavigationViewModel: NSObject {
     func addSession(session: Session) {
         session.assignment = self.assignment
         
-        //TODO: add a calendar
-        
+        calendar.createEvent(for: session)
     }
     
     func delete(session: Session) {
