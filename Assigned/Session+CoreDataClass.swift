@@ -148,6 +148,8 @@ public class Session: NSManagedObject {
     public override func didSave() {
         super.didSave()
         
+        guard self.isDeleted == false else { return }
+        
         let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
         guard let sessionEvent = calendar.event(for: self) else {
             fatalError("the session must already have a calendar event assigned to its id before saving")
