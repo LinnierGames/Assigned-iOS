@@ -43,7 +43,6 @@ extension CalendarStack {
         
         // create the event and udpate the session's event id
         let newSessionEvent = self.createEvent(with: session.title, startDate: session.startDate, endDate: session.endDate)
-        newSessionEvent.
         newSessionEvent.setValuesFor(session: session) //updating values that were not updated in the CalendarStack.createEvent(with:, startDate:, endDate:)
         session.eventIdentifier = newSessionEvent.eventIdentifier
         

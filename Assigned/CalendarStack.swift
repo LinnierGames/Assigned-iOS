@@ -97,6 +97,8 @@ struct CalendarStack {
         }
     }
     
+    // MARK: - VOID METHODS
+    
     /**
      <#Lorem ipsum dolor sit amet.#>
      
@@ -112,7 +114,20 @@ struct CalendarStack {
         }
     }
     
-    // MARK: - VOID METHODS
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    func delete(event: EKEvent, for span: EKSpan = .thisEvent) {
+        do {
+            try self.eventStore.remove(event, span: span)
+        } catch let err {
+            assertionFailure(err.localizedDescription)
+        }
+    }
     
     /**
      Present an editor view controller view w new event

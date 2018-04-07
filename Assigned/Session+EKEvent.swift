@@ -11,29 +11,19 @@ import EventKit
 
 extension Session {
     
-    public override func awakeFromFetch() {
-        super.awakeFromFetch()
+    func setValuesFor(event: EKEvent) {
+        let assignmentTitle = self.assignment.title
         
-        //TODO: update from any changes from ical
-    }
-    
-    /**
-     Updates the "linked" calendar event
-     
-     - precondition: the session must already have a calendar event assigned to its id
-     before saving on any context
-     */
-    public override func didSave() {
-        super.didSave()
-        
-        let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
-        guard let sessionEvent = calendar.event(for: self) else {
-            fatalError("the session must already have a calendar event assigned to its id before saving")
+        // Event title has default session title, which is the assignment title
+        if event.title == assignmentTitle {
+            self.clearTitle()
+        } else {
+            self.title = event.title
         }
         
-        // update and save the event
-        sessionEvent.setValuesFor(session: self)
-        calendar.save(event: sessionEvent)
+        // Dates
+        self.startDate = event.startDate
+        self.endDate = event.endDate
     }
 }
 

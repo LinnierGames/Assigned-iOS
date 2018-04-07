@@ -71,8 +71,10 @@ public class Session: NSManagedObject {
     
     /** addes the duration, in seconds, to the start date to return the end date */
     public var endDate: Date {
-        set {
-            fatalError("not implemented")
+        set (newEndDate) {
+            let sinceStartDate = newEndDate.timeIntervalSince(self.startDate)
+            
+            self.durationValue = sinceStartDate
         }
         get {
             return self.startDate.addingTimeInterval(self.durationValue)
@@ -113,6 +115,68 @@ public class Session: NSManagedObject {
     }
     
     // MARK: - VOID METHODS
+    
+    public override func awakeFromFetch() {
+        super.awakeFromFetch()
+        
+        //TODO: create shared calendar store?
+        let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
+        
+        // find the session's event and update self by the found event
+        if let sessionEvent = calendar.event(for: self) {
+            self.setValuesFor(event: sessionEvent)
+            
+            // iCal event was not found: delete self
+        } else {
+            guard let context = self.managedObjectContext else {
+                fatalError("no context after fetching")
+            }
+            
+            // delete and save the context
+            context.delete(self)
+            //FIXME: don't save context here, may have side-effects to other changes on the same context
+            PersistenceStack().saveContext(context: context)
+        }
+    }
+    
+    /**
+     Updates the "linked" calendar event
+     
+     - precondition: the session must already have a calendar event assigned to its id
+     before saving on any context
+     */
+    public override func didSave() {
+        super.didSave()
+        
+        let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
+        guard let sessionEvent = calendar.event(for: self) else {
+            fatalError("the session must already have a calendar event assigned to its id before saving")
+        }
+        
+        // update and save the event
+        sessionEvent.setValuesFor(session: self)
+        calendar.save(event: sessionEvent)
+    }
+    
+    /**
+     Deletes the "linked" calendar event
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    public override func prepareForDeletion() {
+        super.prepareForDeletion()
+        
+        let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
+        if let sessionEvent = calendar.event(for: self) {
+            
+            // delete the event
+            calendar.delete(event: sessionEvent)
+        } else {
+            print("no event was found to delete when deleting the session")
+        }
+    }
     
     // MARK: - IBACTIONS
     
