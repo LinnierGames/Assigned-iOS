@@ -75,7 +75,7 @@ class AssignmentNavigationViewController: UIViewController {
         }
         
         if animated {
-            UIView.animate(withDuration: UIViewPropertyAnimator.transitionAnimationDuration) {
+            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) {
                 if self.editingMode.isReading {
                     showCards()
                 } else {

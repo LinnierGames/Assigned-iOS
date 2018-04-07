@@ -206,13 +206,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
             },
             failureHandler: { [unowned self] in
                 self.buttonAddEvent.isEnabled = false
-                UIAlertController(title: "Access to iCal", message: "Assigned needs to have access to your calendar. Please open the Settings app and enable Calendar", preferredStyle: .alert)
-                    .addConfirmationButton(title: "Open Settings", with: { (action) in
-                        
-                        // url to open settings
-                        UIApplication.shared.openAppSettings()
-                    })
-                    .present(in: self)
+                PrivacyService.Calendar.promptAlert(in: self, with: .alert)
         })
     }
 }

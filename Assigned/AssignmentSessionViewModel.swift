@@ -17,20 +17,15 @@ class SessionViewModel {
         
     unowned var parentModel: AssignmentNavigationViewModel
     
-    init(with parentModel: AssignmentNavigationViewModel, delegate: SessionViewModelDelegate) {
-        self.parentModel = parentModel
-        self.delegate = delegate
-    }
-    
-    var context: NSManagedObjectContext {
-        return self.parentModel.context
-    }
-    
-    var assignment: Assignment {
-        return self.parentModel.assignment
-    }
-    
-    lazy var fetchedAssignmentSessions: NSFetchedResultsController<Session> = {
+    lazy var fetchedAssignmentSessions: NSFetchedResultsController<Session>? = {
+        
+        // Privacy Restriction
+        guard PrivacyService.Calendar.isAuthorized else {
+            
+            // Calendar was not granted access
+            return nil
+        }
+        
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
         fetch.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
         fetch.predicate = NSPredicate(format: "assignment == %@", self.assignment)
@@ -50,6 +45,31 @@ class SessionViewModel {
         
         return fetchedRequestController
     }()
+    
+    init(with parentModel: AssignmentNavigationViewModel, delegate: SessionViewModelDelegate) {
+        self.parentModel = parentModel
+        self.delegate = delegate
+    }
+    
+    // MARK: - RETURN VALUES
+    
+    var context: NSManagedObjectContext {
+        return self.parentModel.context
+    }
+    
+    var assignment: Assignment {
+        return self.parentModel.assignment
+    }
+    
+    var isAuthorizedForCalendarEvents: Bool {
+        return PrivacyService.Calendar.isAuthorized
+    }
+    
+    // MARK: - VOID METHODS
+    
+    // MARK: - IBACTIONS
+    
+    // MARK: - LIFE CYCLE
     
 }
 

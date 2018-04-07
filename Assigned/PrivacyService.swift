@@ -9,6 +9,9 @@
 import Foundation
 import EventKit
 
+// Provides a default uialertcontroller to promot the user a message
+import UIKit
+
 struct PrivacyService {
     
     // MARK: - Calendar
@@ -31,8 +34,6 @@ struct PrivacyService {
         
         /**
          checks the system if this app is currently authorized to access calendars
-         
-         - postcondition: updates the stored var
          */
         static func authorize(successfulHandler: (() -> ())? = nil, failureHandler: (() -> ())? = nil) {
             self.successfulHandler = successfulHandler
@@ -64,6 +65,8 @@ struct PrivacyService {
             let eventStore = EKEventStore()
             
             //TODO: revise Info.plist - Privacy – Calendars Usage Description
+            // illstrate that sessions created in-app will reflect the user's
+            //ical, adding, updating, and deleting events
             eventStore.requestAccess(to: EKEntityType.event, completion: {
                 (accessGranted: Bool, error: Error?) in
                 
@@ -80,6 +83,25 @@ struct PrivacyService {
                     })
                 }
             })
+        }
+        
+        /**
+         <#Lorem ipsum dolor sit amet.#>
+         
+         - parameter openedLinkCompleition: Provide a value for this parameter if you want to be informed of the success or failure of opening the URL. This block is executed asynchronously on your app's main thread.
+         
+         - returns: <#Sed do eiusmod tempor.#>
+         */
+        static func promptAlert(in viewController: UIViewController, with alertStyle: UIAlertControllerStyle, openedLinkCompleition: ((Bool) -> ())? = nil) {
+            
+            //TODO: localized string
+            UIAlertController(title: "Access to iCal", message: "Assigned needs to have access to your calendar. Please open the Settings app and enable Calendar", preferredStyle: alertStyle)
+                .addConfirmationButton(title: "Open Settings", with: { (action) in
+                    
+                    // url to open settings
+                    UIApplication.shared.openAppSettings(completion: openedLinkCompleition)
+                })
+                .present(in: viewController)
         }
     }
 }

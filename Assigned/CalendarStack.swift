@@ -52,6 +52,26 @@ struct CalendarStack {
     
     // MARK: - RETURN VALUES
     
+    @discardableResult
+    func createEvent(with title: String, startDate: Date, endDate: Date) -> EKEvent {
+        //TODO: http://irekasoft.com/blog/ios-user-data-calendar
+        
+        let newEvent = EKEvent(eventStore: self.eventStore)
+        newEvent.title = title
+        newEvent.startDate = startDate
+        newEvent.endDate = endDate
+        newEvent.calendar = self.eventStore.defaultCalendarForNewEvents
+        
+        return newEvent
+    }
+    
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
     func events(for date: Date) -> [EKEvent] {
         let startDate = date.midnight
         let endDate = date.endOfDay
@@ -66,17 +86,19 @@ struct CalendarStack {
         }
     }
     
-    @discardableResult
-    func createEvent(with title: String, startDate: Date, endDate: Date) -> EKEvent {
-        //TODO: http://irekasoft.com/blog/ios-user-data-calendar
-        
-        let newEvent = EKEvent(eventStore: self.eventStore)
-        newEvent.title = title
-        newEvent.startDate = startDate
-        newEvent.endDate = endDate
-        newEvent.calendar = self.eventStore.defaultCalendarForNewEvents
-        
-        return newEvent
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    func save(event: EKEvent, for span: EKSpan = .thisEvent) {
+        do {
+            try self.eventStore.save(event, span: span)
+        } catch let err {
+            assertionFailure(err.localizedDescription)
+        }
     }
     
     // MARK: - VOID METHODS

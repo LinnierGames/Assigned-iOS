@@ -30,6 +30,14 @@ class AssignmentNavigationViewModel: NSObject {
     
     private var readingAssignmentValue: Assignment?
     
+    private lazy var calendar: CalendarStack = {
+        do {
+            return try CalendarStack()
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
+    }()
+    
     // MARK: - RETURN VALUES
     
     /**
@@ -107,12 +115,16 @@ class AssignmentNavigationViewModel: NSObject {
             title: nil,
             startDate: date,
             assignment: self.assignment, in: self.context)
+        addSession(session: newSession)
         
         return newSession
     }
     
     func addSession(session: Session) {
         session.assignment = self.assignment
+        
+        //TODO: add a calendar
+        
     }
     
     func delete(session: Session) {
