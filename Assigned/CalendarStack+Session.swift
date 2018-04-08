@@ -18,14 +18,10 @@ extension CalendarStack {
     /**
      for the given session, fetches its event with the stored event identifer
      
-     - returns: can return nil if the identifer is invalid
+     - returns: returns nil if no event was found
      */
     func event(for session: Session) -> EKEvent? {
-        guard let eventIdentifier = session.eventIdentifier else {
-            return nil
-        }
-        
-        return eventStore.event(withIdentifier: eventIdentifier)
+        return eventStore.event(withIdentifier: session.eventIdentifier)
     }
     
     /**
@@ -45,6 +41,7 @@ extension CalendarStack {
         let newSessionEvent = self.createEvent(with: session.title, startDate: session.startDate, endDate: session.endDate)
         newSessionEvent.setValuesFor(session: session) //updating values that were not updated in the CalendarStack.createEvent(with:, startDate:, endDate:)
         session.eventIdentifier = newSessionEvent.eventIdentifier
+        session.eventLastModifiedDate = newSessionEvent.lastModifiedDate
         
         return newSessionEvent
     }

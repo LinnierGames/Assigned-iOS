@@ -104,7 +104,7 @@ class AssignmentNavigationViewModel: NSObject {
     }
     
     func save() {
-        PersistenceStack.shared.saveContext()
+        PersistenceStack.shared.saveContext(context: self.context)
     }
     
     // MARK: Sessions
@@ -146,6 +146,8 @@ extension AssignmentNavigationViewModel: CalendarStackDelegate {
         //TODO: validate each mo in the given updatedSessions
     }
 }
+
+// MARK: - View Controller Get/Set
 
 extension AssignmentNavigationViewModel {
     

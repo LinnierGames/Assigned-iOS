@@ -76,6 +76,7 @@ class CalendarService {
 //        privateContext.performAndWait {
 //            <#code#>
 //        }
+        
         do {
             let fetch: NSFetchRequest<Session> = Session.fetchRequest()
             let sessions = try privateContext.fetch(fetch)
