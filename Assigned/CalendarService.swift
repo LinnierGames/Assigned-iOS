@@ -5,6 +5,12 @@
 //  Created by Erick Sanchez on 4/7/18.
 //  Copyright © 2018 LinnierGames. All rights reserved.
 //
+//  Only updates sessions stored in the persistant store of any changes made
+//  in iCal.
+//
+//  Updating of the iCal events themsevles are done by the seesion managed object
+//  when didSave and prepareForDeletion are invoked
+//
 
 import Foundation
 import CoreData
@@ -45,13 +51,13 @@ class CalendarService {
     
     @objc private func applicationDidBecomeActive( _ notification: Notification) {
         if PrivacyService.Calendar.isAuthorized {
-            self.updateStaleSession()
+            self.updateStaleSessions()
         }
     }
     
     @objc private func eventStoreDidChange( _ notification: Notification) {
         if PrivacyService.Calendar.isAuthorized {
-            self.updateStaleSession()
+            self.updateStaleSessions()
         } else {
             debugPrint("PrivacyService.Calendar.isAuthorized == false for eventStoreDidChange(notification:)")
         }
@@ -62,34 +68,36 @@ class CalendarService {
      
      - precondition: check for privacy before calling this method
      */
-    private func updateStaleSession() {
+    private func updateStaleSessions() {
         let persistanceStore = PersistenceStack.shared
         let privateContext = persistanceStore.newBackgroundContext()
         
-        do {
-            let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-            let sessions = try privateContext.fetch(fetch)
-            
-            // Update stale sessions
-            let calendar = try! CalendarStack()
-            sessions.forEach({ (aSession) in
-                if let sessionEvent = calendar.event(for: aSession) {
-                    aSession.setValuesIfNeededFor(event: sessionEvent)
-                    
-                // delete session
-                } else {
-                    privateContext.delete(aSession)
-                }
-            })
-            
-            let modifiedObjects = privateContext.updatedObjects.union(privateContext.deletedObjects) as! Set<Session>
-            
-            // Save and notify observers of new changes
-            persistanceStore.saveContext(context: privateContext)
-            NotificationCenter.default.post(name: Notification.Name.CalendarServiceDidUpdateStaleSessions, object: modifiedObjects)
-            
-        } catch {
-            fatalError(error.localizedDescription)
+        privateContext.perform {
+            do {
+                let fetch: NSFetchRequest<Session> = Session.fetchRequest()
+                let sessions = try privateContext.fetch(fetch)
+                
+                // Update stale sessions
+                let calendar = try! CalendarStack()
+                sessions.forEach({ (aSession) in
+                    if let sessionEvent = calendar.event(for: aSession) {
+                        aSession.setValuesIfNeededFor(event: sessionEvent)
+                        
+                        // delete session
+                    } else {
+                        privateContext.delete(aSession)
+                    }
+                })
+                
+                let modifiedObjects = privateContext.updatedObjects.union(privateContext.deletedObjects) as! Set<Session>
+                
+                // Save and notify observers of new changes
+                persistanceStore.saveContext(context: privateContext)
+                NotificationCenter.default.post(name: Notification.Name.CalendarServiceDidUpdateStaleSessions, object: modifiedObjects)
+                
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
     
