@@ -40,6 +40,13 @@ struct PersistenceStack {
         return self.persistentContainer.viewContext
     }
     
+    func newBackgroundContext() -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
+        
+        return context
+    }
+    
     // MARK: - Core Data Saving support
     
     func saveContext (context: NSManagedObjectContext = PersistenceStack.shared.viewContext) {

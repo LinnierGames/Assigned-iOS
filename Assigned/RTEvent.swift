@@ -5,6 +5,8 @@
 //  Created by Erick Sanchez on 4/5/18.
 //  Copyright © 2018 LinnierGames. All rights reserved.
 //
+//  A map between CalendarKit.Event and a EventKit.EKEvent
+//
 
 import Foundation
 import EventKit

@@ -11,6 +11,28 @@ import EventKit
 
 extension Session {
     
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    func setValuesIfNeededFor(event: EKEvent) {
+        
+        //TODO: chech for lastModified on event if update is needed
+        if true {
+            self.setValuesFor(event: event)
+        }
+    }
+    
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
     func setValuesFor(event: EKEvent) {
         let assignmentTitle = self.assignment.title
         
