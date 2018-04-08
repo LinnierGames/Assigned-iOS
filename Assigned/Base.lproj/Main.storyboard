@@ -83,11 +83,38 @@
                     <view key="view" contentMode="scaleToFill" id="pyJ-YA-aYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="34" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OpL-9N-pOK">
+                                <rect key="frame" x="15" y="316.5" width="345" height="34"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Info" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Klw-fx-V8V">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Info" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fge-Dt-Oeh">
+                                        <rect key="frame" x="0.0" y="20.5" width="345" height="13.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="OpL-9N-pOK" firstAttribute="leading" secondItem="PiL-5Z-e7A" secondAttribute="leading" constant="15" id="phv-7b-dvL"/>
+                            <constraint firstItem="OpL-9N-pOK" firstAttribute="centerY" secondItem="pyJ-YA-aYg" secondAttribute="centerY" id="pql-Iz-Kqg"/>
+                            <constraint firstItem="PiL-5Z-e7A" firstAttribute="trailing" secondItem="OpL-9N-pOK" secondAttribute="trailing" constant="15" id="rGd-Hf-bnf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="PiL-5Z-e7A"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Agenda" id="pOg-c2-n06"/>
+                    <connections>
+                        <outlet property="buildInfo" destination="Fge-Dt-Oeh" id="0ha-KD-UY3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydB-tX-PMK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

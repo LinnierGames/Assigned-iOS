@@ -10,6 +10,13 @@ import UIKit
 
 class AgendaViewController: UIViewController {
 
+    @IBOutlet weak var buildInfo: UILabel! {
+        didSet {
+            let gitMessage = PersistenceStack.shared.gitCommitDebugMessage()
+            buildInfo.text = gitMessage
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
