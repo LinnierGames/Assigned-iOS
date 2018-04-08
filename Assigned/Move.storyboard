@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Move Task-->
+        <!--Move-->
         <scene sceneID="6Fa-bF-UpH">
             <objects>
                 <tableViewController id="i56-Sw-EsN" customClass="MoveViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,7 +48,7 @@
                             <outlet property="delegate" destination="i56-Sw-EsN" id="tay-uF-H9o"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Move Task" prompt="select a folder to move 'item'" largeTitleDisplayMode="never" id="XKd-tW-zvy">
+                    <navigationItem key="navigationItem" title="Move" prompt="select a destination" largeTitleDisplayMode="never" id="XKd-tW-zvy">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="0Z6-kT-qZa">
                             <connections>
                                 <action selector="pressCancel:" destination="i56-Sw-EsN" id="msd-92-6Ms"/>

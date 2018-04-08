@@ -187,21 +187,26 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 self.viewModel.save()
                 self.setEditing(false, animated: true)
             }
-            .addButton(title: "Move to..") { (action) in
+            .addButton(title: "Move to..") { [unowned self] (action) in
                 guard let directoriesToMove = self.directoriesForSelectedIndexPaths() else {
                     fatalError("action button should be disabled if no rows are selected")
                 }
                 
                 self.performSegue(withIdentifier: "show move", sender: directoriesToMove)
             }
-            .addButton(title: "Delete..", style: .destructive) { (action) in
+            .addButton(title: "Delete..", style: .destructive) { [unowned self] (action) in
                 guard let directoriesToDelete = self.directoriesForSelectedIndexPaths() else {
                     fatalError("action button should be disabled if no rows are selected")
                 }
                 
-                self.directoryManager.delete(directories: directoriesToDelete)
-                self.viewModel.save()
-                self.setEditing(false, animated: true)
+                //TODO: undo
+                UIAlertController(title: "Delete Items", message: "are you sure you want to delete \(directoriesToDelete.count) items? This action cannot be undone", preferredStyle: .alert)
+                    .addConfirmationButton(title: "Delete", style: .destructive, with: { [unowned self] (action) in
+                        self.directoryManager.delete(directories: directoriesToDelete)
+                        self.viewModel.save()
+                        self.setEditing(false, animated: true)
+                    })
+                    .present(in: self)
             }
             .addCancelButton()
             .present(in: self)

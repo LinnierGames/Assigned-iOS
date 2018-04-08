@@ -302,6 +302,10 @@
 				E97226CA2073D52E00A021B4 /* Agenda */,
 				E97226CB2073D53C00A021B4 /* Plan */,
 				E97DF46720530BD80050EA21 /* Organize */,
+				E961D6662065F62800AD6EFC /* MoveViewController.swift */,
+				E96DC33A206B35CF000BB60A /* Move.storyboard */,
+				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
+				E972ADB820618A3D00B26980 /* SessionDetailedController.swift */,
 				E97DF437205305F80050EA21 /* Main.storyboard */,
 			);
 			name = "View Hierarchy";
@@ -441,10 +445,6 @@
 				E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */,
 				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
 				E98064602054E5E100073B33 /* Assigned Editor */,
-				E961D6662065F62800AD6EFC /* MoveViewController.swift */,
-				E96DC33A206B35CF000BB60A /* Move.storyboard */,
-				E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */,
-				E972ADB820618A3D00B26980 /* SessionDetailedController.swift */,
 			);
 			name = Organize;
 			sourceTree = "<group>";
