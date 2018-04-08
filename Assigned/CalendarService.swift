@@ -71,33 +71,35 @@ class CalendarService {
     private func updateStaleSessions() {
         let persistanceStore = PersistenceStack.shared
         let privateContext = persistanceStore.newBackgroundContext()
-        
-        privateContext.perform {
-            do {
-                let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-                let sessions = try privateContext.fetch(fetch)
-                
-                // Update stale sessions
-                let calendar = try! CalendarStack(delegate: nil)
-                sessions.forEach({ (aSession) in
-                    if let sessionEvent = calendar.event(for: aSession) {
-                        aSession.setValuesIfNeededFor(event: sessionEvent)
-                        
-                        // delete session
-                    } else {
-                        privateContext.delete(aSession)
-                    }
-                })
-                
-                let modifiedObjects = privateContext.updatedObjects.union(privateContext.deletedObjects) as! Set<Session>
-                
-                // Save and notify observers of new changes
-                persistanceStore.saveContext(context: privateContext)
-                NotificationCenter.default.post(name: Notification.Name.CalendarServiceDidUpdateStaleSessions, object: modifiedObjects)
-                
-            } catch {
-                fatalError(error.localizedDescription)
-            }
+
+        //TODO: this crashes on iphone but not the simulator :(
+//        privateContext.performAndWait {
+//            <#code#>
+//        }
+        do {
+            let fetch: NSFetchRequest<Session> = Session.fetchRequest()
+            let sessions = try privateContext.fetch(fetch)
+            
+            // Update stale sessions
+            let calendar = try! CalendarStack(delegate: nil)
+            sessions.forEach({ (aSession) in
+                if let sessionEvent = calendar.event(for: aSession) {
+                    aSession.setValuesIfNeededFor(event: sessionEvent)
+                    
+                    // delete session
+                } else {
+                    privateContext.delete(aSession)
+                }
+            })
+            
+            let modifiedObjects = privateContext.updatedObjects.union(privateContext.deletedObjects) as! Set<Session>
+            
+            // Save and notify observers of new changes
+            persistanceStore.saveContext(context: privateContext)
+            NotificationCenter.default.post(name: Notification.Name.CalendarServiceDidUpdateStaleSessions, object: modifiedObjects)
+            
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
     
