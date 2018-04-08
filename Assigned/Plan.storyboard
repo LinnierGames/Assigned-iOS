@@ -189,7 +189,6 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="61C-JG-MgR"/>
                         <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="NO"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="12"/>
                             </userDefinedRuntimeAttribute>

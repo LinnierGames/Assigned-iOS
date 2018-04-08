@@ -243,6 +243,20 @@ class TaskViewController: UIViewController {
 
         // Fetch subtasks
         tableSubtasks.reloadData()
+        self.updateSubtaskTableLength()
+    }
+    
+    private func updateSubtaskTableLength() {
+        
+        let cellHeight: CGFloat = self.tableSubtasks.rowHeight
+        let nSubtasks: Int = self.tableSubtasks.numberOfRows(inSection: 0)
+        
+        contraintTableViewHeight.constant = cellHeight * CGFloat(nSubtasks)
+        self.viewCard.layoutIfNeeded()
+        
+        let cardHeight: CGFloat = viewCard.height
+        scrollView.contentSize = CGSize(width: 0.0, height: TOP_MARGIN + cardHeight + BOTTOM_MARGIN)
+        self.view.layoutIfNeeded()
     }
 
     // MARK: - IBACTIONS
@@ -252,9 +266,11 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     @IBOutlet weak var constraintCardTopMargin: NSLayoutConstraint!
-
+    @IBOutlet weak var viewCard: UIView!
+    
     @IBOutlet weak var imageDraggable: UIImageView!
-
+    @IBOutlet weak var contraintTableViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressLeft(_ sender: Any) {
         // Save new Task
@@ -630,6 +646,8 @@ class TaskViewController: UIViewController {
         if editingMode.isCreating {
             textfieldTitle.becomeFirstResponder()
         }
+        
+        self.updateSubtaskTableLength()
     }
 }
 
@@ -699,6 +717,7 @@ extension TaskViewController: NSFetchedResultsControllerDelegate {
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableSubtasks.endUpdates()
+        updateSubtaskTableLength()
     }
 }
 
