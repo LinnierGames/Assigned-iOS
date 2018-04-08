@@ -30,7 +30,7 @@ extension CalendarStack {
      
      - parameter session: that will be linked to the new calendar event
      
-     - postcondition: events are saved
+     - postcondition: events are saved and the storeDidChange will be triggered
      
      - returns: the new calendar event
      */

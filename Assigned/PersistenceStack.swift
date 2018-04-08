@@ -50,7 +50,7 @@ struct PersistenceStack {
     // MARK: - Core Data Saving support
     
     func saveContext (context: NSManagedObjectContext = PersistenceStack.shared.viewContext) {
-        if context.hasChanges {
+        while context.hasChanges {
             context.performAndWait {
                 do {
                     try context.save()

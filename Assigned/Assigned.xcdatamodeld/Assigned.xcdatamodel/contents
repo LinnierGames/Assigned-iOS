@@ -22,7 +22,7 @@
     <entity name="Sessions" representedClassName="Session" syncable="YES">
         <attribute name="dayOfStartDate" optional="YES" transient="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="durationValue" attributeType="Double" defaultValueString="3600" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="eventIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventIdentifier" attributeType="String" syncable="YES"/>
         <attribute name="eventLastModifiedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="startDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="titleValue" optional="YES" attributeType="String" syncable="YES"/>

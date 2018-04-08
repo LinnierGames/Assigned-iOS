@@ -85,8 +85,8 @@ extension Session {
      - precondition: the session must already have a calendar event assigned to its id
      before saving on any context
      */
-    public override func didSave() {
-        super.didSave()
+    public override func willSave() {
+        super.willSave()
         
         guard self.isDeleted == false else { return }
         
@@ -99,7 +99,9 @@ extension Session {
         sessionEvent.setValuesFor(session: self)
         calendar.save(event: sessionEvent)
         
-        self.eventLastModifiedDate = sessionEvent.lastModifiedDate!
+        if self.eventLastModifiedDate != sessionEvent.lastModifiedDate {
+            self.eventLastModifiedDate = sessionEvent.lastModifiedDate!
+        }
     }
     
     /**

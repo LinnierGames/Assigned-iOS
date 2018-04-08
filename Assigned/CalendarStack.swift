@@ -50,8 +50,12 @@ class CalendarStack: NSObject {
         
         // Since the stock calendar app does not allow you to delete all calendars
         //stored locally, this is how we'll know if fetching for calendars was limited due to privacy
-        guard fetchedCalendars.count != 0 else {
-                throw CalendarStackErrors.PrivacyRestricted
+//        guard fetchedCalendars.count != 0 else {
+//            throw CalendarStackErrors.PrivacyRestricted
+//        }
+        
+        guard PrivacyService.Calendar.isAuthorized else {
+            throw CalendarStackErrors.PrivacyRestricted
         }
         
         self.calendars = fetchedCalendars

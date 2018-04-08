@@ -331,7 +331,6 @@
 			isa = PBXGroup;
 			children = (
 				E97ED771207986950021B651 /* CalendarService.swift */,
-				E95E139C207682CE00BF4276 /* CalendarStack.swift */,
 				E976BD522077CA430071B13F /* CalendarStack+Session.swift */,
 			);
 			name = EventKit;
@@ -406,9 +405,9 @@
 			children = (
 				E97DF46620530BCF0050EA21 /* Core Data */,
 				E9CA1C0F2053144100B8936E /* PersistenceStack.swift */,
-				E976BD512077C9CF0071B13F /* EventKit */,
 				E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */,
 				E95E139C207682CE00BF4276 /* CalendarStack.swift */,
+				E976BD512077C9CF0071B13F /* EventKit */,
 				E9C5B25B2072715600621B8C /* DirectoryManager.swift */,
 				E95E139A207675EB00BF4276 /* PrivacyService.swift */,
 			);

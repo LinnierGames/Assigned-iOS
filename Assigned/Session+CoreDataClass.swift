@@ -23,6 +23,8 @@ public class Session: NSManagedObject {
         self.titleValue = title
         self.startDate = startDate
         self.duration = duration
+        self.eventIdentifier = nil
+        self.eventLastModifiedDate = nil
         
         self.assignment = assignment
     }
