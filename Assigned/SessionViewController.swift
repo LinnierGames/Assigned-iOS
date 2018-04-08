@@ -67,6 +67,7 @@ class SessionViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var contraintCardHeight: NSLayoutConstraint!
     @IBOutlet weak var tableSessions: UITableView!
     
     @IBAction func pressAddSession(_ sender: Any) {
@@ -87,6 +88,9 @@ class SessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
+        self.view.layoutIfNeeded()
         
         updateUI()
     }

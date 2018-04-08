@@ -10,6 +10,9 @@ import UIKit
 
 class TaskNavigationViewController: UIViewController {
     
+    static let TOP_MARGIN: CGFloat = 48.0
+    static let BOTTOM_MARGIN: CGFloat = 58.0
+    
     private(set) var viewModel = TaskNavigationViewModel()
     
     @IBOutlet weak var scrollView: UIScrollView!

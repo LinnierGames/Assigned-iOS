@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Add sessions to user&apos;s calendar</string>
+	<string>Add sessions to user's calendar</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Read and update contact usage</string>
 	<key>UILaunchStoryboardName</key>
@@ -37,8 +37,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

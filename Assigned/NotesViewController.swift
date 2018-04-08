@@ -24,6 +24,7 @@ class NotesViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var contraintCardHeight: NSLayoutConstraint!
     @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var textviewNotes: UITextView!
     
@@ -31,6 +32,10 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
+        self.view.layoutIfNeeded()
+        
         let inputView = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
         inputView.addActionToRightButton(action: { [unowned self] (_) in
             self.textviewNotes.resignFirstResponder()

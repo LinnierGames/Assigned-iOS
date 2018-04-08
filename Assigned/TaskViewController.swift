@@ -52,9 +52,6 @@ class TaskViewController: UIViewController {
 
     private var viewState: ViewStates = .Hidden
 
-    private let TOP_MARGIN = CGFloat(48.0)
-    private let BOTTOM_MARGIN = CGFloat(58.0)
-
     // MARK: - RETURN VALUES
 
     // MARK: - VOID METHODS
@@ -98,7 +95,7 @@ class TaskViewController: UIViewController {
             animationBlock = { [weak self] in
                 guard let unwrappedSelf = self else { return }
 
-                unwrappedSelf.constraintCardTopMargin.constant = unwrappedSelf.TOP_MARGIN
+                unwrappedSelf.constraintCardTopMargin.constant = TaskNavigationViewController.TOP_MARGIN
                 unwrappedSelf.view.layoutIfNeeded()
             }
             animationCurve = .curveEaseIn
@@ -255,7 +252,7 @@ class TaskViewController: UIViewController {
         self.viewCard.layoutIfNeeded()
         
         let cardHeight: CGFloat = viewCard.height
-        scrollView.contentSize = CGSize(width: 0.0, height: TOP_MARGIN + cardHeight + BOTTOM_MARGIN)
+        scrollView.contentSize = CGSize(width: 0.0, height: TaskNavigationViewController.TOP_MARGIN + cardHeight + TaskNavigationViewController.BOTTOM_MARGIN)
         self.view.layoutIfNeeded()
     }
 
@@ -266,6 +263,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     @IBOutlet weak var constraintCardTopMargin: NSLayoutConstraint!
+    @IBOutlet weak var contraintCardHeight: NSLayoutConstraint!
     @IBOutlet weak var viewCard: UIView!
     
     @IBOutlet weak var imageDraggable: UIImageView!
@@ -602,6 +600,7 @@ class TaskViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         let titleCell = UISubtaskTableViewCell.Types.Textfield
         tableSubtasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
@@ -624,6 +623,7 @@ class TaskViewController: UIViewController {
 
         //FIXME: RxSwift, rename method to viewDidLoad()
         self.updateUI()
+        contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
 
         self.isShowingPriorityBox = false
     }
