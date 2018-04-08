@@ -48,7 +48,7 @@ struct TaskPanelViewModel {
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)
         switch selectedFilter {
         case .SelectedDay:
-            fetch.predicate = NSPredicate(date: self.selectedDate, for: "deadline")
+            fetch.predicate = NSPredicate(date: self.selectedDate, for: Task.StringKeys.deadline)
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortPriority,

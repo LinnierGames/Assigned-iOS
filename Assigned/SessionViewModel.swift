@@ -27,7 +27,7 @@ class SessionViewModel {
         }
         
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
+        fetch.sortDescriptors = [NSSortDescriptor(key: Session.StringKeys.startDate, ascending: false)]
         fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@", self.task)
         
         let fetchedRequestController = NSFetchedResultsController<Session>(

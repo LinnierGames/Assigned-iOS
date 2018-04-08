@@ -13,6 +13,12 @@ import CoreData
 extension Session {
     enum StringKeys {
         static let task = "task"
+        static let startDate = "startDate"
+        static let durationValue = "durationValue"
+        static let titleValue = "titleValue"
+        static let eventIdentifier = "eventIdentifier"
+        static let eventLastModifiedDate = "eventLastModifiedDate"
+        
         static let dayOfStartDate = "dayOfStartDate"
     }
 }

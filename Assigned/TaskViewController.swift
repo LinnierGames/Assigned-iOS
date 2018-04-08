@@ -62,7 +62,7 @@ class TaskViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "show move":
+            case UIStoryboardSegue.showMove:
                 guard
                     let navVc = segue.destination as? UINavigationController,
                     let moveVc = navVc.topViewController! as? MoveViewController
@@ -782,6 +782,7 @@ extension TaskViewController: MoveViewControllerDelegate {
 }
 
 // MARK: - UIStoryboardSegue
-extension UIStoryboardSegue {
-    static var ShowDetailedTask = "show detailed task"
+
+private extension UIStoryboardSegue {
+    static let showMove = "show move"
 }

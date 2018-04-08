@@ -22,7 +22,7 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
         }
         
         // Present PlanViewController
-        self.performSegue(withIdentifier: "show plan", sender: nil)
+        self.performSegue(withIdentifier: UIStoryboardSegue.showPlan, sender: nil)
         
         // Prevent selecting the placeholder UIViewController linked in the storyboard
         return false
@@ -39,5 +39,8 @@ class RootTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         self.delegate = self
     }
+}
 
+private extension UIStoryboardSegue {
+    static let showPlan = "show plan"
 }

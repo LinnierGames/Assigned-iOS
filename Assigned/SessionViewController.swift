@@ -43,13 +43,13 @@ class SessionViewController: UIViewController {
     }
     
     private func presentSessionDetail(for session: Session) {
-        self.performSegue(withIdentifier: "show session details", sender: session)
+        self.performSegue(withIdentifier: UIStoryboardSegue.showDetailedSession, sender: session)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "show session details":
+            case UIStoryboardSegue.showDetailedSession:
                 guard let vc = segue.destination as? SessionDetailedController else {
                     fatalError("destination is not set up as a SessionDetailedController")
                 }
@@ -233,4 +233,10 @@ extension SessionViewController: SessionDetailedControllerDelegate {
         dataModel.delete(session: session)
         dataModel.saveOnlyOnReading()
     }
+}
+
+// MARK: - UIStoryboardSegue
+
+private extension UIStoryboardSegue {
+    static let showDetailedSession = "show detailed session"
 }

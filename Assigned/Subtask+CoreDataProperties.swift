@@ -13,6 +13,8 @@ import CoreData
 extension Subtask {
     enum StringKeys {
         static let task = "task"
+        static let title = "title"
+        static let isCompleted = "isCompleted"
     }
 }
 

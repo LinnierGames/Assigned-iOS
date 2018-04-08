@@ -41,7 +41,7 @@ class TaskViewModel {
     lazy var fetchedSubtasks: NSFetchedResultsController<Subtask> = {
         let fetch: NSFetchRequest<Subtask> = Subtask.fetchRequest()
         fetch.predicate = NSPredicate(format: "\(Subtask.StringKeys.task) == %@", task)
-        fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title", ascending: true)]
+        fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: Subtask.StringKeys.title, ascending: true)]
 
         let fetchedRequestController = NSFetchedResultsController<Subtask>(
             fetchRequest: fetch,

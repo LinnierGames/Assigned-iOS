@@ -156,7 +156,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "embed task panel":
+            case UIStoryboardSegue.embedTaskPanel:
                 guard let vc = segue.destination as? TaskPanelViewController else {
                     fatalError("TaskPanelViewController was not set correctly in the storyboard")
                 }
@@ -164,7 +164,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
                 let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlanViewController.didPanTaskPanel(_:)))
                 vc.panGesture = panGesture
                 self.taskPanelViewController = vc
-            case "embed day planner":
+            case UIStoryboardSegue.embedDayPanel:
                 guard let vc = segue.destination as? CalendarDayViewController else {
                     fatalError("PlannerDayViewController was not set correctly in the storyboard")
                 }
@@ -259,5 +259,12 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
     //
     //        return calendar
     //    }
+}
+
+// MARK: - UIStoryboardSegue
+
+private extension UIStoryboardSegue {
+    static let embedTaskPanel = "embed task panel"
+    static let embedDayPanel = "embed day planner"
 }
 

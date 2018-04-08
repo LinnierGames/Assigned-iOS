@@ -79,9 +79,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         ]
         
         if let parent = self.currentDirectory {
-            fetch.predicate = NSPredicate(format: "parent == %@", parent)
+            fetch.predicate = NSPredicate(format: "\(Directory.StringKeys.parent) == %@", parent)
         } else {
-            fetch.predicate = NSPredicate(format: "parent == NULL")
+            fetch.predicate = NSPredicate(format: "\(Directory.StringKeys.parent) == NULL")
         }
         
         self.fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
@@ -107,7 +107,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
             switch identifier {
                 
             /** A folder */
-            case "show child directory":
+            case UIStoryboardSegue.showChildDirectory:
                 guard let vc = segue.destination as? OrganizeTableViewController else {
                     fatalError("segue did not have a destination of OrganizeTableViewController")
                 }
@@ -122,7 +122,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 vc.currentDirectory = selectedDirectory
                 
             /** an task Vc */
-            case "show detailed task":
+            case UIStoryboardSegue.showDetailedTask:
                 guard let navVc = segue.destination as? TaskNavigationViewController else {
                     fatalError("segue did not have a destination of TaskNavigationViewController")
                 }
@@ -140,7 +140,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 }
                 
             /** move vc */
-            case "show move":
+            case UIStoryboardSegue.showMove:
                 guard
                     let navVc = segue.destination as? UINavigationController,
                     let moveVc = navVc.topViewController! as? MoveViewController,
@@ -162,9 +162,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         if tableView.isEditing == false {
             let directory = fetchedResultsController.directory(at: indexPath)
             if directory.isFolder {
-                self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
+                self.performSegue(withIdentifier: UIStoryboardSegue.showChildDirectory, sender: indexPath)
             } else if directory.isTask {
-                self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedTask, sender: indexPath)
+                self.performSegue(withIdentifier: UIStoryboardSegue.showDetailedTask, sender: indexPath)
             }
         }
     }
@@ -192,7 +192,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                     fatalError("action button should be disabled if no rows are selected")
                 }
                 
-                self.performSegue(withIdentifier: "show move", sender: directoriesToMove)
+                self.performSegue(withIdentifier: UIStoryboardSegue.showMove, sender: directoriesToMove)
             }
             .addButton(title: "Delete..", style: .destructive) { [unowned self] (action) in
                 guard let directoriesToDelete = self.directoriesForSelectedIndexPaths() else {
@@ -285,6 +285,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
 
 }
 
+// MARK: - MoveViewControllerDelegate
+
 extension OrganizeTableViewController: MoveViewControllerDelegate {
     func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?) {
         self.viewModel.save()
@@ -292,6 +294,10 @@ extension OrganizeTableViewController: MoveViewControllerDelegate {
     }
 }
 
-fileprivate extension UIStoryboardSegue {
-    static var ShowChildDirectory = "show child directory"
+// MARK: - UIStoryboardSegue
+
+private extension UIStoryboardSegue {
+    static let showChildDirectory = "show child directory"
+    static let showDetailedTask = "show detailed task"
+    static let showMove = "show move"
 }

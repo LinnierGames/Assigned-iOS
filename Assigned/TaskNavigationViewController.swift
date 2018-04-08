@@ -94,19 +94,20 @@ class TaskNavigationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "embedded task vc":
+                
+            case UIStoryboardSegue.embedTaskVc:
                 guard let vc = segue.destination as? TaskViewController else {
                     fatalError("TaskViewController not set up in storyboard")
                 }
                 
                 vc.parentNavigationViewController = self
-            case "embedded sessions vc":
+            case UIStoryboardSegue.embedSessionVc:
                 guard let vc = segue.destination as? SessionViewController else {
                     fatalError("SessionViewController not set up in storyboard")
                 }
                 
                 vc.parentNavigationViewController = self
-            case "embedded notes vc":
+            case UIStoryboardSegue.embedNotesVc:
                 guard let vc = segue.destination as? NotesViewController else {
                     fatalError("NotesViewController not set up in storyboard")
                 }
@@ -146,8 +147,18 @@ class TaskNavigationViewController: UIViewController {
     }
 }
 
+// MARK: - UIScrollViewDelegate
+
 extension TaskNavigationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
+}
+
+// MARK: - UIStoryboardSegue
+
+private extension UIStoryboardSegue {
+    static let embedTaskVc = "embed task vc"
+    static let embedSessionVc = "embed sessions vc"
+    static let embedNotesVc = "embed notes vc"
 }

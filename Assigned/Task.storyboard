@@ -30,19 +30,19 @@
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-Ef-JLi">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
                                                 <connections>
-                                                    <segue destination="EUH-mU-ZxT" kind="embed" identifier="embedded task vc" id="4Ne-tj-Bec"/>
+                                                    <segue destination="EUH-mU-ZxT" kind="embed" identifier="embed task vc" id="4Ne-tj-Bec"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpV-Ig-nNY">
                                                 <rect key="frame" x="335" y="0.0" width="335" height="667"/>
                                                 <connections>
-                                                    <segue destination="4zc-4q-6Oa" kind="embed" identifier="embedded sessions vc" id="wpH-KK-qh4"/>
+                                                    <segue destination="4zc-4q-6Oa" kind="embed" identifier="embed sessions vc" id="wpH-KK-qh4"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hau-IP-nOf">
                                                 <rect key="frame" x="670" y="0.0" width="335" height="667"/>
                                                 <connections>
-                                                    <segue destination="YzO-0g-PvT" kind="embed" identifier="embedded notes vc" id="t9h-Db-boO"/>
+                                                    <segue destination="YzO-0g-PvT" kind="embed" identifier="embed notes vc" id="t9h-Db-boO"/>
                                                 </connections>
                                             </containerView>
                                         </subviews>
@@ -340,7 +340,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="coh-49-Xgt" userLabel="Effort">
-                                                                <rect key="frame" x="0.0" y="196.5" width="311" height="188.5"/>
+                                                                <rect key="frame" x="0.0" y="196.5" width="311" height="189"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mGU-ht-roC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="14.5"/>
@@ -360,7 +360,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cBz-pc-voL">
-                                                                        <rect key="frame" x="0.0" y="22.5" width="311" height="116"/>
+                                                                        <rect key="frame" x="0.0" y="22.5" width="311" height="116.5"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Ur2-ds-pjw">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="62"/>
@@ -488,20 +488,20 @@
                                                                                 </constraints>
                                                                             </stackView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-Ma-NS6" customClass="UITimeBox" customModule="Assigned" customModuleProvider="target">
-                                                                                <rect key="frame" x="0.0" y="62" width="311" height="54"/>
+                                                                                <rect key="frame" x="0.0" y="62" width="311" height="54.5"/>
                                                                                 <subviews>
                                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A3-cR-Yb0">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="54.5"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="311" height="55"/>
                                                                                         <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hrs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSj-LQ-YUG">
-                                                                                        <rect key="frame" x="0.0" y="20.5" width="311" height="14.5"/>
+                                                                                        <rect key="frame" x="0.0" y="21" width="311" height="14.5"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Effort" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gon-91-pht">
-                                                                                        <rect key="frame" x="0.0" y="38.5" width="311" height="12"/>
+                                                                                        <rect key="frame" x="0.0" y="39" width="311" height="12"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -532,7 +532,7 @@
                                                                         </constraints>
                                                                     </stackView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRz-0e-qJ2">
-                                                                        <rect key="frame" x="0.0" y="146.5" width="311" height="42"/>
+                                                                        <rect key="frame" x="0.0" y="147" width="311" height="42"/>
                                                                         <subviews>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GZ-MA-Y3M">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="311" height="42"/>
@@ -597,7 +597,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WLk-Bn-Lge" userLabel="Tasks">
-                                                                <rect key="frame" x="0.0" y="389" width="311" height="93"/>
+                                                                <rect key="frame" x="0.0" y="389.5" width="311" height="93"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3tz-3q-iHz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="311" height="0.0"/>
@@ -656,7 +656,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RS-Ek-TtM">
-                                                                <rect key="frame" x="0.0" y="486" width="311" height="24"/>
+                                                                <rect key="frame" x="0.0" y="486.5" width="311" height="23.5"/>
                                                                 <state key="normal" title="Delete Task">
                                                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
@@ -853,7 +853,7 @@
                     </view>
                     <connections>
                         <outlet property="tableSessions" destination="Zl4-Tm-gJW" id="NCe-hr-fmD"/>
-                        <segue destination="zfx-0l-IER" kind="presentation" identifier="show session details" modalTransitionStyle="crossDissolve" id="ZeC-vk-N6B"/>
+                        <segue destination="zfx-0l-IER" kind="presentation" identifier="show detailed session" modalTransitionStyle="crossDissolve" id="ZeC-vk-N6B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lRc-EF-Oz6" userLabel="First Responder" sceneMemberID="firstResponder"/>
