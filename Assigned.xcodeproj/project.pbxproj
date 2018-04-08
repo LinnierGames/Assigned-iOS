@@ -46,6 +46,7 @@
 		E97DF457205305F80050EA21 /* AssignedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF456205305F80050EA21 /* AssignedUITests.swift */; };
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
 		E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */; };
+		E97F84D9207A7D3500797074 /* PersistenceStack+InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */; };
 		E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645A205335C100073B33 /* Folder+CoreDataClass.swift */; };
 		E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */; };
 		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
@@ -148,6 +149,7 @@
 		E97DF458205305F80050EA21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceStack+InfoPlist.swift"; sourceTree = "<group>"; };
 		E980645A205335C100073B33 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCellModel.swift; sourceTree = "<group>"; };
 		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 			children = (
 				E97DF46620530BCF0050EA21 /* Core Data */,
 				E9CA1C0F2053144100B8936E /* PersistenceStack.swift */,
+				E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */,
 				E95E139C207682CE00BF4276 /* CalendarStack.swift */,
 				E9C5B25B2072715600621B8C /* DirectoryManager.swift */,
 				E95E139A207675EB00BF4276 /* PrivacyService.swift */,
@@ -470,6 +473,7 @@
 				E97DF42E205305F80050EA21 /* Resources */,
 				9869E05B8C9C88561F153150 /* [CP] Embed Pods Frameworks */,
 				89F5A3C8B29FBC9215CBBA88 /* [CP] Copy Pods Resources */,
+				E97F84D7207A7BAC00797074 /* Save build info into info.plist */,
 			);
 			buildRules = (
 			);
@@ -727,6 +731,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AssignedTests/Pods-AssignedTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		E97F84D7207A7BAC00797074 /* Save build info into info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Save build info into info.plist";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nif [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n\ngit_version=$(git rev-parse --verify HEAD)\ngit_branch=$(git symbolic-ref --short -q HEAD)\ngit_tag=$(git describe --tags --exact-match 2>/dev/null)\n\nbuild_time=$(date)\ngit_branch_or_tag=\"${git_branch:-${git_tag}}\"\n\ninfo_plist=\"${BUILT_PRODUCTS_DIR}/${EXECUTABLE_FOLDER_PATH}/Info.plist\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion '${git_branch_or_tag}-${git_version}'\" \"${info_plist}\"\n/usr/libexec/PlistBuddy -c \"Set :BuildTime '${build_time}'\" \"${info_plist}\"\n\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		EC2B9574D253ACAA648C067E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -798,6 +817,7 @@
 				E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
 				E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */,
+				E97F84D9207A7D3500797074 /* PersistenceStack+InfoPlist.swift in Sources */,
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
 				E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */,
