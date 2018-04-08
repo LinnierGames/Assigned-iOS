@@ -34,18 +34,18 @@ struct TaskPanelViewModel {
     
     var selectedFilter = SearchFilter.SelectedDay
     
-    var fetchedTasks: NSFetchedResultsController<Assignment>?
+    var fetchedTasks: NSFetchedResultsController<Task>?
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
     mutating func reloadTasks() {
-        let fetch: NSFetchRequest<Assignment> = Assignment.fetchRequest()
+        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
         
-        let sortDeadline = NSSortDescriptor(key: Assignment.StringKeys.deadline, ascending: false)
-        let sortPriority = NSSortDescriptor(key: Assignment.StringKeys.priorityValue, ascending: false)
-        let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Assignment.StringKeys.title, ascending: false)
+        let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: false)
+        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
+        let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)
         switch selectedFilter {
         case .SelectedDay:
             fetch.predicate = NSPredicate(date: self.selectedDate, for: "deadline")
@@ -74,7 +74,7 @@ struct TaskPanelViewModel {
             ]
         }
         
-        self.fetchedTasks = NSFetchedResultsController<Assignment>(
+        self.fetchedTasks = NSFetchedResultsController<Task>(
             fetchRequest: fetch,
             managedObjectContext: self.context,
             sectionNameKeyPath: nil, cacheName: nil

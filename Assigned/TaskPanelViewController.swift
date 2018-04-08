@@ -16,7 +16,7 @@ class TaskPanelViewController: UIViewController {
     
     lazy private(set) var viewModel = TaskPanelViewModel(delegate: self)
     
-    var fetchedResultsController: NSFetchedResultsController<Assignment>? {
+    var fetchedResultsController: NSFetchedResultsController<Task>? {
         get {
             return viewModel.fetchedTasks
         }
@@ -106,7 +106,7 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UITaskCollectionViewCell.Types.baseCell.cellIdentifier, for: indexPath) as! UITaskCollectionViewCell
         
-        let task = self.fetchedResultsController!.assignment(at: indexPath)
+        let task = self.fetchedResultsController!.task(at: indexPath)
         cell.configure(task)
         
         return cell

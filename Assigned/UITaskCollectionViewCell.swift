@@ -28,10 +28,10 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     
     // MARK: - VOID METHODS
     
-    func configure(_ assignment: Assignment) {
-        self.imagePriority.priority = assignment.priority
-        self.labelTitle.text = assignment.title
-        if let deadline = assignment.deadline {
+    func configure(_ task: Task) {
+        self.imagePriority.priority = task.priority
+        self.labelTitle.text = task.title
+        if let deadline = task.deadline {
             self.labelSubtitle.text = String(timeInterval: Date().timeIntervalSince(deadline))
         } else {
             self.labelSubtitle.text = nil

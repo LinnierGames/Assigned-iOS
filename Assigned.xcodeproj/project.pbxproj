@@ -25,7 +25,7 @@
 		E95E13A22076A39D00BF4276 /* RTEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13A12076A39D00BF4276 /* RTEvent.swift */; };
 		E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961D6662065F62800AD6EFC /* MoveViewController.swift */; };
 		E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E96DC33A206B35CF000BB60A /* Move.storyboard */; };
-		E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */; };
+		E9702BB6206B235E00EF1EB1 /* TaskNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702BB5206B235E00EF1EB1 /* TaskNavigationViewModel.swift */; };
 		E97226C32073D02B00A021B4 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226C22073D02B00A021B4 /* AgendaViewController.swift */; };
 		E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226C42073D0D500A021B4 /* RootTabBarController.swift */; };
 		E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97226C62073D43E00A021B4 /* PlanViewController.swift */; };
@@ -34,9 +34,9 @@
 		E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADB820618A3D00B26980 /* SessionDetailedController.swift */; };
 		E972ADBD20618A5F00B26980 /* SessionDetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */; };
 		E972ADBF20618EC500B26980 /* Temp.xib in Resources */ = {isa = PBXBuildFile; fileRef = E972ADBE20618EC500B26980 /* Temp.xib */; };
-		E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */; };
-		E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */; };
-		E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */; };
+		E972ADC12061925400B26980 /* TaskNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC02061925400B26980 /* TaskNavigationViewController.swift */; };
+		E972ADC32061933500B26980 /* SessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC22061933500B26980 /* SessionViewController.swift */; };
+		E972ADC52061935600B26980 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E972ADC42061935600B26980 /* NotesViewController.swift */; };
 		E976BD532077CA430071B13F /* CalendarStack+Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976BD522077CA430071B13F /* CalendarStack+Session.swift */; };
 		E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976BD542077CC870071B13F /* Session+EKEvent.swift */; };
 		E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF433205305F80050EA21 /* AppDelegate.swift */; };
@@ -47,16 +47,16 @@
 		E97DF44C205305F80050EA21 /* AssignedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF44B205305F80050EA21 /* AssignedTests.swift */; };
 		E97DF457205305F80050EA21 /* AssignedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF456205305F80050EA21 /* AssignedUITests.swift */; };
 		E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */; };
-		E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */; };
+		E97DF46E20530C2E0050EA21 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */; };
 		E97ED772207986950021B651 /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97ED771207986950021B651 /* CalendarService.swift */; };
 		E97F84D9207A7D3500797074 /* PersistenceStack+InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */; };
 		E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645A205335C100073B33 /* Folder+CoreDataClass.swift */; };
-		E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */; };
-		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
-		E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064612054E5F400073B33 /* AssignmentViewModel.swift */; };
-		E98064662054E68C00073B33 /* Assignment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98064652054E68C00073B33 /* Assignment.storyboard */; };
+		E980645D2054B1CC00073B33 /* TaskTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645C2054B1CC00073B33 /* TaskTableViewCellModel.swift */; };
+		E980645F2054B4FF00073B33 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* TaskViewController.swift */; };
+		E98064622054E5F400073B33 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064612054E5F400073B33 /* TaskViewModel.swift */; };
+		E98064662054E68C00073B33 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98064652054E68C00073B33 /* Task.storyboard */; };
 		E98064692054FAD700073B33 /* UISubtaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */; };
-		E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */; };
+		E988BD81206B01C100A09F49 /* SessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E988BD80206B01C100A09F49 /* SessionViewModel.swift */; };
 		E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */; };
 		E98E2F182055065100B1624A /* UISubtaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */; };
 		E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */; };
@@ -67,15 +67,15 @@
 		E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CD20588A0800C42821 /* UICheckbox.swift */; };
 		E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */; };
 		E9CA1C102053144100B8936E /* PersistenceStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C0F2053144100B8936E /* PersistenceStack.swift */; };
-		E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */; };
-		E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */; };
+		E9CA1C162053178500B8936E /* UITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C142053178500B8936E /* UITaskTableViewCell.swift */; };
+		E9CA1C172053178500B8936E /* UITaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9CA1C152053178500B8936E /* UITaskTableViewCell.xib */; };
 		E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */; };
 		E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */; };
 		E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */; };
 		E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */; };
 		E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */; };
 		E9D51D7F20532877006D8CEF /* Directory+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */; };
-		E9E6C9D9206F2FDD00566149 /* Assignment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */; };
+		E9E6C9D9206F2FDD00566149 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9D7206F2FDD00566149 /* Task+CoreDataProperties.swift */; };
 		E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */; };
 		E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */; };
 		E9E6C9E520701FF200566149 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */; };
@@ -125,7 +125,7 @@
 		E95E13A12076A39D00BF4276 /* RTEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RTEvent.swift; sourceTree = "<group>"; };
 		E961D6662065F62800AD6EFC /* MoveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveViewController.swift; sourceTree = "<group>"; };
 		E96DC33A206B35CF000BB60A /* Move.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Move.storyboard; sourceTree = "<group>"; };
-		E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewModel.swift; sourceTree = "<group>"; };
+		E9702BB5206B235E00EF1EB1 /* TaskNavigationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNavigationViewModel.swift; sourceTree = "<group>"; };
 		E97226C22073D02B00A021B4 /* AgendaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
 		E97226C42073D0D500A021B4 /* RootTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabBarController.swift; sourceTree = "<group>"; };
 		E97226C62073D43E00A021B4 /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
@@ -134,9 +134,9 @@
 		E972ADB820618A3D00B26980 /* SessionDetailedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedController.swift; sourceTree = "<group>"; };
 		E972ADBC20618A5F00B26980 /* SessionDetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionDetailedViewModel.swift; sourceTree = "<group>"; };
 		E972ADBE20618EC500B26980 /* Temp.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Temp.xib; sourceTree = "<group>"; };
-		E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNavigationViewController.swift; sourceTree = "<group>"; };
-		E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewController.swift; sourceTree = "<group>"; };
-		E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentNotesViewController.swift; sourceTree = "<group>"; };
+		E972ADC02061925400B26980 /* TaskNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskNavigationViewController.swift; sourceTree = "<group>"; };
+		E972ADC22061933500B26980 /* SessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewController.swift; sourceTree = "<group>"; };
+		E972ADC42061935600B26980 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		E976BD522077CA430071B13F /* CalendarStack+Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CalendarStack+Session.swift"; sourceTree = "<group>"; };
 		E976BD542077CC870071B13F /* Session+EKEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+EKEvent.swift"; sourceTree = "<group>"; };
 		E97DF430205305F80050EA21 /* Assigned.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assigned.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,16 +153,16 @@
 		E97DF456205305F80050EA21 /* AssignedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignedUITests.swift; sourceTree = "<group>"; };
 		E97DF458205305F80050EA21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E97ED771207986950021B651 /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
 		E97F84D8207A7D3500797074 /* PersistenceStack+InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistenceStack+InfoPlist.swift"; sourceTree = "<group>"; };
 		E980645A205335C100073B33 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentTableViewCellModel.swift; sourceTree = "<group>"; };
-		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
-		E98064612054E5F400073B33 /* AssignmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewModel.swift; sourceTree = "<group>"; };
-		E98064652054E68C00073B33 /* Assignment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assignment.storyboard; sourceTree = "<group>"; };
+		E980645C2054B1CC00073B33 /* TaskTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCellModel.swift; sourceTree = "<group>"; };
+		E980645E2054B4FF00073B33 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		E98064612054E5F400073B33 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
+		E98064652054E68C00073B33 /* Task.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Task.storyboard; sourceTree = "<group>"; };
 		E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISubtaskTableViewCell.swift; sourceTree = "<group>"; };
-		E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewModel.swift; sourceTree = "<group>"; };
+		E988BD80206B01C100A09F49 /* SessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionViewModel.swift; sourceTree = "<group>"; };
 		E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subtask+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubtaskTableViewCell.xib; sourceTree = "<group>"; };
 		E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITimeBox.swift; sourceTree = "<group>"; };
@@ -173,15 +173,15 @@
 		E9C5D5CD20588A0800C42821 /* UICheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICheckbox.swift; sourceTree = "<group>"; };
 		E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriorityBox.swift; sourceTree = "<group>"; };
 		E9CA1C0F2053144100B8936E /* PersistenceStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceStack.swift; sourceTree = "<group>"; };
-		E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAssignmentTableViewCell.swift; sourceTree = "<group>"; };
-		E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIAssignmentTableViewCell.xib; sourceTree = "<group>"; };
+		E9CA1C142053178500B8936E /* UITaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskTableViewCell.swift; sourceTree = "<group>"; };
+		E9CA1C152053178500B8936E /* UITaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITaskTableViewCell.xib; sourceTree = "<group>"; };
 		E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeTableViewController.swift; sourceTree = "<group>"; };
 		E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OragnizeViewModel.swift; sourceTree = "<group>"; };
 		E9CA1C1C20531F4300B8936E /* FetchedResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchedResultsTableViewController.swift; path = "../../../../Swift Source Files/FetchedResultsTableViewController.swift"; sourceTree = "<group>"; };
 		E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UniversalExtentions.swift; path = "../../../../Swift Source Files/UniversalExtentions.swift"; sourceTree = "<group>"; };
 		E9D51D7920532877006D8CEF /* DirectoryInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9D51D7B20532877006D8CEF /* Directory+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assignment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9D7206F2FDD00566149 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -251,8 +251,8 @@
 		E96DC337206B35A2000BB60A /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
-				E98064612054E5F400073B33 /* AssignmentViewModel.swift */,
-				E980645E2054B4FF00073B33 /* AssignmentViewController.swift */,
+				E98064612054E5F400073B33 /* TaskViewModel.swift */,
+				E980645E2054B4FF00073B33 /* TaskViewController.swift */,
 			);
 			name = Assignment;
 			sourceTree = "<group>";
@@ -260,8 +260,8 @@
 		E96DC338206B35AD000BB60A /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
-				E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */,
-				E972ADC22061933500B26980 /* AssignmentSessionViewController.swift */,
+				E988BD80206B01C100A09F49 /* SessionViewModel.swift */,
+				E972ADC22061933500B26980 /* SessionViewController.swift */,
 			);
 			name = Sessions;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 		E96DC339206B35B6000BB60A /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				E972ADC42061935600B26980 /* AssignmentNotesViewController.swift */,
+				E972ADC42061935600B26980 /* NotesViewController.swift */,
 			);
 			name = Notes;
 			sourceTree = "<group>";
@@ -423,8 +423,8 @@
 				E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */,
 				E980645A205335C100073B33 /* Folder+CoreDataClass.swift */,
 				E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */,
-				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
-				E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */,
+				E97DF46A20530C2E0050EA21 /* Task+CoreDataClass.swift */,
+				E9E6C9D7206F2FDD00566149 /* Task+CoreDataProperties.swift */,
 				E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */,
 				E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
@@ -452,12 +452,12 @@
 		E98064602054E5E100073B33 /* Assigned Editor */ = {
 			isa = PBXGroup;
 			children = (
-				E9702BB5206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift */,
-				E972ADC02061925400B26980 /* AssignmentNavigationViewController.swift */,
+				E9702BB5206B235E00EF1EB1 /* TaskNavigationViewModel.swift */,
+				E972ADC02061925400B26980 /* TaskNavigationViewController.swift */,
 				E96DC337206B35A2000BB60A /* Assignment */,
 				E96DC338206B35AD000BB60A /* Sessions */,
 				E96DC339206B35B6000BB60A /* Notes */,
-				E98064652054E68C00073B33 /* Assignment.storyboard */,
+				E98064652054E68C00073B33 /* Task.storyboard */,
 			);
 			name = "Assigned Editor";
 			sourceTree = "<group>";
@@ -465,9 +465,9 @@
 		E9CA1C112053173C00B8936E /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */,
-				E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */,
-				E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */,
+				E980645C2054B1CC00073B33 /* TaskTableViewCellModel.swift */,
+				E9CA1C142053178500B8936E /* UITaskTableViewCell.swift */,
+				E9CA1C152053178500B8936E /* UITaskTableViewCell.xib */,
 				E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */,
 				E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */,
 				E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */,
@@ -599,13 +599,13 @@
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
 				E95E137A2073EBC300BF4276 /* UITaskCollectionViewCell.xib in Resources */,
-				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
+				E9CA1C172053178500B8936E /* UITaskTableViewCell.xib in Resources */,
 				E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */,
 				E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */,
 				E98E2F182055065100B1624A /* UISubtaskTableViewCell.xib in Resources */,
 				E99D7C14205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib in Resources */,
 				E97226C92073D45B00A021B4 /* Plan.storyboard in Resources */,
-				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
+				E98064662054E68C00073B33 /* Task.storyboard in Resources */,
 				E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -810,28 +810,28 @@
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
 				E9E6C9E9207021FA00566149 /* Subtask+CoreDataProperties.swift in Sources */,
 				E97226CE2073E1D500A021B4 /* TaskPanelViewController.swift in Sources */,
-				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
+				E972ADC52061935600B26980 /* NotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E95E139D207682CE00BF4276 /* CalendarStack.swift in Sources */,
-				E9702BB6206B235E00EF1EB1 /* AssignmentNavigationViewModel.swift in Sources */,
+				E9702BB6206B235E00EF1EB1 /* TaskNavigationViewModel.swift in Sources */,
 				E95E13792073EBC300BF4276 /* UITaskCollectionViewCell.swift in Sources */,
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
-				E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */,
+				E980645F2054B4FF00073B33 /* TaskViewController.swift in Sources */,
 				E95E139B207675EB00BF4276 /* PrivacyService.swift in Sources */,
 				E9CA1C1B20531E3600B8936E /* OragnizeViewModel.swift in Sources */,
-				E980645D2054B1CC00073B33 /* AssignmentTableViewCellModel.swift in Sources */,
-				E9E6C9D9206F2FDD00566149 /* Assignment+CoreDataProperties.swift in Sources */,
+				E980645D2054B1CC00073B33 /* TaskTableViewCellModel.swift in Sources */,
+				E9E6C9D9206F2FDD00566149 /* Task+CoreDataProperties.swift in Sources */,
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
 				E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */,
-				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
+				E98064622054E5F400073B33 /* TaskViewModel.swift in Sources */,
 				E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */,
 				E95E139F2076A21A00BF4276 /* CalendarDayViewController.swift in Sources */,
 				E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
-				E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */,
+				E972ADC32061933500B26980 /* SessionViewController.swift in Sources */,
 				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,
 				E98064692054FAD700073B33 /* UISubtaskTableViewCell.swift in Sources */,
-				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
+				E97DF46E20530C2E0050EA21 /* Task+CoreDataClass.swift in Sources */,
 				E95E13A22076A39D00BF4276 /* RTEvent.swift in Sources */,
 				E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */,
 				E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */,
@@ -840,8 +840,8 @@
 				E9CA1C1D20531F4300B8936E /* FetchedResultsTableViewController.swift in Sources */,
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
 				E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */,
-				E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */,
-				E972ADC12061925400B26980 /* AssignmentNavigationViewController.swift in Sources */,
+				E988BD81206B01C100A09F49 /* SessionViewModel.swift in Sources */,
+				E972ADC12061925400B26980 /* TaskNavigationViewController.swift in Sources */,
 				E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */,
 				E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */,
 				E97226C32073D02B00A021B4 /* AgendaViewController.swift in Sources */,
@@ -853,7 +853,7 @@
 				E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */,
 				E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */,
 				E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */,
-				E9CA1C162053178500B8936E /* UIAssignmentTableViewCell.swift in Sources */,
+				E9CA1C162053178500B8936E /* UITaskTableViewCell.swift in Sources */,
 				E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */,
 				E95E13992075BB3B00BF4276 /* CalendarTableView.swift in Sources */,
 			);

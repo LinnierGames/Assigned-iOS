@@ -10,17 +10,17 @@ import UIKit
 
 class UIPriorityBox: UIImageView {
     
-    var priority: Assignment.Priorities = .None {
+    var priority: Task.Priorities = .None {
         didSet {
             switch priority {
             case .None:
-                self.image = UIImage.assignmentPriorityNone
+                self.image = UIImage.taskPriorityNone
             case .Low:
-                self.image = UIImage.assignmentPriorityLow
+                self.image = UIImage.taskPriorityLow
             case .Medium:
-                self.image = UIImage.assignmentPriorityMedium
+                self.image = UIImage.taskPriorityMedium
             case .High:
-                self.image = UIImage.assignmentPriorityHigh
+                self.image = UIImage.taskPriorityHigh
             }
         }
     }

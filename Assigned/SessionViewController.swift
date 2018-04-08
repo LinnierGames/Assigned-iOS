@@ -1,5 +1,5 @@
 //
-//  AssignmentSessionViewController.swift
+//  SessionViewController.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/20/18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AssignmentSessionViewController: UIViewController {
+class SessionViewController: UIViewController {
     
     private lazy var viewModel: SessionViewModel = {
         guard let model = self.parentNavigationViewController?.viewModel else {
@@ -19,18 +19,18 @@ class AssignmentSessionViewController: UIViewController {
         return SessionViewModel(with: model, delegate: self)
     }()
     
-    private var dataModel: AssignmentNavigationViewModel {
+    private var dataModel: TaskNavigationViewModel {
         return viewModel.parentModel
     }
     
-    weak var parentNavigationViewController: AssignmentNavigationViewController?
+    weak var parentNavigationViewController: TaskNavigationViewController?
     
-    var assignment: Assignment {
+    var task: Task {
         set {
-            dataModel.assignment = newValue
+            dataModel.task = newValue
         }
         get {
-            return dataModel.assignment
+            return dataModel.task
         }
     }
 
@@ -99,10 +99,10 @@ class AssignmentSessionViewController: UIViewController {
 
 // MARK: - UITableViewDataSource, UITableViewDelegate
 
-extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDelegate {
+extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let fetchedResults = viewModel.fetchedAssignmentSessions {
+        if let fetchedResults = viewModel.fetchedSessions {
             
             //TODO: create sections for each day of the week
             return fetchedResults.sections?.count ?? 0
@@ -114,7 +114,7 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let fetchedResults = viewModel.fetchedAssignmentSessions {
+        if let fetchedResults = viewModel.fetchedSessions {
             return fetchedResults.sections?[section].objects?.count ?? 0
             
         // privacy message cell
@@ -124,7 +124,7 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let fetchedResults = viewModel.fetchedAssignmentSessions {
+        if let fetchedResults = viewModel.fetchedSessions {
             if let fetchedSections = fetchedResults.sections {
                 guard
                     let fetchedSessions = fetchedSections[section].objects as? [Session]?,
@@ -147,12 +147,12 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let fetchedResults = viewModel.fetchedAssignmentSessions {
+        if let fetchedResults = viewModel.fetchedSessions {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
             
             let session = fetchedResults.session(at: indexPath)
             
-            //TODO: udpate if the assignment title gets updated
+            //TODO: udpate if the task title gets updated
             cell.textLabel!.text = session.title
             
             let startingDate = String(date: session.startDate, dateStyle: .short, timeStyle: .short)
@@ -178,18 +178,18 @@ extension AssignmentSessionViewController: UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let fetchedAssignments = self.viewModel.fetchedAssignmentSessions else {
+        guard let fetchedTasks = self.viewModel.fetchedSessions else {
             return assertionFailure("table view was populated with some rows but the fetched results controller became nil when selceting a row")
         }
         
-        let session = fetchedAssignments.session(at: indexPath)
+        let session = fetchedTasks.session(at: indexPath)
         self.presentSessionDetail(for: session)
     }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
 
-extension AssignmentSessionViewController: NSFetchedResultsControllerDelegate {
+extension SessionViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableSessions.beginUpdates()
@@ -224,7 +224,7 @@ extension AssignmentSessionViewController: NSFetchedResultsControllerDelegate {
 
 // MARK: - SessionDetailedControllerDelegate
 
-extension AssignmentSessionViewController: SessionDetailedControllerDelegate {
+extension SessionViewController: SessionDetailedControllerDelegate {
     func session(controller: SessionDetailedController, didFinishEditing session: Session) {
         dataModel.saveOnlyOnReading()
     }

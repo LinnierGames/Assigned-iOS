@@ -16,7 +16,7 @@ public class Session: NSManagedObject {
     required public convenience init(title: String?,
                      startDate: Date,
                      duration: TimeInterval = 1,
-                     assignment: Assignment,
+                     task: Task,
                      in context: NSManagedObjectContext) {
         self.init(context: context)
         
@@ -26,11 +26,11 @@ public class Session: NSManagedObject {
         self.eventIdentifier = nil
         self.eventLastModifiedDate = nil
         
-        self.assignment = assignment
+        self.task = task
     }
     
     public func copying() -> Session {
-        let copiedSession = type(of: self).init(title: self.title, startDate: self.startDate, duration: self.duration, assignment: self.assignment, in: self.managedObjectContext!)
+        let copiedSession = type(of: self).init(title: self.title, startDate: self.startDate, duration: self.duration, task: self.task, in: self.managedObjectContext!)
         
         return copiedSession
     }
@@ -52,7 +52,7 @@ public class Session: NSManagedObject {
             if let sessionTitle = self.titleValue {
                 return sessionTitle
             } else {
-                return self.assignment.title
+                return self.task.title
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  AssignmentTableViewCellModel.swift
+//  TaskTableViewCellModel.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/10/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct AssignmentTableViewCellModel {
+struct TaskTableViewCellModel {
     
     
     

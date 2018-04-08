@@ -1,5 +1,5 @@
 //
-//  Assignments+CoreDataProperties.swift
+//  Tasks+CoreDataProperties.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/30/18.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-extension Assignment {
+extension Task {
     enum StringKeys {
         static let title = "title"
         static let durationValue = "durationValue"
@@ -22,10 +22,10 @@ extension Assignment {
     }
 }
 
-extension Assignment {
+extension Task {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Assignment> {
-        return NSFetchRequest<Assignment>(entityName: "Assignments")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
+        return NSFetchRequest<Task>(entityName: "Tasks")
     }
 
     @NSManaged public var deadline: Date?
@@ -41,7 +41,7 @@ extension Assignment {
 }
 
 // MARK: Generated accessors for sessions
-extension Assignment {
+extension Task {
 
     @objc(addSessionsObject:)
     @NSManaged public func addToSessions(_ value: Session)
@@ -58,7 +58,7 @@ extension Assignment {
 }
 
 // MARK: Generated accessors for subtasks
-extension Assignment {
+extension Task {
 
     @objc(addSubtasksObject:)
     @NSManaged public func addToSubtasks(_ value: Subtask)

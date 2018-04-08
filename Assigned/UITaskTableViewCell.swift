@@ -1,5 +1,5 @@
 //
-//  UIAssignmentTableViewCell.swift
+//  UITaskTableViewCell.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/9/18.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-@objc protocol UIAssignmentTableViewCellDelegate: class {
-    @objc optional func assignment(cell: UIAssignmentTableViewCell, didPressCheckbox button: UIButton)
+@objc protocol UITaskTableViewCellDelegate: class {
+    @objc optional func task(cell: UITaskTableViewCell, didPressCheckbox button: UIButton)
 }
 
-class UIAssignmentTableViewCell: UITableViewCell {
+class UITaskTableViewCell: UITableViewCell {
     
     private var projectImage = #imageLiteral(resourceName: "file-1")
     
@@ -29,10 +29,10 @@ class UIAssignmentTableViewCell: UITableViewCell {
             }
         }
         
-        static var baseCell = Info(id: "assignment", nibTitle: "UIAssignmentTableViewCell")
+        static var baseCell = Info(id: "task", nibTitle: "UITaskTableViewCell")
         //TODO: Layout notes/extended cells in nibs
-//        static var notesCell = Info(id: "assignment notes", nibTitle: "UIAssignmentTableViewCell-Notes")
-//        static var extendedCell = Info(id: "assignment extended", nibTitle: "UIAssignmentTableViewCell-Extended")
+//        static var notesCell = Info(id: "task notes", nibTitle: "UITaskTableViewCell-Notes")
+//        static var extendedCell = Info(id: "task extended", nibTitle: "UITaskTableViewCell-Extended")
     }
     
     @IBOutlet weak var labelTitle: UILabel!
@@ -40,22 +40,22 @@ class UIAssignmentTableViewCell: UITableViewCell {
     @IBOutlet weak var labelTasks: UILabel!
     @IBOutlet weak var imagePriority: UIPriorityBox!
     
-    weak var delegate: UIAssignmentTableViewCellDelegate?
+    weak var delegate: UITaskTableViewCellDelegate?
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
-    func configure(_ assignment: Assignment) {
+    func configure(_ task: Task) {
         self.accessoryType = .none
-        self.labelTitle.text = assignment.title
-        if assignment.isCompleted {
-            self.buttonCheckbox.setImage(UIImage.assignmentCheckboxCompleted, for: .normal)
+        self.labelTitle.text = task.title
+        if task.isCompleted {
+            self.buttonCheckbox.setImage(UIImage.taskCheckboxCompleted, for: .normal)
         } else {
-            self.buttonCheckbox.setImage(UIImage.assignmentCheckbox, for: .normal)
+            self.buttonCheckbox.setImage(UIImage.taskCheckbox, for: .normal)
         }
-        self.imagePriority.priority = assignment.priority
-        if let deadline = assignment.deadline {
+        self.imagePriority.priority = task.priority
+        if let deadline = task.deadline {
             self.labelDeadline.text = String(date: deadline, dateStyle: .short)
             
             //TODO: deadline formating
@@ -66,14 +66,14 @@ class UIAssignmentTableViewCell: UITableViewCell {
         } else {
             self.labelDeadline.text = nil
         }
-        //TODO: configure the assignment cell of all assignment properties
+        //TODO: configure the task cell of all task properties
     }
     
     func configure(_ folder: Folder) {
         self.accessoryType = .disclosureIndicator
         self.labelTitle.text = folder.title
         self.buttonCheckbox.setImage(folderImage, for: .normal)
-        //TODO: configure the assignment cell of all assignment properties
+        //TODO: configure the task cell of all task properties
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -86,7 +86,7 @@ class UIAssignmentTableViewCell: UITableViewCell {
     
     @IBOutlet weak var buttonCheckbox: UIButton!
     @IBAction func pressCheckbox(_ sender: UIButton) {
-        delegate?.assignment?(cell: self, didPressCheckbox: sender)
+        delegate?.task?(cell: self, didPressCheckbox: sender)
     }
     
     // MARK: - LIFE CYCLE
@@ -98,27 +98,27 @@ class UIAssignmentTableViewCell: UITableViewCell {
 }
 
 extension UIImage {
-    static var assignmentCheckbox: UIImage {
+    static var taskCheckbox: UIImage {
         return #imageLiteral(resourceName: "checkbox")
     }
     
-    static var assignmentCheckboxCompleted: UIImage {
+    static var taskCheckboxCompleted: UIImage {
         return #imageLiteral(resourceName: "checkbox-completed")
     }
     
-    static var assignmentPriorityNone: UIImage {
+    static var taskPriorityNone: UIImage {
         return #imageLiteral(resourceName: "priority-none")
     }
     
-    static var assignmentPriorityLow: UIImage {
+    static var taskPriorityLow: UIImage {
         return #imageLiteral(resourceName: "priority-low")
     }
     
-    static var assignmentPriorityMedium: UIImage {
+    static var taskPriorityMedium: UIImage {
         return #imageLiteral(resourceName: "priority-medium")
     }
     
-    static var assignmentPriorityHigh: UIImage {
+    static var taskPriorityHigh: UIImage {
         return #imageLiteral(resourceName: "priority-high")
     }
 }

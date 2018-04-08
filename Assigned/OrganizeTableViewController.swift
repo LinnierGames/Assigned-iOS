@@ -40,7 +40,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     // MARK: Table View Data Source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UIAssignmentTableViewCell.Types.baseCell.cellIdentifier) as! UIAssignmentTableViewCell?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.baseCell.cellIdentifier) as! UITaskTableViewCell?
             else {
                 assertionFailure("custom cell did not load")
                 
@@ -53,9 +53,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         case is Folder:
             let folder = directory.folder
             cell.configure(folder)
-        case is Assignment:
-            let assignment = directory.assignment
-            cell.configure(assignment)
+        case is Task:
+            let task = directory.task
+            cell.configure(task)
         default:
             break
         }
@@ -121,22 +121,22 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
                 vc.currentDirectory = selectedDirectory
                 
-            /** an assignment Vc */
-            case "show detailed assignment":
-                guard let navVc = segue.destination as? AssignmentNavigationViewController else {
-                    fatalError("segue did not have a destination of AssignmentNavigationViewController")
+            /** an task Vc */
+            case "show detailed task":
+                guard let navVc = segue.destination as? TaskNavigationViewController else {
+                    fatalError("segue did not have a destination of TaskNavigationViewController")
                 }
                 
-                // modifying an exsiting assignment or adding a new one?
+                // modifying an exsiting task or adding a new one?
                 if let indexPath = sender as? IndexPath {
                     let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
-                    navVc.assignment = selectedDirectory.assignment
+                    navVc.task = selectedDirectory.task
                     navVc.editingMode = .Read
                     
-                // adding a new assignment
+                // adding a new task
                 } else {
                     navVc.editingMode = .Create
-                    navVc.assignmentParentDirectory = self.currentDirectory
+                    navVc.taskParentDirectory = self.currentDirectory
                 }
                 
             /** move vc */
@@ -163,8 +163,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
             let directory = fetchedResultsController.directory(at: indexPath)
             if directory.isFolder {
                 self.performSegue(withIdentifier: UIStoryboardSegue.ShowChildDirectory, sender: indexPath)
-            } else if directory.isAssignment {
-                self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedAssignment, sender: indexPath)
+            } else if directory.isTask {
+                self.performSegue(withIdentifier: UIStoryboardSegue.ShowDetailedTask, sender: indexPath)
             }
         }
     }
@@ -226,8 +226,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 .addButton(title: "Add") { (action) in
                     if let newTitle = alertAddTitle.inputField.text {
                         switch type {
-                        case is Assignment.Type:
-                            self.viewModel.addAssignment(with: newTitle)
+                        case is Task.Type:
+                            self.viewModel.addTask(with: newTitle)
                         case is Folder.Type:
                             self.viewModel.addFolder(with: newTitle)
                         default: break
@@ -239,8 +239,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
         
         UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            .addButton(title: "Assignment", with: { [unowned self] (action) in
-                self.performSegue(withIdentifier: "show detailed assignment", sender: nil)
+            .addButton(title: "Task", with: { [unowned self] (action) in
+                self.performSegue(withIdentifier: "show detailed task", sender: nil)
             })
             .addButton(title: "Folder", with: { (action) in
                 add(Folder.self)
@@ -261,7 +261,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
             self.title = currentDirectory!.info.title
         }
         
-        let baseCell = UIAssignmentTableViewCell.Types.baseCell
+        let baseCell = UITaskTableViewCell.Types.baseCell
         tableView.register(baseCell.nib, forCellReuseIdentifier: baseCell.cellIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
@@ -287,6 +287,6 @@ extension OrganizeTableViewController: MoveViewControllerDelegate {
     }
 }
 
-extension UIStoryboardSegue {
+fileprivate extension UIStoryboardSegue {
     static var ShowChildDirectory = "show child directory"
 }

@@ -36,7 +36,7 @@ class SessionDetailedController: UIViewController {
         //TODO: refactor to model
         
         // Title
-        let sessionTask = session.assignment
+        let sessionTask = session.task
         
         textfieldTitle.text = session.title
         labelTaskTitle.text = sessionTask.title

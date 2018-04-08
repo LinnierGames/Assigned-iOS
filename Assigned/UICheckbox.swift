@@ -12,10 +12,10 @@ import UIKit
 class UICheckbox: UIButton {
     
     @IBInspectable
-    var uncheckedImage: UIImage = UIImage.assignmentCheckbox
+    var uncheckedImage: UIImage = UIImage.taskCheckbox
     
     @IBInspectable
-    var checkedImage: UIImage = UIImage.assignmentCheckboxCompleted
+    var checkedImage: UIImage = UIImage.taskCheckboxCompleted
     
     var isChecked: Bool = false {
         didSet {

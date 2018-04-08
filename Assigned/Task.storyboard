@@ -13,10 +13,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Assignment Navigation View Controller-->
+        <!--Task Navigation View Controller-->
         <scene sceneID="k0Q-zN-Jtw">
             <objects>
-                <viewController id="LZs-bp-GQ5" customClass="AssignmentNavigationViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LZs-bp-GQ5" customClass="TaskNavigationViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IIh-Ip-Pv2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-Ef-JLi">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
                                                 <connections>
-                                                    <segue destination="EUH-mU-ZxT" kind="embed" identifier="embedded assignment vc" id="4Ne-tj-Bec"/>
+                                                    <segue destination="EUH-mU-ZxT" kind="embed" identifier="embedded task vc" id="4Ne-tj-Bec"/>
                                                 </connections>
                                             </containerView>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpV-Ig-nNY">
@@ -75,9 +75,9 @@
                         <outlet property="constraintScrollViewWidth" destination="I0o-Yf-lJ8" id="huL-y7-4NH"/>
                         <outlet property="scrollView" destination="9Ao-Sv-ppO" id="gT8-av-aKC"/>
                         <outlet property="stackView" destination="21p-GP-UgE" id="XPj-lX-Ayv"/>
-                        <outlet property="viewAssignment" destination="IKY-Ef-JLi" id="TIq-N1-PJn"/>
                         <outlet property="viewNotes" destination="Hau-IP-nOf" id="G0h-Ry-1j8"/>
                         <outlet property="viewSessions" destination="SpV-Ig-nNY" id="ePw-3v-uPa"/>
+                        <outlet property="viewTask" destination="IKY-Ef-JLi" id="TIq-N1-PJn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VqI-DN-ct7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -87,7 +87,7 @@
         <!--Text Field Delegate-->
         <scene sceneID="j4u-jd-b9r">
             <objects>
-                <viewController modalPresentationStyle="overFullScreen" id="EUH-mU-ZxT" customClass="AssignmentViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="overFullScreen" id="EUH-mU-ZxT" customClass="TaskViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kVY-Ax-CWb">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,7 +495,7 @@
                                                                                         <color key="backgroundColor" red="0.0" green="0.99143940210000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                     </button>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hrs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZSj-LQ-YUG">
-                                                                                        <rect key="frame" x="0.0" y="20" width="311" height="14.5"/>
+                                                                                        <rect key="frame" x="0.0" y="20.5" width="311" height="14.5"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                         <nil key="textColor"/>
                                                                                         <nil key="highlightedColor"/>
@@ -661,7 +661,7 @@
                                                                     <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
-                                                                    <action selector="pressDeleteAssignment:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="XUW-Ir-M5R"/>
+                                                                    <action selector="pressDeleteTask:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="XUW-Ir-M5R"/>
                                                                 </connections>
                                                             </button>
                                                             <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="P6Q-RE-6Yg">
@@ -752,10 +752,10 @@
             </objects>
             <point key="canvasLocation" x="-1863.2" y="245.12743628185908"/>
         </scene>
-        <!--Assignment Session View Controller-->
+        <!--Session View Controller-->
         <scene sceneID="Cdn-sf-qZL">
             <objects>
-                <viewController id="4zc-4q-6Oa" customClass="AssignmentSessionViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4zc-4q-6Oa" customClass="SessionViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vu5-yY-2NB">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -775,7 +775,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="assignment title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBd-yG-9bJ">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="task title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBd-yG-9bJ">
                                                         <rect key="frame" x="0.0" y="24" width="297" height="10.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                         <nil key="textColor"/>
@@ -860,10 +860,10 @@
             </objects>
             <point key="canvasLocation" x="-1119.2" y="253.2233883058471"/>
         </scene>
-        <!--Assignment Notes View Controller-->
+        <!--Notes View Controller-->
         <scene sceneID="wZN-LD-IB1">
             <objects>
-                <viewController id="YzO-0g-PvT" customClass="AssignmentNotesViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="YzO-0g-PvT" customClass="NotesViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SnO-r2-D3f">
                         <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -883,7 +883,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="assignment title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vx-am-Bor">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="task title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vx-am-Bor">
                                                         <rect key="frame" x="0.0" y="24" width="297" height="12"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                         <nil key="textColor"/>
@@ -922,7 +922,7 @@
                         <viewLayoutGuide key="safeArea" id="8jH-MT-usc"/>
                     </view>
                     <connections>
-                        <outlet property="labelAssignmentTitle" destination="5Vx-am-Bor" id="cPo-0m-Qvb"/>
+                        <outlet property="labelTaskTitle" destination="5Vx-am-Bor" id="cPo-0m-Qvb"/>
                         <outlet property="textviewNotes" destination="FL6-Pc-lhT" id="Lor-pM-wIL"/>
                     </connections>
                 </viewController>

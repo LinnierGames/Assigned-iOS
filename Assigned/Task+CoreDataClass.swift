@@ -10,8 +10,8 @@
 import Foundation
 import CoreData
 
-@objc(Assignment)
-public class Assignment: DirectoryInfo {
+@objc(Task)
+public class Task: DirectoryInfo {
     
     public override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
         super.init(entity: entity, insertInto: context)
@@ -30,7 +30,7 @@ public class Assignment: DirectoryInfo {
     
     init(title: String, effort: Float,
                      deadline: Date? = nil,
-                     priority: Assignment.Priorities = .None,
+                     priority: Task.Priorities = .None,
                      notes: String = "",
                      isCompleted: Bool = false,
                      parent directory: Directory?,
@@ -45,31 +45,31 @@ public class Assignment: DirectoryInfo {
         self.isCompleted = isCompleted
     }
     
-    public override func copying() -> Assignment {
-        let copiedAssignment = super.copying() as! Assignment
+    public override func copying() -> Task {
+        let copiedTask = super.copying() as! Task
         
         // Copy self's properties to copied
-        copiedAssignment.deadline = self.deadline
-        copiedAssignment.durationValue = self.durationValue
-        copiedAssignment.isCompleted = self.isCompleted
-        copiedAssignment.priorityValue = self.priorityValue
-        copiedAssignment.notes = self.notes
+        copiedTask.deadline = self.deadline
+        copiedTask.durationValue = self.durationValue
+        copiedTask.isCompleted = self.isCompleted
+        copiedTask.priorityValue = self.priorityValue
+        copiedTask.notes = self.notes
         
         if let selfSessions = self.sessions {
             for aSession in selfSessions {
                 let copiedSession = aSession.copying()
-                copiedAssignment.addToSessions(copiedSession)
+                copiedTask.addToSessions(copiedSession)
             }
         }
         
         if let selfSubtasks = self.subtasks {
             for aSubtask in selfSubtasks {
                 let copiedSubtask = aSubtask.copying()
-                copiedAssignment.addToSubtasks(copiedSubtask)
+                copiedTask.addToSubtasks(copiedSubtask)
             }
         }
         
-        return copiedAssignment
+        return copiedTask
     }
     
     enum Priorities: Int, Equatable, CustomStringConvertible {
@@ -147,22 +147,22 @@ public class Assignment: DirectoryInfo {
     }
     
     public override var description: String {
-        return "Assignment"
+        return "Task"
     }
 }
 
 extension Directory {
-    var assignment: Assignment {
-        return self.info as! Assignment
+    var task: Task {
+        return self.info as! Task
     }
     
-    var isAssignment: Bool {
-        return self.info is Assignment
+    var isTask: Bool {
+        return self.info is Task
     }
 }
 
 extension NSFetchedResultsController {
-    @objc func assignment(at indexPath: IndexPath) -> Assignment {
-        return self.object(at: indexPath) as! Assignment
+    @objc func task(at indexPath: IndexPath) -> Task {
+        return self.object(at: indexPath) as! Task
     }
 }

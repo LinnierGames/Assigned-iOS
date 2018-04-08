@@ -1,5 +1,5 @@
 //
-//  AssignmentSessionViewModel.swift
+//  SessionViewModel.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/27/18.
@@ -15,9 +15,9 @@ class SessionViewModel {
     
     weak var delegate: SessionViewModelDelegate?
         
-    unowned var parentModel: AssignmentNavigationViewModel
+    unowned var parentModel: TaskNavigationViewModel
     
-    lazy var fetchedAssignmentSessions: NSFetchedResultsController<Session>? = {
+    lazy var fetchedSessions: NSFetchedResultsController<Session>? = {
         
         // Privacy Restriction
         guard PrivacyService.Calendar.isAuthorized else {
@@ -28,7 +28,7 @@ class SessionViewModel {
         
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
         fetch.sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
-        fetch.predicate = NSPredicate(format: "assignment == %@", self.assignment)
+        fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@", self.task)
         
         let fetchedRequestController = NSFetchedResultsController<Session>(
             fetchRequest: fetch,
@@ -46,7 +46,7 @@ class SessionViewModel {
         return fetchedRequestController
     }()
     
-    init(with parentModel: AssignmentNavigationViewModel, delegate: SessionViewModelDelegate) {
+    init(with parentModel: TaskNavigationViewModel, delegate: SessionViewModelDelegate) {
         self.parentModel = parentModel
         self.delegate = delegate
     }
@@ -57,8 +57,8 @@ class SessionViewModel {
         return self.parentModel.context
     }
     
-    var assignment: Assignment {
-        return self.parentModel.assignment
+    var task: Task {
+        return self.parentModel.task
     }
     
     var isAuthorizedForCalendarEvents: Bool {

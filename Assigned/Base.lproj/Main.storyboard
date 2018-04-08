@@ -44,7 +44,7 @@
                         <outlet property="buttonEdit" destination="DpL-j0-AXx" id="b7i-sh-2z8"/>
                         <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
                         <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
-                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed assignment" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
+                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
                         <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="TfI-52-Dm8"/>
                     </connections>
                 </tableViewController>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="1948" y="-35"/>
         </scene>
-        <!--Assignment-->
+        <!--Task-->
         <scene sceneID="jzG-GQ-ua3">
             <objects>
-                <viewControllerPlaceholder storyboardName="Assignment" id="rdH-3M-SjS" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Task" id="rdH-3M-SjS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcJ-iW-DU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2110" y="314"/>

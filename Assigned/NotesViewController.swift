@@ -1,5 +1,5 @@
 //
-//  AssignmentNotesViewController.swift
+//  NotesViewController.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/20/18.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class AssignmentNotesViewController: UIViewController {
+class NotesViewController: UIViewController {
     
-    weak var parentModel: AssignmentNavigationViewModel!
+    weak var parentModel: TaskNavigationViewModel!
     
-    private var assignment: Assignment {
+    private var task: Task {
         get {
-            return parentModel.assignment
+            return parentModel.task
         }
     }
     
@@ -24,7 +24,7 @@ class AssignmentNotesViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var labelAssignmentTitle: UILabel!
+    @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var textviewNotes: UITextView!
     
     // MARK: - LIFE CYCLE
@@ -42,16 +42,16 @@ class AssignmentNotesViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //TODO: RxSwift
-        self.textviewNotes.text = assignment.notes
-        self.labelAssignmentTitle.text = assignment.title
+        self.textviewNotes.text = task.notes
+        self.labelTaskTitle.text = task.title
     }
 }
 
-extension AssignmentNotesViewController: UITextViewDelegate {
+extension NotesViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         
         //TODO: RxSwift
-        assignment.notes = textView.text
+        task.notes = textView.text
         parentModel.saveOnlyOnReading()
     }
 }

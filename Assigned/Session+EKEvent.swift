@@ -35,10 +35,10 @@ extension Session {
      - returns: <#Sed do eiusmod tempor.#>
      */
     func setValuesFor(event: EKEvent) {
-        let assignmentTitle = self.assignment.title
+        let taskTitle = self.task.title
         
-        // Event title has default session title, which is the assignment title
-        if event.title == assignmentTitle {
+        // Event title has default session title, which is the task title
+        if event.title == taskTitle {
             self.clearTitle()
         } else {
             self.title = event.title

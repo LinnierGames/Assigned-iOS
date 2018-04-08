@@ -1,5 +1,5 @@
 //
-//  AssignmentNavigationViewController.swift
+//  TaskNavigationViewController.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/20/18.
@@ -8,34 +8,34 @@
 
 import UIKit
 
-class AssignmentNavigationViewController: UIViewController {
+class TaskNavigationViewController: UIViewController {
     
-    private(set) var viewModel = AssignmentNavigationViewModel()
+    private(set) var viewModel = TaskNavigationViewModel()
     
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var assignment: Assignment {
+    var task: Task {
         set {
-            self.viewModel.assignment = newValue
+            self.viewModel.task = newValue
         }
         get {
-            return self.viewModel.assignment
+            return self.viewModel.task
         }
     }
     
-    var assignmentParentDirectory: Directory? {
+    var taskParentDirectory: Directory? {
         set {
             
             // fetch the same parent in the different context
             if let parent = newValue {
                 let newParent = viewModel.context.object(with: parent.objectID) as! Directory
-                assignment.parentDirectory = newParent
+                task.parentDirectory = newParent
             } else {
-                assignment.parentDirectory = nil
+                task.parentDirectory = nil
             }
         }
         get {
-            return assignment.parentDirectory
+            return task.parentDirectory
         }
     }
     
@@ -94,21 +94,21 @@ class AssignmentNavigationViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "embedded assignment vc":
-                guard let vc = segue.destination as? AssignmentViewController else {
-                    fatalError("AssignmentViewController not set up in storyboard")
+            case "embedded task vc":
+                guard let vc = segue.destination as? TaskViewController else {
+                    fatalError("TaskViewController not set up in storyboard")
                 }
                 
                 vc.parentNavigationViewController = self
             case "embedded sessions vc":
-                guard let vc = segue.destination as? AssignmentSessionViewController else {
-                    fatalError("AssignmentSessionViewController not set up in storyboard")
+                guard let vc = segue.destination as? SessionViewController else {
+                    fatalError("SessionViewController not set up in storyboard")
                 }
                 
                 vc.parentNavigationViewController = self
             case "embedded notes vc":
-                guard let vc = segue.destination as? AssignmentNotesViewController else {
-                    fatalError("AssignmentNotesViewController not set up in storyboard")
+                guard let vc = segue.destination as? NotesViewController else {
+                    fatalError("NotesViewController not set up in storyboard")
                 }
                 
                 vc.parentModel = self.viewModel
@@ -118,14 +118,14 @@ class AssignmentNavigationViewController: UIViewController {
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let model = object as? AssignmentNavigationViewModel, model === viewModel, keyPath! == "editingMode" {
+        if let model = object as? TaskNavigationViewModel, model === viewModel, keyPath! == "editingMode" {
             updateUI()
         }
     }
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var viewAssignment: UIView!
+    @IBOutlet weak var viewTask: UIView!
     @IBOutlet weak var viewSessions: UIView!
     @IBOutlet weak var viewNotes: UIView!
     
@@ -146,7 +146,7 @@ class AssignmentNavigationViewController: UIViewController {
     }
 }
 
-extension AssignmentNavigationViewController: UIScrollViewDelegate {
+extension TaskNavigationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }

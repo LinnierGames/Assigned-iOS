@@ -12,7 +12,7 @@ import CoreData
 
 extension Subtask {
     enum StringKeys {
-        static let assignment = "assignment"
+        static let task = "task"
     }
 }
 
@@ -24,6 +24,6 @@ extension Subtask {
 
     @NSManaged public var isCompleted: Bool
     @NSManaged public var title: String
-    @NSManaged public var assignment: Assignment
+    @NSManaged public var task: Task
 
 }

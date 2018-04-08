@@ -12,7 +12,7 @@ import CoreData
 
 extension Session {
     enum StringKeys {
-        static let assignment = "assignment"
+        static let task = "task"
         static let dayOfStartDate = "dayOfStartDate"
     }
 }
@@ -37,7 +37,7 @@ extension Session {
     @NSManaged public var durationValue: Double
     @NSManaged public var startDate: Date
     @NSManaged public var titleValue: String?
-    @NSManaged public var assignment: Assignment
+    @NSManaged public var task: Task
     @NSManaged public var eventIdentifier: String!
     @NSManaged public var eventLastModifiedDate: Date?
 

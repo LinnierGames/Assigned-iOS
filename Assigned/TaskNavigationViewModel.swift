@@ -1,21 +1,21 @@
 //
-//  AssignmentNavigationViewModel.swift
+//  TaskNavigationViewModel.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/27/18.
-//  Copyright © 2018 LinnierGames. All rights/Users/ericksanc/Developer/My Projects/Assigned/Universal iOS/Assigned/Assigned/AssignmentNavigationViewModel.swift reserved.
+//  Copyright © 2018 LinnierGames. All rights/Users/ericksanc/Developer/My Projects/Assigned/Universal iOS/Assigned/Assigned/TaskNavigationViewModel.swift reserved.
 //
 
 import Foundation
 import CoreData
 
-class AssignmentNavigationViewModel: NSObject {
+class TaskNavigationViewModel: NSObject {
     
     @objc dynamic var editingMode: CRUD = .Create {
         didSet {
             switch editingMode {
             case .Create:
-                self.createNewAssignment()
+                self.createNewTask()
             case .Read:
                 break
             case .Update:
@@ -26,9 +26,9 @@ class AssignmentNavigationViewModel: NSObject {
         }
     }
     
-    var assignment: Assignment!
+    var task: Task!
     
-    private var readingAssignmentValue: Assignment?
+    private var readingTaskValue: Task?
     
     private lazy var calendar: CalendarStack = {
         do {
@@ -65,15 +65,15 @@ class AssignmentNavigationViewModel: NSObject {
     }
     
     private func updateContextToMainContext() {
-        guard let readingAssignment = readingAssignmentValue else {
+        guard let readingTask = readingTaskValue else {
             fatalError("discard changes was called without an orignal returning point")
         }
         
         // switch back to the main context
         self.context = self.mainContext()
         
-        // revert the assignment back to the readingAssignment, which was set before editing started
-        assignment = readingAssignment
+        // revert the task back to the readingTask, which was set before editing started
+        task = readingTask
     }
     
     private func pushChangesToParentAndSave() {
@@ -96,7 +96,7 @@ class AssignmentNavigationViewModel: NSObject {
     }
     
     func addSubtask(_ subtask: Subtask) {
-        subtask.assignment = self.assignment
+        subtask.task = self.task
     }
     
     func delete(subtask: Subtask) {
@@ -114,14 +114,14 @@ class AssignmentNavigationViewModel: NSObject {
         let newSession = Session(
             title: nil,
             startDate: date,
-            assignment: self.assignment, in: self.context)
+            task: self.task, in: self.context)
         addSession(session: newSession)
         
         return newSession
     }
     
     func addSession(session: Session) {
-        session.assignment = self.assignment
+        session.task = self.task
         
         calendar.createEvent(for: session)
     }
@@ -137,7 +137,7 @@ class AssignmentNavigationViewModel: NSObject {
 
 // MARK: - CalendarStackDelegate
 
-extension AssignmentNavigationViewModel: CalendarStackDelegate {
+extension TaskNavigationViewModel: CalendarStackDelegate {
     func calendar(stack: CalendarStack, didUpdateStaleSessions updatedSessions: Set<Session>) {
         
         // Removes merge conflicts when saving after CalendarService has made its own changes from a stale Session update
@@ -149,32 +149,32 @@ extension AssignmentNavigationViewModel: CalendarStackDelegate {
 
 // MARK: - View Controller Get/Set
 
-extension AssignmentNavigationViewModel {
+extension TaskNavigationViewModel {
     
     /**
      Creates a blank context with a new assigned MO
      */
-    func createNewAssignment() {
+    func createNewTask() {
         
         // set context to edits context
         self.updateContextToANewEditContext()
         
         //FIXME: get the parent directory
-        let newAssignment = Assignment(
+        let newTask = Task(
             title: "",
             effort: 0,
             parent: nil,
             in: self.context
         )
         
-        self.assignment = newAssignment
+        self.task = newTask
     }
     
     /**
      pushes changes from the editing context to its parent, the main context,
      and saves the parent context.
      */
-    func saveNewAssignment() {
+    func saveNewTask() {
         self.pushChangesToParentAndSave()
     }
     
@@ -182,25 +182,25 @@ extension AssignmentNavigationViewModel {
      creates an editing context with a fetched copy of the assigned MO from the
      main context
      
-     - precondition: assignmentValue must already be set
+     - precondition: taskValue must already be set
      */
     func beginEdits() {
         
         // create edit context
         self.updateContextToANewEditContext()
         
-        // fetch a copy of assignment, from view context, to new edit context
-        readingAssignmentValue = assignment
-        assignment = self.context.object(with: assignment.objectID) as! Assignment
+        // fetch a copy of task, from view context, to new edit context
+        readingTaskValue = task
+        task = self.context.object(with: task.objectID) as! Task
     }
     
     /**
      the trash button was pressed
      */
-    func deleteAssignment() {
+    func deleteTask() {
         
         // discard any changes
-        self.context.delete(assignment)
+        self.context.delete(task)
         
         // push changes to parent and save the parent
         self.pushChangesToParentAndSave()
@@ -214,7 +214,7 @@ extension AssignmentNavigationViewModel {
     }
     
     /**
-     pushes changes from the editing context to its parent, just like saveNewAssignment(),
+     pushes changes from the editing context to its parent, just like saveNewTask(),
      but also switches back from the edit context to the main context.
      
      - warning: the edit context is deleted after pushing changes up to its parent

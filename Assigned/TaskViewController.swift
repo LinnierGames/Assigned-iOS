@@ -1,5 +1,5 @@
 //
-//  AssignmentViewController.swift
+//  TaskViewController.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/10/18.
@@ -9,24 +9,24 @@
 import UIKit
 import CoreData
 
-class AssignmentViewController: UIViewController {
+class TaskViewController: UIViewController {
 
-    private lazy var viewModel: AssignmentViewModel = {
+    private lazy var viewModel: TaskViewModel = {
         guard let model = self.parentNavigationViewController?.viewModel else {
             fatalError("parent navigation view controller was not set")
         }
         
-        return AssignmentViewModel(with: model, delegate: self)
+        return TaskViewModel(with: model, delegate: self)
     }()
 
-    var dataModel: AssignmentNavigationViewModel {
+    var dataModel: TaskNavigationViewModel {
         return self.viewModel.parentModel
     }
 
-    weak var parentNavigationViewController: AssignmentNavigationViewController?
+    weak var parentNavigationViewController: TaskNavigationViewController?
 
-    var assignment: Assignment {
-        return viewModel.assignment
+    var task: Task {
+        return viewModel.task
     }
 
     var editingMode: CRUD {
@@ -70,7 +70,7 @@ class AssignmentViewController: UIViewController {
                         fatalError("MoveTableViewController was not set in storyboard")
                 }
 
-                moveVc.items = [assignment.directory]
+                moveVc.items = [task.directory]
                 moveVc.delegate = self
             default: break
             }
@@ -164,15 +164,15 @@ class AssignmentViewController: UIViewController {
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
         }
 
-        // Update assignment properties
+        // Update task properties
 
         //TODO: RxSwift
-        textfieldTitle.text = assignment.title
-        buttonCheckbox.isChecked = assignment.isCompleted
-        imagePriorityBox.priority = assignment.priority
+        textfieldTitle.text = task.title
+        buttonCheckbox.isChecked = task.isCompleted
+        imagePriorityBox.priority = task.priority
         buttonBreadcrum.setTitleWithoutAnimation(viewModel.parentTitle, for: .normal)
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
-        deadlinePicker.date = assignment.deadline ?? Date()
+        deadlinePicker.date = task.deadline ?? Date()
 
         if editingMode.isReading {
             buttonDeadline.setTitleWithoutAnimation(viewModel.deadlineTitle ?? "no deadline", for: .normal)
@@ -199,7 +199,7 @@ class AssignmentViewController: UIViewController {
             self.imageDraggable.alpha = 1.0
         }
 
-        // edit assignment properties
+        // edit task properties
         if self.editingMode.isUpdating || self.editingMode.isCreating {
             buttonDeadline.setTitleColor(.buttonTint, for: .normal)
             buttonDeadline.isUserInteractionEnabled = true
@@ -209,7 +209,7 @@ class AssignmentViewController: UIViewController {
             } else {
                 showEffortSliderAnimations()
             }
-            effortSliderValue = assignment.duration
+            effortSliderValue = task.duration
             labelEffort.text = viewModel.effortTitle
 
         // reading only
@@ -224,20 +224,20 @@ class AssignmentViewController: UIViewController {
             }
 
             //TODO: update the effort chart
-            viewEffortCompleted.duration = assignment.completedDurationOfSessions
-            viewEffortPlanned.duration = assignment.plannedDurationOfSessions
+            viewEffortCompleted.duration = task.completedDurationOfSessions
+            viewEffortPlanned.duration = task.plannedDurationOfSessions
             
             // Hide the unplanned section if no duration is set
-            if assignment.duration <= 0 {
+            if task.duration <= 0 {
                 viewEffortUnplanned.isHidden = true
                 viewEffortTotal.isHidden = true
             } else {
                 viewEffortUnplanned.isHidden = false
                 viewEffortTotal.isHidden = false
-                viewEffortUnplanned.duration = assignment.unplannedDuration
+                viewEffortUnplanned.duration = task.unplannedDuration
             }
-            print(assignment.completedDurationOfSessions, assignment.plannedDurationOfSessions, assignment.unplannedDuration, assignment.durationValue)
-            viewEffortTotal.duration = assignment.durationValue
+            print(task.completedDurationOfSessions, task.plannedDurationOfSessions, task.unplannedDuration, task.durationValue)
+            viewEffortTotal.duration = task.durationValue
             labelEffort.text = nil
         }
 
@@ -257,12 +257,12 @@ class AssignmentViewController: UIViewController {
 
     @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressLeft(_ sender: Any) {
-        // Save new Assignment
+        // Save new Task
         if editingMode.isCreating {
             dismiss()
 
             //save
-            dataModel.saveNewAssignment()
+            dataModel.saveNewTask()
             self.dismissViewController()
 
         // Save edits
@@ -337,8 +337,8 @@ class AssignmentViewController: UIViewController {
     }
 
     @IBOutlet weak var buttonDelete: UIButton!
-    @IBAction func pressDeleteAssignment(_ sender: Any) {
-        dataModel.deleteAssignment()
+    @IBAction func pressDeleteTask(_ sender: Any) {
+        dataModel.deleteTask()
         self.dismissViewController()
     }
 
@@ -367,7 +367,7 @@ class AssignmentViewController: UIViewController {
         buttonCheckbox.isChecked.invert()
 
         //TODO: RxSwift
-        assignment.isCompleted = buttonCheckbox.isChecked
+        task.isCompleted = buttonCheckbox.isChecked
         dataModel.saveOnlyOnReading()
     }
 
@@ -391,7 +391,7 @@ class AssignmentViewController: UIViewController {
 
     @IBOutlet weak var imagePriorityBox: UIPriorityBox!
     @IBAction func pressA_Priority(_ sender: UIButton) {
-        guard let newPriority = Assignment.Priorities(rawValue: sender.tag) else {
+        guard let newPriority = Task.Priorities(rawValue: sender.tag) else {
             fatalError("setting a priority to an unsupported button.tag value")
         }
 
@@ -417,7 +417,7 @@ class AssignmentViewController: UIViewController {
         if self.isShowingDeadlinePicker {
             self.isShowingDeadlinePicker = false
         } else {
-            if assignment.deadline == nil {
+            if task.deadline == nil {
                 viewModel.setDeadlineToToday()
 
                 //TODO: RxSwift
@@ -498,9 +498,9 @@ class AssignmentViewController: UIViewController {
                 }
             }
             
-            // update slider and assignment
+            // update slider and task
             sliderEffort.value = newSliderValue
-            assignment.duration = newSliderValue
+            task.duration = newSliderValue
             labelEffort.text = viewModel.effortTitle
         }
         get {
@@ -626,7 +626,7 @@ class AssignmentViewController: UIViewController {
      */
     private func theViewDidAppear(_ animated: Bool) {
 
-        // present the keyboard on new assignments
+        // present the keyboard on new tasks
         if editingMode.isCreating {
             textfieldTitle.becomeFirstResponder()
         }
@@ -634,9 +634,9 @@ class AssignmentViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension AssignmentViewController: UITableViewDataSource {
+extension TaskViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.fetchedAssignmentSubtasks.fetchedObjects?.count ?? 0
+        return viewModel.fetchedSubtasks.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -646,7 +646,7 @@ extension AssignmentViewController: UITableViewDataSource {
             return UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
 
-        let subtask = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
+        let subtask = viewModel.fetchedSubtasks.subtask(at: indexPath)
         cell.configure(subtask)
         cell.delegate = self
 
@@ -655,12 +655,12 @@ extension AssignmentViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension AssignmentViewController: UITableViewDelegate {
+extension TaskViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            let subtask = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
+            let subtask = viewModel.fetchedSubtasks.subtask(at: indexPath)
             dataModel.delete(subtask: subtask)
             dataModel.saveOnlyOnReading()
         default: break
@@ -669,7 +669,7 @@ extension AssignmentViewController: UITableViewDelegate {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-extension AssignmentViewController: NSFetchedResultsControllerDelegate {
+extension TaskViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableSubtasks.beginUpdates()
@@ -703,7 +703,7 @@ extension AssignmentViewController: NSFetchedResultsControllerDelegate {
 }
 
 // MARK: - UITaskTableViewCellDelegate
-extension AssignmentViewController: UISubtaskTableViewCellDelegate {
+extension TaskViewController: UISubtaskTableViewCellDelegate {
     func subtask(cell: UISubtaskTableViewCell, didTapCheckBox newState: Bool) {
         guard
             let indexPath = tableSubtasks.indexPath(for: cell)
@@ -711,7 +711,7 @@ extension AssignmentViewController: UISubtaskTableViewCellDelegate {
             return assertionFailure("index path for cell not found")
         }
 
-        let task = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
+        let task = viewModel.fetchedSubtasks.subtask(at: indexPath)
         task.isCompleted = newState
         dataModel.saveOnlyOnReading()
     }
@@ -723,7 +723,7 @@ extension AssignmentViewController: UISubtaskTableViewCellDelegate {
 }
 
 // MARK: - UITextFieldDelegate
-extension AssignmentViewController: UITextFieldDelegate {
+extension TaskViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === textfieldTitle {
@@ -749,7 +749,7 @@ extension AssignmentViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField === textfieldTitle {
             if let text = textField.text {
-                assignment.title = text
+                task.title = text
                 dataModel.saveOnlyOnReading()
             }
         }
@@ -758,7 +758,7 @@ extension AssignmentViewController: UITextFieldDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
-extension AssignmentViewController: UIScrollViewDelegate {
+extension TaskViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         dismissKeyboardOnly()
     }
@@ -773,7 +773,7 @@ extension AssignmentViewController: UIScrollViewDelegate {
 }
 
 // MARK: - MoveViewControllerDelegate
-extension AssignmentViewController: MoveViewControllerDelegate {
+extension TaskViewController: MoveViewControllerDelegate {
     func move(viewController: MoveViewController, didMove items: [Directory], to destination: Directory?) {
         //TODO: RxSwift
         buttonBreadcrum.setTitle(viewModel.parentTitle, for: .normal)
@@ -783,5 +783,5 @@ extension AssignmentViewController: MoveViewControllerDelegate {
 
 // MARK: - UIStoryboardSegue
 extension UIStoryboardSegue {
-    static var ShowDetailedAssignment = "show detailed assignment"
+    static var ShowDetailedTask = "show detailed task"
 }

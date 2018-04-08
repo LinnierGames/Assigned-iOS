@@ -1,5 +1,5 @@
 //
-//  AssignmentViewModel.swift
+//  TaskViewModel.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/10/18.
@@ -9,15 +9,15 @@
 import Foundation
 import CoreData
 
-class AssignmentViewModel {
+class TaskViewModel {
 
     typealias AssignedViewModelDelegate = NSFetchedResultsControllerDelegate
 
     weak var delegate: AssignedViewModelDelegate?
 
-    unowned var parentModel: AssignmentNavigationViewModel
+    unowned var parentModel: TaskNavigationViewModel
 
-    init(with parentModel: AssignmentNavigationViewModel, delegate: AssignedViewModelDelegate) {
+    init(with parentModel: TaskNavigationViewModel, delegate: AssignedViewModelDelegate) {
         self.delegate = delegate
         self.parentModel = parentModel
     }
@@ -38,9 +38,9 @@ class AssignmentViewModel {
 
 //    private var persistance = PersistenceStack.shared
 
-    lazy var fetchedAssignmentSubtasks: NSFetchedResultsController<Subtask> = {
+    lazy var fetchedSubtasks: NSFetchedResultsController<Subtask> = {
         let fetch: NSFetchRequest<Subtask> = Subtask.fetchRequest()
-        fetch.predicate = NSPredicate(format: "\(Subtask.StringKeys.assignment) == %@", assignment)
+        fetch.predicate = NSPredicate(format: "\(Subtask.StringKeys.task) == %@", task)
         fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title", ascending: true)]
 
         let fetchedRequestController = NSFetchedResultsController<Subtask>(
@@ -68,31 +68,31 @@ class AssignmentViewModel {
     // MARK: - LIFE CYCLE
 }
 
-extension AssignmentViewModel {
+extension TaskViewModel {
 
     /**
      - warning: read this value only after you've set the editingMode
 
      - parameter <#bar#>: <#Consectetur adipisicing elit.#>
      */
-    var assignment: Assignment {
-        return self.parentModel.assignment
+    var task: Task {
+        return self.parentModel.task
     }
 
     var parentTitle: String? {
-        if let parentDirectoryInfo = assignment.parentInfo {
+        if let parentDirectoryInfo = task.parentInfo {
             return parentDirectoryInfo.title
         } else {
             return "Braindump"
         }
     }
 
-    func setPriority(to value: Assignment.Priorities) {
-        assignment.priority = value
+    func setPriority(to value: Task.Priorities) {
+        task.priority = value
     }
 
     var deadlineSubtext: String? {
-        if let deadline = assignment.deadline {
+        if let deadline = task.deadline {
             let daysUntilDeadline = deadline.timeIntervalSinceNow
 
             //TODO: User Preferences
@@ -111,7 +111,7 @@ extension AssignmentViewModel {
     }
 
     var deadlineTitle: String? {
-        if let deadline = assignment.deadline {
+        if let deadline = task.deadline {
             return String(date: deadline, dateStyle: .medium, timeStyle: .short)
         } else {
             return nil
@@ -119,19 +119,19 @@ extension AssignmentViewModel {
     }
 
     func updateDeadline(to date: Date?) {
-        self.assignment.deadline = date
+        self.task.deadline = date
     }
 
     //TODO: Add deadline presets
     func setDeadlineToToday() {
-        assignment.deadline = Date()
+        task.deadline = Date()
     }
 
     var effortTitle: String {
-        if assignment.durationValue == 0 {
+        if task.durationValue == 0 {
             return "no effort"
         } else {
-            let nHours = TimeInterval(assignment.durationValue)
+            let nHours = TimeInterval(task.durationValue)
 
             return String(timeInterval: nHours, units: .day, .hour, .minute)
         }

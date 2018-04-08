@@ -34,7 +34,7 @@ class MoveViewController: UITableViewController {
     
     private lazy var foldersInDepth: [DepthFolder] = {
         
-        //TODO: move assignments into projects (use DirectoryInfo instead of Folder)
+        //TODO: move tasks into projects (use DirectoryInfo instead of Folder)
         let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
         fetch.predicate = NSPredicate(format: "\(Folder.StringKeys.directory).\(Directory.StringKeys.parent) == nil")
         

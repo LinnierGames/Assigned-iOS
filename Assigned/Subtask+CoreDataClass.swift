@@ -23,7 +23,7 @@ public class Subtask: NSManagedObject {
         let copiedSubtask = type(of: self).init(title: self.title, in: self.managedObjectContext!)
         
         // Copy self's properties to copied
-        copiedSubtask.assignment = self.assignment
+        copiedSubtask.task = self.task
         copiedSubtask.isCompleted = self.isCompleted
         
         return copiedSubtask
