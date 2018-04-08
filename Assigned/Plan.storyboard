@@ -37,6 +37,11 @@
                                 <rect key="frame" x="0.0" y="60" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Planner" id="YRW-3Z-c38">
+                                        <barButtonItem key="leftBarButtonItem" title="Today" id="Guj-Y6-ZRc">
+                                            <connections>
+                                                <action selector="pressToday:" destination="mAr-hZ-3af" id="cd8-Tx-VgK"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="bDO-SD-RcV">
                                             <connections>
                                                 <action selector="addEventCalendar:" destination="mAr-hZ-3af" id="lYy-LD-EY4"/>

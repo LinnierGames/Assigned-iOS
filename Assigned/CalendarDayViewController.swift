@@ -29,7 +29,14 @@ class CalendarDayViewController: DayViewController {
     
     @IBOutlet weak var calendarDelegate: (CalendarDayViewControllerDelegate & UIViewController)?
     
-    private(set) var selectedDate: Date!
+    var selectedDate: Date {
+        set {
+            self.dayView.state!.move(to: newValue)
+        }
+        get {
+            return self.dayView.state!.selectedDate
+        }
+    }
     
     // MARK: - RETURN VALUES
     
@@ -75,7 +82,7 @@ class CalendarDayViewController: DayViewController {
 //    }
     
     override func dayView(dayView: DayView, didMoveTo date: Date) {
-        self.selectedDate = date
+//        self.selectedDate = date
         self.calendarDelegate?.planner?(controller: self, didChangeTo: date)
     }
     
@@ -86,6 +93,7 @@ class CalendarDayViewController: DayViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //TODO: scroll to today's time
         dayView.autoScrollToFirstEvent = true
 //        dayView.timelinePagerView.timelinePager.delegate = self
     }
@@ -98,6 +106,7 @@ class CalendarDayViewController: DayViewController {
         })
     }
     
+    //TODO: hide the task panel when scroll near the bottom
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let yOffset = scrollView.contentOffset.y
 //        let scrollHeight = scrollView.contentSize.height

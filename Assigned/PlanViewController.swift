@@ -13,6 +13,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private weak var taskPanelViewController: TaskPanelViewController!
     
+    private weak var dayViewController: CalendarDayViewController!
+    
     private lazy var viewModel = PlanViewModel()
     
     private(set) lazy var calendar: CalendarStack = {
@@ -22,6 +24,20 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
             fatalError(err.localizedDescription)
         }
     }()
+    
+    var selectedDate: Date {
+        set {
+            
+            // updates the task fetched results controller
+            self.taskPanelViewController.selectedDay = newValue
+            
+            // updates the dayView
+            self.dayViewController.selectedDate = newValue
+        }
+        get {
+            return self.dayViewController.selectedDate
+        }
+    }
     
     // MARK: - RETURN VALUES
     
@@ -154,6 +170,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
                 }
                 
                 vc.calendarDelegate = self
+                self.dayViewController = vc
             default: break
             }
         }
@@ -183,11 +200,16 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         self.presentingViewController!.dismiss(animated: true)
     }
     
-    @IBOutlet weak var viewTaskPanel: UIView!
+    @IBAction func pressToday(_ sender: Any) {
+        self.selectedDate = Date()
+    }
+    
     @IBOutlet weak var buttonAddEvent: UIBarButtonItem!
     @IBAction func addEventCalendar(_ sender: Any) {
         self.calendar.presentNewEvent(in: self)
     }
+    
+    @IBOutlet weak var viewTaskPanel: UIView!
     
     // MARK: - LIFE CYCLE
     
@@ -210,6 +232,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         })
     }
 }
+
+// MARK: - CalendarDayViewControllerDelegate
 
 extension PlanViewController: CalendarDayViewControllerDelegate {
     func planner(controller: CalendarDayViewController, didChangeTo date: Date) {
