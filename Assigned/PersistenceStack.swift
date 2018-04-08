@@ -50,7 +50,7 @@ struct PersistenceStack {
     // MARK: - Core Data Saving support
     
     func saveContext (context: NSManagedObjectContext = PersistenceStack.shared.viewContext) {
-        while context.hasChanges {
+        if context.hasChanges {
             context.performAndWait {
                 do {
                     try context.save()
@@ -61,6 +61,8 @@ struct PersistenceStack {
                     fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
                 }
             }
+        } else {
+            
         }
     }
 }
