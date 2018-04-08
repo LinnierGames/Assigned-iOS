@@ -62,10 +62,10 @@ public class Assignment: DirectoryInfo {
             }
         }
         
-        if let selfTasks = self.tasks {
-            for aTask in selfTasks {
-                let copiedTask = aTask.copying()
-                copiedAssignment.addToTasks(copiedTask)
+        if let selfSubtasks = self.subtasks {
+            for aSubtask in selfSubtasks {
+                let copiedSubtask = aSubtask.copying()
+                copiedAssignment.addToSubtasks(copiedSubtask)
             }
         }
         

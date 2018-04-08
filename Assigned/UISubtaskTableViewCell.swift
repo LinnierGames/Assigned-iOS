@@ -1,5 +1,5 @@
 //
-//  TaskTableViewCell.swift
+//  UISubtaskTableViewCell.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/10/18.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-@objc protocol UITaskTableViewCellDelegate: class {
-    @objc optional func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool)
-    @objc optional func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String)
+@objc protocol UISubtaskTableViewCellDelegate: class {
+    @objc optional func subtask(cell: UISubtaskTableViewCell, didTapCheckBox newState: Bool)
+    @objc optional func subtask(cell: UISubtaskTableViewCell, didChangeSubtask subtask: Subtask, to newTitle: String)
 }
 
-class UITaskTableViewCell: UITableViewCell {
+class UISubtaskTableViewCell: UITableViewCell {
     
     enum Types {
         struct Info {
@@ -26,9 +26,9 @@ class UITaskTableViewCell: UITableViewCell {
             }
         }
         
-        static var Basic = Info(id: "task", nibTitle: "UITaskTableViewCell")
+        static var Basic = Info(id: "subtask", nibTitle: "UISubtaskTableViewCell")
         
-        static var Textfield = Info(id: "task textfield", nibTitle: "UITaskTableViewCell-TextField")
+        static var Textfield = Info(id: "subtask textfield", nibTitle: "UISubtaskTableViewCell-TextField")
     }
     
     @IBOutlet weak var textfield: UIValidatedTextField? {
@@ -41,37 +41,37 @@ class UITaskTableViewCell: UITableViewCell {
     
     @IBOutlet weak var labelTitle: UILabel?
     
-    weak var delegate: (UITaskTableViewCellDelegate)?
+    weak var delegate: (UISubtaskTableViewCellDelegate)?
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
-    private(set) var task: Task?
+    private(set) var subtask: Subtask?
     
-    func configure(_ task: Task) {
+    func configure(_ subtask: Subtask) {
         guard let textfield = self.textfield else {
-            return assertionFailure("configured task without a label present")
+            return assertionFailure("configured subtask without a label present")
         }
         
-        buttonCheckbox.isChecked = task.isCompleted
-        if task.isCompleted {
-            textfield.attributedText = NSMutableAttributedString(strikedOut: task.title)
+        buttonCheckbox.isChecked = subtask.isCompleted
+        if subtask.isCompleted {
+            textfield.attributedText = NSMutableAttributedString(strikedOut: subtask.title)
             textfield.textColor = .disabledGray
         } else {
-            textfield.text = task.title
+            textfield.text = subtask.title
             textfield.textColor = .black
         }
         
-        self.task = task
+        self.subtask = subtask
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         guard
-            let task = self.task,
-            task.isCompleted == false
+            let subtask = self.subtask,
+            subtask.isCompleted == false
             else {
                 return
         }
@@ -93,14 +93,14 @@ class UITaskTableViewCell: UITableViewCell {
         
         textfield?.resignFirstResponder()
         
-        delegate?.task?(cell: self, didTapCheckBox: buttonCheckbox.isChecked)
+        delegate?.subtask?(cell: self, didTapCheckBox: buttonCheckbox.isChecked)
     }
     
     // MARK: - LIFE CYCLE
     
 }
 
-extension UITaskTableViewCell: UITextFieldDelegate {
+extension UISubtaskTableViewCell: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
@@ -110,17 +110,17 @@ extension UITaskTableViewCell: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
-        // check if the cell was configured with a task
-        guard let task = self.task else { return }
+        // check if the cell was configured with a subtask
+        guard let subtask = self.subtask else { return }
         
-        textField.placeholder = task.title
+        textField.placeholder = subtask.title
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        // check if the cell was configured with a task
-        guard let task = self.task else { return }
+        // check if the cell was configured with a subtask
+        guard let subtask = self.subtask else { return }
         
-        delegate?.task?(cell: self, didChangeTask: task, to: textField.text ?? "")
+        delegate?.subtask?(cell: self, didChangeSubtask: subtask, to: textField.text ?? "")
     }
 }

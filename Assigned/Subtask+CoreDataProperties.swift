@@ -1,5 +1,5 @@
 //
-//  Task+CoreDataProperties.swift
+//  Subtask+CoreDataProperties.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 3/31/18.
@@ -10,16 +10,16 @@
 import Foundation
 import CoreData
 
-extension Task {
+extension Subtask {
     enum StringKeys {
         static let assignment = "assignment"
     }
 }
 
-extension Task {
+extension Subtask {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Task> {
-        return NSFetchRequest<Task>(entityName: "Tasks")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Subtask> {
+        return NSFetchRequest<Subtask>(entityName: "Subtasks")
     }
 
     @NSManaged public var isCompleted: Bool

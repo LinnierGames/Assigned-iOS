@@ -122,8 +122,8 @@ class AssignmentViewController: UIViewController {
     private func dismissKeyboardOnly() {
         if textfieldTitle.isFirstResponder {
             textfieldTitle.resignFirstResponder()
-        } else if textfieldAddTasks.isFirstResponder {
-            textfieldAddTasks.resignFirstResponder()
+        } else if textfieldAddSubtasks.isFirstResponder {
+            textfieldAddSubtasks.resignFirstResponder()
         }
     }
 
@@ -150,17 +150,17 @@ class AssignmentViewController: UIViewController {
         if editingMode.isCreating {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = false
-            isShowingTasksTable = true
+            isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
-            isShowingTasksTable = true
+            isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Edit", for: .normal)
         } else if editingMode.isUpdating {
             isDeleteButtonHidden = false
             isDiscardButtonHidden = false
-            isShowingTasksTable = false
+            isShowingSubtasksTable = false
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
         }
 
@@ -241,8 +241,8 @@ class AssignmentViewController: UIViewController {
             labelEffort.text = nil
         }
 
-        // Fetch tasks
-        tableTasks.reloadData()
+        // Fetch subtasks
+        tableSubtasks.reloadData()
     }
 
     // MARK: - IBACTIONS
@@ -540,33 +540,33 @@ class AssignmentViewController: UIViewController {
     }
 
 
-    // MARK: Tasks
+    // MARK: Subtasks
 
-    @IBOutlet weak var viewTasks: UIStackView!
-    @IBOutlet weak var viewNonTasks: UIView!
-    @IBOutlet weak var tableTasks: UITableView!
-    @IBOutlet weak var textfieldAddTasks: UITextField!
+    @IBOutlet weak var viewSubtasks: UIStackView!
+    @IBOutlet weak var viewNonSubtasks: UIView!
+    @IBOutlet weak var tableSubtasks: UITableView!
+    @IBOutlet weak var textfieldAddSubtasks: UITextField!
 
-    private var isShowingTasksTable: Bool {
+    private var isShowingSubtasksTable: Bool {
         set {
             UIView.animate(withDuration: 0.35) { [unowned self] in
-                self.viewTasks.isHidden = newValue.inverse
+                self.viewSubtasks.isHidden = newValue.inverse
                 if newValue == false {
-                    self.viewTasks.alpha = 0.0
+                    self.viewSubtasks.alpha = 0.0
                 } else {
-                    self.viewTasks.alpha = 1.0
+                    self.viewSubtasks.alpha = 1.0
                 }
             }
-            self.viewNonTasks.isHidden = newValue
+            self.viewNonSubtasks.isHidden = newValue
         }
         get {
-            return viewTasks.isHidden.inverse
+            return viewSubtasks.isHidden.inverse
         }
     }
 
-    @IBAction func pressAddTask(_ sender: Any) {
+    @IBAction func pressAddSubtask(_ sender: Any) {
         let alertAddTitle = UIAlertController(
-            title: "Add a Task",
+            title: "Add a Subtask",
             message: "enter a title",
             preferredStyle: .alert
         )
@@ -576,7 +576,7 @@ class AssignmentViewController: UIViewController {
             .addCancelButton()
             .addButton(title: "Add") { [unowned self] (action) in
                 if let newTitle = alertAddTitle.inputField.text {
-                    self.dataModel.addTask(with: newTitle)
+                    self.dataModel.addSubtask(with: newTitle)
                 }
             }
             .present(in: self)
@@ -587,11 +587,11 @@ class AssignmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleCell = UITaskTableViewCell.Types.Textfield
-        tableTasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
+        let titleCell = UISubtaskTableViewCell.Types.Textfield
+        tableSubtasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
 
         //TODO: Dynamic Font, user preferences of which cell to display
-        tableTasks.rowHeight = 44
+        tableSubtasks.rowHeight = 44
         
         let inputAccessory = UIInputAccessoryView.initialize(accessoryType: .Dismiss)
         inputAccessory.labelCaption.text = "hit return to add"
@@ -599,7 +599,7 @@ class AssignmentViewController: UIViewController {
             self.dismissKeyboardOnly()
         })
         
-        textfieldAddTasks.inputAccessoryView = inputAccessory
+        textfieldAddSubtasks.inputAccessoryView = inputAccessory
 
         viewEffortTotal.calendarUnits = [.day, .hour, .minute]
 
@@ -636,18 +636,18 @@ class AssignmentViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension AssignmentViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.fetchedAssignmentTasks.fetchedObjects?.count ?? 0
+        return viewModel.fetchedAssignmentSubtasks.fetchedObjects?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.Textfield.cellIdentifier) as! UITaskTableViewCell? else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UISubtaskTableViewCell.Types.Textfield.cellIdentifier) as! UISubtaskTableViewCell? else {
             assertionFailure("TaskTableViewCell was not registered")
 
             return UITableViewCell(style: .default, reuseIdentifier: "cell")
         }
 
-        let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
-        cell.configure(task)
+        let subtask = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
+        cell.configure(subtask)
         cell.delegate = self
 
         return cell
@@ -660,8 +660,8 @@ extension AssignmentViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         switch editingStyle {
         case .delete:
-            let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
-            dataModel.delete(task: task)
+            let subtask = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
+            dataModel.delete(subtask: subtask)
             dataModel.saveOnlyOnReading()
         default: break
         }
@@ -672,13 +672,13 @@ extension AssignmentViewController: UITableViewDelegate {
 extension AssignmentViewController: NSFetchedResultsControllerDelegate {
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableTasks.beginUpdates()
+        tableSubtasks.beginUpdates()
     }
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .insert: tableTasks.insertSections([sectionIndex], with: .fade)
-        case .delete: tableTasks.deleteSections([sectionIndex], with: .fade)
+        case .insert: tableSubtasks.insertSections([sectionIndex], with: .fade)
+        case .delete: tableSubtasks.deleteSections([sectionIndex], with: .fade)
         default: break
         }
     }
@@ -686,37 +686,37 @@ extension AssignmentViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableTasks.insertRows(at: [newIndexPath!], with: .fade)
+            tableSubtasks.insertRows(at: [newIndexPath!], with: .fade)
         case .delete:
-            tableTasks.deleteRows(at: [indexPath!], with: .fade)
+            tableSubtasks.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-            tableTasks.reloadRows(at: [indexPath!], with: .fade)
+            tableSubtasks.reloadRows(at: [indexPath!], with: .fade)
         case .move:
-            tableTasks.deleteRows(at: [indexPath!], with: .fade)
-            tableTasks.insertRows(at: [newIndexPath!], with: .fade)
+            tableSubtasks.deleteRows(at: [indexPath!], with: .fade)
+            tableSubtasks.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableTasks.endUpdates()
+        tableSubtasks.endUpdates()
     }
 }
 
 // MARK: - UITaskTableViewCellDelegate
-extension AssignmentViewController: UITaskTableViewCellDelegate {
-    func task(cell: UITaskTableViewCell, didTapCheckBox newState: Bool) {
+extension AssignmentViewController: UISubtaskTableViewCellDelegate {
+    func subtask(cell: UISubtaskTableViewCell, didTapCheckBox newState: Bool) {
         guard
-            let indexPath = tableTasks.indexPath(for: cell)
+            let indexPath = tableSubtasks.indexPath(for: cell)
             else {
             return assertionFailure("index path for cell not found")
         }
 
-        let task = viewModel.fetchedAssignmentTasks.task(at: indexPath)
+        let task = viewModel.fetchedAssignmentSubtasks.subtask(at: indexPath)
         task.isCompleted = newState
         dataModel.saveOnlyOnReading()
     }
 
-    func task(cell: UITaskTableViewCell, didChangeTask task: Task, to newTitle: String) {
+    func task(cell: UISubtaskTableViewCell, didChangeTask task: Subtask, to newTitle: String) {
         task.title = newTitle
         dataModel.saveOnlyOnReading()
     }
@@ -730,16 +730,16 @@ extension AssignmentViewController: UITextFieldDelegate {
 
             //TODO: validation
             textfieldTitle.resignFirstResponder()
-        } else if textField === textfieldAddTasks {
+        } else if textField === textfieldAddSubtasks {
             textfieldTitle.resignFirstResponder()
 
             // is empty?
-            if let newTitle = textfieldAddTasks.text, newTitle != "" {
-                dataModel.addTask(with: newTitle)
+            if let newTitle = textfieldAddSubtasks.text, newTitle != "" {
+                dataModel.addSubtask(with: newTitle)
                 dataModel.saveOnlyOnReading()
-                textfieldAddTasks.text = ""
+                textfieldAddSubtasks.text = ""
             } else {
-                textfieldAddTasks.resignFirstResponder()
+                textfieldAddSubtasks.resignFirstResponder()
             }
         }
 

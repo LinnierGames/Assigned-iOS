@@ -18,7 +18,7 @@ extension Assignment {
         static let isCompleted = "isCompleted"
         static let priorityValue = "priorityValue"
         static let notes = "notes"
-        static let tasks = "tasks"
+        static let subtasks = "subtasks"
     }
 }
 
@@ -36,7 +36,7 @@ extension Assignment {
     @NSManaged public var priorityValue: Int16
     @NSManaged public var notes: String?
     @NSManaged public var sessions: Set<Session>?
-    @NSManaged public var tasks: Set<Task>?
+    @NSManaged public var subtasks: Set<Subtask>?
 
 }
 
@@ -57,19 +57,19 @@ extension Assignment {
 
 }
 
-// MARK: Generated accessors for tasks
+// MARK: Generated accessors for subtasks
 extension Assignment {
 
-    @objc(addTasksObject:)
-    @NSManaged public func addToTasks(_ value: Task)
+    @objc(addSubtasksObject:)
+    @NSManaged public func addToSubtasks(_ value: Subtask)
 
-    @objc(removeTasksObject:)
-    @NSManaged public func removeFromTasks(_ value: Task)
+    @objc(removeSubtasksObject:)
+    @NSManaged public func removeFromSubtasks(_ value: Subtask)
 
-    @objc(addTasks:)
-    @NSManaged public func addToTasks(_ values: NSSet)
+    @objc(addSubtasks:)
+    @NSManaged public func addToSubtasks(_ values: NSSet)
 
-    @objc(removeTasks:)
-    @NSManaged public func removeFromTasks(_ values: NSSet)
+    @objc(removeSubtasks:)
+    @NSManaged public func removeFromSubtasks(_ values: NSSet)
 
 }

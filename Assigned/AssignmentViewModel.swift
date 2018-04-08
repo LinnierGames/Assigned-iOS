@@ -38,12 +38,12 @@ class AssignmentViewModel {
 
 //    private var persistance = PersistenceStack.shared
 
-    lazy var fetchedAssignmentTasks: NSFetchedResultsController<Task> = {
-        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
-        fetch.predicate = NSPredicate(format: "\(Task.StringKeys.assignment) == %@", assignment)
+    lazy var fetchedAssignmentSubtasks: NSFetchedResultsController<Subtask> = {
+        let fetch: NSFetchRequest<Subtask> = Subtask.fetchRequest()
+        fetch.predicate = NSPredicate(format: "\(Subtask.StringKeys.assignment) == %@", assignment)
         fetch.sortDescriptors = [NSSortDescriptor.localizedStandardCompare(with: "title", ascending: true)]
 
-        let fetchedRequestController = NSFetchedResultsController<Task>(
+        let fetchedRequestController = NSFetchedResultsController<Subtask>(
             fetchRequest: fetch,
             managedObjectContext: parentModel.context,
             sectionNameKeyPath: nil, cacheName: nil

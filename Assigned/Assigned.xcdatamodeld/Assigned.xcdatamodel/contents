@@ -7,7 +7,7 @@
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="priorityValue" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="sessions" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Sessions" inverseName="assignment" inverseEntity="Sessions" syncable="YES"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Tasks" inverseName="assignment" inverseEntity="Tasks" syncable="YES"/>
+        <relationship name="subtasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Subtasks" inverseName="assignment" inverseEntity="Subtasks" syncable="YES"/>
     </entity>
     <entity name="Directories" representedClassName="Directory" syncable="YES">
         <relationship name="children" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Directories" inverseName="parent" inverseEntity="Directories" syncable="YES"/>
@@ -28,10 +28,10 @@
         <attribute name="titleValue" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignments" inverseName="sessions" inverseEntity="Assignments" syncable="YES"/>
     </entity>
-    <entity name="Tasks" representedClassName="Task" syncable="YES">
+    <entity name="Subtasks" representedClassName="Subtask" syncable="YES">
         <attribute name="isCompleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignments" inverseName="tasks" inverseEntity="Assignments" syncable="YES"/>
+        <relationship name="assignment" maxCount="1" deletionRule="Nullify" destinationEntity="Assignments" inverseName="subtasks" inverseEntity="Assignments" syncable="YES"/>
     </entity>
     <elements>
         <element name="Assignments" positionX="-63" positionY="-18" width="128" height="150"/>
@@ -39,6 +39,6 @@
         <element name="DirectoryInfos" positionX="-45" positionY="63" width="128" height="75"/>
         <element name="Folders" positionX="-54" positionY="54" width="128" height="45"/>
         <element name="Sessions" positionX="-54" positionY="36" width="128" height="150"/>
-        <element name="Tasks" positionX="-36" positionY="72" width="128" height="90"/>
+        <element name="Subtasks" positionX="-36" positionY="72" width="128" height="90"/>
     </elements>
 </model>

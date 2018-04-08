@@ -55,12 +55,12 @@
 		E980645F2054B4FF00073B33 /* AssignmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E980645E2054B4FF00073B33 /* AssignmentViewController.swift */; };
 		E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064612054E5F400073B33 /* AssignmentViewModel.swift */; };
 		E98064662054E68C00073B33 /* Assignment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98064652054E68C00073B33 /* Assignment.storyboard */; };
-		E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064672054FAD700073B33 /* UITaskTableViewCell.swift */; };
+		E98064692054FAD700073B33 /* UISubtaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */; };
 		E988BD81206B01C100A09F49 /* AssignmentSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */; };
-		E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */; };
-		E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UITaskTableViewCell.xib */; };
+		E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */; };
+		E98E2F182055065100B1624A /* UISubtaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */; };
 		E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */; };
-		E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */; };
+		E99D7C14205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */; };
 		E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */; };
 		E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */; };
 		E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5B25B2072715600621B8C /* DirectoryManager.swift */; };
@@ -79,7 +79,7 @@
 		E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */; };
 		E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */; };
 		E9E6C9E520701FF200566149 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */; };
-		E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */; };
+		E9E6C9E9207021FA00566149 /* Subtask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */; };
 		E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
@@ -161,12 +161,12 @@
 		E980645E2054B4FF00073B33 /* AssignmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewController.swift; sourceTree = "<group>"; };
 		E98064612054E5F400073B33 /* AssignmentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentViewModel.swift; sourceTree = "<group>"; };
 		E98064652054E68C00073B33 /* Assignment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assignment.storyboard; sourceTree = "<group>"; };
-		E98064672054FAD700073B33 /* UITaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskTableViewCell.swift; sourceTree = "<group>"; };
+		E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISubtaskTableViewCell.swift; sourceTree = "<group>"; };
 		E988BD80206B01C100A09F49 /* AssignmentSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignmentSessionViewModel.swift; sourceTree = "<group>"; };
-		E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
-		E98E2F172055065000B1624A /* UITaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UITaskTableViewCell.xib; sourceTree = "<group>"; };
+		E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subtask+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UISubtaskTableViewCell.xib; sourceTree = "<group>"; };
 		E99D7C11205B1B0400FE7B07 /* UITimeBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITimeBox.swift; sourceTree = "<group>"; };
-		E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UITaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
+		E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UISubtaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
 		E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputAccessoryView.swift; sourceTree = "<group>"; };
 		E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIInputAccessoryView.xib; sourceTree = "<group>"; };
 		E9C5B25B2072715600621B8C /* DirectoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryManager.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		E9E6C9DB206F314100566149 /* DirectoryInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DirectoryInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9DF206F31F400566149 /* Directory+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Directory+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subtask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -425,8 +425,8 @@
 				E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */,
 				E97DF46A20530C2E0050EA21 /* Assignment+CoreDataClass.swift */,
 				E9E6C9D7206F2FDD00566149 /* Assignment+CoreDataProperties.swift */,
-				E98E2F132054FD3300B1624A /* Task+CoreDataClass.swift */,
-				E9E6C9E7207021FA00566149 /* Task+CoreDataProperties.swift */,
+				E98E2F132054FD3300B1624A /* Subtask+CoreDataClass.swift */,
+				E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */,
 				E97DF46820530C2E0050EA21 /* Session+CoreDataClass.swift */,
 				E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */,
 				E976BD542077CC870071B13F /* Session+EKEvent.swift */,
@@ -468,9 +468,9 @@
 				E980645C2054B1CC00073B33 /* AssignmentTableViewCellModel.swift */,
 				E9CA1C142053178500B8936E /* UIAssignmentTableViewCell.swift */,
 				E9CA1C152053178500B8936E /* UIAssignmentTableViewCell.xib */,
-				E98064672054FAD700073B33 /* UITaskTableViewCell.swift */,
-				E98E2F172055065000B1624A /* UITaskTableViewCell.xib */,
-				E99D7C13205B370800FE7B07 /* UITaskTableViewCell-TextField.xib */,
+				E98064672054FAD700073B33 /* UISubtaskTableViewCell.swift */,
+				E98E2F172055065000B1624A /* UISubtaskTableViewCell.xib */,
+				E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */,
 				E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */,
 				E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */,
 			);
@@ -602,8 +602,8 @@
 				E9CA1C172053178500B8936E /* UIAssignmentTableViewCell.xib in Resources */,
 				E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */,
 				E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */,
-				E98E2F182055065100B1624A /* UITaskTableViewCell.xib in Resources */,
-				E99D7C14205B370800FE7B07 /* UITaskTableViewCell-TextField.xib in Resources */,
+				E98E2F182055065100B1624A /* UISubtaskTableViewCell.xib in Resources */,
+				E99D7C14205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib in Resources */,
 				E97226C92073D45B00A021B4 /* Plan.storyboard in Resources */,
 				E98064662054E68C00073B33 /* Assignment.storyboard in Resources */,
 				E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */,
@@ -808,7 +808,7 @@
 				E976BD532077CA430071B13F /* CalendarStack+Session.swift in Sources */,
 				E95E137C2073F3EF00BF4276 /* TaskPanelViewModel.swift in Sources */,
 				E9D51D7D20532877006D8CEF /* DirectoryInfo+CoreDataClass.swift in Sources */,
-				E9E6C9E9207021FA00566149 /* Task+CoreDataProperties.swift in Sources */,
+				E9E6C9E9207021FA00566149 /* Subtask+CoreDataProperties.swift in Sources */,
 				E97226CE2073E1D500A021B4 /* TaskPanelViewController.swift in Sources */,
 				E972ADC52061935600B26980 /* AssignmentNotesViewController.swift in Sources */,
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
@@ -824,13 +824,13 @@
 				E97DF46C20530C2E0050EA21 /* Session+CoreDataClass.swift in Sources */,
 				E972ADBA20618A3D00B26980 /* SessionDetailedController.swift in Sources */,
 				E98064622054E5F400073B33 /* AssignmentViewModel.swift in Sources */,
-				E98E2F152054FD3300B1624A /* Task+CoreDataClass.swift in Sources */,
+				E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */,
 				E95E139F2076A21A00BF4276 /* CalendarDayViewController.swift in Sources */,
 				E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E972ADC32061933500B26980 /* AssignmentSessionViewController.swift in Sources */,
 				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,
-				E98064692054FAD700073B33 /* UITaskTableViewCell.swift in Sources */,
+				E98064692054FAD700073B33 /* UISubtaskTableViewCell.swift in Sources */,
 				E97DF46E20530C2E0050EA21 /* Assignment+CoreDataClass.swift in Sources */,
 				E95E13A22076A39D00BF4276 /* RTEvent.swift in Sources */,
 				E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */,

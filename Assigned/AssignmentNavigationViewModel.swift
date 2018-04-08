@@ -88,19 +88,19 @@ class AssignmentNavigationViewModel: NSObject {
     // MARK: Subtasks
     
     @discardableResult
-    func addTask(with title: String) -> Task {
-        let newTask = Task(title: title, in: self.context)
-        self.addTask(newTask)
+    func addSubtask(with title: String) -> Subtask {
+        let newSubtask = Subtask(title: title, in: self.context)
+        self.addSubtask(newSubtask)
         
-        return newTask
+        return newSubtask
     }
     
-    func addTask(_ task: Task) {
-        task.assignment = self.assignment
+    func addSubtask(_ subtask: Subtask) {
+        subtask.assignment = self.assignment
     }
     
-    func delete(task: Task) {
-        self.context.delete(task)
+    func delete(subtask: Subtask) {
+        self.context.delete(subtask)
     }
     
     func save() {
