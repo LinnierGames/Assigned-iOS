@@ -19,7 +19,7 @@ class CalendarDayViewController: DayViewController {
     
     private lazy var calendar: CalendarStack = {
         do {
-            return try CalendarStack()
+            return try CalendarStack(delegate: self)
         } catch let err {
             fatalError(err.localizedDescription)
         }
@@ -109,5 +109,8 @@ class CalendarDayViewController: DayViewController {
 //    }
 }
 
-extension CalendarDayViewController: UIScrollViewDelegate {
+extension CalendarDayViewController: CalendarStackDelegate {
+    func calendar(stack: CalendarStack, eventStoreDidChange eventStore: EKEventStore) {
+        self.reloadData()
+    }
 }

@@ -32,22 +32,11 @@ class AssignmentNavigationViewModel: NSObject {
     
     private lazy var calendar: CalendarStack = {
         do {
-            return try CalendarStack()
+            return try CalendarStack(delegate: self)
         } catch let err {
             fatalError(err.localizedDescription)
         }
     }()
-    
-    override init() {
-        super.init()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(AssignmentNavigationViewModel.calendarServiceDidUpdateStaleSessions(_:)),
-            name: NSNotification.Name.CalendarServiceDidUpdateStaleSessions,
-            object: nil
-        )
-    }
     
     // MARK: - RETURN VALUES
     
@@ -69,12 +58,6 @@ class AssignmentNavigationViewModel: NSObject {
     }()
     
     // MARK: - VOID METHODS
-    
-    @objc func calendarServiceDidUpdateStaleSessions(_ notification: Notification) {
-        
-        // Removes merge conflicts when saving after CalendarService has made its own changes from a stale Session update
-        self.context.refreshAllObjects()
-    }
     
     private func updateContextToANewEditContext() {
         let editContext = self.newEditsContext()
@@ -150,6 +133,18 @@ class AssignmentNavigationViewModel: NSObject {
     // MARK: - IBACTIONS
     
     // MARK: - LIFE CYCLE
+}
+
+// MARK: - CalendarStackDelegate
+
+extension AssignmentNavigationViewModel: CalendarStackDelegate {
+    func calendar(stack: CalendarStack, didUpdateStaleSessions updatedSessions: Set<Session>) {
+        
+        // Removes merge conflicts when saving after CalendarService has made its own changes from a stale Session update
+        self.context.refreshAllObjects()
+        
+        //TODO: validate each mo in the given updatedSessions
+    }
 }
 
 extension AssignmentNavigationViewModel {

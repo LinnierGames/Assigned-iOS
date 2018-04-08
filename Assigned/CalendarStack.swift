@@ -9,13 +9,20 @@
 import Foundation
 import EventKitUI
 
-struct CalendarStack {
+@objc protocol CalendarStackDelegate {
+    @objc optional func calendar(stack: CalendarStack, eventStoreDidChange eventStore: EKEventStore)
+    @objc optional func calendar(stack: CalendarStack, didUpdateStaleSessions updatedSessions: Set<Session>)
+}
+
+class CalendarStack: NSObject {
     
     //TODO: listen for changes made in the calendar and notify anyone listening
     
     private(set) var eventStore = EKEventStore()
     
     var calendars: [EKCalendar]
+    
+    weak var delegate: CalendarStackDelegate?
     
     enum CalendarStackErrors: Error {
         case PrivacyRestricted
@@ -38,7 +45,7 @@ struct CalendarStack {
      
      - throws: due to user privacy
      */
-    init() throws {
+    init(delegate: CalendarStackDelegate?) throws {
         let fetchedCalendars = eventStore.calendars(for: EKEntityType.event)
         
         // Since the stock calendar app does not allow you to delete all calendars
@@ -48,6 +55,27 @@ struct CalendarStack {
         }
         
         self.calendars = fetchedCalendars
+        self.delegate = delegate
+        
+        super.init()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(CalendarStack.eventStoreDidChange(_:)),
+            name: NSNotification.Name.EKEventStoreChanged,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(CalendarStack.calendarServiceDidUpdateStaleSessions(_:)),
+            name: NSNotification.Name.CalendarServiceDidUpdateStaleSessions,
+            object: nil
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - RETURN VALUES
@@ -98,6 +126,14 @@ struct CalendarStack {
     }
     
     // MARK: - VOID METHODS
+    
+    @objc func eventStoreDidChange(_ notification: Notification) {
+        self.delegate?.calendar?(stack: self, eventStoreDidChange: notification.object as! EKEventStore)
+    }
+    
+    @objc func calendarServiceDidUpdateStaleSessions(_ notification: Notification) {
+        self.delegate?.calendar?(stack: self, didUpdateStaleSessions: notification.object as! Set<Session>)
+    }
     
     /**
      <#Lorem ipsum dolor sit amet.#>

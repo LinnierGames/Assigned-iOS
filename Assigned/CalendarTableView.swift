@@ -15,7 +15,7 @@ class CalendarTableView: UITableViewController {
     
     lazy var calendar: CalendarStack = {
         do {
-            return try CalendarStack()
+            return try CalendarStack(delegate: nil)
         } catch let err {
             fatalError(err.localizedDescription)
         }

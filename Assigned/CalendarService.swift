@@ -78,7 +78,7 @@ class CalendarService {
                 let sessions = try privateContext.fetch(fetch)
                 
                 // Update stale sessions
-                let calendar = try! CalendarStack()
+                let calendar = try! CalendarStack(delegate: nil)
                 sessions.forEach({ (aSession) in
                     if let sessionEvent = calendar.event(for: aSession) {
                         aSession.setValuesIfNeededFor(event: sessionEvent)

@@ -17,7 +17,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private(set) lazy var calendar: CalendarStack = {
         do {
-            return try CalendarStack()
+            return try CalendarStack(delegate: nil)
         } catch let err {
             fatalError(err.localizedDescription)
         }
