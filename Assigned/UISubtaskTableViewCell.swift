@@ -119,11 +119,11 @@ extension UISubtaskTableViewCell: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         
-        self.setSelected(false, animated: false)
-        
         // check if the cell was configured with a subtask
         guard let subtask = self.subtask else { return }
         
         delegate?.subtask?(cell: self, didChangeSubtask: subtask, to: textField.text ?? "")
+        
+        self.setSelected(false, animated: false)
     }
 }

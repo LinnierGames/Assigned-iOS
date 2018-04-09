@@ -730,7 +730,7 @@ extension TaskViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
-// MARK: - UITaskTableViewCellDelegate
+// MARK: - UISubtaskTableViewCellDelegate
 extension TaskViewController: UISubtaskTableViewCellDelegate {
     func subtask(cell: UISubtaskTableViewCell, didTapCheckBox newState: Bool) {
         guard
@@ -744,8 +744,8 @@ extension TaskViewController: UISubtaskTableViewCellDelegate {
         dataModel.saveOnlyOnReading()
     }
 
-    func task(cell: UISubtaskTableViewCell, didChangeTask task: Subtask, to newTitle: String) {
-        task.title = newTitle
+    func subtask(cell: UISubtaskTableViewCell, didChangeSubtask subtask: Subtask, to newTitle: String) {
+        subtask.title = newTitle
         dataModel.saveOnlyOnReading()
     }
 }
