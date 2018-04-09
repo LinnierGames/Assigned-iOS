@@ -108,7 +108,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
             } else {
                 self.taskPanelViewState.expand()
             }
-            self.setView(to: self.taskPanelViewState)
+            self.setTaskPanel(to: self.taskPanelViewState)
             
             self.originPoint = nil
             self.touchOffset = nil
@@ -126,7 +126,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
     private let BOTTOM_VERTICAL_MARGIN: CGFloat = 128.0
     private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 32.0
-    private func setView(to newState: ViewState, animated: Bool = true) {
+    func setTaskPanel(to newState: ViewState, animated: Bool = true) {
         guard let windowSize = self.view?.frame.size else {
             return print("self.view was not set")
         }
@@ -142,7 +142,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         self.taskPanelViewState = newState
         
         if animated {
-            UIView.animate(withDuration: TimeInterval.transitionImmediatelyAnimationDuration, delay: 0.0, options: .curveEaseOut, animations: { [unowned self] in
+            UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, delay: 0.0, options: .curveEaseOut, animations: { [unowned self] in
                 self.view.layoutIfNeeded()
             })
         } else {
@@ -216,7 +216,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.setView(to: self.taskPanelViewState, animated: false)
+        self.setTaskPanel(to: self.taskPanelViewState, animated: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -259,6 +259,40 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
     //
     //        return calendar
     //    }
+}
+
+// MARK: - UITaskCollectionViewCellDelegate
+
+extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecognizerDelegate {
+    static var currentDraggingView: UIView?
+    static var touchOffset: CGPoint?
+    
+    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
+        let cellSize = cell.frame.size
+        let cellOrigin = self.view.convert(cell.frame.origin, from: cell.superview)
+        let draggingView = UIView(frame: CGRect(origin: cellOrigin, size: cellSize))
+        draggingView.backgroundColor = .blue
+        PlanViewController.currentDraggingView = draggingView
+        PlanViewController.touchOffset = cell.frame.origin - gesture.location(in: cell.superview)
+        self.view.addSubview(draggingView)
+        
+        self.setTaskPanel(to: .Hidden)
+    }
+    
+    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
+        guard
+            let draggingView = PlanViewController.currentDraggingView,
+            let touchOffset = PlanViewController.touchOffset else {
+                return assertionFailure("longpress gesture did change without the inital draggingView/touch offset")
+        }
+        
+        let location = gesture.location(in: self.view)
+        draggingView.frame.origin = location + touchOffset
+    }
+    
+    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
+        self.setTaskPanel(to: .Minimized)
+    }
 }
 
 // MARK: - UIStoryboardSegue

@@ -11,10 +11,23 @@ import CoreData
 
 class TaskPanelViewController: UIViewController {
     
+    var planViewController: PlanViewController {
+        get {
+            guard
+                let viewController = self.parent,
+                let planViewController = viewController as? PlanViewController else {
+                    fatalError("parent view controller is not PlanViewController")
+            }
+            
+            return planViewController
+        }
+    }
+    
+    //TODO: use a delegate to subsittute the target action selector
     /** assigned by the parent view controller */
     var panGesture: UIPanGestureRecognizer!
     
-    lazy private(set) var viewModel = TaskPanelViewModel(delegate: self)
+    private(set) lazy var viewModel = TaskPanelViewModel(delegate: self)
     
     var fetchedResultsController: NSFetchedResultsController<Task>? {
         get {
@@ -111,8 +124,8 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         let task = self.fetchedResultsController!.task(at: indexPath)
         cell.configure(task)
         
-        cell.delegate = self
-        cell.longTapGestureDelegate = self
+        cell.delegate = self.planViewController
+        cell.longTapGestureDelegate = self.planViewController
         
         return cell
     }
@@ -129,25 +142,36 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         self.reloadData()
     }
 }
-
-extension TaskPanelViewController: UITaskCollectionViewCellDelegate {
-    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
-        print("begin")
-    }
-    
-    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
-        print("change")
-    }
-    
-    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
-        print("end")
-    }
-}
-
-// MARK: - UIGestureRecognizerDelegate
+//
+//extension TaskPanelViewController: UITaskCollectionViewCellDelegate {
+//
+//    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
+//
+//        self.delegate?.taskCollection?(cell: cell, didBegin: gesture)
+//    }
+//
+//    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
+//        guard
+//            let draggingView = PlanViewController.currentDraggingView,
+//            let touchOffset = PlanViewController.touchOffset else {
+//                return assertionFailure("longpress gesture did change without the inital draggingView/touch offset")
+//        }
+//
+//        let location = gesture.location(in: self.view)
+//        draggingView.frame.origin = location + touchOffset
+//    }
+//
+//    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
+//        print("end")
+//    }
+//}
 
 extension TaskPanelViewController: UIGestureRecognizerDelegate {
-    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        self.planViewController.setTaskPanel(to: .Hidden)
+        
+        return true
+    }
 }
 
 // MARK: - TaskPanelViewModel.TaskPanelViewModelDelegate & NSFetchedResultsControllerDelegate

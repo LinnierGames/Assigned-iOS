@@ -31,6 +31,17 @@ class UITaskCollectionViewCell: UICollectionViewCell {
         static var baseCell = Info(id: "task - draggable", nibTitle: "UITaskCollectionViewCell")
     }
     
+    enum State {
+        case normal
+        case dragging
+    }
+    
+    var cellState: State = .normal {
+        didSet {
+            self.updateUI()
+        }
+    }
+    
     weak var delegate: UITaskCollectionViewCellDelegate?
     
     private(set) lazy var longTapGesture: UILongPressGestureRecognizer = {
@@ -62,6 +73,8 @@ class UITaskCollectionViewCell: UICollectionViewCell {
         } else {
             self.labelSubtitle.text = nil
         }
+        
+        self.updateUI()
     }
     
     @objc private func didLongTap(gesture: UILongPressGestureRecognizer) {
@@ -69,14 +82,30 @@ class UITaskCollectionViewCell: UICollectionViewCell {
         case .began:
             delegate?.taskCollection?(cell: self, didBegin: gesture)
             delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            self.cellState = .dragging
         case .changed:
             delegate?.taskCollection?(cell: self, didChange: gesture)
             delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            self.cellState = .dragging
         case .ended:
             delegate?.taskCollection?(cell: self, didEnd: gesture)
             delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            self.cellState = .normal
         default:
             delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+        }
+    }
+    
+    private func updateUI() {
+        switch self.cellState {
+        case .normal:
+            self.backgroundColor = UIColor.lightGray
+            self.labelTitle.textColor = .black
+            self.alpha = 1.0
+        case .dragging:
+            self.backgroundColor = UIColor.black
+            self.labelTitle.textColor = .white
+            self.alpha = 0.35
         }
     }
     
