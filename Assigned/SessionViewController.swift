@@ -68,6 +68,7 @@ class SessionViewController: UIViewController {
     // MARK: - IBACTIONS
     
     @IBOutlet weak var contraintCardHeight: NSLayoutConstraint!
+    @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var tableSessions: UITableView!
     
     @IBAction func pressAddSession(_ sender: Any) {
@@ -84,6 +85,18 @@ class SessionViewController: UIViewController {
             PrivacyService.Calendar.promptAlert(in: self, with: .alert)
         })
     }
+    
+    @IBOutlet weak var buttonPastSessions: UIButton!
+    @IBAction func pressTogglePastSessions(_ sender: Any) {
+        self.viewModel.toggleShowPastSessions()
+        self.tableSessions.reloadData()
+        
+        if self.viewModel.isShowingPastSessions {
+            buttonPastSessions.setTitle("Show Upcoming Sessions", for: .normal)
+        } else {
+            buttonPastSessions.setTitle("Show Past Sessions", for: .normal)
+        }
+    }
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
@@ -91,6 +104,8 @@ class SessionViewController: UIViewController {
         
         contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
         self.view.layoutIfNeeded()
+        
+        self.labelTaskTitle.text = task.title
         
         updateUI()
     }
@@ -137,18 +152,25 @@ extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
                         fatalError("fetched results controller did not fetch Sessions")
                 }
                 
-                if aSession.dayOfStartDate.isToday {
-                    return "Tdoay"
-                } else if aSession.dayOfStartDate.isTomorrow {
-                    return "Tomorrow"
-                } else if aSession.dayOfStartDate.isEarlier(than: Date()) {
-                    return "Past Sessions"
-                } else {
-                    let formattedDate = String(
-                        date: aSession.dayOfStartDate,
-                        formatterMap: .Day_oftheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, ", ", .Year_minimumOfFourDigits)
+                let formattedDate = String(
+                    date: aSession.dayOfStartDate,
+                    formatterMap: .Day_oftheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, ", ", .Year_minimumOfFourDigits)
+                
+                if viewModel.isShowingPastSessions {
+                    if section == 0 {
+                        return "Past Sessions - \(formattedDate)"
+                    } else {
+                        return formattedDate
+                    }
                     
-                    return formattedDate
+                } else {
+                    if aSession.dayOfStartDate.isToday {
+                        return "Tdoay"
+                    } else if aSession.dayOfStartDate.isTomorrow {
+                        return "Tomorrow"
+                    } else {
+                        return formattedDate
+                    }
                 }
                 
             } else {

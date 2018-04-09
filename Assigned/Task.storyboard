@@ -769,7 +769,7 @@
                                         <rect key="frame" x="15" y="32" width="297" height="524"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CdH-vY-h8K">
-                                                <rect key="frame" x="0.0" y="0.0" width="297" height="34.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="297" height="38.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Planned Sessions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAQ-t9-7hm">
                                                         <rect key="frame" x="0.0" y="0.0" width="297" height="24"/>
@@ -778,18 +778,18 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="task title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBd-yG-9bJ">
-                                                        <rect key="frame" x="0.0" y="24" width="297" height="10.5"/>
+                                                        <rect key="frame" x="0.0" y="24" width="297" height="14.5"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TFA-rE-by5">
-                                                <rect key="frame" x="0.0" y="42.5" width="297" height="481.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TFA-rE-by5">
+                                                <rect key="frame" x="0.0" y="46.5" width="297" height="437.5"/>
                                                 <subviews>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" estimatedRowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Zl4-Tm-gJW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="297" height="481.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="297" height="437.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="0Sg-ZC-41T" detailTextLabel="Py1-Qz-YWP" style="IBUITableViewCellStyleSubtitle" id="hCu-ek-f3E">
@@ -825,6 +825,14 @@
                                                     </tableView>
                                                 </subviews>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="297" placeholderIntrinsicHeight="32" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zra-dh-AOA">
+                                                <rect key="frame" x="0.0" y="492" width="297" height="32"/>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="16" maxX="0.0" maxY="16"/>
+                                                <state key="normal" title="Show Past Session"/>
+                                                <connections>
+                                                    <action selector="pressTogglePastSessions:" destination="4zc-4q-6Oa" eventType="touchUpInside" id="HEb-JO-Lmv"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2q-gS-hxc">
@@ -854,7 +862,9 @@
                         <viewLayoutGuide key="safeArea" id="rgM-lm-hVX"/>
                     </view>
                     <connections>
+                        <outlet property="buttonPastSessions" destination="zra-dh-AOA" id="AvD-Az-u6N"/>
                         <outlet property="contraintCardHeight" destination="8Z5-h1-ILx" id="oMF-yO-zDc"/>
+                        <outlet property="labelTaskTitle" destination="nBd-yG-9bJ" id="U1u-z9-AfT"/>
                         <outlet property="tableSessions" destination="Zl4-Tm-gJW" id="NCe-hr-fmD"/>
                         <segue destination="zfx-0l-IER" kind="presentation" identifier="show detailed session" modalTransitionStyle="crossDissolve" id="ZeC-vk-N6B"/>
                     </connections>

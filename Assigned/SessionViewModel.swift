@@ -17,20 +17,47 @@ class SessionViewModel {
         
     unowned var parentModel: TaskNavigationViewModel
     
-    lazy var fetchedSessions: NSFetchedResultsController<Session>? = {
+    private(set) var isShowingPastSessions = false
+    
+    var fetchedSessions: NSFetchedResultsController<Session>?
+    
+    init(with parentModel: TaskNavigationViewModel, delegate: SessionViewModelDelegate) {
+        self.parentModel = parentModel
+        self.delegate = delegate
+        
+        self.reloadFetch()
+    }
+    
+    // MARK: - RETURN VALUES
+    
+    var context: NSManagedObjectContext {
+        return self.parentModel.context
+    }
+    
+    var task: Task {
+        return self.parentModel.task
+    }
+    
+    private func reloadFetch() {
         
         // Privacy Restriction
         guard PrivacyService.Calendar.isAuthorized else {
             
             // Calendar was not granted access
-            return nil
+            self.fetchedSessions = nil
+            
+            return
         }
         
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: Session.StringKeys.startDate, ascending: true)]
         
-        // Exclude past sessions
-        fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@ AND \(Session.StringKeys.startDate) >= %@", self.task, Date().midnight as NSDate)
+        if self.isShowingPastSessions {
+            fetch.sortDescriptors = [NSSortDescriptor(key: Session.StringKeys.startDate, ascending: false)]
+            fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@ AND \(Session.StringKeys.startDate) < %@", self.task, Date().midnight as NSDate)
+        } else {
+            fetch.sortDescriptors = [NSSortDescriptor(key: Session.StringKeys.startDate, ascending: true)]
+            fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@ AND \(Session.StringKeys.startDate) >= %@", self.task, Date().midnight as NSDate)
+        }
         
         let fetchedRequestController = NSFetchedResultsController<Session>(
             fetchRequest: fetch,
@@ -45,29 +72,15 @@ class SessionViewModel {
             assertionFailure(String(describing: error))
         }
         
-        return fetchedRequestController
-    }()
-    
-    init(with parentModel: TaskNavigationViewModel, delegate: SessionViewModelDelegate) {
-        self.parentModel = parentModel
-        self.delegate = delegate
-    }
-    
-    // MARK: - RETURN VALUES
-    
-    var context: NSManagedObjectContext {
-        return self.parentModel.context
-    }
-    
-    var task: Task {
-        return self.parentModel.task
-    }
-    
-    var isAuthorizedForCalendarEvents: Bool {
-        return PrivacyService.Calendar.isAuthorized
+        self.fetchedSessions = fetchedRequestController
     }
     
     // MARK: - VOID METHODS
+    
+    func toggleShowPastSessions() {
+        self.isShowingPastSessions.invert()
+        reloadFetch()
+    }
     
     // MARK: - IBACTIONS
     
@@ -76,4 +89,8 @@ class SessionViewModel {
 }
 
 extension SessionViewModel {
+    
+    var isAuthorizedForCalendarEvents: Bool {
+        return PrivacyService.Calendar.isAuthorized
+    }
 }
