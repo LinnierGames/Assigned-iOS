@@ -137,9 +137,18 @@ extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
                         fatalError("fetched results controller did not fetch Sessions")
                 }
                 
-                let formattedDate = String(date: aSession.dayOfStartDate, dateStyle: .long)
+                if aSession.dayOfStartDate.isToday {
+                    return "Tdoay"
+                } else if aSession.dayOfStartDate.isTomorrow {
+                    return "Tomorrow"
+                } else if aSession.dayOfStartDate.isEarlier(than: Date()) {
+                    return "Past Sessions"
+                } else {
+                    let formattedDate = String(date: aSession.dayOfStartDate, dateStyle: .long)
+                    
+                    return formattedDate
+                }
                 
-                return formattedDate
             } else {
                 return nil
             }

@@ -50,36 +50,6 @@ extension Session {
     }
     
     /**
-     Updates the session with the "linked" iCal event
-     
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-     
-     - returns: <#Sed do eiusmod tempor.#>
-     */
-    public override func awakeFromFetch() {
-        super.awakeFromFetch()
-        //
-        //        //TODO: create shared calendar store?
-        //        let calendar = try! CalendarStack() //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
-        //
-        //        // find the session's event and update self by the found event
-        //        if let sessionEvent = calendar.event(for: self) {
-        //            self.setValuesFor(event: sessionEvent)
-        //
-        //            // iCal event was not found: delete self
-        //        } else {
-        //            guard let context = self.managedObjectContext else {
-        //                fatalError("no context after fetching")
-        //            }
-        //
-        //            // delete and save the context
-        //            context.delete(self)
-        //            //FIXME: don't save context here, may have side-effects to other changes on the same context
-        //            PersistenceStack().saveContext(context: context)
-        //        }
-    }
-    
-    /**
      Updates the "linked" calendar event
      
      - precondition: the session must already have a calendar event assigned to its id

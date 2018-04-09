@@ -25,10 +25,39 @@ extension Session {
 
 extension Session {
     
-    /** <#Lorem ipsum dolor sit amet.#> */
-    var dayOfStartDate: Date {
+    @objc dynamic var dayOfStartDate: Date {
         return self.startDate.midnight
     }
+    
+    /** <#Lorem ipsum dolor sit amet.#> */
+//    var dayOfStartDate: Date {
+//
+//        self.willAccessValue(forKey: "dayOfStartDate")
+//        var dayValue = self.primitiveValue(forKey: "dayOfStartDate") as! Date?
+//        self.didAccessValue(forKey: "dayOfStartDate")
+//
+//        if dayValue == nil {
+//            let midnight = self.startDate.midnight
+//
+//            dayValue = midnight
+//            self.setPrimitiveValue(midnight, forKey: "dayOfStartDate")
+//        }
+//
+//        return dayValue!
+//    }
+    
+//    public override func willAccessValue(forKey key: String?) {
+//        super.willAccessValue(forKey: key)
+//
+//        if let key = key {
+//            switch key {
+//            case "dayOfStartDate":
+//                self.dayOfStartDate = self.startDate.midnight
+//            default:
+//                break
+//            }
+//        }
+//    }
 }
 
 extension Session {
@@ -37,7 +66,7 @@ extension Session {
         return NSFetchRequest<Session>(entityName: "Sessions")
     }
 
-//    @NSManaged public var dayOfStartDate: NSDate?
+//    @NSManaged public var dayOfStartDate: Date!
     
     /** stored as seconds */
     @NSManaged public var durationValue: Double
