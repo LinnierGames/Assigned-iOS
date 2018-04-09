@@ -367,7 +367,6 @@
 			children = (
 				E97DF433205305F80050EA21 /* AppDelegate.swift */,
 				E9CA1C1E2053208200B8936E /* UniversalExtentions.swift */,
-				E9BFBBB3207AFCC30093D7C8 /* New Group */,
 				E97226CC2073D54800A021B4 /* View Hierarchy */,
 				E972ADB7206189CF00B26980 /* Custom Views */,
 				E95E13A02076A38400BF4276 /* Models */,
@@ -461,13 +460,6 @@
 				E98064652054E68C00073B33 /* Task.storyboard */,
 			);
 			name = "Assigned Editor";
-			sourceTree = "<group>";
-		};
-		E9BFBBB3207AFCC30093D7C8 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "New Group";
 			sourceTree = "<group>";
 		};
 		E9CA1C112053173C00B8936E /* Table View Cells */ = {
