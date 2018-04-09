@@ -63,6 +63,7 @@
 		E99D7C14205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */; };
 		E9AC7F9620715EE300AE365A /* UIInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */; };
 		E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */; };
+		E9BFBBB5207B0B450093D7C8 /* TaskCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9BFBBB4207B0B450093D7C8 /* TaskCard.storyboard */; };
 		E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5B25B2072715600621B8C /* DirectoryManager.swift */; };
 		E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CD20588A0800C42821 /* UICheckbox.swift */; };
 		E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */; };
@@ -169,6 +170,7 @@
 		E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "UISubtaskTableViewCell-TextField.xib"; sourceTree = "<group>"; };
 		E9AC7F9520715EE300AE365A /* UIInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIInputAccessoryView.swift; sourceTree = "<group>"; };
 		E9AC7F9720715F3900AE365A /* UIInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIInputAccessoryView.xib; sourceTree = "<group>"; };
+		E9BFBBB4207B0B450093D7C8 /* TaskCard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaskCard.storyboard; sourceTree = "<group>"; };
 		E9C5B25B2072715600621B8C /* DirectoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryManager.swift; sourceTree = "<group>"; };
 		E9C5D5CD20588A0800C42821 /* UICheckbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICheckbox.swift; sourceTree = "<group>"; };
 		E9C5D5CF20588FA100C42821 /* UIPriorityBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPriorityBox.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 			children = (
 				E98064612054E5F400073B33 /* TaskViewModel.swift */,
 				E980645E2054B4FF00073B33 /* TaskViewController.swift */,
+				E9BFBBB4207B0B450093D7C8 /* TaskCard.storyboard */,
 			);
 			name = Assignment;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				E97226C92073D45B00A021B4 /* Plan.storyboard in Resources */,
 				E98064662054E68C00073B33 /* Task.storyboard in Resources */,
 				E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */,
+				E9BFBBB5207B0B450093D7C8 /* TaskCard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

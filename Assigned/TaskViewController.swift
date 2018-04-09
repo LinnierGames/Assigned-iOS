@@ -245,14 +245,18 @@ class TaskViewController: UIViewController {
     
     private func updateSubtaskTableLength() {
         
+        // set up table height
         let cellHeight: CGFloat = self.tableSubtasks.rowHeight
         let nSubtasks: Int = self.tableSubtasks.numberOfRows(inSection: 0)
         
-        contraintTableViewHeight.constant = cellHeight * CGFloat(nSubtasks)
+        var cardHeight: CGFloat = viewCard.height
+        
+        contraintTableViewHeight.constant = max(cellHeight * CGFloat(nSubtasks), self.view.frame.size.height - TaskNavigationViewController.TOP_MARGIN - TaskNavigationViewController.BOTTOM_MARGIN - cardHeight)
         self.viewCard.layoutIfNeeded()
         
-        let cardHeight: CGFloat = viewCard.height
-        scrollView.contentSize = CGSize(width: 0.0, height: TaskNavigationViewController.TOP_MARGIN + cardHeight + TaskNavigationViewController.BOTTOM_MARGIN)
+        // set up min card height
+        cardHeight = viewCard.height
+        scrollView.contentSize = CGSize(width: 8.0, height: TaskNavigationViewController.TOP_MARGIN + cardHeight + TaskNavigationViewController.BOTTOM_MARGIN)
         self.view.layoutIfNeeded()
     }
 
@@ -618,12 +622,17 @@ class TaskViewController: UIViewController {
 
         viewEffortTotal.calendarUnits = [.day, .hour, .minute]
 
-        // set card at the bottom and animate to the top
-        setViewState(to: .Hidden, animated: false)
-
-        //FIXME: RxSwift, rename method to viewDidLoad()
-        self.updateUI()
-        contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
+        UIView.performWithoutAnimation { [unowned self] in
+            
+            // set card at the bottom and animate to the top
+            self.setViewState(to: .Hidden, animated: false)
+            
+            //FIXME: RxSwift, rename method to viewDidLoad()
+            self.updateUI()
+            
+            // set up min card height
+            self.contraintCardHeight.constant = self.view.frame.size.height - (TaskNavigationViewController.TOP_MARGIN + TaskNavigationViewController.BOTTOM_MARGIN)
+        }
 
         self.isShowingPriorityBox = false
     }

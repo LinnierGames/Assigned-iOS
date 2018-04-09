@@ -69,6 +69,7 @@ class UISubtaskTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
+        // prevent completed tasks to be selected and edited
         guard
             let subtask = self.subtask,
             subtask.isCompleted == false
@@ -117,6 +118,8 @@ extension UISubtaskTableViewCell: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        self.setSelected(false, animated: false)
         
         // check if the cell was configured with a subtask
         guard let subtask = self.subtask else { return }
