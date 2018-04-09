@@ -26,6 +26,8 @@
 	<string>Add sessions to user's calendar</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Read and update contact usage</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Add sessions to user's calendar</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
