@@ -58,7 +58,7 @@ class UITaskTableViewCell: UITableViewCell {
         if let deadline = task.deadline {
             self.labelDeadline.text = String(date: deadline, dateStyle: .short)
             
-            //TODO: deadline formating
+            //TODO: deadline formating for Task Cell
 //            let durationTillDeadline = deadline.timeIntervalSinceNow
 //            let unitsUntilDeadline = String(timeInterval: durationTillDeadline, options: .day)
 //

@@ -143,7 +143,7 @@ extension TaskNavigationViewModel: CalendarStackDelegate {
         // Removes merge conflicts when saving after CalendarService has made its own changes from a stale Session update
         self.context.refreshAllObjects()
         
-        //TODO: validate each mo in the given updatedSessions
+        //TODO: refresh mo in the given param: updatedSessions
     }
 }
 

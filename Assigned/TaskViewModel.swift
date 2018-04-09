@@ -22,7 +22,6 @@ class TaskViewModel {
         self.parentModel = parentModel
     }
 
-    //TODO: bridge
     var editingMode: CRUD {
         set {
             self.parentModel.editingMode = newValue
@@ -95,7 +94,7 @@ extension TaskViewModel {
         if let deadline = task.deadline {
             let daysUntilDeadline = deadline.timeIntervalSinceNow
 
-            //TODO: User Preferences
+            //A/B: User Preferences
             //FIXME: use largest unit, weeks, days, hours, minutes, and grammar
             let text = String(timeInterval: daysUntilDeadline, options: .largestTwoUnits)
 

@@ -16,8 +16,6 @@ import EventKitUI
 
 class CalendarStack: NSObject {
     
-    //TODO: listen for changes made in the calendar and notify anyone listening
-    
     private(set) var eventStore = EKEventStore()
     
     var calendars: [EKCalendar]

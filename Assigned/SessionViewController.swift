@@ -81,6 +81,9 @@ class SessionViewController: UIViewController {
                 unwrappedSelf.dataModel.saveOnlyOnReading()
                 unwrappedSelf.presentSessionDetail(for: newSession)
                 
+                // update the table to begin showing sessions vs the prompt message
+                unwrappedSelf.viewModel.reloadFetch()
+                
         }, failureHandler: {
             PrivacyService.Calendar.promptAlert(in: self, with: .alert)
         })
@@ -122,11 +125,9 @@ extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         if let fetchedResults = viewModel.fetchedSessions {
-            
-            //TODO: create sections for each day of the week
             return fetchedResults.sections?.count ?? 0
             
-            // privacy message cell
+        // privacy message cell
         } else {
             return 1
         }

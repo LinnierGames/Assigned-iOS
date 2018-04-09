@@ -220,7 +220,6 @@ class TaskViewController: UIViewController {
                 showEffortValuesAnimations()
             }
 
-            //TODO: update the effort chart
             viewEffortCompleted.duration = task.completedDurationOfSessions
             viewEffortPlanned.duration = task.plannedDurationOfSessions
             
@@ -756,8 +755,7 @@ extension TaskViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField === textfieldTitle {
 
-            //TODO: validation
-            textfieldTitle.resignFirstResponder()
+            textfieldTitle.resignFirstResponder() // will validate if empty
         } else if textField === textfieldAddSubtasks {
             textfieldTitle.resignFirstResponder()
 

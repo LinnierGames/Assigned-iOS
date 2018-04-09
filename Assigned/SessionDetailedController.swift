@@ -33,7 +33,6 @@ class SessionDetailedController: UIViewController {
     // MARK: - VOID METHODS
     
     private func updateUI() {
-        //TODO: refactor to model
         
         // Title
         let sessionTask = session.task
@@ -53,7 +52,7 @@ class SessionDetailedController: UIViewController {
         
         // Duration
 //        let anHour = CTDateComponentHour
-        //TODO: implement duration slider
+        //TODO: implement duration slider class
     }
     
     private func dismissViewController() {

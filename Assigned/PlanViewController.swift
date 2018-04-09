@@ -44,7 +44,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - VOID METHODS
     
     enum ViewState {
-        case Hidden //TODO: implement hidden task panel
+        case Hidden
         case Minimized
         case Shown
         
@@ -243,12 +243,12 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
     }
     
     func eventViewController(_ controller: EKEventViewController, didCompleteWith action: EKEventViewAction) {
-        //TODO: switch on action (.done, .responded, .deleted)
+        //TODO: switch on param: action (.done, .responded, .deleted)
         self.dismiss(animated: true)
     }
     
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
-        //TODO: switch on action (.canceled, .saved, .deleted)
+        //TODO: switch on param: action (.canceled, .saved, .deleted)
         controller.dismiss(animated: true)
     }
     //    func eventEditViewControllerDefaultCalendar(forNewEvents controller: EKEventEditViewController) -> EKCalendar {

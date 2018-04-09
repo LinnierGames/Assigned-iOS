@@ -38,7 +38,7 @@ class SessionViewModel {
         return self.parentModel.task
     }
     
-    private func reloadFetch() {
+    func reloadFetch() {
         
         // Privacy Restriction
         guard PrivacyService.Calendar.isAuthorized else {
@@ -51,6 +51,7 @@ class SessionViewModel {
         
         let fetch: NSFetchRequest<Session> = Session.fetchRequest()
         
+        //A/B: past sessions means after the today's time or after today's date
         if self.isShowingPastSessions {
             fetch.sortDescriptors = [NSSortDescriptor(key: Session.StringKeys.startDate, ascending: false)]
             fetch.predicate = NSPredicate(format: "\(Session.StringKeys.task) == %@ AND \(Session.StringKeys.startDate) < %@", self.task, Date().midnight as NSDate)

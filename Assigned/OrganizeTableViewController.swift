@@ -199,7 +199,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                     fatalError("action button should be disabled if no rows are selected")
                 }
                 
-                //TODO: undo
+                //TODO: allow undo deleted batch
                 UIAlertController(title: "Delete Items", message: "are you sure you want to delete \(directoriesToDelete.count) items? This action cannot be undone", preferredStyle: .alert)
                     .addConfirmationButton(title: "Delete", style: .destructive, with: { [unowned self] (action) in
                         self.directoryManager.delete(directories: directoriesToDelete)
