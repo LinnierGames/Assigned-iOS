@@ -144,7 +144,9 @@ extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
                 } else if aSession.dayOfStartDate.isEarlier(than: Date()) {
                     return "Past Sessions"
                 } else {
-                    let formattedDate = String(date: aSession.dayOfStartDate, dateStyle: .long)
+                    let formattedDate = String(
+                        date: aSession.dayOfStartDate,
+                        formatterMap: .Day_oftheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, ", ", .Year_minimumOfFourDigits)
                     
                     return formattedDate
                 }
