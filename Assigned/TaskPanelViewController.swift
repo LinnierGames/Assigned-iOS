@@ -91,9 +91,11 @@ class TaskPanelViewController: UIViewController {
 
 }
 
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
 extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    // MARK: - RETURN VALUES
+    // MARK: RETURN VALUES
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -109,20 +111,43 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         let task = self.fetchedResultsController!.task(at: indexPath)
         cell.configure(task)
         
+        cell.delegate = self
+        cell.longTapGestureDelegate = self
+        
         return cell
     }
     
-    // MARK: - VOID METHODS
+    // MARK: VOID METHODS
     
-    // MARK: - IBACTIONS
+    // MARK: IBACTIONS
     
-    // MARK: - LIFE CYCLE
+    // MARK: LIFE CYCLE
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.reloadData()
     }
+}
+
+extension TaskPanelViewController: UITaskCollectionViewCellDelegate {
+    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
+        print("begin")
+    }
+    
+    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
+        print("change")
+    }
+    
+    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
+        print("end")
+    }
+}
+
+// MARK: - UIGestureRecognizerDelegate
+
+extension TaskPanelViewController: UIGestureRecognizerDelegate {
+    
 }
 
 // MARK: - TaskPanelViewModel.TaskPanelViewModelDelegate & NSFetchedResultsControllerDelegate
