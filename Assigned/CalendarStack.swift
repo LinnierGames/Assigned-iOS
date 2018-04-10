@@ -202,3 +202,16 @@ class CalendarStack: NSObject {
     
     // MARK: - LIFE CYCLE
 }
+
+extension CalendarStack {
+    
+    //TODO: user perferences
+    var defaultCalendar: EKCalendar {
+        guard let defaultCalendar = self.eventStore.defaultCalendarForNewEvents else {
+            fatalError("no default calendar")
+        }
+        
+        return defaultCalendar
+    }
+    
+}

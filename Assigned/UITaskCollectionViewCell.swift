@@ -9,10 +9,10 @@
 import UIKit
 
 @objc protocol UITaskCollectionViewCellDelegate: class {
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState)
+    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer, for task: Task?)
+    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer, for task: Task?)
+    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer, for task: Task?)
+    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState, for task: Task?)
 }
 
 class UITaskCollectionViewCell: UICollectionViewCell {
@@ -44,6 +44,8 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: UITaskCollectionViewCellDelegate?
     
+    weak var task: Task?
+    
     private(set) lazy var longTapGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(UITaskCollectionViewCell.didLongTap(gesture:)))
         self.contentView.addGestureRecognizer(gesture)
@@ -74,25 +76,27 @@ class UITaskCollectionViewCell: UICollectionViewCell {
             self.labelSubtitle.text = nil
         }
         
+        self.task = task
+        
         self.updateUI()
     }
     
     @objc private func didLongTap(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            delegate?.taskCollection?(cell: self, didBegin: gesture)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            delegate?.taskCollection?(cell: self, didBegin: gesture, for: self.task)
+            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, for: self.task)
             self.cellState = .dragging
         case .changed:
-            delegate?.taskCollection?(cell: self, didChange: gesture)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            delegate?.taskCollection?(cell: self, didChange: gesture, for: self.task)
+            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, for: self.task)
             self.cellState = .dragging
         case .ended:
-            delegate?.taskCollection?(cell: self, didEnd: gesture)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            delegate?.taskCollection?(cell: self, didEnd: gesture, for: self.task)
+            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, for: self.task)
             self.cellState = .normal
         default:
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state)
+            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, for: self.task)
         }
     }
     

@@ -17,14 +17,6 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     private lazy var viewModel = PlanViewModel()
     
-    private(set) lazy var calendar: CalendarStack = {
-        do {
-            return try CalendarStack(delegate: nil)
-        } catch let err {
-            fatalError(err.localizedDescription)
-        }
-    }()
-    
     var selectedDate: Date {
         set {
             
@@ -206,7 +198,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var buttonAddEvent: UIBarButtonItem!
     @IBAction func addEventCalendar(_ sender: Any) {
-        self.calendar.presentNewEvent(in: self)
+        self.viewModel.calendar.presentNewEvent(in: self)
     }
     
     @IBOutlet weak var viewTaskPanel: UIView!
@@ -264,22 +256,27 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
 // MARK: - UITaskCollectionViewCellDelegate
 
 extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecognizerDelegate {
-    static var currentDraggingView: UIView?
+    static var currentDraggingView: UIDraggableSession?
     static var touchOffset: CGPoint?
     
-    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
+    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer, for task: Task?) {
+        guard let task = task else {
+            return
+        }
+        
         let cellSize = cell.frame.size
         let cellOrigin = self.view.convert(cell.frame.origin, from: cell.superview)
-        let draggingView = UIView(frame: CGRect(origin: cellOrigin, size: cellSize))
-        draggingView.backgroundColor = .blue
-        PlanViewController.currentDraggingView = draggingView
+        let newSessionView = UIDraggableSession(task: task, withCopied: CGRect(origin: cellOrigin, size: cellSize))
+        
+        newSessionView.backgroundColor = viewModel.defaultCalendarColor
+        PlanViewController.currentDraggingView = newSessionView
         PlanViewController.touchOffset = cell.frame.origin - gesture.location(in: cell.superview)
-        self.view.addSubview(draggingView)
+        self.view.addSubview(newSessionView)
         
         self.setTaskPanel(to: .Hidden)
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
+    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer, for task: Task?) {
         guard
             let draggingView = PlanViewController.currentDraggingView,
             let touchOffset = PlanViewController.touchOffset else {
@@ -290,7 +287,7 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         draggingView.frame.origin = location + touchOffset
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
+    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer, for task: Task?) {
         self.setTaskPanel(to: .Minimized)
     }
 }

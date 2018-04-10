@@ -7,11 +7,27 @@
 //
 
 import Foundation
+import UIKit
 
 protocol PlanViewModelDelegate: class {
     
 }
 
-struct PlanViewModel {
+class PlanViewModel {
+    
+    private(set) lazy var calendar: CalendarStack = {
+        do {
+            return try CalendarStack(delegate: nil)
+        } catch let err {
+            fatalError(err.localizedDescription)
+        }
+    }()
+    
+    var defaultCalendarColor: UIColor {
+        return UIColor(cgColor: calendar.defaultCalendar.cgColor).withAlphaComponent(0.35)
+    }
+}
+
+extension PlanViewModel {
     
 }
