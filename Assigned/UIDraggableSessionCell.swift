@@ -1,5 +1,5 @@
 //
-//  UIDraggableSession.swift
+//  UIDraggableSessionCell.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 4/9/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UIDraggableSession: UIView {
+class UIDraggableSessionCell: UIView {
     
     @IBOutlet var contentView: UIView!
     
@@ -31,25 +31,15 @@ class UIDraggableSession: UIView {
         self.layer.cornerRadius = 4.0
         
         if let task = task {
-            self.updateUI(for: task)
+            self.configure(for: task)
         }
     }
-    
-//    init(task: Task, withCopied frame: CGRect = CGRect.zero) {
-//        super.init(frame: frame)
-//        self = nib.load
-//        Bundle.main.loadNibNamed(UINib.classNib, owner: self, options: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
     
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
-    private func updateUI(for task: Task) {
+    func configure(for task: Task) {
         titleLabel.text = task.title
     }
     
@@ -62,5 +52,5 @@ class UIDraggableSession: UIView {
 }
 
 extension UINib {
-    static let classNib = "UIDraggableSession"
+    static let classNib = "UIDraggableSessionCell"
 }

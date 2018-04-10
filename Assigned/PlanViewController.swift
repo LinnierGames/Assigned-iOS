@@ -256,7 +256,7 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
 // MARK: - UITaskCollectionViewCellDelegate
 
 extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecognizerDelegate {
-    static var currentDraggingView: UIDraggableSession?
+    static var currentDraggingView: UIDraggableSessionCell?
     static var touchOffset: CGPoint?
     
     func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer, for task: Task?) {
@@ -264,14 +264,18 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
             return
         }
         
-        let cellSize = cell.frame.size
+        let cellSize = CGSize(width: cell.frame.size.width, height: 45.0)
         let cellOrigin = self.view.convert(cell.frame.origin, from: cell.superview)
-        let newSessionView = UIDraggableSession(task: task, withCopied: CGRect(origin: cellOrigin, size: cellSize))
+        let newSessionView = UIDraggableSessionCell(task: task, withCopied: CGRect(origin: cellOrigin, size: cellSize))
         
         newSessionView.backgroundColor = viewModel.defaultCalendarColor
         PlanViewController.currentDraggingView = newSessionView
         PlanViewController.touchOffset = cell.frame.origin - gesture.location(in: cell.superview)
         self.view.addSubview(newSessionView)
+        
+        // also, adjust the width to match the calendar day view
+        let draggableViewWidth = self.dayViewController.eventWidth
+        newSessionView.frame.size.width = draggableViewWidth
         
         self.setTaskPanel(to: .Hidden)
     }
@@ -283,8 +287,26 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
                 return assertionFailure("longpress gesture did change without the inital draggingView/touch offset")
         }
         
-        let location = gesture.location(in: self.view)
-        draggingView.frame.origin = location + touchOffset
+        //TODO: animate position and resizing
+        // update location and snap to the right edge of the screen
+        let todaysTimelineContainer = self.dayViewController.timelineContainer
+        
+        // get point
+        // convert into todays time line cartiesian plane
+        var location = gesture.location(in: todaysTimelineContainer)
+        
+        // round
+        location.y = CGFloat(Int(location.y + touchOffset.y) / (45) * (45)) + 10 // every 60 mins
+        
+        // convert back into self.view cartiesian plane
+        location = self.view.convert(location, from: todaysTimelineContainer)
+
+        // insets
+        let screenWidth = self.view.frame.size.width
+        let leftAlign = screenWidth - draggingView.frame.size.width
+        
+        // udpate the position
+        draggingView.frame.origin = CGPoint(x: leftAlign, y: location.y)
     }
     
     func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer, for task: Task?) {
