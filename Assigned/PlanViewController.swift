@@ -296,7 +296,9 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         var location = gesture.location(in: todaysTimelineContainer)
         
         // round
-        location.y = CGFloat(Int(location.y + touchOffset.y) / (45) * (45)) + 10 // every 60 mins
+        let intervalSize:CGFloat = 45.0*0.25
+        let roundedInt = Int((location.y + touchOffset.y) / (intervalSize))
+        location.y = CGFloat(roundedInt) * intervalSize + 10.0 // every 15 mins
         
         // convert back into self.view cartiesian plane
         location = self.view.convert(location, from: todaysTimelineContainer)
