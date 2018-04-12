@@ -259,7 +259,7 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
     static var currentDraggingView: UIDraggableSessionCell?
     static var touchOffset: CGPoint?
     
-    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer, for task: Task?) {
+    func taskCollection(cell: UITaskCollectionViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         guard let task = task else {
             return
         }
@@ -280,7 +280,7 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         self.setTaskPanel(to: .Hidden)
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer, for task: Task?) {
+    func taskCollection(cell: UITaskCollectionViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         guard
             let draggingView = PlanViewController.currentDraggingView,
             let touchOffset = PlanViewController.touchOffset else {
@@ -311,7 +311,17 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         draggingView.frame.origin = CGPoint(x: leftAlign, y: location.y)
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer, for task: Task?) {
+    func taskCollection(cell: UITaskCollectionViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
+        let todaysTimeline = self.dayViewController.timelineContainer
+        guard
+            var dragLocationOrigin = PlanViewController.currentDraggingView?.frame.origin else {
+                return assertionFailure("longpress gesture did end without the inital draggingView offset")
+        }
+        
+        dragLocationOrigin = todaysTimeline.timeline.convert(dragLocationOrigin, from: self.view)
+        
+        print(todaysTimeline.date(for: dragLocationOrigin, with: self.selectedDate))
+        
         self.setTaskPanel(to: .Minimized)
     }
 }

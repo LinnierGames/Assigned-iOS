@@ -135,6 +135,69 @@ class CalendarDayViewController: DayViewController {
 //    }
 }
 
+extension TimelineContainer {
+    
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter point: must be in the cartesian plate of the timeline view
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    func hour(for point: CGPoint) -> Int {
+        //let timelineView = self.timeline
+        //let viewHeight = timelineView.fullHeight
+        
+        return Int(timeFloat(for: point))
+    }
+    
+    /**
+     <#Lorem ipsum dolor sit amet.#>
+     
+     - parameter point: must be in the cartesian plate of the timeline view
+     
+     - returns: <#Sed do eiusmod tempor.#>
+     */
+    func date(for point: CGPoint, with offsettingDate: Date) -> Date {
+        var timeFloatValue = timeFloat(for: point)
+        let hourValue = Int(timeFloatValue)
+        
+        timeFloatValue -= CGFloat(hourValue)
+        
+        timeFloatValue -= 0.22
+        
+        let minuteValue: Int = {
+            if timeFloatValue >= 0.75 {
+                return 45
+            } else if timeFloatValue >= 0.5 {
+                return 30
+            } else if timeFloatValue >= 0.25 {
+                return 15
+            } else {
+                return 0
+            }
+        }()
+        
+        var dateComponents = offsettingDate.components(DateComponents.DayComponents.union(DateComponents.TimeComponents))
+        dateComponents.hour = hourValue
+        dateComponents.minute = minuteValue
+        
+        guard let date = Calendar.current.date(from: dateComponents)
+            else {
+            fatalError("cannot make date with date components")
+        }
+        
+        return date
+    }
+    
+    private func timeFloat(for point: CGPoint) -> CGFloat {
+        let cellHeightForAn_Hour: CGFloat = 45.0
+        
+        return point.y / cellHeightForAn_Hour
+    }
+}
+
+
 extension CalendarDayViewController: CalendarStackDelegate {
     func calendar(stack: CalendarStack, eventStoreDidChange eventStore: EKEventStore) {
         self.reloadData()
