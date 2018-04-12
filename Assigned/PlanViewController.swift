@@ -300,10 +300,18 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         let roundedInt = Int((location.y + touchOffset.y) / (intervalSize))
         location.y = CGFloat(roundedInt) * intervalSize + 10.0 // every 15 mins
         
+        // prevent new location.y to go beyond the scroll view's content size
+        location.y = max(0, location.y)
+        
         // convert back into self.view cartiesian plane
         location = self.view.convert(location, from: todaysTimelineContainer)
+        
+        // prevent location.y to go beyond the scroll view's top bounds
+        let dayHeaderViewFrame = self.view.convert(self.dayViewController.dayHeaderView.frame, from: self.dayViewController.view)
+        let bottomDayHeaderPoint = dayHeaderViewFrame.origin.y + dayHeaderViewFrame.size.height
+        location.y = max(bottomDayHeaderPoint, location.y)
 
-        // insets
+        // left inset
         let screenWidth = self.view.frame.size.width
         let leftAlign = screenWidth - draggingView.frame.size.width
         
@@ -314,13 +322,24 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
     func taskCollection(cell: UITaskCollectionViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         let todaysTimeline = self.dayViewController.timelineContainer
         guard
+            let draggingView = PlanViewController.currentDraggingView,
             var dragLocationOrigin = PlanViewController.currentDraggingView?.frame.origin else {
                 return assertionFailure("longpress gesture did end without the inital draggingView offset")
         }
         
+        guard let task = task else {
+            fatalError("no task was given")
+        }
+        
         dragLocationOrigin = todaysTimeline.timeline.convert(dragLocationOrigin, from: self.view)
         
-        print(todaysTimeline.date(for: dragLocationOrigin, with: self.selectedDate))
+        let newDate = todaysTimeline.date(for: dragLocationOrigin, with: self.selectedDate)
+        
+        viewModel.addSession(for: task, at: newDate)
+                
+        draggingView.removeFromSuperview()
+        PlanViewController.currentDraggingView = nil
+        PlanViewController.touchOffset = nil
         
         self.setTaskPanel(to: .Minimized)
     }

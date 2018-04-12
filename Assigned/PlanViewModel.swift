@@ -15,6 +15,8 @@ protocol PlanViewModelDelegate: class {
 
 class PlanViewModel {
     
+    private let context = PersistenceStack.shared.viewContext
+    
     private(set) lazy var calendar: CalendarStack = {
         do {
             return try CalendarStack(delegate: nil)
@@ -30,4 +32,12 @@ class PlanViewModel {
 
 extension PlanViewModel {
     
+    func addSession(for task: Task, at date: Date) {
+        let newSession = Session(
+            title: nil,
+            startDate: date,
+            task: task, in: self.context)
+        
+        calendar.createEvent(for: newSession)
+    }
 }

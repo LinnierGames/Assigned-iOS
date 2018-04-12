@@ -38,23 +38,6 @@ class CalendarDayViewController: DayViewController {
         }
     }
     
-    var eventWidth: CGFloat {
-        // references TimelineView.draw(..)
-        return self.view.bounds.size.width - 53
-    }
-    
-    var timelineContainers: [CalendarKit.TimelineContainer] {
-        let timelinePagerView = self.dayView.subviews[0] as! CalendarKit.TimelinePagerView
-        let pagingScrollView = timelinePagerView.subviews[0] as! UIScrollView // PagingScrollView
-        let timelines = pagingScrollView.subviews as! [TimelineContainer]
-        
-        return timelines
-    }
-    
-    var timelineContainer: CalendarKit.TimelineContainer {
-        return self.timelineContainers[1]
-    }
-    
     // MARK: - RETURN VALUES
     
     // MARK: EventDataSource
@@ -135,6 +118,29 @@ class CalendarDayViewController: DayViewController {
 //    }
 }
 
+extension DayViewController {
+    var eventWidth: CGFloat {
+        // references TimelineView.draw(..)
+        return self.view.bounds.size.width - 53
+    }
+    
+    var dayHeaderView: CalendarKit.DayHeaderView {
+        return self.dayView.subviews[1] as! CalendarKit.DayHeaderView
+    }
+    
+    var timelineContainers: [CalendarKit.TimelineContainer] {
+        let timelinePagerView = self.dayView.subviews[0] as! CalendarKit.TimelinePagerView
+        let pagingScrollView = timelinePagerView.subviews[0] as! UIScrollView // PagingScrollView
+        let timelines = pagingScrollView.subviews as! [TimelineContainer]
+        
+        return timelines
+    }
+    
+    var timelineContainer: CalendarKit.TimelineContainer {
+        return self.timelineContainers[1]
+    }
+}
+
 extension TimelineContainer {
     
     /**
@@ -193,7 +199,7 @@ extension TimelineContainer {
     private func timeFloat(for point: CGPoint) -> CGFloat {
         let cellHeightForAn_Hour: CGFloat = 45.0
         
-        return point.y / cellHeightForAn_Hour
+        return max(0, point.y / cellHeightForAn_Hour)
     }
 }
 
