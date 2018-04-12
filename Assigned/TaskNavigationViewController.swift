@@ -129,6 +129,8 @@ class TaskNavigationViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    
     @IBOutlet weak var viewTask: UIView!
     @IBOutlet weak var viewSessions: UIView!
     @IBOutlet weak var viewNotes: UIView!
@@ -140,7 +142,29 @@ class TaskNavigationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // update the UI if editing mode changes
         viewModel.addObserver(self, forKeyPath: "editingMode", options: .new, context: nil)
+        
+        // blury background
+//        let blur = UIBlurEffect(style: .dark)
+//        self.visualEffectView.effect = blur
+        
+        
+        let max = CGFloat(30)
+        let min = CGFloat(-max)
+        
+        let xMotion = UIInterpolatingMotionEffect(keyPath: "layer.transform.translation.x", type: .tiltAlongHorizontalAxis)
+        xMotion.minimumRelativeValue = min
+        xMotion.maximumRelativeValue = max
+        
+        let yMotion = UIInterpolatingMotionEffect(keyPath: "layer.transform.translation.y", type: .tiltAlongVerticalAxis)
+        yMotion.minimumRelativeValue = min
+        yMotion.maximumRelativeValue = max
+        
+        let motionEffectGroup = UIMotionEffectGroup()
+        motionEffectGroup.motionEffects = [xMotion,yMotion]
+        
+        scrollView.addMotionEffect(motionEffectGroup)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -164,4 +188,15 @@ private extension UIStoryboardSegue {
     static let embedTaskVc = "embed task vc"
     static let embedSessionVc = "embed sessions vc"
     static let embedNotesVc = "embed notes vc"
+}
+
+// MARK: - UIView
+
+extension UIView {
+    func bluryCard() {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = 0.25
+        self.layer.shadowOffset = CGSize(width: 5, height: 30)
+        self.layer.shadowRadius = 25.0
+    }
 }

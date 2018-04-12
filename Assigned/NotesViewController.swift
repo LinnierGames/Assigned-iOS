@@ -28,6 +28,9 @@ class NotesViewController: UIViewController {
     @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var textviewNotes: UITextView!
     
+    //TODO: adjust text view when keyboard appears
+    @IBOutlet weak var constraintBottomTextView: NSLayoutConstraint!
+    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
@@ -41,6 +44,8 @@ class NotesViewController: UIViewController {
             self.textviewNotes.resignFirstResponder()
         })
         textviewNotes.inputAccessoryView = inputView
+        
+//        self.view.bluryCard()
     }
     
     override func viewWillAppear(_ animated: Bool) {

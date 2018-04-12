@@ -8,8 +8,8 @@
           "width" : 1
         },
         "cap-insets" : {
-          "right" : 15,
-          "left" : 12
+          "right" : 19,
+          "left" : 13
         }
       },
       "idiom" : "universal",
@@ -24,8 +24,8 @@
           "width" : 1
         },
         "cap-insets" : {
-          "right" : 29,
-          "left" : 22
+          "right" : 37,
+          "left" : 25
         }
       },
       "idiom" : "universal",
@@ -40,8 +40,8 @@
           "width" : 1
         },
         "cap-insets" : {
-          "right" : 43,
-          "left" : 33
+          "right" : 55,
+          "left" : 37
         }
       },
       "idiom" : "universal",

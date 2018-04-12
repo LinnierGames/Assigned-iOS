@@ -71,6 +71,14 @@ class SessionViewController: UIViewController {
     @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var tableSessions: UITableView!
     
+    @IBOutlet weak var buttonAddSession: UIButton! {
+        didSet {
+            buttonAddSession.layer.cornerRadius = 4.0
+            buttonAddSession.layer.borderWidth = 1.0
+            buttonAddSession.layer.borderColor = UIColor.buttonTint.cgColor
+        }
+    }
+    
     @IBAction func pressAddSession(_ sender: Any) {
         PrivacyService.Calendar.authorize(
             
@@ -89,7 +97,14 @@ class SessionViewController: UIViewController {
         })
     }
     
-    @IBOutlet weak var buttonPastSessions: UIButton!
+    @IBOutlet weak var buttonPastSessions: UIButton! {
+        didSet {
+            buttonPastSessions.layer.cornerRadius = 4.0
+            buttonPastSessions.layer.borderWidth = 1.0
+            buttonPastSessions.layer.borderColor = UIColor.buttonTint.cgColor
+        }
+    }
+    
     @IBAction func pressTogglePastSessions(_ sender: Any) {
         self.viewModel.toggleShowPastSessions()
         self.tableSessions.reloadData()
@@ -100,6 +115,7 @@ class SessionViewController: UIViewController {
             buttonPastSessions.setTitle("Show Past Sessions", for: .normal)
         }
     }
+    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
@@ -111,6 +127,8 @@ class SessionViewController: UIViewController {
         self.labelTaskTitle.text = task.title
         
         updateUI()
+        
+//        self.view.bluryCard()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -149,16 +149,19 @@ class TaskViewController: UIViewController {
             isDiscardButtonHidden = false
             isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
+            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
             isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Edit", for: .normal)
+            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         } else if editingMode.isUpdating {
             isDeleteButtonHidden = false
             isDiscardButtonHidden = false
             isShowingSubtasksTable = false
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
+            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         }
 
         // Update task properties
@@ -272,7 +275,12 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var imageDraggable: UIImageView!
     @IBOutlet weak var contraintTableViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var buttonLeft: UIButton!
+    @IBOutlet weak var buttonLeft: UIButton! {
+        didSet {
+            buttonLeft.layer.borderWidth = 1.0
+            buttonLeft.layer.cornerRadius = 4.0
+        }
+    }
     @IBAction func pressLeft(_ sender: Any) {
         // Save new Task
         if editingMode.isCreating {
@@ -319,16 +327,6 @@ class TaskViewController: UIViewController {
     private var isDeleteButtonHidden: Bool {
         set {
             buttonDelete.isHidden = newValue
-//            // hide the button
-//            if newValue == true {
-//                buttonDelete.isHidden = true
-//                buttonDelete.isUserInteractionEnabled = false
-//
-//                // show the button
-//            } else {
-//                buttonDelete.setTitleColor(UIColor.destructive, for: .normal)
-//                buttonDelete.isUserInteractionEnabled = true
-//            }
         }
         get {
             return buttonDelete.isHidden
@@ -337,15 +335,15 @@ class TaskViewController: UIViewController {
 
     private var isDiscardButtonHidden: Bool {
         set {
+            buttonDiscard.isHidden = newValue
+            
             // hide the button
             if newValue == true {
-                buttonDiscard.setTitleColor(UIColor.clear, for: .normal)
-                buttonDiscard.isUserInteractionEnabled = false
-
+                buttonDiscard.layer.borderColor = nil
+                
                 // show the button
             } else {
-                buttonDiscard.setTitleColor(UIColor.destructive, for: .normal)
-                buttonDiscard.isUserInteractionEnabled = true
+                buttonDiscard.layer.borderColor = UIColor.red.cgColor
             }
         }
         get {
@@ -353,13 +351,25 @@ class TaskViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var buttonDelete: UIButton!
+    @IBOutlet weak var buttonDelete: UIButton! {
+        didSet {
+            buttonDelete.layer.cornerRadius = 4.0
+            buttonDelete.layer.borderWidth = 1.0
+            buttonDelete.layer.borderColor = UIColor.red.cgColor
+        }
+    }
     @IBAction func pressDeleteTask(_ sender: Any) {
         dataModel.deleteTask()
         self.dismissViewController()
     }
 
-    @IBOutlet weak var buttonDiscard: UIButton!
+    @IBOutlet weak var buttonDiscard: UIButton! {
+        didSet {
+            buttonDiscard.layer.cornerRadius = 4.0
+            buttonDiscard.layer.borderWidth = 1.0
+            buttonDiscard.layer.borderColor = UIColor.red.cgColor
+        }
+    }
     @IBAction func pressDiscardChanges(_ sender: Any) {
         if editingMode.isCreating {
             self.dismissViewController()
@@ -422,9 +432,6 @@ class TaskViewController: UIViewController {
     }
 
     @IBOutlet weak var buttonBreadcrum: UIButton!
-    @IBAction func pressBreadcrum(_ sender: Any) {
-
-    }
 
     // MARK: Deadline
     @IBOutlet weak var labelDeadlineSubtext: UILabel!
@@ -473,7 +480,7 @@ class TaskViewController: UIViewController {
 
     // MARK: Effort View
 
-    @IBOutlet weak var viewEffortValues: UIStackView!
+    @IBOutlet weak var viewEffortValues: UIView!
 
     @IBOutlet weak var viewEffortCompleted: UITimeBox!
     @IBOutlet weak var viewEffortPlanned: UITimeBox!
@@ -603,7 +610,6 @@ class TaskViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
         let titleCell = UISubtaskTableViewCell.Types.Textfield
         tableSubtasks.register(titleCell.nib, forCellReuseIdentifier: titleCell.cellIdentifier)
@@ -634,6 +640,10 @@ class TaskViewController: UIViewController {
         }
 
         self.isShowingPriorityBox = false
+        
+        if editingMode.isCreating {
+            self.view.bluryCard()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

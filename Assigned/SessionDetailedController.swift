@@ -65,10 +65,26 @@ class SessionDetailedController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var buttonDone: UIButton! {
+        didSet {
+            buttonDone.layer.cornerRadius = 4.0
+            buttonDone.layer.borderWidth = 1.0
+            buttonDone.layer.borderColor = UIColor.buttonTint.cgColor
+        }
+    }
+    
     @IBAction func pressDone(_ sender: Any) {
         delegate?.session(controller: self, didFinishEditing: self.session)
         
         dismissViewController()
+    }
+    
+    @IBOutlet weak var buttonTrash: UIButton! {
+        didSet {
+            buttonTrash.layer.cornerRadius = 4.0
+            buttonTrash.layer.borderWidth = 1.0
+            buttonTrash.layer.borderColor = UIColor.red.cgColor
+        }
     }
     
     @IBAction func pressTrash(_ sender: Any) {
