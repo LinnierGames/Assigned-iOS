@@ -86,6 +86,9 @@
 		E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */; };
 		E9FF77AF208044A50086D6D9 /* UITitleIconTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF77AD208044A50086D6D9 /* UITitleIconTableViewCell.swift */; };
 		E9FF77B0208044A50086D6D9 /* UITitleIconTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9FF77AE208044A50086D6D9 /* UITitleIconTableViewCell.xib */; };
+		E9FF77B220804FEA0086D6D9 /* OrganizeRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF77B120804FEA0086D6D9 /* OrganizeRootTableViewController.swift */; };
+		E9FF77B4208050170086D6D9 /* OrganizeChildDirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF77B3208050170086D6D9 /* OrganizeChildDirectoryTableViewController.swift */; };
+		E9FF77B6208050540086D6D9 /* OrganizeSmartFolderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FF77B5208050540086D6D9 /* OrganizeSmartFolderTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +200,9 @@
 		E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9FF77AD208044A50086D6D9 /* UITitleIconTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITitleIconTableViewCell.swift; sourceTree = "<group>"; };
 		E9FF77AE208044A50086D6D9 /* UITitleIconTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITitleIconTableViewCell.xib; sourceTree = "<group>"; };
+		E9FF77B120804FEA0086D6D9 /* OrganizeRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeRootTableViewController.swift; sourceTree = "<group>"; };
+		E9FF77B3208050170086D6D9 /* OrganizeChildDirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeChildDirectoryTableViewController.swift; sourceTree = "<group>"; };
+		E9FF77B5208050540086D6D9 /* OrganizeSmartFolderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrganizeSmartFolderTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +461,9 @@
 			children = (
 				E9CA1C1A20531E3600B8936E /* OragnizeViewModel.swift */,
 				E9CA1C1820531A7800B8936E /* OrganizeTableViewController.swift */,
+				E9FF77B120804FEA0086D6D9 /* OrganizeRootTableViewController.swift */,
+				E9FF77B5208050540086D6D9 /* OrganizeSmartFolderTableViewController.swift */,
+				E9FF77B3208050170086D6D9 /* OrganizeChildDirectoryTableViewController.swift */,
 				E98064602054E5E100073B33 /* Assigned Editor */,
 			);
 			name = Organize;
@@ -860,18 +869,21 @@
 				E9C5D5D020588FA100C42821 /* UIPriorityBox.swift in Sources */,
 				E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */,
 				E988BD81206B01C100A09F49 /* SessionViewModel.swift in Sources */,
+				E9FF77B220804FEA0086D6D9 /* OrganizeRootTableViewController.swift in Sources */,
 				E972ADC12061925400B26980 /* TaskNavigationViewController.swift in Sources */,
 				E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */,
 				E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */,
 				E97226C32073D02B00A021B4 /* AgendaViewController.swift in Sources */,
 				E97DF434205305F80050EA21 /* AppDelegate.swift in Sources */,
 				E90D6839205B65D00038E2DF /* UITextFieldTableViewCell.swift in Sources */,
+				E9FF77B4208050170086D6D9 /* OrganizeChildDirectoryTableViewController.swift in Sources */,
 				E99D7C12205B1B0400FE7B07 /* UITimeBox.swift in Sources */,
 				E9CA1C1920531A7800B8936E /* OrganizeTableViewController.swift in Sources */,
 				E947DE4E20772F340006D141 /* PlanViewModel.swift in Sources */,
 				E9C5D5CE20588A0800C42821 /* UICheckbox.swift in Sources */,
 				E961D6672065F62800AD6EFC /* MoveViewController.swift in Sources */,
 				E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */,
+				E9FF77B6208050540086D6D9 /* OrganizeSmartFolderTableViewController.swift in Sources */,
 				E9925F62207C28E200DCB2B5 /* UIDraggableSessionCell.swift in Sources */,
 				E9CA1C162053178500B8936E /* UITaskTableViewCell.swift in Sources */,
 				E9E6C9E1206F31F400566149 /* Directory+CoreDataProperties.swift in Sources */,
