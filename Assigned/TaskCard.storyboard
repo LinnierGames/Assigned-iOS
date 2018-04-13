@@ -97,7 +97,7 @@
                                                                     <constraint firstAttribute="height" constant="32" id="CsT-ji-rux"/>
                                                                 </constraints>
                                                                 <nil key="textColor"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" spellCheckingType="yes"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="string" keyPath="defaultText" value="Untitled Task"/>
@@ -118,32 +118,36 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47F-Yo-x6t" userLabel="Priority Box">
                                                         <rect key="frame" x="0.0" y="44" width="335" height="50"/>
                                                         <subviews>
-                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="k9P-cb-L6e">
+                                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="k9P-cb-L6e">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
                                                                 <subviews>
                                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSK-Kc-W6y">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="84" height="46"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="52" height="46"/>
+                                                                        <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
                                                                         <state key="normal" title="Low"/>
                                                                         <connections>
                                                                             <action selector="pressA_Priority:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="3b8-zl-kZw"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnc-5T-YQC">
-                                                                        <rect key="frame" x="84" y="0.0" width="83.5" height="46"/>
+                                                                        <rect key="frame" x="81" y="0.0" width="79" height="46"/>
+                                                                        <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
                                                                         <state key="normal" title="Medium"/>
                                                                         <connections>
                                                                             <action selector="pressA_Priority:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="dZQ-vU-kih"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqm-rV-wsW">
-                                                                        <rect key="frame" x="167.5" y="0.0" width="84" height="46"/>
+                                                                        <rect key="frame" x="189" y="0.0" width="56" height="46"/>
+                                                                        <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
                                                                         <state key="normal" title="High"/>
                                                                         <connections>
                                                                             <action selector="pressA_Priority:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="U70-dU-QLz"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utw-ub-PQ0">
-                                                                        <rect key="frame" x="251.5" y="0.0" width="83.5" height="46"/>
+                                                                        <rect key="frame" x="274" y="0.0" width="61" height="46"/>
+                                                                        <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
                                                                         <state key="normal" title="None"/>
                                                                         <connections>
                                                                             <action selector="pressA_Priority:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="T4j-Yo-hbl"/>
@@ -667,7 +671,11 @@
                         <outlet property="buttonDeadline" destination="inD-5h-tlD" id="4qn-uz-A8X"/>
                         <outlet property="buttonDelete" destination="1RS-Ek-TtM" id="IYN-z5-gyT"/>
                         <outlet property="buttonDiscard" destination="b5x-Xa-tZd" id="xAY-Jf-CHb"/>
+                        <outlet property="buttonHighPriority" destination="jqm-rV-wsW" id="MmF-0j-Mse"/>
                         <outlet property="buttonLeft" destination="xA3-ll-iQD" id="9BP-qT-MWW"/>
+                        <outlet property="buttonLowPriority" destination="rSK-Kc-W6y" id="TjJ-gZ-siS"/>
+                        <outlet property="buttonMediumPriority" destination="Jnc-5T-YQC" id="ZW0-A5-NZE"/>
+                        <outlet property="buttonNonePriority" destination="utw-ub-PQ0" id="ExX-ds-RVd"/>
                         <outlet property="constraintCardTopMargin" destination="ENw-E2-Pd3" id="zYw-SI-Gtt"/>
                         <outlet property="contraintCardHeight" destination="Lew-gs-yZK" id="F2h-6l-1ro"/>
                         <outlet property="contraintTableViewHeight" destination="26c-3s-C7P" id="PdN-cX-Z4t"/>
@@ -704,14 +712,14 @@
                 <viewControllerPlaceholder storyboardName="Move" id="Qef-H9-hNd" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0JV-R0-C8C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1531" y="-101"/>
+            <point key="canvasLocation" x="-1366" y="-73"/>
         </scene>
     </scenes>
     <resources>
         <image name="checkbox" width="22" height="22"/>
         <image name="folder-1-mini" width="18" height="14"/>
         <image name="misc_dismiss" width="54" height="10"/>
-        <image name="patt-flag-1" width="31" height="34"/>
+        <image name="patt-flag-1" width="30" height="34"/>
         <image name="priority-high" width="5" height="12"/>
     </resources>
 </document>

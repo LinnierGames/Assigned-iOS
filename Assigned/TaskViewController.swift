@@ -170,6 +170,8 @@ class TaskViewController: UIViewController {
         textfieldTitle.text = task.title
         buttonCheckbox.isChecked = task.isCompleted
         imagePriorityBox.priority = task.priority
+        self.updateProrityButtons()
+        
         buttonBreadcrum.setTitleWithoutAnimation(viewModel.parentTitle, for: .normal)
         labelDeadlineSubtext.text = viewModel.deadlineSubtext
         deadlinePicker.date = task.deadline ?? Date()
@@ -188,6 +190,7 @@ class TaskViewController: UIViewController {
             self.viewEffortSlider.alpha = 1.0
 
             self.imageDraggable.alpha = 0.0
+            self.viewCard.layoutIfNeeded()
         }
 
         let showEffortValuesAnimations = { [unowned self] in
@@ -197,6 +200,7 @@ class TaskViewController: UIViewController {
             self.viewEffortSlider.alpha = 0.0
 
             self.imageDraggable.alpha = 1.0
+            self.viewCard.layoutIfNeeded()
         }
 
         // edit task properties
@@ -243,6 +247,47 @@ class TaskViewController: UIViewController {
         // Fetch subtasks
         tableSubtasks.reloadData()
         self.updateSubtaskTableLength()
+    }
+    
+    private func updateProrityButtons() {
+        switch self.task.priority {
+        case .Low:
+            buttonLowPriority.layer.roundedShape(cornerRadius: 4.0, backgroundColor: UIColor.buttonTint)
+            buttonLowPriority.tintColor = .white
+            buttonMediumPriority.layer.clear()
+            buttonMediumPriority.tintColor = .buttonTint
+            buttonHighPriority.layer.clear()
+            buttonHighPriority.tintColor = .buttonTint
+            buttonNonePriority.layer.clear()
+            buttonNonePriority.tintColor = .buttonTint
+        case .Medium:
+            buttonLowPriority.layer.clear()
+            buttonLowPriority.tintColor = .buttonTint
+            buttonMediumPriority.layer.roundedShape(cornerRadius: 4.0, backgroundColor: UIColor.buttonTint)
+            buttonMediumPriority.tintColor = .white
+            buttonHighPriority.layer.clear()
+            buttonHighPriority.tintColor = .buttonTint
+            buttonNonePriority.layer.clear()
+            buttonNonePriority.tintColor = .buttonTint
+        case .High:
+            buttonLowPriority.layer.clear()
+            buttonLowPriority.tintColor = .buttonTint
+            buttonMediumPriority.layer.clear()
+            buttonMediumPriority.tintColor = .buttonTint
+            buttonHighPriority.layer.roundedShape(cornerRadius: 4.0, backgroundColor: UIColor.buttonTint)
+            buttonHighPriority.tintColor = .white
+            buttonNonePriority.layer.clear()
+            buttonNonePriority.tintColor = .buttonTint
+        case .None:
+            buttonLowPriority.layer.clear()
+            buttonLowPriority.tintColor = .buttonTint
+            buttonMediumPriority.layer.clear()
+            buttonMediumPriority.tintColor = .buttonTint
+            buttonHighPriority.layer.clear()
+            buttonHighPriority.tintColor = .buttonTint
+            buttonNonePriority.layer.roundedShape(cornerRadius: 4.0, backgroundColor: UIColor.buttonTint)
+            buttonNonePriority.tintColor = .white
+        }
     }
     
     private func updateSubtaskTableLength() {
@@ -317,6 +362,7 @@ class TaskViewController: UIViewController {
                 } else {
                     self.viewDeadlinePicker.alpha = 1.0
                 }
+                self.viewCard.layoutIfNeeded()
             }
         }
         get {
@@ -403,6 +449,7 @@ class TaskViewController: UIViewController {
             UIView.animate(withDuration: 0.35) { [unowned self] in
                 self.viewPriorityBox.isHidden = newValue.inverse
                 self.viewPriorityBox.alpha = newValue ? 1.0 : 0.0
+                self.viewCard.layoutIfNeeded()
             }
         }
         get {
@@ -417,18 +464,25 @@ class TaskViewController: UIViewController {
     }
 
     @IBOutlet weak var imagePriorityBox: UIPriorityBox!
+    @IBOutlet weak var buttonLowPriority: UIButton!
+    @IBOutlet weak var buttonMediumPriority: UIButton!
+    @IBOutlet weak var buttonHighPriority: UIButton!
+    @IBOutlet weak var buttonNonePriority: UIButton!
     @IBAction func pressA_Priority(_ sender: UIButton) {
         guard let newPriority = Task.Priorities(rawValue: sender.tag) else {
             fatalError("setting a priority to an unsupported button.tag value")
         }
 
         viewModel.setPriority(to: newPriority)
+        
+        // update prority buttons
+        self.updateProrityButtons()
 
         //TODO: RxSwift
         imagePriorityBox.priority = newPriority
         dataModel.saveOnlyOnReading()
 
-        isShowingPriorityBox = false
+//        isShowingPriorityBox = false
     }
 
     @IBOutlet weak var buttonBreadcrum: UIButton!
@@ -580,6 +634,7 @@ class TaskViewController: UIViewController {
                 } else {
                     self.viewSubtasks.alpha = 1.0
                 }
+                self.viewCard.layoutIfNeeded()
             }
             self.viewNonSubtasks.isHidden = newValue
         }
