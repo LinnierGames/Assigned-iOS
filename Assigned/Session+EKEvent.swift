@@ -12,15 +12,13 @@ import EventKit
 extension Session {
     
     /**
-     <#Lorem ipsum dolor sit amet.#>
+     Updates properties only if the event's and session's have `lastModifiedDate`
+     out of sync
      
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-     
-     - returns: <#Sed do eiusmod tempor.#>
+     - parameter event: update the reciever's properties with this event
      */
     func setValuesIfNeededFor(event: EKEvent) {
         
-        //TODO: chech for lastModified on event if update is needed
         if event.lastModifiedDate! != self.eventLastModifiedDate {
             self.setValuesFor(event: event)
             self.eventLastModifiedDate = event.lastModifiedDate!
@@ -28,11 +26,10 @@ extension Session {
     }
     
     /**
-     <#Lorem ipsum dolor sit amet.#>
+     Updates the reciever's properties. Use `setValuesIfNeededFor(..)` to only update
+     if `lastModifiedDate`s are not the same
      
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-     
-     - returns: <#Sed do eiusmod tempor.#>
+     - parameter event: update the reciever's properties with this event
      */
     func setValuesFor(event: EKEvent) {
         let taskTitle = self.task.title
@@ -75,11 +72,7 @@ extension Session {
     }
     
     /**
-     Deletes the "linked" calendar event
-     
-     - parameter <#bar#>: <#Consectetur adipisicing elit.#>
-     
-     - returns: <#Sed do eiusmod tempor.#>
+     Deletes the "linked" calendar event, if the event still exists
      */
     public override func prepareForDeletion() {
         super.prepareForDeletion()
@@ -90,7 +83,7 @@ extension Session {
             // delete the event
             calendar.delete(event: sessionEvent)
         } else {
-            print("no event was found to delete when deleting the session")
+            debugPrint("no event was found to delete when deleting the session")
         }
     }
 }

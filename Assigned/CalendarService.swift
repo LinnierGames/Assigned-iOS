@@ -84,10 +84,12 @@ class CalendarService {
             // Update stale sessions
             let calendar = try! CalendarStack(delegate: nil)
             sessions.forEach({ (aSession) in
+                
+                // update, if needed, session with its event
                 if let sessionEvent = calendar.event(for: aSession) {
                     aSession.setValuesIfNeededFor(event: sessionEvent)
                     
-                    // delete session
+                // event not found: delete session
                 } else {
                     privateContext.delete(aSession)
                 }
