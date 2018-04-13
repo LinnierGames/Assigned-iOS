@@ -51,3 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension UIColor {
+    static let backgroundColor = UIColor(displayP3Red: 255/255.0, green: 253/255.0, blue: 224/255.0, alpha: 1.0)
+}
+

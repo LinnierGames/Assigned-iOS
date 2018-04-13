@@ -98,7 +98,11 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         if editing {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(OrganizeTableViewController.pressActionTools(_:)))
         } else {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "item", style: .plain, target: self, action: #selector(OrganizeTableViewController.pressProfile(_:)))
+            if currentDirectory == nil {
+                self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "item", style: .plain, target: self, action: #selector(OrganizeTableViewController.pressProfile(_:)))
+            } else {
+                self.navigationItem.leftBarButtonItem = nil
+            }
         }
     }
 
@@ -275,6 +279,14 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         saveHandler = viewModel.save
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.backgroundColor = .backgroundColor
+        
+        //TODO: blury navigation item
+        let navigationBar = navigationController!.navigationBar
+        navigationBar.barTintColor = UIColor.backgroundColor
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
