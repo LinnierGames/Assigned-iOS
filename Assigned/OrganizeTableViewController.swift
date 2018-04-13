@@ -30,8 +30,17 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         guard let selectedIndexPaths = self.tableView.indexPathsForSelectedRows else {
             return nil
         }
+        
         let directories = selectedIndexPaths.map({ [unowned self] (indexPath) -> Directory in
-            return self.fetchedResultsController.directory(at: indexPath)
+            let offsettedIndexPath: IndexPath = { [unowned self] in
+                if self.currentDirectory == nil {
+                    return IndexPath(row: indexPath.row, section: 0)
+                } else {
+                    return indexPath
+                }
+            }()
+            
+            return self.fetchedResultsController.directory(at: offsettedIndexPath)
         })
         
         return directories
@@ -39,7 +48,35 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     // MARK: Table View Data Source
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if self.currentDirectory == nil {
+            return 2
+        } else {
+            return super.numberOfSections(in: tableView)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.currentDirectory == nil {
+            if section == 0 {
+                return 3 // inbox, overdue, due soon
+            } else {
+                return super.tableView(tableView, numberOfRowsInSection: 0)
+            }
+        } else {
+            return super.tableView(tableView, numberOfRowsInSection: section)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Folders"
+        }
+        
+        return nil
+    }
+    
+    private func taskFolderProjectCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.baseCell.cellIdentifier) as! UITaskTableViewCell?
             else {
                 assertionFailure("custom cell did not load")
@@ -61,6 +98,41 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if self.currentDirectory == nil {
+            if indexPath.section == 0 {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: UITitleIconTableViewCell.reusableIdentifier) as! UITitleIconTableViewCell? else {
+                    assertionFailure("custom cell did not load")
+                    
+                    return UITableViewCell(style: .default, reuseIdentifier: "cell")
+                }
+                
+                //TODO: make icons for smart cell
+                if indexPath.row == 0 {
+                    cell.labelTitle.text = "Inbox"
+                } else if indexPath.row == 1 {
+                    cell.labelTitle.text = "Overdue"
+                } else {
+                    cell.labelTitle.text = "Due Soon"
+                }
+                
+                return cell
+            } else {
+                let offsettedIndexPath: IndexPath = { [unowned self] in
+                    if self.currentDirectory == nil {
+                        return IndexPath(row: indexPath.row, section: 0)
+                    } else {
+                        return indexPath
+                    }
+                    }()
+                
+                return self.taskFolderProjectCell(tableView, cellForRowAt: offsettedIndexPath)
+            }
+        } else {
+            return self.taskFolderProjectCell(tableView, cellForRowAt: indexPath)
+        }
     }
     
     // MARK: - VOID METHODS
@@ -160,9 +232,63 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
     }
     
+    // MARK: Fetched Results Controller
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        let offsettedSectionIndex: Int = { [unowned self] in
+            if self.currentDirectory == nil {
+                return 1
+            } else {
+                return sectionIndex
+            }
+        }()
+        
+        super.controller(controller, didChange: sectionInfo, atSectionIndex: offsettedSectionIndex, for: type)
+    }
+    
+    override func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        let offsettedIndexPath: IndexPath? = { [unowned self] in
+            guard let indexPath = indexPath else {
+                return nil
+            }
+            
+            if self.currentDirectory == nil {
+                return IndexPath(row: indexPath.row, section: 1)
+            } else {
+                return indexPath
+            }
+        }()
+        let offsettedNewIndexPath: IndexPath? = { [unowned self] in
+            guard let newIndexPath = newIndexPath else {
+                return nil
+            }
+            
+            if self.currentDirectory == nil {
+                return IndexPath(row: newIndexPath.row, section: 1)
+            } else {
+                return newIndexPath
+            }
+        }()
+        
+        super.controller(controller, didChange: anObject, at: offsettedIndexPath, for: type, newIndexPath: offsettedNewIndexPath)
+    }
+
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let offsettedIndexPath: IndexPath = { [unowned self] in
+            if self.currentDirectory == nil {
+                return IndexPath(row: indexPath.row, section: 0)
+            } else {
+                return indexPath
+            }
+        }()
+        
+        super.tableView(tableView, commit: editingStyle, forRowAt: offsettedIndexPath)
+    }
+    
     // MARK: Table View Delegate
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    private func tableViewDidSelect(_ tableView: UITableView, indexPath: IndexPath) {
         if tableView.isEditing == false {
             let directory = fetchedResultsController.directory(at: indexPath)
             if directory.isFolder {
@@ -173,6 +299,20 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.currentDirectory == nil {
+            if indexPath.section == 0 {
+                //TODO: segue to smart cells
+            } else {
+                let offsettedIndexPath = IndexPath(row: indexPath.row, section: 0)
+                
+                self.tableViewDidSelect(tableView, indexPath: offsettedIndexPath)
+            }
+        } else {
+            self.tableViewDidSelect(tableView, indexPath: indexPath)
+        }
+    }
+    
     // MARK: - IBACTIONS
     
     @IBOutlet weak var buttonProfile: UIBarButtonItem!
@@ -180,7 +320,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
     }
     
-    @IBAction func pressActionTools(_ sender: Any) {
+    @objc func pressActionTools(_ sender: Any) {
         UIAlertController(title: nil, message: "select an action", preferredStyle: .actionSheet)
             .addButton(title: "Duplicate") { [unowned self] (action) in
                 guard let directoriesToCopy = self.directoriesForSelectedIndexPaths() else {
@@ -272,6 +412,7 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         
         let baseCell = UITaskTableViewCell.Types.baseCell
         tableView.register(baseCell.nib, forCellReuseIdentifier: baseCell.cellIdentifier)
+        tableView.register(UITitleIconTableViewCell.nib(), forCellReuseIdentifier: UITitleIconTableViewCell.reusableIdentifier)
         
         //TODO: Dynamic Font, user preferences of which cell to display
         tableView.rowHeight = 44
