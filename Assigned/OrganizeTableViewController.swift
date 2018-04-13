@@ -32,15 +32,12 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         }
         
         let directories = selectedIndexPaths.map({ [unowned self] (indexPath) -> Directory in
-            let offsettedIndexPath: IndexPath = { [unowned self] in
-                if self.currentDirectory == nil {
-                    return IndexPath(row: indexPath.row, section: 0)
-                } else {
-                    return indexPath
-                }
-            }()
+            if self.currentDirectory == nil {
+                return self.fetchedResultsController.folder(at: IndexPath(row: indexPath.row, section: 0)).directory
+            } else {
+                return self.fetchedResultsController.directory(at: indexPath)
+            }
             
-            return self.fetchedResultsController.directory(at: offsettedIndexPath)
         })
         
         return directories
@@ -76,33 +73,11 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         return nil
     }
     
-    private func taskFolderProjectCell(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.baseCell.cellIdentifier) as! UITaskTableViewCell?
-            else {
-                assertionFailure("custom cell did not load")
-                
-                return UITableViewCell(style: .default, reuseIdentifier: "cell")
-        }
-        
-        let directory = fetchedResultsController.directory(at: indexPath)
-        //TODO: DRY by using an interface
-        switch directory.info {
-        case is Folder:
-            let folder = directory.folder
-            cell.configure(folder)
-        case is Task:
-            let task = directory.task
-            cell.configure(task)
-        default:
-            break
-        }
-        
-        return cell
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.currentDirectory == nil {
             if indexPath.section == 0 {
+                
+                // smart cells
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: UITitleIconTableViewCell.reusableIdentifier) as! UITitleIconTableViewCell? else {
                     assertionFailure("custom cell did not load")
                     
@@ -120,18 +95,44 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                 
                 return cell
             } else {
-                let offsettedIndexPath: IndexPath = { [unowned self] in
-                    if self.currentDirectory == nil {
-                        return IndexPath(row: indexPath.row, section: 0)
-                    } else {
-                        return indexPath
-                    }
-                    }()
                 
-                return self.taskFolderProjectCell(tableView, cellForRowAt: offsettedIndexPath)
+                // folder cells
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.baseCell.cellIdentifier) as! UITaskTableViewCell?
+                    else {
+                        assertionFailure("custom cell did not load")
+                        
+                        return UITableViewCell(style: .default, reuseIdentifier: "cell")
+                }
+                
+                let folder = fetchedResultsController.folder(at: IndexPath(row: indexPath.row, section: 0))
+                cell.configure(folder)
+                
+                return cell
             }
         } else {
-            return self.taskFolderProjectCell(tableView, cellForRowAt: indexPath)
+            
+            // directory cells
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: UITaskTableViewCell.Types.baseCell.cellIdentifier) as! UITaskTableViewCell?
+                else {
+                    assertionFailure("custom cell did not load")
+                    
+                    return UITableViewCell(style: .default, reuseIdentifier: "cell")
+            }
+            
+            let directory = fetchedResultsController.directory(at: indexPath)
+            //TODO: DRY by using an interface
+            switch directory.info {
+            case is Folder:
+                let folder = directory.folder
+                cell.configure(folder)
+            case is Task:
+                let task = directory.task
+                cell.configure(task)
+            default:
+                break
+            }
+            
+            return cell
         }
     }
     
@@ -142,25 +143,41 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     }
     
     private func updateFetch() {
-        let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
-        fetch.sortDescriptors = [
-            NSSortDescriptor(key: "\(Directory.StringKeys.info).title",
-                             ascending: false,
-                             selector: #selector(NSString.localizedStandardCompare(_:))
+        if self.currentDirectory == nil {
+            let fetch: NSFetchRequest<Folder> = Folder.fetchRequest()
+            
+            //TODO: stringly typed
+            fetch.sortDescriptors = [
+                NSSortDescriptor(key: "title",
+                    ascending: false,
+                    selector: #selector(NSString.localizedStandardCompare(_:))
+                )
+            ]
+            fetch.predicate = NSPredicate(format: "directory.parent == NULL")
+            
+            self.fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
+                fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
+                managedObjectContext: viewModel.managedObjectContext,
+                sectionNameKeyPath: nil, cacheName: nil
             )
-        ]
-        
-        if let parent = self.currentDirectory {
-            fetch.predicate = NSPredicate(format: "\(Directory.StringKeys.parent) == %@", parent)
         } else {
-            fetch.predicate = NSPredicate(format: "\(Directory.StringKeys.parent) == NULL")
+            
+            let fetch: NSFetchRequest<Directory> = Directory.fetchRequest()
+            fetch.sortDescriptors = [
+                NSSortDescriptor(key: "\(Directory.StringKeys.info).title",
+                    ascending: false,
+                    selector: #selector(NSString.localizedStandardCompare(_:))
+                )
+            ]
+            
+            fetch.predicate = NSPredicate(format: "\(Directory.StringKeys.parent) == %@", self.currentDirectory!)
+            
+            self.fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
+                fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
+                managedObjectContext: viewModel.managedObjectContext,
+                sectionNameKeyPath: nil, cacheName: nil
+            )
         }
-        
-        self.fetchedResultsController = NSFetchedResultsController<NSManagedObject>(
-            fetchRequest: fetch as! NSFetchRequest<NSManagedObject>,
-            managedObjectContext: viewModel.managedObjectContext,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -194,7 +211,14 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
                         fatalError("\"show child directory\" was fired by something other than a table view cell did select")
                 }
                 
-                let selectedDirectory = self.fetchedResultsController.directory(at: indexPath)
+                let selectedDirectory: Directory = { [unowned self] in
+                    if self.currentDirectory == nil {
+                        return self.fetchedResultsController.folder(at: indexPath).directory
+                    } else {
+                        return self.fetchedResultsController.directory(at: indexPath)
+                    }
+                }()
+                
                 vc.currentDirectory = selectedDirectory
                 
             /** an task Vc */
@@ -290,11 +314,15 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     private func tableViewDidSelect(_ tableView: UITableView, indexPath: IndexPath) {
         if tableView.isEditing == false {
-            let directory = fetchedResultsController.directory(at: indexPath)
-            if directory.isFolder {
+            if self.currentDirectory == nil {
                 self.performSegue(withIdentifier: UIStoryboardSegue.showChildDirectory, sender: indexPath)
-            } else if directory.isTask {
-                self.performSegue(withIdentifier: UIStoryboardSegue.showDetailedTask, sender: indexPath)
+            } else {
+                let directory = fetchedResultsController.directory(at: indexPath)
+                if directory.isFolder {
+                    self.performSegue(withIdentifier: UIStoryboardSegue.showChildDirectory, sender: indexPath)
+                } else if directory.isTask {
+                    self.performSegue(withIdentifier: UIStoryboardSegue.showDetailedTask, sender: indexPath)
+                }
             }
         }
     }
