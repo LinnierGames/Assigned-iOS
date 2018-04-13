@@ -761,7 +761,7 @@
 		};
 		E97F84D7207A7BAC00797074 /* Save build info into info.plist */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (

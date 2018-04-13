@@ -32,9 +32,6 @@
                                         <subviews>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKY-Ef-JLi">
                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="667"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
-                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="vFa-WN-Snu" kind="embed" identifier="embed task vc" id="4Ne-tj-Bec"/>
                                                 </connections>
