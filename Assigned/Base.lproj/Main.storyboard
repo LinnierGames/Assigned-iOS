@@ -14,7 +14,7 @@
         <!--Organize-->
         <scene sceneID="3v8-XW-0Tw">
             <objects>
-                <tableViewController storyboardIdentifier="organize table vc" id="JAc-Yi-lyA" customClass="OrganizeTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="organize root" id="JAc-Yi-lyA" customClass="OrganizeRootTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" springLoaded="YES" id="Gi5-bt-1eR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -43,22 +43,14 @@
                         <outlet property="buttonAdd" destination="2sa-YV-5Wg" id="7JH-ez-zcC"/>
                         <outlet property="buttonEdit" destination="DpL-j0-AXx" id="b7i-sh-2z8"/>
                         <outlet property="buttonProfile" destination="LZe-Sr-Re2" id="0ZP-ww-kQH"/>
-                        <segue destination="oeQ-MX-DdJ" kind="show" identifier="show child directory" id="cBq-VK-FmM"/>
                         <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
                         <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="TfI-52-Dm8"/>
+                        <segue destination="Zgl-Es-auS" kind="show" identifier="show child directory" id="CXV-ey-xYk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="315"/>
-        </scene>
-        <!--Directory View Controller-->
-        <scene sceneID="uX4-ik-zlK">
-            <objects>
-                <viewControllerPlaceholder referencedIdentifier="organize table vc" id="oeQ-MX-DdJ" userLabel="Directory View Controller" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uIH-bj-ZIV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1922" y="-102"/>
         </scene>
         <!--Move-->
         <scene sceneID="kwE-98-FiM">
@@ -66,7 +58,56 @@
                 <viewControllerPlaceholder storyboardName="Move" id="yKp-vJ-YdW" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjZ-vz-ED0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1948" y="-35"/>
+            <point key="canvasLocation" x="1428" y="845"/>
+        </scene>
+        <!--Child Directory-->
+        <scene sceneID="rI3-6C-f3U">
+            <objects>
+                <viewControllerPlaceholder referencedIdentifier="organize child" id="8bN-lf-Vbn" userLabel="Child Directory" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5VK-Ej-Tfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3136" y="-103"/>
+        </scene>
+        <!--Organize-->
+        <scene sceneID="ABi-wJ-rP0">
+            <objects>
+                <tableViewController storyboardIdentifier="organize child" id="Zgl-Es-auS" customClass="OrganizeChildDirectoryTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" springLoaded="YES" id="8d0-hJ-Uuk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Zgl-Es-auS" id="MqG-bM-mje"/>
+                            <outlet property="delegate" destination="Zgl-Es-auS" id="flw-dM-rGa"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Organize" id="mRW-CR-gD8">
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="rq2-Hd-TGM">
+                            <connections>
+                                <action selector="pressProfile:" destination="Zgl-Es-auS" id="DXO-2O-My0"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="h6J-KQ-Zmr"/>
+                            <barButtonItem systemItem="add" id="4EO-AA-urY">
+                                <connections>
+                                    <action selector="pressAdd:" destination="Zgl-Es-auS" id="GDJ-UT-IkA"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonAdd" destination="4EO-AA-urY" id="gbp-g1-QRw"/>
+                        <outlet property="buttonEdit" destination="h6J-KQ-Zmr" id="EGe-TW-Ip5"/>
+                        <outlet property="buttonProfile" destination="rq2-Hd-TGM" id="fcF-fm-e1u"/>
+                        <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="4FJ-Jw-DJ8"/>
+                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="Zvy-rE-wjq"/>
+                        <segue destination="8bN-lf-Vbn" kind="show" identifier="show child directory" id="9YH-mW-azB"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-tp-OiA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2502" y="314"/>
         </scene>
         <!--Task-->
         <scene sceneID="jzG-GQ-ua3">
@@ -74,7 +115,7 @@
                 <viewControllerPlaceholder storyboardName="Task" id="rdH-3M-SjS" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hcJ-iW-DU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2110" y="314"/>
+            <point key="canvasLocation" x="1907" y="845"/>
         </scene>
         <!--Agenda-->
         <scene sceneID="gAW-uL-LMa">
@@ -208,4 +249,8 @@
             <point key="canvasLocation" x="439" y="315"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="R6N-bP-5sD"/>
+        <segue reference="TfI-52-Dm8"/>
+    </inferredMetricsTieBreakers>
 </document>
