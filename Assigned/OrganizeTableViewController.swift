@@ -297,7 +297,6 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
         super.controller(controller, didChange: anObject, at: offsettedIndexPath, for: type, newIndexPath: offsettedNewIndexPath)
     }
 
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let offsettedIndexPath: IndexPath = { [unowned self] in
             if self.currentDirectory == nil {
