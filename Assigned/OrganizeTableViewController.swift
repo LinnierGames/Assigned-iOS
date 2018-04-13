@@ -91,9 +91,9 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
-        buttonAdd.isEnabled = editing.inverse
+        buttonAdd?.isEnabled = editing.inverse
         if editing {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(OrganizeTableViewController.pressActionTools(_:)))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(pressActionTools(_:)))
         } else {
             self.navigationItem.leftBarButtonItem = nil
         }
@@ -156,9 +156,6 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     // MARK: Table View Delegate
     
-    private func tableViewDidSelect(_ tableView: UITableView, indexPath: IndexPath) {
-    }
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView.isEditing == false {
             let directory = fetchedResultsController.directory(at: indexPath)
@@ -171,11 +168,6 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     }
     
     // MARK: - IBACTIONS
-    
-    @IBOutlet weak var buttonProfile: UIBarButtonItem!
-    @IBAction func pressProfile(_ sender: Any) {
-        
-    }
     
     @objc func pressActionTools(_ sender: Any) {
         UIAlertController(title: nil, message: "select an action", preferredStyle: .actionSheet)
@@ -260,6 +252,8 @@ class OrganizeTableViewController: FetchedResultsTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         // show the back button vs the profile button, and update title
         if currentDirectory != nil {

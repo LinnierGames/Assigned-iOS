@@ -12,7 +12,6 @@ import CoreData
 
 extension Task {
     enum StringKeys {
-        static let title = "title"
         static let durationValue = "durationValue"
         static let deadline = "deadline"
         static let isCompleted = "isCompleted"

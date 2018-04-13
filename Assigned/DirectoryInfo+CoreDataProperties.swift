@@ -12,6 +12,7 @@ import CoreData
 
 extension DirectoryInfo {
     enum StringKeys {
+        static let title = "title"
         static let directory = "directory"
     }
 }

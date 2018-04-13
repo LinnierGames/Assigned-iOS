@@ -28,6 +28,7 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
         
         return directories
     }
+    
     // MARK: Table View Data Source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -68,6 +69,7 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
             } else {
                 cell.labelTitle.text = "Due Soon"
             }
+            cell.accessoryType = .disclosureIndicator
             
             return cell
         } else {
@@ -115,15 +117,28 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
         
         buttonAdd.isEnabled = editing.inverse
         if editing {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(OrganizeTableViewController.pressActionTools(_:)))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(pressActionTools(_:)))
         } else {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "item", style: .plain, target: self, action: #selector(OrganizeTableViewController.pressProfile(_:)))
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "item", style: .plain, target: self, action: #selector(pressProfile(_:)))
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
+                
+            case UIStoryboardSegue.showSmartFolder:
+                guard let vc = segue.destination as? OrganizeSmartFolderTableViewController else {
+                    fatalError("segue did not have a destination of OrganizeSmartFolderTableViewController")
+                }
+                
+                guard
+                    let smartFolderType = sender as? OrganizeSmartFolderTableViewController.SmartFolder
+                    else {
+                        fatalError("\"show smart folder\" was fired by something other than a table view cell did select")
+                }
+                
+                vc.smartFolderType = smartFolderType
                 
             /** A folder */
             case UIStoryboardSegue.showChildDirectory:
@@ -185,7 +200,16 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            //TODO: segue to smart cells
+            let smartFolderType: OrganizeSmartFolderTableViewController.SmartFolder
+            if indexPath.row == 0 {
+                smartFolderType = .Inbox
+            } else if indexPath.row == 1 {
+                smartFolderType = .Overdue
+            } else {
+                smartFolderType = .DueSoon
+            }
+            
+            self.performSegue(withIdentifier: UIStoryboardSegue.showSmartFolder, sender: smartFolderType)
         } else {
             let offsettedIndexPath = IndexPath(row: indexPath.row, section: 0)
             
@@ -197,6 +221,11 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var buttonProfile: UIBarButtonItem!
+    @IBAction func pressProfile(_ sender: Any) {
+        
+    }
+    
     // MARK: - LIFE CYCLE
 
 }
@@ -206,4 +235,5 @@ class OrganizeRootTableViewController: OrganizeTableViewController {
 fileprivate extension UIStoryboardSegue {
     static let showChildDirectory = "show child directory"
     static let showMove = "show move"
+    static let showSmartFolder = "show smart folder"
 }

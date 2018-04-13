@@ -46,6 +46,7 @@
                         <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="R6N-bP-5sD"/>
                         <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="TfI-52-Dm8"/>
                         <segue destination="Zgl-Es-auS" kind="show" identifier="show child directory" id="CXV-ey-xYk"/>
+                        <segue destination="Bcy-dz-5aj" kind="show" identifier="show smart folder" id="hOv-M9-Onx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TjF-0U-NvM" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -66,9 +67,44 @@
                 <viewControllerPlaceholder referencedIdentifier="organize child" id="8bN-lf-Vbn" userLabel="Child Directory" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5VK-Ej-Tfb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3136" y="-103"/>
+            <point key="canvasLocation" x="2654" y="667"/>
         </scene>
-        <!--Organize-->
+        <!--Smart Folder-->
+        <scene sceneID="gxx-A6-Znd">
+            <objects>
+                <tableViewController storyboardIdentifier="organize smart folder" id="Bcy-dz-5aj" customClass="OrganizeSmartFolderTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" springLoaded="YES" id="S2u-eK-KAn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="Bcy-dz-5aj" id="VQv-Ep-XCl"/>
+                            <outlet property="delegate" destination="Bcy-dz-5aj" id="3HO-hQ-YaO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Smart Folder" id="EdK-WV-5GP">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="C5c-nb-fhj"/>
+                            <barButtonItem systemItem="add" id="Kel-5Y-LV8">
+                                <connections>
+                                    <action selector="pressAdd:" destination="Bcy-dz-5aj" id="Q8Q-mI-XYs"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="buttonAdd" destination="Kel-5Y-LV8" id="8KG-Ly-2tI"/>
+                        <outlet property="buttonEdit" destination="C5c-nb-fhj" id="q0d-Sp-Tuk"/>
+                        <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="A8x-EV-zs6"/>
+                        <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="eFK-9d-DI2"/>
+                        <segue destination="8bN-lf-Vbn" kind="show" identifier="show child directory" id="9dc-kQ-MjG"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ovk-h5-pRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3258" y="314"/>
+        </scene>
+        <!--Child Directory-->
         <scene sceneID="ABi-wJ-rP0">
             <objects>
                 <tableViewController storyboardIdentifier="organize child" id="Zgl-Es-auS" customClass="OrganizeChildDirectoryTableViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,12 +117,7 @@
                             <outlet property="delegate" destination="Zgl-Es-auS" id="flw-dM-rGa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Organize" id="mRW-CR-gD8">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="rq2-Hd-TGM">
-                            <connections>
-                                <action selector="pressProfile:" destination="Zgl-Es-auS" id="DXO-2O-My0"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Child Directory" id="mRW-CR-gD8">
                         <rightBarButtonItems>
                             <barButtonItem systemItem="edit" id="h6J-KQ-Zmr"/>
                             <barButtonItem systemItem="add" id="4EO-AA-urY">
@@ -99,7 +130,6 @@
                     <connections>
                         <outlet property="buttonAdd" destination="4EO-AA-urY" id="gbp-g1-QRw"/>
                         <outlet property="buttonEdit" destination="h6J-KQ-Zmr" id="EGe-TW-Ip5"/>
-                        <outlet property="buttonProfile" destination="rq2-Hd-TGM" id="fcF-fm-e1u"/>
                         <segue destination="yKp-vJ-YdW" kind="showDetail" identifier="show move" id="4FJ-Jw-DJ8"/>
                         <segue destination="rdH-3M-SjS" kind="presentation" identifier="show detailed task" modalTransitionStyle="crossDissolve" id="Zvy-rE-wjq"/>
                         <segue destination="8bN-lf-Vbn" kind="show" identifier="show child directory" id="9YH-mW-azB"/>
@@ -107,7 +137,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-tp-OiA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2502" y="314"/>
+            <point key="canvasLocation" x="2122" y="314"/>
         </scene>
         <!--Task-->
         <scene sceneID="jzG-GQ-ua3">
@@ -250,7 +280,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="R6N-bP-5sD"/>
-        <segue reference="TfI-52-Dm8"/>
+        <segue reference="eFK-9d-DI2"/>
+        <segue reference="9dc-kQ-MjG"/>
+        <segue reference="A8x-EV-zs6"/>
     </inferredMetricsTieBreakers>
 </document>
