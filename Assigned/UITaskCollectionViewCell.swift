@@ -68,12 +68,18 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     // MARK: - VOID METHODS
     
     func configure(_ task: Task) {
-        self.imagePriority.priority = task.priority
+//        self.imagePriority.priority = task.priority
         self.labelTitle.text = task.title
         if let deadline = task.deadline {
-            self.labelSubtitle.text = String(timeInterval: Date().timeIntervalSince(deadline))
+            self.labelDeadline.text = "String(timeInterval: Date().timeIntervalSince(deadline))"
         } else {
-            self.labelSubtitle.text = nil
+            self.labelDeadline.text = "no deadline"
+        }
+        if let subtasks = task.subtasks, subtasks.count != 0 {
+            let nCompletedSubtasks = subtasks.numberOfCompletedSubtasks
+            self.labelSubtasks.text = "\(nCompletedSubtasks) of \(subtasks.count)"
+        } else {
+            self.labelSubtasks.text = nil
         }
         
         self.task = task
@@ -101,23 +107,25 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     }
     
     private func updateUI() {
-        switch self.cellState {
-        case .normal:
-            self.backgroundColor = UIColor.lightGray
-            self.labelTitle.textColor = .black
-            self.alpha = 1.0
-        case .dragging:
-            self.backgroundColor = UIColor.black
-            self.labelTitle.textColor = .white
-            self.alpha = 0.35
-        }
+//        switch self.cellState {
+//        case .normal:
+//            self.backgroundColor = UIColor.lightGray
+//            self.labelTitle.textColor = .black
+//            self.alpha = 1.0
+//        case .dragging:
+//            self.backgroundColor = UIColor.black
+//            self.labelTitle.textColor = .white
+//            self.alpha = 0.35
+//        }
     }
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var imagePriority: UIPriorityBox!
+//    @IBOutlet weak var imagePriority: UIPriorityBox!
+    @IBOutlet weak var checkbox: UICheckbox!
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelSubtitle: UILabel!
+    @IBOutlet weak var labelSubtasks: UILabel!
+    @IBOutlet weak var labelDeadline: UILabel!
     
     // MARK: - LIFE CYCLE
 

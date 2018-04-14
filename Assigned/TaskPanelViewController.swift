@@ -211,3 +211,9 @@ extension TaskPanelViewController: NSFetchedResultsControllerDelegate {
         collectionView.endUpdates()
     }
 }
+
+// MARK: - UIStoryboardSegue
+
+fileprivate extension UIStoryboardSegue {
+    static let showTask = "show task"
+}

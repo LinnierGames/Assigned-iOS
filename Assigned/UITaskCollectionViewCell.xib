@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,36 +21,54 @@
                 <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-Ro-mA8">
-                        <rect key="frame" x="10" y="12" width="353" height="64"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-Ro-mA8">
+                        <rect key="frame" x="16" y="8" width="273.5" height="32"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priority-high" translatesAutoresizingMaskIntoConstraints="NO" id="lNY-M3-YcJ" customClass="UIPriorityBox" customModule="Assigned" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag_hitbox" translatesAutoresizingMaskIntoConstraints="NO" id="Naa-xN-TVt">
                                 <rect key="frame" x="0.0" y="0.0" width="16" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="16" id="MUw-8D-MZf"/>
+                                    <constraint firstAttribute="width" constant="16" id="IP1-Da-hbA"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ans-r8-TW2" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
+                                <rect key="frame" x="16" y="0.0" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Ans-r8-TW2" secondAttribute="height" id="DBu-RA-qZS"/>
+                                </constraints>
+                                <state key="normal" image="checkbox"/>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-Q8-ifi">
-                                <rect key="frame" x="24" y="0.0" width="251.5" height="32"/>
+                                <rect key="frame" x="48" y="0.0" width="225.5" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ef8-Zt-aDe">
-                                <rect key="frame" x="283.5" y="0.0" width="43.5" height="32"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrv-Ff-zxk">
+                        <rect key="frame" x="64" y="28" width="263" height="16"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 of 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-Fj-Vyh">
+                        <rect key="frame" x="293.5" y="9.5" width="33.5" height="14.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="NSo-Ro-mA8" secondAttribute="trailing" constant="8" id="4kY-IC-0MO"/>
+                <constraint firstItem="2ai-Fj-Vyh" firstAttribute="leading" secondItem="NSo-Ro-mA8" secondAttribute="trailing" constant="4" id="4kY-IC-0MO"/>
+                <constraint firstAttribute="trailingMargin" secondItem="2ai-Fj-Vyh" secondAttribute="trailing" id="DHb-mF-ByZ"/>
                 <constraint firstItem="NSo-Ro-mA8" firstAttribute="top" secondItem="0Vk-QP-Ed1" secondAttribute="top" constant="8" id="RCn-yL-dh4"/>
-                <constraint firstItem="NSo-Ro-mA8" firstAttribute="leading" secondItem="0Vk-QP-Ed1" secondAttribute="leading" constant="8" id="arW-HG-PfH"/>
+                <constraint firstItem="jrv-Ff-zxk" firstAttribute="top" secondItem="2ai-Fj-Vyh" secondAttribute="bottom" constant="4" id="S2e-Z5-7CH"/>
+                <constraint firstItem="jrv-Ff-zxk" firstAttribute="leading" secondItem="Ans-r8-TW2" secondAttribute="trailing" id="XHV-TW-W2p"/>
+                <constraint firstAttribute="bottom" secondItem="jrv-Ff-zxk" secondAttribute="bottom" constant="4" id="aWy-Yz-nhB"/>
+                <constraint firstItem="NSo-Ro-mA8" firstAttribute="leading" secondItem="0Vk-QP-Ed1" secondAttribute="leadingMargin" id="arW-HG-PfH"/>
+                <constraint firstAttribute="trailingMargin" secondItem="jrv-Ff-zxk" secondAttribute="trailing" id="fUb-X9-7wU"/>
                 <constraint firstAttribute="bottom" secondItem="NSo-Ro-mA8" secondAttribute="bottom" constant="8" id="rqk-ce-exm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Jwu-FJ-v92"/>
@@ -58,13 +78,16 @@
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="imagePriority" destination="lNY-M3-YcJ" id="mHZ-u9-GH8"/>
-                <outlet property="labelSubtitle" destination="ef8-Zt-aDe" id="nVW-Oo-12M"/>
+                <outlet property="checkbox" destination="Ans-r8-TW2" id="JbC-eb-mCI"/>
+                <outlet property="labelDeadline" destination="jrv-Ff-zxk" id="dLO-Hh-mnm"/>
+                <outlet property="labelSubtasks" destination="2ai-Fj-Vyh" id="pFn-PJ-7AB"/>
                 <outlet property="labelTitle" destination="AWa-Q8-ifi" id="hfB-jI-WEw"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="156"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="priority-high" width="5" height="12"/>
+        <image name="checkbox" width="22" height="22"/>
+        <image name="misc_drag_hitbox" width="14" height="31"/>
     </resources>
 </document>
