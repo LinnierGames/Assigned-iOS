@@ -38,14 +38,14 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     enum ViewState {
         case Hidden
         case Minimized
-        case Shown
+        case Expanded
         
         /**
          decrement to a smaller state
          */
         mutating func colaspe() {
             switch self {
-            case .Shown:
+            case .Expanded:
                 self = .Minimized
             case .Minimized:
                 self = .Hidden
@@ -59,10 +59,10 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
          */
         mutating func expand() {
             switch self {
-            case .Shown:
+            case .Expanded:
                 break
             case .Minimized:
-                self = .Shown
+                self = .Expanded
             case .Hidden:
                 self = .Minimized
             }
@@ -116,8 +116,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var constraintHeight: NSLayoutConstraint!
     
     private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
-    private let BOTTOM_VERTICAL_MARGIN: CGFloat = 128.0
-    private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 32.0
+    private let BOTTOM_MINIZIED_VERTICAL_MARGIN: CGFloat = 192.0
+    private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 64
     func setTaskPanel(to newState: ViewState, animated: Bool = true) {
         guard let windowSize = self.view?.frame.size else {
             return print("self.view was not set")
@@ -126,10 +126,13 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         switch newState {
         case .Hidden:
             self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
+            self.taskPanelViewController.setDisplayToHidden()
         case .Minimized:
-            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_VERTICAL_MARGIN
-        case .Shown:
+            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_MINIZIED_VERTICAL_MARGIN
+            self.taskPanelViewController.setDisplayToMinizied()
+        case .Expanded:
             self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
+            self.taskPanelViewController.setDisplayToExpanded()
         }
         self.taskPanelViewState = newState
         
@@ -176,8 +179,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         case .Hidden:
             self.constraintTopSpacing.constant = size.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
         case .Minimized:
-            self.constraintTopSpacing.constant = size.height - self.BOTTOM_VERTICAL_MARGIN
-        case .Shown:
+            self.constraintTopSpacing.constant = size.height - self.BOTTOM_MINIZIED_VERTICAL_MARGIN
+        case .Expanded:
             self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
         }
         
@@ -188,18 +191,9 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - IBACTIONS
     
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var buttonFinish: UIButton!
-    @IBAction func pressFinish(_ sender: Any) {
-        self.presentingViewController!.dismiss(animated: true)
-    }
     
     @IBAction func pressToday(_ sender: Any) {
         self.selectedDate = Date()
-    }
-    
-    @IBOutlet weak var buttonAddEvent: UIBarButtonItem!
-    @IBAction func addEventCalendar(_ sender: Any) {
-        self.viewModel.calendar.presentNewEvent(in: self)
     }
     
     @IBOutlet weak var viewTaskPanel: UIView!
@@ -222,11 +216,8 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         super.viewDidAppear(animated)
         
         PrivacyService.Calendar.authorize(
-            successfulHandler: { [unowned self] in
-                self.buttonAddEvent.isEnabled = true
-            },
+            successfulHandler: nil,
             failureHandler: { [unowned self] in
-                self.buttonAddEvent.isEnabled = false
                 PrivacyService.Calendar.promptAlert(in: self, with: .alert)
         })
     }

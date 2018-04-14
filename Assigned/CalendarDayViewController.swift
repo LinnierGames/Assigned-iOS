@@ -74,7 +74,11 @@ class CalendarDayViewController: DayViewController {
             return //can't add event if not authorized
         }
         
-        //TODO: insert event longpressing the timeline
+        if let parentVcEventHandler = self.parent as? UIViewController & EKEventEditViewDelegate {
+            self.calendar.presentNewEvent(in: parentVcEventHandler)
+        } else {
+            debugPrint("self.parent vc is not EKEventEditViewDelegate \(String(describing: self.parent))")
+        }
     }
     
 //    override func dayView(dayView: DayView, willMoveTo date: Date) {

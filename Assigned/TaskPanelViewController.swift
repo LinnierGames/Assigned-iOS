@@ -69,19 +69,90 @@ class TaskPanelViewController: UIViewController {
     
     // MARK: - VOID METHODS
     
+    func setDisplayToExpanded() {
+        UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
+            self.buttonEdit.alpha = 1.0
+            self.labelInstruction.alpha = 1.0
+            self.labelHeadline.alpha = 1.0
+            self.labelBody.alpha = 1.0
+        }
+    }
+    
+    func setDisplayToMinizied() {
+        UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
+            self.buttonEdit.alpha = 1.0
+            self.labelInstruction.alpha = 1.0
+            self.labelHeadline.alpha = 1.0
+            self.labelBody.alpha = 1.0
+        }
+    }
+    
+    func setDisplayToHidden() {
+        UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
+            self.buttonEdit.alpha = 0.0
+            self.labelInstruction.alpha = 0.0
+            self.labelHeadline.alpha = 0.0
+            self.labelBody.alpha = 0.0
+        }
+    }
+    
     func reloadData() {
         self.viewModel.reloadTasks()
         self.updateUI()
     }
     
     private func updateUI() {
-        collectionView.reloadData()
+        
+        self.updateLabels()
+        
+        self.collectionView.reloadData()
+    }
+    
+    private func updateLabels() {
+        
+        // instruction
+        let nTasks = collectionView(self.collectionView, numberOfItemsInSection: 0)
+        if nTasks == 0 {
+            self.labelInstruction.text = ""
+        } else {
+            self.labelInstruction.text = "Tap and hold to add to calendar"
+        }
+        
+        // Headline and body
+        if self.viewModel.userHasCreatedFirstTask {
+            let nTasks = collectionView(self.collectionView, numberOfItemsInSection: 0)
+            if nTasks == 0 {
+                
+                //TODO: display random headlines and bodies
+                self.labelHeadline.text = "No tasks here"
+                self.labelBody.text = nil
+            } else {
+                self.labelHeadline.text = nil
+                self.labelBody.text = nil
+            }
+            self.labelInstruction.isHidden = false
+        } else {
+            self.labelHeadline.text = "No tasks, yet 😏"
+            self.labelBody.text = "Let's braindump some ideas! Press $$ to get started"
+            self.labelInstruction.isHidden = true
+        }
     }
     
     // MARK: - IBACTIONS
     
     @IBOutlet weak var collectionView: UIBatchableCollectView!
     @IBOutlet weak var viewHitbox: UIView!
+    @IBOutlet weak var buttonEdit: UIButton!
+    
+    @IBOutlet weak var labelInstruction: UILabel!
+    @IBOutlet weak var labelHeadline: UILabel!
+    @IBOutlet weak var labelBody: UILabel!
+    
+    @IBOutlet weak var buttonAddTask: UIButton!
+    @IBAction func pressAddTask(_ sender: Any) {
+        self.performSegue(withIdentifier: UIStoryboardSegue.showTask, sender: nil)
+    }
+    
     @IBOutlet weak var segmentFilter: UISegmentedControl!
     @IBAction func didChangeFilter(_ sender: Any) {
         guard let newFilter = TaskPanelViewModel.SearchFilter(rawValue: segmentFilter.selectedSegmentIndex) else {
@@ -131,6 +202,34 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
     }
     
     // MARK: VOID METHODS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case UIStoryboardSegue.showTask:
+                guard let navVc = segue.destination as? TaskNavigationViewController else {
+                    fatalError("segue did not have a destination of TaskNavigationViewController")
+                }
+                
+                // modifying an exsiting task or adding a new one?
+                if let indexPath = sender as? IndexPath {
+                    let selectedTask = self.viewModel.fetchedTasks!.task(at: indexPath)
+                    navVc.task = selectedTask
+                    navVc.editingMode = .Read
+                    
+                    // adding a new task
+                } else {
+                    navVc.editingMode = .Create
+                    navVc.taskParentDirectory = nil //always is nil since there are no directories (mvp)
+                }
+            default: break
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: UIStoryboardSegue.showTask, sender: indexPath)
+    }
     
     // MARK: IBACTIONS
     
@@ -209,6 +308,7 @@ extension TaskPanelViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         collectionView.endUpdates()
+        self.updateLabels()
     }
 }
 

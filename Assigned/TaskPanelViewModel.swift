@@ -92,3 +92,16 @@ struct TaskPanelViewModel {
     
     // MARK: - LIFE CYCLE
 }
+
+extension TaskPanelViewModel {
+    var userHasCreatedFirstTask: Bool {
+        
+        //TODO: use user prefences to store the key-value of a bool instead of count
+        let fetch: NSFetchRequest<Task> = Task.fetchRequest()
+        guard let nTask = try? self.context.count(for: fetch) else {
+            fatalError("fetch failed")
+        }
+        
+        return nTask != 0
+    }
+}

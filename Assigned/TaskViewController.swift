@@ -133,7 +133,9 @@ class TaskViewController: UIViewController {
         dismiss()
         
         if dataModel.editingMode.isReading, dataModel.context.hasChanges == true {
-            fatalError("unsaved changes during dismissing on reading")
+            //TODO: remove fatal error
+            debugPrint("fatalError(\"unsaved changes during dismissing on reading\")")
+            self.dataModel.save()
         }
 
         setViewState(to: .Hidden, animated: true) { [unowned self] in
