@@ -187,6 +187,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var buttonFinish: UIButton!
     @IBAction func pressFinish(_ sender: Any) {
         self.presentingViewController!.dismiss(animated: true)
@@ -204,6 +205,12 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var viewTaskPanel: UIView!
     
     // MARK: - LIFE CYCLE
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.navigationBar.hideBottomShadow()
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -342,6 +349,14 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         PlanViewController.touchOffset = nil
         
         self.setTaskPanel(to: .Minimized)
+    }
+}
+
+// MARK: - UINavigationBarDelegate
+
+extension PlanViewController: UINavigationBarDelegate {
+    public func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
 }
 
