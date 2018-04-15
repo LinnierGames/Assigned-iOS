@@ -65,6 +65,7 @@ struct TaskPanelViewModel {
 //                }
 //            }
 //        }
+        let sortCompleted = NSSortDescriptor(key: Task.StringKeys.isCompleted, ascending: true)
         let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: true)
 //        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)

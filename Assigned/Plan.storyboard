@@ -79,7 +79,7 @@
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="3bD-an-VyC"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="top" secondItem="EaC-Jf-Zja" secondAttribute="top" id="968-qL-uxj"/>
                             <constraint firstAttribute="top" secondItem="HzY-xH-kt6" secondAttribute="top" id="FHd-O5-4OA"/>
-                            <constraint firstItem="CP8-i5-z5p" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" constant="2" id="Lnt-JR-VYF"/>
+                            <constraint firstItem="CP8-i5-z5p" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="Lnt-JR-VYF"/>
                             <constraint firstItem="EaC-Jf-Zja" firstAttribute="trailing" secondItem="HzY-xH-kt6" secondAttribute="trailing" id="ObN-t1-vU3"/>
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="PWF-GP-DgI"/>
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="top" secondItem="Ayx-f1-0VL" secondAttribute="bottom" id="Qph-Fw-oWo"/>
@@ -88,7 +88,7 @@
                             <constraint firstItem="EaC-Jf-Zja" firstAttribute="bottom" secondItem="8FM-6d-U3H" secondAttribute="bottom" constant="64" id="qX9-kc-oTi"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="tlZ-GV-qu7"/>
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="zBc-rX-hZt"/>
-                            <constraint firstItem="CP8-i5-z5p" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" constant="2" id="zbp-6c-Anw"/>
+                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="trailing" secondItem="CP8-i5-z5p" secondAttribute="trailing" id="zbp-6c-Anw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EaC-Jf-Zja"/>
                     </view>
@@ -136,7 +136,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yE4-jQ-FIB">
-                                <rect key="frame" x="16" y="15" width="343" height="35"/>
+                                <rect key="frame" x="20" y="15" width="335" height="35"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neo-27-Nxl">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
@@ -146,7 +146,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJV-FA-OHg">
-                                        <rect key="frame" x="313" y="0.0" width="30" height="35"/>
+                                        <rect key="frame" x="284" y="0.0" width="51" height="35"/>
+                                        <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                         <state key="normal" title="Edit"/>
                                         <connections>
                                             <action selector="pressEdit:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="bgE-mc-aWM"/>
@@ -185,7 +186,7 @@
                                 </subviews>
                             </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
-                                <rect key="frame" x="16" y="545" width="343" height="29"/>
+                                <rect key="frame" x="20" y="545" width="335" height="29"/>
                                 <segments>
                                     <segment title="Urgent"/>
                                     <segment title="Selected Day"/>
@@ -196,34 +197,45 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iPo-k8-eAc">
-                                <rect key="frame" x="20" y="66.5" width="335" height="462.5"/>
+                                <rect key="frame" x="16" y="66.5" width="343" height="420.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="hHZ-6t-x1H" id="Cm2-02-wW4"/>
                                     <outlet property="delegate" destination="hHZ-6t-x1H" id="V4z-iC-fik"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8X-RG-CHU">
+                                <rect key="frame" x="20" y="499" width="335" height="34"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
+                                <state key="normal" title="Show Completed Tasks"/>
+                                <connections>
+                                    <action selector="pressShowCompletedTasks:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="96y-vk-9Yl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99942404029999998" green="0.93553631667752868" blue="0.72505742976452814" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="64" id="4mM-2S-hRU"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="w8X-RG-CHU" secondAttribute="trailing" constant="20" id="651-2e-EeZ"/>
                             <constraint firstItem="5dp-jS-Pe6" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="24" id="7ZI-R4-51f"/>
                             <constraint firstItem="yE4-jQ-FIB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" id="CWJ-c8-gUW"/>
+                            <constraint firstItem="w8X-RG-CHU" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="20" id="Cqn-St-Xnd"/>
+                            <constraint firstItem="w8X-RG-CHU" firstAttribute="top" secondItem="iPo-k8-eAc" secondAttribute="bottom" constant="12" id="Jzn-te-TOP"/>
                             <constraint firstItem="vU5-tC-tm3" firstAttribute="centerX" secondItem="61C-JG-MgR" secondAttribute="centerX" id="Npl-aI-OXy"/>
                             <constraint firstItem="5dp-jS-Pe6" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="UPW-Rx-OfF"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="TA9-BI-IYB" secondAttribute="trailing" constant="8" id="Wxc-dI-arP"/>
                             <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" constant="24" id="g7x-Mb-Xeo"/>
-                            <constraint firstItem="iPo-k8-eAc" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="20" id="gUp-31-tEc"/>
-                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gcb-6z-CTe"/>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="16" id="gr3-Ox-uvt"/>
-                            <constraint firstItem="yE4-jQ-FIB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="pOT-Gi-Vay"/>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="iPo-k8-eAc" secondAttribute="trailing" constant="20" id="pVF-DI-upa"/>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="yE4-jQ-FIB" secondAttribute="trailing" constant="16" id="qwp-c6-LBs"/>
+                            <constraint firstItem="iPo-k8-eAc" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gUp-31-tEc"/>
+                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="20" id="gcb-6z-CTe"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="20" id="gr3-Ox-uvt"/>
+                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="top" secondItem="w8X-RG-CHU" secondAttribute="bottom" constant="12" id="mfY-d9-UbW"/>
+                            <constraint firstItem="yE4-jQ-FIB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="20" id="pOT-Gi-Vay"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="iPo-k8-eAc" secondAttribute="trailing" constant="16" id="pVF-DI-upa"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="yE4-jQ-FIB" secondAttribute="trailing" constant="20" id="qwp-c6-LBs"/>
                             <constraint firstItem="iPo-k8-eAc" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="8" id="rqS-Fw-2P6"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="5dp-jS-Pe6" secondAttribute="trailing" constant="16" id="sZi-rM-Zeo"/>
                             <constraint firstItem="vU5-tC-tm3" firstAttribute="top" secondItem="HEE-W1-BKl" secondAttribute="top" constant="8" id="tSY-pi-h5h"/>
-                            <constraint firstItem="sTg-G5-Mqf" firstAttribute="top" secondItem="iPo-k8-eAc" secondAttribute="bottom" constant="16" id="wpj-aS-TEn"/>
                             <constraint firstItem="TA9-BI-IYB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="8" id="wsZ-fJ-ipt"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="61C-JG-MgR"/>
@@ -231,6 +243,7 @@
                     <connections>
                         <outlet property="buttonAddTask" destination="neo-27-Nxl" id="Pfu-bQ-wfn"/>
                         <outlet property="buttonEdit" destination="RJV-FA-OHg" id="BMp-Un-o8N"/>
+                        <outlet property="buttonShowCompletedTasks" destination="w8X-RG-CHU" id="RC9-sQ-KEB"/>
                         <outlet property="labelBody" destination="Opw-64-CXl" id="SLf-7f-ZvR"/>
                         <outlet property="labelHeadline" destination="equ-xX-cGB" id="3cH-4h-ZjV"/>
                         <outlet property="labelInstruction" destination="TA9-BI-IYB" id="GhA-bw-VDB"/>

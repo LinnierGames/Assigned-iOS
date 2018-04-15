@@ -194,6 +194,10 @@ class TaskPanelViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var buttonShowCompletedTasks: UIButton!
+    @IBAction func pressShowCompletedTasks(_ sender: Any) {
+        
+    }
     
     // MARK: - LIFE CYCLE
     
@@ -206,6 +210,9 @@ class TaskPanelViewController: UIViewController {
         self.view.addGestureRecognizer(self.panGesture)
         
         self.tableView.alwaysBounceVertical = false
+        
+        self.buttonEdit.layer.roundedOutline()
+        self.buttonShowCompletedTasks.layer.roundedOutline()
     }
 
 }

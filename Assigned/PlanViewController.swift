@@ -345,6 +345,15 @@ extension PlanViewController: UIDraggableTaskTableViewCellDelegate, UIGestureRec
         
         self.setTaskPanel(to: .Minimized)
     }
+    
+    func task(cell: UIDraggableTaskTableViewCell, didPress checkbox: UIButton, with newState: Bool) {
+//        guard let indexPath = self.taskPanelViewController.tableView.indexPath(for: cell) else {
+//            assertionFailure("index path not found for cell")
+//        }
+//        
+//        let task = self.viewModel.
+//        dataModel.saveOnlyOnReading()
+    }
 }
 
 // MARK: - UINavigationBarDelegate

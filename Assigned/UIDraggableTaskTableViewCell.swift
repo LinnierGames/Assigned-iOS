@@ -13,6 +13,7 @@ import UIKit
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState, toCreateA_SessionFor task: Task?)
+    @objc optional func task(cell: UIDraggableTaskTableViewCell, didPress checkbox: UIButton, with newState: Bool)
 }
 
 class UIDraggableTaskTableViewCell: UITableViewCell {
@@ -71,6 +72,9 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
     
     func configure(_ task: Task) {
         self.viewModel.task = task
+        
+        self.buttonCheckbox.isChecked = task.isCompleted
+        
 //        self.imagePriority.priority = task.priority
         self.labelTitle.text = task.title
         if let _ = task.deadline {
@@ -129,6 +133,13 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtasks: UILabel!
     @IBOutlet weak var labelDeadline: UILabel!
+    
+    @IBOutlet weak var buttonCheckbox: UICheckbox!
+    @IBAction func pressCheckbox(_ sender: Any) {
+        self.buttonCheckbox.isChecked.invert()
+        
+        self.delegate?.task(cell: self, didPress: buttonCheckbox, with: self.buttonCheckbox.isChecked)
+    }
     
     // MARK: - LIFE CYCLE
 
