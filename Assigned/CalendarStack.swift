@@ -172,9 +172,14 @@ class CalendarStack: NSObject {
      
      - warning: the new EKEvent is stored to this model's event store
      */
-    func presentNewEvent(in viewController: UIViewController & EKEventEditViewDelegate) {
+    func presentNewEvent(for date: Date? = nil, in viewController: UIViewController & EKEventEditViewDelegate) {
         let eventVC = EKEventEditViewController()
-        eventVC.event = EKEvent(eventStore: self.eventStore)
+        let event = EKEvent(eventStore: self.eventStore)
+        if let date = date {
+            event.startDate = date
+            event.endDate = date.addingTimeInterval(CTDateComponentHour)
+        }
+        eventVC.event = event
         eventVC.editViewDelegate = viewController
         eventVC.eventStore = self.eventStore
         

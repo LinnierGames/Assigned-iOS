@@ -111,6 +111,18 @@ struct TaskPanelViewModel {
         }
     }
     
+    func deleteTask(at indexPath: IndexPath) {
+        if let task = self.fetchedTasks?.task(at: indexPath) {
+            self.context.delete(task)
+        } else {
+            assertionFailure("no task was found at the indexPath \(indexPath)")
+        }
+    }
+    
+    func save() {
+        PersistenceStack.shared.saveContext(context: self.context)
+    }
+    
     // MARK: - IBACTIONS
     
     // MARK: - LIFE CYCLE

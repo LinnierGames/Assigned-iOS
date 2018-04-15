@@ -187,7 +187,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
                                 <rect key="frame" x="16" y="545" width="343" height="29"/>
                                 <segments>
-                                    <segment title="Ugency"/>
+                                    <segment title="Urgent"/>
                                     <segment title="Selected Day"/>
                                     <segment title="All Tasks"/>
                                 </segments>
@@ -196,7 +196,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iPo-k8-eAc">
-                                <rect key="frame" x="32" y="66.5" width="311" height="462.5"/>
+                                <rect key="frame" x="20" y="66.5" width="335" height="462.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="hHZ-6t-x1H" id="Cm2-02-wW4"/>
@@ -214,11 +214,11 @@
                             <constraint firstItem="5dp-jS-Pe6" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="UPW-Rx-OfF"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="TA9-BI-IYB" secondAttribute="trailing" constant="8" id="Wxc-dI-arP"/>
                             <constraint firstItem="TA9-BI-IYB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" constant="24" id="g7x-Mb-Xeo"/>
-                            <constraint firstItem="iPo-k8-eAc" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="32" id="gUp-31-tEc"/>
+                            <constraint firstItem="iPo-k8-eAc" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="20" id="gUp-31-tEc"/>
                             <constraint firstItem="sTg-G5-Mqf" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="gcb-6z-CTe"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="sTg-G5-Mqf" secondAttribute="trailing" constant="16" id="gr3-Ox-uvt"/>
                             <constraint firstItem="yE4-jQ-FIB" firstAttribute="leading" secondItem="61C-JG-MgR" secondAttribute="leading" constant="16" id="pOT-Gi-Vay"/>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="iPo-k8-eAc" secondAttribute="trailing" constant="32" id="pVF-DI-upa"/>
+                            <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="iPo-k8-eAc" secondAttribute="trailing" constant="20" id="pVF-DI-upa"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="yE4-jQ-FIB" secondAttribute="trailing" constant="16" id="qwp-c6-LBs"/>
                             <constraint firstItem="iPo-k8-eAc" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="8" id="rqS-Fw-2P6"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="5dp-jS-Pe6" secondAttribute="trailing" constant="16" id="sZi-rM-Zeo"/>

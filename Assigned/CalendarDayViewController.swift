@@ -75,7 +75,11 @@ class CalendarDayViewController: DayViewController {
         }
         
         if let parentVcEventHandler = self.parent as? UIViewController & EKEventEditViewDelegate {
-            self.calendar.presentNewEvent(in: parentVcEventHandler)
+            var dateComponent = DateComponents(date: self.selectedDate, forComponents: DateComponents.AllComponents)
+            dateComponent.hour = hour
+            let tappedHourDate = dateComponent.date!
+            
+            self.calendar.presentNewEvent(for: tappedHourDate, in: parentVcEventHandler)
         } else {
             debugPrint("self.parent vc is not EKEventEditViewDelegate \(String(describing: self.parent))")
         }

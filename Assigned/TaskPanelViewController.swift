@@ -151,6 +151,18 @@ class TaskPanelViewController: UIViewController {
         }
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        self.tableView.setEditing(editing, animated: animated)
+        
+        if editing {
+            self.buttonEdit.setTitle("Done", for: .normal)
+        } else {
+            self.buttonEdit.setTitle("Edit", for: .normal)
+        }
+    }
+    
     // MARK: - IBACTIONS
     
 //    @IBOutlet weak var collectionView: UIBatchableCollectView!
@@ -163,7 +175,7 @@ class TaskPanelViewController: UIViewController {
     
     @IBOutlet weak var buttonEdit: UIButton!
     @IBAction func pressEdit(_ sender: Any) {
-//        self.collectionView.editing
+        self.setEditing(self.tableView.isEditing.inverse, animated: true)
     }
     
     @IBOutlet weak var labelInstruction: UILabel!
@@ -255,7 +267,8 @@ extension TaskPanelViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+        self.viewModel.deleteTask(at: indexPath)
+        self.viewModel.save()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
