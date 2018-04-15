@@ -26,13 +26,13 @@ struct TaskPanelViewModel {
     var selectedDate: Date = Date()
     
     enum SearchFilter: Int {
-        case SelectedDay = 0
-        case Priority
+        case Urgency = 0
+        case SelectedDay
+//        case Priority
         case AllTasks
-        case None
     }
     
-    var selectedFilter = SearchFilter.SelectedDay
+    var selectedFilter = SearchFilter.Urgency
     
     var fetchedTasks: NSFetchedResultsController<Task>?
     
@@ -42,35 +42,58 @@ struct TaskPanelViewModel {
     
     mutating func reloadTasks() {
         let fetch: NSFetchRequest<Task> = Task.fetchRequest()
-        
-        let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: false)
-        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
+
+        // unsupported sort
+//        let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: true) { (a, b) -> ComparisonResult in
+//            let a = a as! Task
+//            let aD = a.deadline
+//
+//            let b = b as! Task
+//            let bD = b.deadline
+//
+//            if aD == nil {
+//                if bD == nil {
+//                    return ComparisonResult.orderedSame
+//                } else {
+//                    return ComparisonResult.orderedAscending
+//                }
+//            } else {
+//                if bD == nil {
+//                    return ComparisonResult.orderedDescending
+//                } else {
+//                    return aD!.compare(bD!)
+//                }
+//            }
+//        }
+        let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: true)
+//        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)
         switch selectedFilter {
+        case .Urgency:
+            //TODO: sort by urgency
+            fetch.predicate = NSPredicate(date: self.selectedDate, for: Task.StringKeys.deadline)
+            fetch.sortDescriptors = [
+                sortDeadline,
+                sortTitle
+            ]
         case .SelectedDay:
             fetch.predicate = NSPredicate(date: self.selectedDate, for: Task.StringKeys.deadline)
             fetch.sortDescriptors = [
                 sortDeadline,
-                sortPriority,
                 sortTitle
             ]
-        case .Priority:
-            fetch.predicate = nil
-            fetch.sortDescriptors = [
-                sortPriority,
-                sortDeadline,
-                sortTitle
-            ]
+//        case .Priority:
+//            fetch.predicate = nil
+//            fetch.sortDescriptors = [
+//                sortPriority,
+//                sortDeadline,
+//                sortTitle
+//            ]
         case .AllTasks:
             fetch.predicate = nil
             fetch.sortDescriptors = [
                 sortDeadline,
-                sortPriority,
                 sortTitle
-            ]
-        case .None:
-            fetch.sortDescriptors = [
-                sortDeadline
             ]
         }
         

@@ -120,19 +120,22 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 64
     func setTaskPanel(to newState: ViewState, animated: Bool = true) {
         guard let windowSize = self.view?.frame.size else {
-            return print("self.view was not set")
+            return print("setTaskPanel was invoked before the view was initialized")
         }
         
         switch newState {
         case .Hidden:
             self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
             self.taskPanelViewController.setDisplayToHidden()
+            self.viewForeground.enableTouchBarrier = false
         case .Minimized:
             self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_MINIZIED_VERTICAL_MARGIN
             self.taskPanelViewController.setDisplayToMinizied()
+            self.viewForeground.enableTouchBarrier = false
         case .Expanded:
             self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
             self.taskPanelViewController.setDisplayToExpanded()
+            self.viewForeground.enableTouchBarrier = true
         }
         self.taskPanelViewState = newState
         
@@ -191,6 +194,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     // MARK: - IBACTIONS
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var viewForeground: UITouchBarrier!
     
     @IBAction func pressToday(_ sender: Any) {
         self.selectedDate = Date()

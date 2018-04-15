@@ -17,6 +17,8 @@ import UIKit
 
 class UITaskCollectionViewCell: UICollectionViewCell {
     
+    private var viewModel = UITaskCollectionViewModel()
+    
     enum Types {
         struct Info {
             var cellIdentifier: String
@@ -68,10 +70,11 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     // MARK: - VOID METHODS
     
     func configure(_ task: Task) {
+        self.viewModel.task = task
 //        self.imagePriority.priority = task.priority
         self.labelTitle.text = task.title
-        if let deadline = task.deadline {
-            self.labelDeadline.text = "String(timeInterval: Date().timeIntervalSince(deadline))"
+        if let _ = task.deadline {
+            self.labelDeadline.attributedText = self.viewModel.deadlineText
         } else {
             self.labelDeadline.text = "no deadline"
         }

@@ -84,6 +84,8 @@
 		E9E6C9E520701FF200566149 /* Session+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */; };
 		E9E6C9E9207021FA00566149 /* Subtask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */; };
 		E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */; };
+		E9F8A14B2082B9B700265A9D /* UITouchBarrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A14A2082B9B700265A9D /* UITouchBarrier.swift */; };
+		E9F8A14D2082C04400265A9D /* UITaskCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +195,8 @@
 		E9E6C9E320701FF200566149 /* Session+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Session+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subtask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E9F8A14A2082B9B700265A9D /* UITouchBarrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchBarrier.swift; sourceTree = "<group>"; };
+		E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskCollectionViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +338,7 @@
 				E95E13982075BB3B00BF4276 /* CalendarTableView.swift */,
 				E9925F61207C28E200DCB2B5 /* UIDraggableSessionCell.swift */,
 				E9925F63207C28EC00DCB2B5 /* UIDraggableSessionCell.xib */,
+				E9F8A14A2082B9B700265A9D /* UITouchBarrier.swift */,
 			);
 			name = "Custom Views";
 			sourceTree = "<group>";
@@ -480,6 +485,7 @@
 				E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */,
 				E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */,
 				E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */,
+				E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */,
 				E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */,
 				E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */,
 			);
@@ -838,6 +844,7 @@
 				E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */,
 				E95E139F2076A21A00BF4276 /* CalendarDayViewController.swift in Sources */,
 				E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */,
+				E9F8A14D2082C04400265A9D /* UITaskCollectionViewModel.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E972ADC32061933500B26980 /* SessionViewController.swift in Sources */,
 				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,
@@ -853,6 +860,7 @@
 				E9C5B25C2072715600621B8C /* DirectoryManager.swift in Sources */,
 				E988BD81206B01C100A09F49 /* SessionViewModel.swift in Sources */,
 				E972ADC12061925400B26980 /* TaskNavigationViewController.swift in Sources */,
+				E9F8A14B2082B9B700265A9D /* UITouchBarrier.swift in Sources */,
 				E97226C52073D0D500A021B4 /* RootTabBarController.swift in Sources */,
 				E976BD552077CC870071B13F /* Session+EKEvent.swift in Sources */,
 				E97226C32073D02B00A021B4 /* AgendaViewController.swift in Sources */,

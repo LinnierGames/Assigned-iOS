@@ -106,7 +106,7 @@
                                                                     <outlet property="textFieldDelegate" destination="EUH-mU-ZxT" id="gJU-LM-E6R"/>
                                                                 </connections>
                                                             </textField>
-                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36Q-XT-1Md">
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36Q-XT-1Md">
                                                                 <rect key="frame" x="289" y="1" width="46" height="30"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <connections>

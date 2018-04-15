@@ -125,7 +125,20 @@ class TaskPanelViewController: UIViewController {
                 
                 //TODO: display random headlines and bodies
                 self.labelHeadline.text = "No tasks here"
-                self.labelBody.text = nil
+                switch selectedFilter {
+                case .Urgency:
+                    self.labelBody.text = "There are no tasks in need of planning. Good stuff!"
+                case .SelectedDay:
+                    let selectedDateText: String
+                    if selectedDay.isSameDay(as: Date()) {
+                        selectedDateText = "today"
+                    } else {
+                        selectedDateText = String(date: self.selectedDay, formatterMap: .Day_ofTheWeekInTheMonth, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit)
+                    }
+                    self.labelBody.text = "There are no tasks due for \(selectedDateText)!"
+                case .AllTasks:
+                    self.labelBody.text = "Nice job! You have no tasks to complete"
+                }
             } else {
                 self.labelHeadline.text = nil
                 self.labelBody.text = nil
@@ -133,7 +146,7 @@ class TaskPanelViewController: UIViewController {
             self.labelInstruction.isHidden = false
         } else {
             self.labelHeadline.text = "No tasks, yet 😏"
-            self.labelBody.text = "Let's braindump some ideas! Press $$ to get started"
+            self.labelBody.text = "Let's braindump some tasks! Press $$ to get started"
             self.labelInstruction.isHidden = true
         }
     }
@@ -142,16 +155,20 @@ class TaskPanelViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UIBatchableCollectView!
     @IBOutlet weak var viewHitbox: UIView!
-    @IBOutlet weak var buttonEdit: UIButton!
-    
-    @IBOutlet weak var labelInstruction: UILabel!
-    @IBOutlet weak var labelHeadline: UILabel!
-    @IBOutlet weak var labelBody: UILabel!
     
     @IBOutlet weak var buttonAddTask: UIButton!
     @IBAction func pressAddTask(_ sender: Any) {
         self.performSegue(withIdentifier: UIStoryboardSegue.showTask, sender: nil)
     }
+    
+    @IBOutlet weak var buttonEdit: UIButton!
+    @IBAction func pressEdit(_ sender: Any) {
+//        self.collectionView.editing
+    }
+    
+    @IBOutlet weak var labelInstruction: UILabel!
+    @IBOutlet weak var labelHeadline: UILabel!
+    @IBOutlet weak var labelBody: UILabel!
     
     @IBOutlet weak var segmentFilter: UISegmentedControl!
     @IBAction func didChangeFilter(_ sender: Any) {
@@ -160,6 +177,7 @@ class TaskPanelViewController: UIViewController {
         }
         
         selectedFilter = newFilter
+        self.updateLabels()
     }
     
     // MARK: - LIFE CYCLE
@@ -170,7 +188,7 @@ class TaskPanelViewController: UIViewController {
         let cell = UITaskCollectionViewCell.Types.baseCell
         collectionView.register(cell.nib, forCellWithReuseIdentifier: cell.cellIdentifier)
         
-        viewHitbox.addGestureRecognizer(self.panGesture)
+        self.view.addGestureRecognizer(self.panGesture)
     }
 
 }
