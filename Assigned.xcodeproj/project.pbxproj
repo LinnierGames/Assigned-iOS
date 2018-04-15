@@ -14,8 +14,8 @@
 		E90D683A205B65D00038E2DF /* UITextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */; };
 		E90D683C205B65F00038E2DF /* UIValidatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */; };
 		E947DE4E20772F340006D141 /* PlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E947DE4D20772F340006D141 /* PlanViewModel.swift */; };
-		E95E13792073EBC300BF4276 /* UITaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */; };
-		E95E137A2073EBC300BF4276 /* UITaskCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */; };
+		E95E13792073EBC300BF4276 /* UIDraggableTaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13772073EBC300BF4276 /* UIDraggableTaskTableViewCell.swift */; };
+		E95E137A2073EBC300BF4276 /* UIDraggableTaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E95E13782073EBC300BF4276 /* UIDraggableTaskTableViewCell.xib */; };
 		E95E137C2073F3EF00BF4276 /* TaskPanelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */; };
 		E95E137E2073FBDE00BF4276 /* UIBatchableCollectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E137D2073FBDE00BF4276 /* UIBatchableCollectView.swift */; };
 		E95E13992075BB3B00BF4276 /* CalendarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95E13982075BB3B00BF4276 /* CalendarTableView.swift */; };
@@ -85,7 +85,7 @@
 		E9E6C9E9207021FA00566149 /* Subtask+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */; };
 		E9E6C9ED207022C200566149 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */; };
 		E9F8A14B2082B9B700265A9D /* UITouchBarrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A14A2082B9B700265A9D /* UITouchBarrier.swift */; };
-		E9F8A14D2082C04400265A9D /* UITaskCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */; };
+		E9F8A14D2082C04400265A9D /* UIDraggableTaskTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F8A14C2082C04400265A9D /* UIDraggableTaskTableViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,8 +119,8 @@
 		E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		E90D683B205B65F00038E2DF /* UIValidatedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIValidatedTextField.swift; sourceTree = "<group>"; };
 		E947DE4D20772F340006D141 /* PlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewModel.swift; sourceTree = "<group>"; };
-		E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskCollectionViewCell.swift; sourceTree = "<group>"; };
-		E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UITaskCollectionViewCell.xib; sourceTree = "<group>"; };
+		E95E13772073EBC300BF4276 /* UIDraggableTaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDraggableTaskTableViewCell.swift; sourceTree = "<group>"; };
+		E95E13782073EBC300BF4276 /* UIDraggableTaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIDraggableTaskTableViewCell.xib; sourceTree = "<group>"; };
 		E95E137B2073F3EF00BF4276 /* TaskPanelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPanelViewModel.swift; sourceTree = "<group>"; };
 		E95E137D2073FBDE00BF4276 /* UIBatchableCollectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBatchableCollectView.swift; sourceTree = "<group>"; };
 		E95E13982075BB3B00BF4276 /* CalendarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTableView.swift; sourceTree = "<group>"; };
@@ -196,7 +196,7 @@
 		E9E6C9E7207021FA00566149 /* Subtask+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Subtask+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9E6C9EB207022C200566149 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		E9F8A14A2082B9B700265A9D /* UITouchBarrier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITouchBarrier.swift; sourceTree = "<group>"; };
-		E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITaskCollectionViewModel.swift; sourceTree = "<group>"; };
+		E9F8A14C2082C04400265A9D /* UIDraggableTaskTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDraggableTaskTableViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -485,9 +485,9 @@
 				E99D7C13205B370800FE7B07 /* UISubtaskTableViewCell-TextField.xib */,
 				E90D6837205B65CF0038E2DF /* UITextFieldTableViewCell.swift */,
 				E90D6838205B65CF0038E2DF /* UITextFieldTableViewCell.xib */,
-				E9F8A14C2082C04400265A9D /* UITaskCollectionViewModel.swift */,
-				E95E13772073EBC300BF4276 /* UITaskCollectionViewCell.swift */,
-				E95E13782073EBC300BF4276 /* UITaskCollectionViewCell.xib */,
+				E9F8A14C2082C04400265A9D /* UIDraggableTaskTableViewModel.swift */,
+				E95E13772073EBC300BF4276 /* UIDraggableTaskTableViewCell.swift */,
+				E95E13782073EBC300BF4276 /* UIDraggableTaskTableViewCell.xib */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
@@ -613,7 +613,7 @@
 				E97DF441205305F80050EA21 /* LaunchScreen.storyboard in Resources */,
 				E97DF43E205305F80050EA21 /* Assets.xcassets in Resources */,
 				E97DF439205305F80050EA21 /* Main.storyboard in Resources */,
-				E95E137A2073EBC300BF4276 /* UITaskCollectionViewCell.xib in Resources */,
+				E95E137A2073EBC300BF4276 /* UIDraggableTaskTableViewCell.xib in Resources */,
 				E9CA1C172053178500B8936E /* UITaskTableViewCell.xib in Resources */,
 				E96DC33B206B35CF000BB60A /* Move.storyboard in Resources */,
 				E9AC7F9820715F3900AE365A /* UIInputAccessoryView.xib in Resources */,
@@ -831,7 +831,7 @@
 				E97DF43C205305F80050EA21 /* Assigned.xcdatamodeld in Sources */,
 				E95E139D207682CE00BF4276 /* CalendarStack.swift in Sources */,
 				E9702BB6206B235E00EF1EB1 /* TaskNavigationViewModel.swift in Sources */,
-				E95E13792073EBC300BF4276 /* UITaskCollectionViewCell.swift in Sources */,
+				E95E13792073EBC300BF4276 /* UIDraggableTaskTableViewCell.swift in Sources */,
 				E9CA1C1F2053208200B8936E /* UniversalExtentions.swift in Sources */,
 				E980645F2054B4FF00073B33 /* TaskViewController.swift in Sources */,
 				E95E139B207675EB00BF4276 /* PrivacyService.swift in Sources */,
@@ -844,7 +844,7 @@
 				E98E2F152054FD3300B1624A /* Subtask+CoreDataClass.swift in Sources */,
 				E95E139F2076A21A00BF4276 /* CalendarDayViewController.swift in Sources */,
 				E97226C72073D43E00A021B4 /* PlanViewController.swift in Sources */,
-				E9F8A14D2082C04400265A9D /* UITaskCollectionViewModel.swift in Sources */,
+				E9F8A14D2082C04400265A9D /* UIDraggableTaskTableViewModel.swift in Sources */,
 				E980645B205335C100073B33 /* Folder+CoreDataClass.swift in Sources */,
 				E972ADC32061933500B26980 /* SessionViewController.swift in Sources */,
 				E9E6C9DD206F314100566149 /* DirectoryInfo+CoreDataProperties.swift in Sources */,

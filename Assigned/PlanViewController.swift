@@ -255,13 +255,13 @@ extension PlanViewController: CalendarDayViewControllerDelegate {
     //    }
 }
 
-// MARK: - UITaskCollectionViewCellDelegate
+// MARK: - UIDraggableTaskTableViewCellDelegate
 
-extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecognizerDelegate {
+extension PlanViewController: UIDraggableTaskTableViewCellDelegate, UIGestureRecognizerDelegate {
     static var currentDraggingView: UIDraggableSessionCell?
     static var touchOffset: CGPoint?
     
-    func taskCollection(cell: UITaskCollectionViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
+    func task(cell: UIDraggableTaskTableViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         guard let task = task else {
             return
         }
@@ -282,7 +282,7 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         self.setTaskPanel(to: .Hidden)
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
+    func task(cell: UIDraggableTaskTableViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         guard
             let draggingView = PlanViewController.currentDraggingView,
             let touchOffset = PlanViewController.touchOffset else {
@@ -321,7 +321,7 @@ extension PlanViewController: UITaskCollectionViewCellDelegate, UIGestureRecogni
         draggingView.frame.origin = CGPoint(x: leftAlign, y: location.y)
     }
     
-    func taskCollection(cell: UITaskCollectionViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
+    func task(cell: UIDraggableTaskTableViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?) {
         let todaysTimeline = self.dayViewController.timelineContainer
         guard
             let draggingView = PlanViewController.currentDraggingView,

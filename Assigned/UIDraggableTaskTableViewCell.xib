@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="task - draggable" rowHeight="52" id="RzS-fj-dPE" customClass="UIDraggableTaskTableViewCell" customModule="Assigned" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RzS-fj-dPE" id="5yy-k2-faU">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJP-u5-Fdl">
+                        <rect key="frame" x="0.0" y="4" width="375" height="43.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-Ro-mA8">
+                                <rect key="frame" x="8" y="0.0" width="317.5" height="43.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag_hitbox" translatesAutoresizingMaskIntoConstraints="NO" id="Naa-xN-TVt">
+                                        <rect key="frame" x="0.0" y="0.0" width="16" height="43.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="16" id="IP1-Da-hbA"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ans-r8-TW2" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="0.0" width="43.5" height="43.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ans-r8-TW2" secondAttribute="height" id="DBu-RA-qZS"/>
+                                        </constraints>
+                                        <state key="normal" image="checkbox"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-Q8-ifi">
+                                        <rect key="frame" x="59.5" y="0.0" width="258" height="43.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0 of 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-Fj-Vyh">
+                                <rect key="frame" x="333.5" y="2" width="33.5" height="25.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrv-Ff-zxk">
+                                <rect key="frame" x="67.5" y="29.5" width="299.5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2ai-Fj-Vyh" firstAttribute="top" secondItem="HJP-u5-Fdl" secondAttribute="top" constant="2" id="1LD-CU-fpK"/>
+                            <constraint firstItem="jrv-Ff-zxk" firstAttribute="top" secondItem="2ai-Fj-Vyh" secondAttribute="bottom" constant="2" id="786-OJ-YXi"/>
+                            <constraint firstAttribute="bottom" secondItem="jrv-Ff-zxk" secondAttribute="bottom" constant="2" id="MBB-54-Sx6"/>
+                            <constraint firstAttribute="trailing" secondItem="2ai-Fj-Vyh" secondAttribute="trailing" constant="8" id="Uaf-Mi-Azb"/>
+                            <constraint firstAttribute="trailing" secondItem="jrv-Ff-zxk" secondAttribute="trailing" constant="8" id="UbM-RA-daR"/>
+                            <constraint firstItem="2ai-Fj-Vyh" firstAttribute="leading" secondItem="NSo-Ro-mA8" secondAttribute="trailing" constant="8" id="V7W-ad-gdY"/>
+                            <constraint firstAttribute="bottom" secondItem="NSo-Ro-mA8" secondAttribute="bottom" id="gEZ-JA-rtJ"/>
+                            <constraint firstItem="jrv-Ff-zxk" firstAttribute="leading" secondItem="Ans-r8-TW2" secondAttribute="trailing" id="heE-CO-jrf"/>
+                            <constraint firstItem="NSo-Ro-mA8" firstAttribute="top" secondItem="HJP-u5-Fdl" secondAttribute="top" id="mSf-nG-KDX"/>
+                            <constraint firstItem="NSo-Ro-mA8" firstAttribute="leading" secondItem="HJP-u5-Fdl" secondAttribute="leading" constant="8" id="qip-Dd-2Tt"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="HJP-u5-Fdl" firstAttribute="top" secondItem="5yy-k2-faU" secondAttribute="top" constant="4" id="4f5-yq-Q7z"/>
+                    <constraint firstItem="HJP-u5-Fdl" firstAttribute="leading" secondItem="5yy-k2-faU" secondAttribute="leading" id="DXV-vq-BfS"/>
+                    <constraint firstAttribute="trailing" secondItem="HJP-u5-Fdl" secondAttribute="trailing" id="qFD-vs-Bfy"/>
+                    <constraint firstAttribute="bottom" secondItem="HJP-u5-Fdl" secondAttribute="bottom" constant="4" id="sfE-Eu-OrN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="checkbox" destination="Ans-r8-TW2" id="5bj-NW-ICZ"/>
+                <outlet property="labelDeadline" destination="jrv-Ff-zxk" id="6ed-G4-a8w"/>
+                <outlet property="labelSubtasks" destination="2ai-Fj-Vyh" id="M9b-Ht-13p"/>
+                <outlet property="labelTitle" destination="AWa-Q8-ifi" id="ZPh-CR-9eN"/>
+            </connections>
+            <point key="canvasLocation" x="30.5" y="37"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="checkbox" width="22" height="22"/>
+        <image name="misc_drag_hitbox" width="14" height="31"/>
+    </resources>
+</document>

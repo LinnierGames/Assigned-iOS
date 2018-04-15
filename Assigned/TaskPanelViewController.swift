@@ -105,13 +105,13 @@ class TaskPanelViewController: UIViewController {
         
         self.updateLabels()
         
-        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
     
     private func updateLabels() {
         
         // instruction
-        let nTasks = collectionView(self.collectionView, numberOfItemsInSection: 0)
+        let nTasks = tableView(self.tableView, numberOfRowsInSection: 0)
         if nTasks == 0 {
             self.labelInstruction.text = ""
         } else {
@@ -120,7 +120,7 @@ class TaskPanelViewController: UIViewController {
         
         // Headline and body
         if self.viewModel.userHasCreatedFirstTask {
-            let nTasks = collectionView(self.collectionView, numberOfItemsInSection: 0)
+            let nTasks = tableView(self.tableView, numberOfRowsInSection: 0)
             if nTasks == 0 {
                 
                 //TODO: display random headlines and bodies
@@ -153,7 +153,7 @@ class TaskPanelViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
-    @IBOutlet weak var collectionView: UIBatchableCollectView!
+//    @IBOutlet weak var collectionView: UIBatchableCollectView!
     @IBOutlet weak var viewHitbox: UIView!
     
     @IBOutlet weak var buttonAddTask: UIButton!
@@ -180,35 +180,44 @@ class TaskPanelViewController: UIViewController {
         self.updateLabels()
     }
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     // MARK: - LIFE CYCLE
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cell = UITaskCollectionViewCell.Types.baseCell
-        collectionView.register(cell.nib, forCellWithReuseIdentifier: cell.cellIdentifier)
+        let cell = UIDraggableTaskTableViewCell.Types.baseCell
+        tableView.register(cell.nib, forCellReuseIdentifier: cell.cellIdentifier)
         
         self.view.addGestureRecognizer(self.panGesture)
+        
+        self.tableView.alwaysBounceVertical = false
     }
 
 }
 
-// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+// MARK: - UITableViewDataSource, UITabBarDelegate
 
-extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension TaskPanelViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: RETURN VALUES
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fetchedResultsController?.fetchedObjects?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UITaskCollectionViewCell.Types.baseCell.cellIdentifier, for: indexPath) as! UITaskCollectionViewCell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 52
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: UIDraggableTaskTableViewCell.Types.baseCell.cellIdentifier) as! UIDraggableTaskTableViewCell
         
         let task = self.fetchedResultsController!.task(at: indexPath)
         cell.configure(task)
@@ -245,7 +254,11 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: UIStoryboardSegue.showTask, sender: indexPath)
     }
     
@@ -259,29 +272,6 @@ extension TaskPanelViewController: UICollectionViewDataSource, UICollectionViewD
         self.reloadData()
     }
 }
-//
-//extension TaskPanelViewController: UITaskCollectionViewCellDelegate {
-//
-//    func taskCollection(cell: UITaskCollectionViewCell, didBegin gesture: UILongPressGestureRecognizer) {
-//
-//        self.delegate?.taskCollection?(cell: cell, didBegin: gesture)
-//    }
-//
-//    func taskCollection(cell: UITaskCollectionViewCell, didChange gesture: UILongPressGestureRecognizer) {
-//        guard
-//            let draggingView = PlanViewController.currentDraggingView,
-//            let touchOffset = PlanViewController.touchOffset else {
-//                return assertionFailure("longpress gesture did change without the inital draggingView/touch offset")
-//        }
-//
-//        let location = gesture.location(in: self.view)
-//        draggingView.frame.origin = location + touchOffset
-//    }
-//
-//    func taskCollection(cell: UITaskCollectionViewCell, didEnd gesture: UILongPressGestureRecognizer) {
-//        print("end")
-//    }
-//}
 
 extension TaskPanelViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -295,37 +285,33 @@ extension TaskPanelViewController: UIGestureRecognizerDelegate {
 extension TaskPanelViewController: NSFetchedResultsControllerDelegate {
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.beginUpdates()
+        tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        collectionView.addBatch { (collectionView) in
-            switch type {
-            case .insert: collectionView.insertSections([sectionIndex])
-            case .delete: collectionView.deleteSections([sectionIndex])
-            default: break
-            }
+        switch type {
+        case .insert: tableView.insertSections([sectionIndex], with: .fade)
+        case .delete: tableView.deleteSections([sectionIndex], with: .fade)
+        default: break
         }
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        collectionView.addBatch { (collectionView) in
-            switch type {
-            case .insert:
-                collectionView.insertItems(at: [newIndexPath!])
-            case .delete:
-                collectionView.deleteItems(at: [indexPath!])
-            case .update:
-                collectionView.reloadItems(at: [indexPath!])
-            case .move:
-                collectionView.deleteItems(at: [indexPath!])
-                collectionView.insertItems(at: [newIndexPath!])
-            }
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        collectionView.endUpdates()
+        tableView.endUpdates()
         self.updateLabels()
     }
 }

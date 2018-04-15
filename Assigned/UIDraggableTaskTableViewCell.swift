@@ -8,16 +8,16 @@
 
 import UIKit
 
-@objc protocol UITaskCollectionViewCellDelegate: class {
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
-    @objc optional func taskCollection(cell: UITaskCollectionViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState, toCreateA_SessionFor task: Task?)
+@objc protocol UIDraggableTaskTableViewCellDelegate: class {
+    @objc optional func task(cell: UIDraggableTaskTableViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
+    @objc optional func task(cell: UIDraggableTaskTableViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
+    @objc optional func task(cell: UIDraggableTaskTableViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
+    @objc optional func task(cell: UIDraggableTaskTableViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState, toCreateA_SessionFor task: Task?)
 }
 
-class UITaskCollectionViewCell: UICollectionViewCell {
+class UIDraggableTaskTableViewCell: UITableViewCell {
     
-    private var viewModel = UITaskCollectionViewModel()
+    private var viewModel = UIDraggableTaskTableViewModel()
     
     enum Types {
         struct Info {
@@ -30,7 +30,7 @@ class UITaskCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        static var baseCell = Info(id: "task - draggable", nibTitle: "UITaskCollectionViewCell")
+        static var baseCell = Info(id: "task - draggable", nibTitle: "UIDraggableTaskTableViewCell")
     }
     
     enum State {
@@ -44,12 +44,12 @@ class UITaskCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    weak var delegate: UITaskCollectionViewCellDelegate?
+    weak var delegate: UIDraggableTaskTableViewCellDelegate?
     
     weak var task: Task?
     
     private(set) lazy var longTapGesture: UILongPressGestureRecognizer = {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(UITaskCollectionViewCell.didLongTap(gesture:)))
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(UIDraggableTaskTableViewCell.didLongTap(gesture:)))
         self.contentView.addGestureRecognizer(gesture)
         
         return gesture
@@ -93,19 +93,19 @@ class UITaskCollectionViewCell: UICollectionViewCell {
     @objc private func didLongTap(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            delegate?.taskCollection?(cell: self, didBeginDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didBeginDragging: gesture, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .dragging
         case .changed:
-            delegate?.taskCollection?(cell: self, didChangeDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didChangeDragging: gesture, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .dragging
         case .ended:
-            delegate?.taskCollection?(cell: self, didEndDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didEndDragging: gesture, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .normal
         default:
-            delegate?.taskCollection?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
         }
     }
     

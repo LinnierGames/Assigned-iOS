@@ -1,5 +1,5 @@
 //
-//  UITaskCollectionViewModel.swift
+//  UIDraggableTaskTableViewModel.swift
 //  Assigned
 //
 //  Created by Erick Sanchez on 4/14/18.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit.UIFont
 
-struct UITaskCollectionViewModel {
+struct UIDraggableTaskTableViewModel {
     
     weak var task: Task!
     
