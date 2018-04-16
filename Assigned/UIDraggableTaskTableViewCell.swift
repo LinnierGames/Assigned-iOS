@@ -138,7 +138,7 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
     @IBAction func pressCheckbox(_ sender: Any) {
         self.buttonCheckbox.isChecked.invert()
         
-        self.delegate?.task(cell: self, didPress: buttonCheckbox, with: self.buttonCheckbox.isChecked)
+        self.delegate?.task?(cell: self, didPress: buttonCheckbox, with: self.buttonCheckbox.isChecked)
     }
     
     // MARK: - LIFE CYCLE

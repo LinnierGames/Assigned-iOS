@@ -24,7 +24,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpD-Rs-0Ht" userLabel="Card">
-                                        <rect key="frame" x="8" y="48" width="367" height="726.5"/>
+                                        <rect key="frame" x="8" y="48" width="367" height="610.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlV-Ml-qpe">
                                                 <rect key="frame" x="16" y="12" width="335" height="34"/>
@@ -65,13 +65,13 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="YHn-PW-yaV">
-                                                <rect key="frame" x="16" y="58" width="335" height="652.5"/>
+                                                <rect key="frame" x="16" y="58" width="335" height="536.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="7Hg-CZ-9Dg" userLabel="Checkbox, Title">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="IEn-WI-afx">
-                                                                <rect key="frame" x="0.0" y="5" width="34" height="22"/>
+                                                                <rect key="frame" x="0.0" y="5" width="22" height="22"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ci-48-G2u" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
@@ -90,9 +90,14 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                 </subviews>
+                                                                <variation key="default">
+                                                                    <mask key="subviews">
+                                                                        <exclude reference="AwL-4e-BgX"/>
+                                                                    </mask>
+                                                                </variation>
                                                             </stackView>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Task Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DpK-Ko-kNc" customClass="UIValidatedTextField" customModule="Assigned" customModuleProvider="target">
-                                                                <rect key="frame" x="42" y="0.0" width="239" height="32"/>
+                                                                <rect key="frame" x="30" y="0.0" width="305" height="32"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="32" id="CsT-ji-rux"/>
                                                                 </constraints>
@@ -108,12 +113,18 @@
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36Q-XT-1Md">
                                                                 <rect key="frame" x="289" y="1" width="46" height="30"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <connections>
                                                                     <action selector="pressPriorityBox:" destination="EUH-mU-ZxT" eventType="touchUpInside" id="srB-iX-ooY"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
+                                                        <variation key="default">
+                                                            <mask key="subviews">
+                                                                <exclude reference="36Q-XT-1Md"/>
+                                                            </mask>
+                                                        </variation>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="47F-Yo-x6t" userLabel="Priority Box">
                                                         <rect key="frame" x="0.0" y="44" width="335" height="50"/>
@@ -203,7 +214,7 @@
                                                         </constraints>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="e4q-fB-A5N" userLabel="Deadline">
-                                                        <rect key="frame" x="0.0" y="160" width="335" height="59"/>
+                                                        <rect key="frame" x="0.0" y="44" width="335" height="59"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="kB1-9y-ajw">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
@@ -274,7 +285,7 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="coh-49-Xgt" userLabel="Effort">
-                                                        <rect key="frame" x="0.0" y="231" width="335" height="199.5"/>
+                                                        <rect key="frame" x="0.0" y="115" width="335" height="199.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="mGU-ht-roC">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
@@ -548,11 +559,11 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view hidden="YES" contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="P6Q-RE-6Yg" userLabel="Expandable">
-                                                        <rect key="frame" x="0.0" y="436.5" width="335" height="0.0"/>
+                                                        <rect key="frame" x="0.0" y="320.5" width="335" height="0.0"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1RS-Ek-TtM">
-                                                        <rect key="frame" x="0.0" y="442.5" width="335" height="42"/>
+                                                        <rect key="frame" x="0.0" y="326.5" width="335" height="42"/>
                                                         <inset key="contentEdgeInsets" minX="0.0" minY="12" maxX="0.0" maxY="12"/>
                                                         <state key="normal" title="Delete Task">
                                                             <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -562,7 +573,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WLk-Bn-Lge" userLabel="Tasks">
-                                                        <rect key="frame" x="0.0" y="496.5" width="335" height="156"/>
+                                                        <rect key="frame" x="0.0" y="380.5" width="335" height="156"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="3tz-3q-iHz">
                                                                 <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
@@ -624,6 +635,12 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <variation key="default">
+                                                    <mask key="subviews">
+                                                        <exclude reference="47F-Yo-x6t"/>
+                                                        <exclude reference="k5X-yD-17M"/>
+                                                    </mask>
+                                                </variation>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -643,6 +660,11 @@
                                                 <integer key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="h0w-h8-zcn"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <constraints>

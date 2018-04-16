@@ -164,7 +164,7 @@ class TaskNavigationViewController: UIViewController {
         let motionEffectGroup = UIMotionEffectGroup()
         motionEffectGroup.motionEffects = [xMotion,yMotion]
         
-        scrollView.addMotionEffect(motionEffectGroup)
+//        scrollView.addMotionEffect(motionEffectGroup)
     }
     
     override func viewWillAppear(_ animated: Bool) {

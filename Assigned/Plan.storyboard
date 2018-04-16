@@ -46,7 +46,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CP8-i5-z5p">
-                                <rect key="frame" x="2" y="400" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="400" width="375" height="637"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="637" id="lgu-bJ-dRc"/>
                                 </constraints>
@@ -177,7 +177,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's braindump some ideas! Press $$ to get started" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opw-64-CXl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's braindump some ideas! Press + to get started" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opw-64-CXl">
                                         <rect key="frame" x="0.0" y="28.5" width="343" height="41"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>

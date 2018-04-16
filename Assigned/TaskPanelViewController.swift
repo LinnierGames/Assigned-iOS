@@ -146,7 +146,7 @@ class TaskPanelViewController: UIViewController {
             self.labelInstruction.isHidden = false
         } else {
             self.labelHeadline.text = "No tasks, yet 😏"
-            self.labelBody.text = "Let's braindump some tasks! Press $$ to get started"
+            self.labelBody.text = "Let's braindump some ideas! Press + to get started"
             self.labelInstruction.isHidden = true
         }
     }
