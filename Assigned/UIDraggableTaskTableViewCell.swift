@@ -8,12 +8,20 @@
 
 import UIKit
 
-@objc protocol UIDraggableTaskTableViewCellDelegate: class {
+@objc protocol UIDraggableTaskTableViewCellGestureDelegate: class, UIGestureRecognizerDelegate {
+    
+    // gesture delegate
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didBeginDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didChangeDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didEndDragging gesture: UILongPressGestureRecognizer, toCreateA_SessionFor task: Task?)
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didLongTap gesture: UILongPressGestureRecognizer, with state: UIGestureRecognizerState, toCreateA_SessionFor task: Task?)
+}
+
+@objc protocol UIDraggableTaskTableViewCellDelegate: class {
+    
+    // cell delegate
     @objc optional func task(cell: UIDraggableTaskTableViewCell, didPress checkbox: UIButton, with newState: Bool)
+    
 }
 
 class UIDraggableTaskTableViewCell: UITableViewCell {
@@ -44,6 +52,8 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
             self.updateUI()
         }
     }
+    
+    weak var gestureDelegate: UIDraggableTaskTableViewCellGestureDelegate?
     
     weak var delegate: UIDraggableTaskTableViewCellDelegate?
     
@@ -97,19 +107,19 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
     @objc private func didLongTap(gesture: UILongPressGestureRecognizer) {
         switch gesture.state {
         case .began:
-            delegate?.task?(cell: self, didBeginDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didBeginDragging: gesture, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .dragging
         case .changed:
-            delegate?.task?(cell: self, didChangeDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didChangeDragging: gesture, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .dragging
         case .ended:
-            delegate?.task?(cell: self, didEndDragging: gesture, toCreateA_SessionFor: self.task)
-            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didEndDragging: gesture, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
             self.cellState = .normal
         default:
-            delegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
+            gestureDelegate?.task?(cell: self, didLongTap: gesture, with: gesture.state, toCreateA_SessionFor: self.task)
         }
     }
     

@@ -65,6 +65,16 @@ class TaskPanelViewController: UIViewController {
         }
     }
     
+    var isShowingCompletedTasks: Bool {
+        set {
+            viewModel.isShowingCompletedTasks = newValue
+            reloadData()
+        }
+        get {
+            return viewModel.isShowingCompletedTasks
+        }
+    }
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
@@ -102,6 +112,18 @@ class TaskPanelViewController: UIViewController {
     }
     
     private func updateUI() {
+        
+        // showing completed tasks
+        let showingCompletedTaskTitle = self.isShowingCompletedTasks ? "Show Uncompleted Tasks" : "Show Completed Tasks"
+        self.buttonShowCompletedTasks.tintColor = self.isShowingCompletedTasks ? .white : .buttonTint
+        self.buttonShowCompletedTasks.setTitle(showingCompletedTaskTitle, for: .normal)
+        UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
+            if self.isShowingCompletedTasks {
+                self.buttonShowCompletedTasks.layer.backgroundColor = UIColor.buttonTint.cgColor
+            } else {
+                self.buttonShowCompletedTasks.layer.backgroundColor = UIColor.clear.cgColor
+            }
+        }
         
         self.updateLabels()
         
@@ -196,7 +218,7 @@ class TaskPanelViewController: UIViewController {
     
     @IBOutlet weak var buttonShowCompletedTasks: UIButton!
     @IBAction func pressShowCompletedTasks(_ sender: Any) {
-        
+        self.isShowingCompletedTasks.invert()
     }
     
     // MARK: - LIFE CYCLE
@@ -241,8 +263,9 @@ extension TaskPanelViewController: UITableViewDataSource, UITableViewDelegate {
         let task = self.fetchedResultsController!.task(at: indexPath)
         cell.configure(task)
         
-        cell.delegate = self.planViewController
+        cell.gestureDelegate = self.planViewController
         cell.longTapGestureDelegate = self.planViewController
+        cell.delegate = self
         
         return cell
     }
@@ -298,6 +321,22 @@ extension TaskPanelViewController: UIGestureRecognizerDelegate {
         self.planViewController.setTaskPanel(to: .Hidden)
         
         return true
+    }
+}
+
+// MARK: - UIDraggableTaskTableViewCellDelegate
+
+extension TaskPanelViewController: UIDraggableTaskTableViewCellDelegate {
+    
+    
+    func task(cell: UIDraggableTaskTableViewCell, didPress checkbox: UIButton, with newState: Bool) {
+        guard let indexPath = self.tableView.indexPath(for: cell) else {
+            return assertionFailure("index path not found for cell")
+        }
+
+        let task = self.viewModel.fetchedTasks!.task(at: indexPath)
+        task.isCompleted = newState
+        self.viewModel.save()
     }
 }
 

@@ -34,6 +34,8 @@ struct TaskPanelViewModel {
     
     var selectedFilter = SearchFilter.Urgency
     
+    var isShowingCompletedTasks: Bool = false
+    
     var fetchedTasks: NSFetchedResultsController<Task>?
     
     // MARK: - RETURN VALUES
@@ -65,20 +67,25 @@ struct TaskPanelViewModel {
 //                }
 //            }
 //        }
-        let sortCompleted = NSSortDescriptor(key: Task.StringKeys.isCompleted, ascending: true)
+//        let sortCompleted = NSSortDescriptor(key: Task.StringKeys.isCompleted, ascending: true)
+        
         let sortDeadline = NSSortDescriptor(key: Task.StringKeys.deadline, ascending: true)
 //        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)
         switch selectedFilter {
         case .Urgency:
             //TODO: sort by urgency
-            fetch.predicate = NSPredicate(date: self.selectedDate, for: Task.StringKeys.deadline)
+            fetch.predicate =
+                NSPredicate(date: self.selectedDate, forKey: Task.StringKeys.deadline)
+                    .appending(predicate: NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks)))
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortTitle
             ]
         case .SelectedDay:
-            fetch.predicate = NSPredicate(date: self.selectedDate, for: Task.StringKeys.deadline)
+            fetch.predicate =
+                NSPredicate(date: self.selectedDate, forKey: Task.StringKeys.deadline)
+                    .appending(predicate: NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks)))
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortTitle
@@ -91,7 +98,7 @@ struct TaskPanelViewModel {
 //                sortTitle
 //            ]
         case .AllTasks:
-            fetch.predicate = nil
+            fetch.predicate = NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks))
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortTitle
