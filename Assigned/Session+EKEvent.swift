@@ -59,7 +59,7 @@ extension Session {
         
         let calendar = try! CalendarStack(delegate: nil) //MUST GUARD TO NOT ALLOW THE USER TO SAVE A SESSION WITHOUT PRIVACY ACCESS
         guard let sessionEvent = calendar.event(for: self) else {
-            return //fatalError("the session must already have a calendar event assigned to its id before saving")
+            return assertionFailure("the session must already have a calendar event assigned to its id before saving")
         }
         
         // update and save the event

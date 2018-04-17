@@ -126,7 +126,7 @@ class CalendarDayViewController: DayViewController {
 //    }
 }
 
-extension DayViewController {
+extension CalendarKit.DayViewController {
     var eventWidth: CGFloat {
         // references TimelineView.draw(..)
         return self.view.bounds.size.width - 53
@@ -149,7 +149,7 @@ extension DayViewController {
     }
 }
 
-extension TimelineContainer {
+extension CalendarKit.TimelineContainer {
     
     /**
      <#Lorem ipsum dolor sit amet.#>
