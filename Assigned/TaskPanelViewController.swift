@@ -148,8 +148,10 @@ class TaskPanelViewController: UIViewController {
                 //TODO: display random headlines and bodies
                 self.labelHeadline.text = "No tasks here"
                 switch selectedFilter {
-                case .Urgency:
-                    self.labelBody.text = "There are no tasks in need of planning. Good stuff!"
+                case .AllTasks:
+                    self.labelBody.text = "Nice job! You have no tasks to complete"
+//                case .Urgency:
+//                    self.labelBody.text = "There are no tasks in need of planning. Good stuff!"
                 case .SelectedDay:
                     let selectedDateText: String
                     if selectedDay.isSameDay(as: Date()) {
@@ -158,8 +160,6 @@ class TaskPanelViewController: UIViewController {
                         selectedDateText = String(date: self.selectedDay, formatterMap: .Day_ofTheWeekInTheMonth, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit)
                     }
                     self.labelBody.text = "There are no tasks due for \(selectedDateText)!"
-                case .AllTasks:
-                    self.labelBody.text = "Nice job! You have no tasks to complete"
                 }
             } else {
                 self.labelHeadline.text = nil

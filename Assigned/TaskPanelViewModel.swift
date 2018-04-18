@@ -25,14 +25,15 @@ struct TaskPanelViewModel {
     
     var selectedDate: Date = Date()
     
+    
     enum SearchFilter: Int {
-        case Urgency = 0
+//        case Urgency = 0
+        case AllTasks = 0
         case SelectedDay
 //        case Priority
-        case AllTasks
     }
     
-    var selectedFilter = SearchFilter.Urgency
+    var selectedFilter = SearchFilter.AllTasks
     
     var isShowingCompletedTasks: Bool = false
     
@@ -73,11 +74,17 @@ struct TaskPanelViewModel {
 //        let sortPriority = NSSortDescriptor(key: Task.StringKeys.priorityValue, ascending: false)
         let sortTitle = NSSortDescriptor.localizedStandardCompare(with: Task.StringKeys.title, ascending: false)
         switch selectedFilter {
-        case .Urgency:
-            //TODO: sort by urgency
-            fetch.predicate =
-                NSPredicate(date: self.selectedDate, forKey: Task.StringKeys.deadline)
-                    .appending(predicate: NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks)))
+//        case .Urgency:
+//            //TODO: sort by urgency
+//            fetch.predicate =
+//                NSPredicate(date: self.selectedDate, forKey: Task.StringKeys.deadline)
+//                    .appending(predicate: NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks)))
+//            fetch.sortDescriptors = [
+//                sortDeadline,
+//                sortTitle
+//            ]
+        case .AllTasks:
+            fetch.predicate = NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks))
             fetch.sortDescriptors = [
                 sortDeadline,
                 sortTitle
@@ -97,12 +104,6 @@ struct TaskPanelViewModel {
 //                sortDeadline,
 //                sortTitle
 //            ]
-        case .AllTasks:
-            fetch.predicate = NSPredicate(format: "\(Task.StringKeys.isCompleted) == %@", NSNumber(value: isShowingCompletedTasks))
-            fetch.sortDescriptors = [
-                sortDeadline,
-                sortTitle
-            ]
         }
         
         self.fetchedTasks = NSFetchedResultsController<Task>(

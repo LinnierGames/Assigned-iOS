@@ -188,9 +188,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
                                 <rect key="frame" x="20" y="545" width="335" height="29"/>
                                 <segments>
-                                    <segment title="Urgent"/>
-                                    <segment title="Selected Day"/>
                                     <segment title="All Tasks"/>
+                                    <segment title="Selected Day"/>
                                 </segments>
                                 <connections>
                                     <action selector="didChangeFilter:" destination="hHZ-6t-x1H" eventType="valueChanged" id="giV-ja-Vp2"/>
