@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="task" id="KGk-i7-Jjw" customClass="UITaskTableViewCell" customModule="Assigned" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xqL-r5-PKD">
+                        <rect key="frame" x="16" y="11" width="288" height="22"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BTj-Cm-czP">
+                                <rect key="frame" x="0.0" y="0.0" width="34" height="22"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTl-9b-QLI">
+                                        <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="pTl-9b-QLI" secondAttribute="height" multiplier="1:1" id="opT-m0-a2M"/>
+                                        </constraints>
+                                        <state key="normal" image="file-1"/>
+                                        <connections>
+                                            <action selector="pressCheckbox:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YCg-bH-7sF"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priority-high" translatesAutoresizingMaskIntoConstraints="NO" id="Ufo-rv-yoM" customClass="UIPriorityBox" customModule="Assigned" customModuleProvider="target">
+                                        <rect key="frame" x="26" y="0.0" width="8" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="8" id="yQC-lL-RsE"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y2V-Be-0iX">
+                                <rect key="frame" x="42" y="0.0" width="204.5" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="0 of 0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUp-xz-RzY">
+                                <rect key="frame" x="254.5" y="0.0" width="33.5" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTx-14-n4o">
+                        <rect key="frame" x="16" y="30" width="288" height="13.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="xqL-r5-PKD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="0ma-f4-GdL"/>
+                    <constraint firstItem="iTx-14-n4o" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="CuG-OU-RvB"/>
+                    <constraint firstItem="iTx-14-n4o" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="LnC-AL-5gl"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="xqL-r5-PKD" secondAttribute="bottom" id="aJw-ga-Rac"/>
+                    <constraint firstItem="xqL-r5-PKD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nVB-DM-RSt"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="xqL-r5-PKD" secondAttribute="trailing" id="te6-Tw-oYJ"/>
+                    <constraint firstAttribute="bottom" secondItem="iTx-14-n4o" secondAttribute="bottom" id="vr3-eF-xkd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="buttonCheckbox" destination="pTl-9b-QLI" id="g6h-FY-WmM"/>
+                <outlet property="imagePriority" destination="Ufo-rv-yoM" id="vgl-ty-9vE"/>
+                <outlet property="labelDeadline" destination="iTx-14-n4o" id="WQi-IK-d38"/>
+                <outlet property="labelTasks" destination="FUp-xz-RzY" id="SPX-oB-jd6"/>
+                <outlet property="labelTitle" destination="y2V-Be-0iX" id="2sr-Zz-rIp"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="file-1" width="19" height="24"/>
+        <image name="priority-high" width="5" height="12"/>
+    </resources>
+</document>
