@@ -25,7 +25,7 @@ class SessionDetailedViewModel {
 extension SessionDetailedViewModel {
     
     var textStartDate: String {
-        return String(date: session.startDate, formatterMap: .Day_oftheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, " 'at' ", .Time_noPadding_am_pm)
+        return String(date: session.startDate, formatterMap: .Day_ofTheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthNoPadding, " 'at' ", .Time_noPadding_am_pm)
     }
     
     var textEndDate: String {

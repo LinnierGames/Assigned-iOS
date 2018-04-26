@@ -157,7 +157,7 @@ class TaskPanelViewController: UIViewController {
                     if selectedDay.isSameDay(as: Date()) {
                         selectedDateText = "today"
                     } else {
-                        selectedDateText = String(date: self.selectedDay, formatterMap: .Day_ofTheWeekInTheMonth, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit)
+                        selectedDateText = String(date: self.selectedDay, formatterMap: .Day_ofTheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthNoPadding)
                     }
                     self.labelBody.text = "There are no tasks due for \(selectedDateText)!"
                 }

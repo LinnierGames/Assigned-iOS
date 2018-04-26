@@ -173,7 +173,7 @@ extension SessionViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let formattedDate = String(
                     date: aSession.dayOfStartDate,
-                    formatterMap: .Day_oftheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, ", ", .Year_minimumOfFourDigits)
+                    formatterMap: .Day_ofTheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthNoPadding, ", ", .Year_minimumOfFourDigits)
                 
                 if viewModel.isShowingPastSessions {
                     if section == 0 {

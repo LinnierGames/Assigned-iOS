@@ -51,13 +51,13 @@ struct UIDraggableTaskTableViewModel {
                     
                     // same week - Sunday 21 at 2:02 pm
                     if deadline.isSame(as: Date(), compareBy: { $0.weekOfYear! == $1.weekOfYear! }) {
-                        let deadlineText = String(date: deadline, formatterMap: .Day_oftheWeekFullName, " ", .Day_ofTheMonthSingleDigit, " 'at' ", .Time_noPadding_am_pm)
+                        let deadlineText = String(date: deadline, formatterMap: .Day_ofTheWeekFullName, " ", .Day_ofTheMonthNoPadding, " 'at' ", .Time_noPadding_am_pm)
                         
                         return NSAttributedString(string: deadlineText)
                         
                     // not today, tomorrow or the same week - Sun, Apr 21 at 2:02 pm
                     } else {
-                        let deadlineText = String(date: deadline, formatterMap: .Day_ofTheWeekInTheMonth, ", ", .Month_shorthand, " ", .Day_ofTheMonthSingleDigit, " 'at' ", .Time_noPadding_am_pm)
+                        let deadlineText = String(date: deadline, formatterMap: .Day_ofTheWeekFullName, ", ", .Month_shorthand, " ", .Day_ofTheMonthNoPadding, " 'at' ", .Time_noPadding_am_pm)
                         
                         return NSAttributedString(string: deadlineText)
                     }
