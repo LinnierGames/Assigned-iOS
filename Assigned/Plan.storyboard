@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="mAr-hZ-3af">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="mAr-hZ-3af" customClass="PlanViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oox-cc-Ae0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayx-f1-0VL">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Planner" id="YRW-3Z-c38">
                                         <barButtonItem key="leftBarButtonItem" title="Today" id="Guj-Y6-ZRc">
@@ -33,19 +33,19 @@
                                     <outlet property="delegate" destination="mAr-hZ-3af" id="vxN-9D-4TM"/>
                                 </connections>
                             </navigationBar>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-6d-U3H">
-                                <rect key="frame" x="0.0" y="64" width="375" height="539"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-6d-U3H" userLabel="Planner">
+                                <rect key="frame" x="0.0" y="88" width="375" height="626"/>
                                 <connections>
                                     <segue destination="1Zb-1a-INK" kind="embed" identifier="embed day planner" id="80N-NY-Mzp"/>
                                 </connections>
                             </containerView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HzY-xH-kt6" customClass="UITouchBarrier" customModule="Assigned" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="enableTouchBarrier" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CP8-i5-z5p">
+                            <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CP8-i5-z5p" userLabel="Task Panel">
                                 <rect key="frame" x="0.0" y="400" width="375" height="637"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="637" id="lgu-bJ-dRc"/>
@@ -72,11 +72,15 @@
                                     <segue destination="hHZ-6t-x1H" kind="embed" identifier="embed task panel" id="rhn-5C-MG4"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="80J-Dg-Rxm">
+                                <rect key="frame" x="0.0" y="770" width="375" height="42"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="HzY-xH-kt6" secondAttribute="bottom" id="2DC-Hq-4JR"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="3bD-an-VyC"/>
+                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="trailing" secondItem="80J-Dg-Rxm" secondAttribute="trailing" id="79P-Ov-Cv4"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="top" secondItem="EaC-Jf-Zja" secondAttribute="top" id="968-qL-uxj"/>
                             <constraint firstAttribute="top" secondItem="HzY-xH-kt6" secondAttribute="top" id="FHd-O5-4OA"/>
                             <constraint firstItem="CP8-i5-z5p" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="Lnt-JR-VYF"/>
@@ -85,24 +89,28 @@
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="top" secondItem="Ayx-f1-0VL" secondAttribute="bottom" id="Qph-Fw-oWo"/>
                             <constraint firstItem="HzY-xH-kt6" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="RSO-Wd-ffT"/>
                             <constraint firstItem="CP8-i5-z5p" firstAttribute="top" secondItem="oox-cc-Ae0" secondAttribute="top" constant="400" id="g7E-sG-VDe"/>
+                            <constraint firstItem="80J-Dg-Rxm" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="ht7-Y5-ewN"/>
                             <constraint firstItem="EaC-Jf-Zja" firstAttribute="bottom" secondItem="8FM-6d-U3H" secondAttribute="bottom" constant="64" id="qX9-kc-oTi"/>
+                            <constraint firstItem="80J-Dg-Rxm" firstAttribute="top" secondItem="EaC-Jf-Zja" secondAttribute="bottom" constant="-8" id="r8J-ds-5IP"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="tlZ-GV-qu7"/>
+                            <constraint firstAttribute="bottom" secondItem="80J-Dg-Rxm" secondAttribute="bottom" id="w8H-mz-lla"/>
                             <constraint firstItem="8FM-6d-U3H" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="zBc-rX-hZt"/>
                             <constraint firstItem="EaC-Jf-Zja" firstAttribute="trailing" secondItem="CP8-i5-z5p" secondAttribute="trailing" id="zbp-6c-Anw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EaC-Jf-Zja"/>
                     </view>
                     <connections>
-                        <outlet property="constraintHeight" destination="lgu-bJ-dRc" id="v78-RV-FgP"/>
+                        <outlet property="constraintTaskPanelHeight" destination="lgu-bJ-dRc" id="v78-RV-FgP"/>
                         <outlet property="constraintTopSpacing" destination="g7E-sG-VDe" id="cIF-EU-5F2"/>
                         <outlet property="navigationBar" destination="Ayx-f1-0VL" id="qpo-K8-hhB"/>
+                        <outlet property="viewBottom" destination="80J-Dg-Rxm" id="s7M-Zh-ARC"/>
                         <outlet property="viewForeground" destination="HzY-xH-kt6" id="T4h-NO-x6g"/>
                         <outlet property="viewTaskPanel" destination="CP8-i5-z5p" id="CwQ-Ar-DXf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qg2-TX-FQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="157.59999999999999" y="229.83508245877064"/>
+            <point key="canvasLocation" x="157.59999999999999" y="229.80295566502463"/>
         </scene>
         <!--Task-->
         <scene sceneID="5nm-De-Fpf">
@@ -117,7 +125,7 @@
             <objects>
                 <viewController id="1Zb-1a-INK" customClass="CalendarDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlw-po-ZP0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="539"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="626"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2lb-nn-puC"/>
@@ -163,22 +171,22 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap and hold to add to calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TA9-BI-IYB">
-                                <rect key="frame" x="8" y="39" width="359" height="19.5"/>
+                                <rect key="frame" x="8" y="39" width="359" height="19.333333333333329"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5dp-jS-Pe6">
-                                <rect key="frame" x="16" y="82" width="343" height="69.5"/>
+                                <rect key="frame" x="16" y="82" width="343" height="69"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No tasks, yet 😏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="equ-xX-cGB">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Let's braindump some ideas! Press + to get started" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Opw-64-CXl">
-                                        <rect key="frame" x="0.0" y="28.5" width="343" height="41"/>
+                                        <rect key="frame" x="0.0" y="28.333333333333325" width="343" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -186,7 +194,7 @@
                                 </subviews>
                             </stackView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-G5-Mqf">
-                                <rect key="frame" x="20" y="545" width="335" height="29"/>
+                                <rect key="frame" x="20" y="511" width="335" height="29"/>
                                 <segments>
                                     <segment title="All Tasks"/>
                                     <segment title="Selected Day"/>
@@ -196,7 +204,7 @@
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iPo-k8-eAc">
-                                <rect key="frame" x="16" y="66.5" width="343" height="420.5"/>
+                                <rect key="frame" x="16" y="66.333333333333343" width="343" height="386.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="hHZ-6t-x1H" id="Cm2-02-wW4"/>
@@ -204,7 +212,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8X-RG-CHU">
-                                <rect key="frame" x="20" y="499" width="335" height="34"/>
+                                <rect key="frame" x="20" y="465" width="335" height="34"/>
                                 <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                 <state key="normal" title="Show Completed Tasks"/>
                                 <connections>
@@ -212,10 +220,10 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.99942404029999998" green="0.93553631667752868" blue="0.72505742976452814" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.93725490196078431" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="61C-JG-MgR" firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="64" id="4mM-2S-hRU"/>
+                            <constraint firstAttribute="bottom" secondItem="sTg-G5-Mqf" secondAttribute="bottom" constant="98" id="4mM-2S-hRU"/>
                             <constraint firstItem="61C-JG-MgR" firstAttribute="trailing" secondItem="w8X-RG-CHU" secondAttribute="trailing" constant="20" id="651-2e-EeZ"/>
                             <constraint firstItem="5dp-jS-Pe6" firstAttribute="top" secondItem="TA9-BI-IYB" secondAttribute="bottom" constant="24" id="7ZI-R4-51f"/>
                             <constraint firstItem="yE4-jQ-FIB" firstAttribute="top" secondItem="vU5-tC-tm3" secondAttribute="bottom" id="CWJ-c8-gUW"/>

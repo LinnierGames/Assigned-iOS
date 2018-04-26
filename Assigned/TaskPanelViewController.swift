@@ -290,7 +290,12 @@ class TaskPanelViewController: UIViewController {
         self.buttonEdit.layer.roundedOutline()
         self.buttonShowCompletedTasks.layer.roundedOutline()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.reloadData()
+    }
 }
 
 // MARK: - UITableViewDataSource, UITabBarDelegate
@@ -362,12 +367,6 @@ extension TaskPanelViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: IBACTIONS
     
     // MARK: LIFE CYCLE
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.reloadData()
-    }
 }
 
 // MARK: - UIDraggableTaskTableViewCellDelegate

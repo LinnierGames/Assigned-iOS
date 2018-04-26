@@ -86,7 +86,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var constraintTopSpacing: NSLayoutConstraint!
     
     /** height of the task panel view */
-    @IBOutlet weak var constraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var constraintTaskPanelHeight: NSLayoutConstraint!
     
     private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
     private let BOTTOM_MINIZIED_VERTICAL_MARGIN: CGFloat = 192.0
@@ -98,15 +98,15 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         
         switch newState {
         case .Hidden:
-            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_HIDDEN_VERTICAL_MARGIN
+            self.constraintTopSpacing.constant = windowSize.height - (self.BOTTOM_HIDDEN_VERTICAL_MARGIN + self.safeAreaInsets.bottom)
             self.taskPanelViewController.setDisplayToHidden()
             self.viewForeground.enableTouchBarrier = false
         case .Minimized:
-            self.constraintTopSpacing.constant = windowSize.height - self.BOTTOM_MINIZIED_VERTICAL_MARGIN
+            self.constraintTopSpacing.constant = windowSize.height - (self.BOTTOM_MINIZIED_VERTICAL_MARGIN + self.safeAreaInsets.bottom)
             self.taskPanelViewController.setDisplayToMinizied()
             self.viewForeground.enableTouchBarrier = false
         case .Expanded:
-            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN
+            self.constraintTopSpacing.constant = self.TOP_VERTICAL_MARGIN + self.safeAreaInsets.top
             self.taskPanelViewController.setDisplayToExpanded()
             self.viewForeground.enableTouchBarrier = true
         }
@@ -115,13 +115,16 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         if animated {
             UIView.animate(withDuration: TimeInterval.transitionAnimationDuration, delay: 0.0, options: .curveEaseOut, animations: { [unowned self] in
                 self.view.layoutIfNeeded()
+            }, completion: { [unowned self] (finished) in
+                //TODO: adjust task table view frame v2
+                _ = self
             })
         } else {
             self.view.setNeedsLayout()
         }
         
         // Adjust the height of the task panel
-        self.constraintHeight.constant = windowSize.height
+        self.constraintTaskPanelHeight.constant = windowSize.height - self.safeAreaInsets.bottom
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -161,7 +164,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
         }
         
         // Adjust the height of the task panel
-        self.constraintHeight.constant = size.height
+        self.constraintTaskPanelHeight.constant = size.height
     }
     
     // MARK: - IBACTIONS
@@ -174,6 +177,17 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     @IBOutlet weak var viewTaskPanel: UIView!
+    
+    @IBOutlet weak var viewBottom: UIView! {
+        didSet {
+            let gradientMaskLayer:CAGradientLayer = CAGradientLayer()
+            gradientMaskLayer.frame = self.viewBottom.bounds
+            gradientMaskLayer.colors = [UIColor.taskPanelBackgroundColor.withAlphaComponent(0.0).cgColor, UIColor.taskPanelBackgroundColor.cgColor]
+            gradientMaskLayer.locations = [0.0, 0.35]
+            
+            self.viewBottom.layer.addSublayer(gradientMaskLayer)
+        }
+    }
     
     // MARK: - LIFE CYCLE
     
