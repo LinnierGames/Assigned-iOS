@@ -138,6 +138,7 @@ struct TaskPanelViewModel {
 }
 
 extension TaskPanelViewModel {
+    
     var userHasCreatedFirstTask: Bool {
         
         //TODO: use user prefences to store the key-value of a bool instead of count
@@ -147,5 +148,13 @@ extension TaskPanelViewModel {
         }
         
         return nTask != 0
+    }
+    
+    var fetchedNumberOfTasks: Int {
+        if let nFetchedObjects = self.fetchedTasks?.fetchedObjects?.count {
+            return nFetchedObjects
+        } else {
+            return 0
+        }
     }
 }

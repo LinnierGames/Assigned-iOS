@@ -75,13 +75,50 @@ class TaskPanelViewController: UIViewController {
         }
     }
     
+    enum ViewState {
+        case Hidden
+        case Minimized
+        case Expanded
+        
+        /**
+         decrement to a smaller state
+         */
+        mutating func colaspe() {
+            switch self {
+            case .Expanded:
+                self = .Minimized
+            case .Minimized:
+                self = .Hidden
+            case .Hidden:
+                break
+            }
+        }
+        
+        /**
+         increment to a smaller state
+         */
+        mutating func expand() {
+            switch self {
+            case .Expanded:
+                break
+            case .Minimized:
+                self = .Expanded
+            case .Hidden:
+                self = .Minimized
+            }
+        }
+    }
+    
+    var viewState = ViewState.Minimized
+    
     // MARK: - RETURN VALUES
     
     // MARK: - VOID METHODS
     
     func setDisplayToExpanded() {
+        self.viewState = .Expanded
         UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
-            self.buttonEdit.alpha = 1.0
+            self.updateControlButtons()
             self.labelInstruction.alpha = 1.0
             self.labelHeadline.alpha = 1.0
             self.labelBody.alpha = 1.0
@@ -89,8 +126,9 @@ class TaskPanelViewController: UIViewController {
     }
     
     func setDisplayToMinizied() {
+        self.viewState = .Minimized
         UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
-            self.buttonEdit.alpha = 1.0
+            self.updateControlButtons()
             self.labelInstruction.alpha = 1.0
             self.labelHeadline.alpha = 1.0
             self.labelBody.alpha = 1.0
@@ -98,8 +136,9 @@ class TaskPanelViewController: UIViewController {
     }
     
     func setDisplayToHidden() {
+        self.viewState = .Hidden
         UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
-            self.buttonEdit.alpha = 0.0
+            self.updateControlButtons()
             self.labelInstruction.alpha = 0.0
             self.labelHeadline.alpha = 0.0
             self.labelBody.alpha = 0.0
@@ -112,6 +151,9 @@ class TaskPanelViewController: UIViewController {
     }
     
     private func updateUI() {
+        
+        // add and edit buttons
+        self.updateControlButtons()
         
         // showing completed tasks
         let showingCompletedTaskTitle = self.isShowingCompletedTasks ? "Show Uncompleted Tasks" : "Show Completed Tasks"
@@ -128,6 +170,18 @@ class TaskPanelViewController: UIViewController {
         self.updateLabels()
         
         self.tableView.reloadData()
+    }
+    
+    private func updateControlButtons() {
+        if self.viewState == .Hidden {
+            self.buttonEdit.alpha = 0.0
+        } else {
+            if viewModel.fetchedNumberOfTasks != 0 {
+                self.buttonEdit.alpha = 1.0
+            } else {
+                self.buttonEdit.alpha = 0.0
+            }
+        }
     }
     
     private func updateLabels() {
@@ -371,7 +425,13 @@ extension TaskPanelViewController: NSFetchedResultsControllerDelegate {
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+        
+        self.updateControlButtons()
         self.updateLabels()
+        
+        if self.isEditing, self.viewModel.fetchedNumberOfTasks == 0 {
+            self.setEditing(false, animated: true)
+        }
     }
 }
 

@@ -35,42 +35,15 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK: - VOID METHODS
     
-    enum ViewState {
-        case Hidden
-        case Minimized
-        case Expanded
-        
-        /**
-         decrement to a smaller state
-         */
-        mutating func colaspe() {
-            switch self {
-            case .Expanded:
-                self = .Minimized
-            case .Minimized:
-                self = .Hidden
-            case .Hidden:
-                break
-            }
+    //TODO: OFL - animate from hidden to minized and back to hidden
+    var taskPanelViewState: TaskPanelViewController.ViewState {
+        set {
+            self.taskPanelViewController.viewState = newValue
         }
-        
-        /**
-         increment to a smaller state
-         */
-        mutating func expand() {
-            switch self {
-            case .Expanded:
-                break
-            case .Minimized:
-                self = .Expanded
-            case .Hidden:
-                self = .Minimized
-            }
+        get {
+            return self.taskPanelViewController.viewState
         }
     }
-    
-    //TODO: OFL - animate from hidden to minized and back to hidden
-    var taskPanelViewState: ViewState = .Minimized
     
     private var touchOffset: CGFloat?
     private var originPoint: CGPoint?
@@ -118,7 +91,7 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     private let TOP_VERTICAL_MARGIN: CGFloat = 48.0
     private let BOTTOM_MINIZIED_VERTICAL_MARGIN: CGFloat = 192.0
     private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 64
-    func setTaskPanel(to newState: ViewState, animated: Bool = true) {
+    func setTaskPanel(to newState: TaskPanelViewController.ViewState, animated: Bool = true) {
         guard let windowSize = self.view?.frame.size else {
             return print("setTaskPanel was invoked before the view was initialized")
         }
