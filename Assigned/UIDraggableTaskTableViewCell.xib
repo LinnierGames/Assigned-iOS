@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJP-u5-Fdl">
                         <rect key="frame" x="4" y="4" width="367" height="43.5"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-Ro-mA8">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NSo-Ro-mA8">
                                 <rect key="frame" x="8" y="0.0" width="309.5" height="43.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="misc_drag_hitbox" translatesAutoresizingMaskIntoConstraints="NO" id="Naa-xN-TVt">
@@ -31,18 +30,15 @@
                                             <constraint firstAttribute="width" constant="16" id="IP1-Da-hbA"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ans-r8-TW2" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="0.0" width="43.5" height="43.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Ans-r8-TW2" secondAttribute="height" id="DBu-RA-qZS"/>
-                                        </constraints>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ans-r8-TW2" customClass="UICheckbox" customModule="Assigned" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="0.0" width="22" height="43.5"/>
                                         <state key="normal" image="checkbox"/>
                                         <connections>
                                             <action selector="pressCheckbox:" destination="RzS-fj-dPE" eventType="touchUpInside" id="xoi-Da-dm3"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWa-Q8-ifi">
-                                        <rect key="frame" x="59.5" y="0.0" width="250" height="43.5"/>
+                                        <rect key="frame" x="54" y="0.0" width="255.5" height="43.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -56,11 +52,15 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrv-Ff-zxk">
-                                <rect key="frame" x="67.5" y="29.5" width="291.5" height="12"/>
+                                <rect key="frame" x="54" y="29.5" width="305" height="12"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D3g-xd-G06" userLabel="Hit Box">
+                                <rect key="frame" x="0.0" y="0.0" width="24" height="43.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
@@ -69,11 +69,15 @@
                             <constraint firstAttribute="bottom" secondItem="jrv-Ff-zxk" secondAttribute="bottom" constant="2" id="MBB-54-Sx6"/>
                             <constraint firstAttribute="trailing" secondItem="2ai-Fj-Vyh" secondAttribute="trailing" constant="8" id="Uaf-Mi-Azb"/>
                             <constraint firstAttribute="trailing" secondItem="jrv-Ff-zxk" secondAttribute="trailing" constant="8" id="UbM-RA-daR"/>
+                            <constraint firstItem="D3g-xd-G06" firstAttribute="leading" secondItem="HJP-u5-Fdl" secondAttribute="leading" id="UfV-eK-fcy"/>
                             <constraint firstItem="2ai-Fj-Vyh" firstAttribute="leading" secondItem="NSo-Ro-mA8" secondAttribute="trailing" constant="8" id="V7W-ad-gdY"/>
                             <constraint firstAttribute="bottom" secondItem="NSo-Ro-mA8" secondAttribute="bottom" id="gEZ-JA-rtJ"/>
                             <constraint firstItem="jrv-Ff-zxk" firstAttribute="leading" secondItem="Ans-r8-TW2" secondAttribute="trailing" id="heE-CO-jrf"/>
+                            <constraint firstItem="D3g-xd-G06" firstAttribute="top" secondItem="HJP-u5-Fdl" secondAttribute="top" id="kKR-Ah-XPa"/>
                             <constraint firstItem="NSo-Ro-mA8" firstAttribute="top" secondItem="HJP-u5-Fdl" secondAttribute="top" id="mSf-nG-KDX"/>
+                            <constraint firstItem="Naa-xN-TVt" firstAttribute="trailing" secondItem="D3g-xd-G06" secondAttribute="trailing" id="q5z-zA-CCu"/>
                             <constraint firstItem="NSo-Ro-mA8" firstAttribute="leading" secondItem="HJP-u5-Fdl" secondAttribute="leading" constant="8" id="qip-Dd-2Tt"/>
+                            <constraint firstAttribute="bottom" secondItem="D3g-xd-G06" secondAttribute="bottom" id="vLF-os-LLO"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -94,9 +98,11 @@
             <connections>
                 <outlet property="buttonCheckbox" destination="Ans-r8-TW2" id="1h5-s5-3Vv"/>
                 <outlet property="checkbox" destination="Ans-r8-TW2" id="5bj-NW-ICZ"/>
+                <outlet property="imageDrag" destination="Naa-xN-TVt" id="XPj-0D-fTK"/>
                 <outlet property="labelDeadline" destination="jrv-Ff-zxk" id="6ed-G4-a8w"/>
                 <outlet property="labelSubtasks" destination="2ai-Fj-Vyh" id="M9b-Ht-13p"/>
                 <outlet property="labelTitle" destination="AWa-Q8-ifi" id="ZPh-CR-9eN"/>
+                <outlet property="viewDragHitBox" destination="D3g-xd-G06" id="qon-5F-J8j"/>
             </connections>
             <point key="canvasLocation" x="30.5" y="37"/>
         </tableViewCell>

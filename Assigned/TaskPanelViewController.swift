@@ -370,14 +370,6 @@ extension TaskPanelViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension TaskPanelViewController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        self.planViewController.setTaskPanel(to: .Hidden)
-        
-        return true
-    }
-}
-
 // MARK: - UIDraggableTaskTableViewCellDelegate
 
 extension TaskPanelViewController: UIDraggableTaskTableViewCellDelegate {

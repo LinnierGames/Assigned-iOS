@@ -61,7 +61,8 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
     
     private(set) lazy var longTapGesture: UILongPressGestureRecognizer = {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(UIDraggableTaskTableViewCell.didLongTap(gesture:)))
-        self.contentView.addGestureRecognizer(gesture)
+        gesture.minimumPressDuration = 0.02
+        self.viewDragHitBox?.addGestureRecognizer(gesture)
         
         return gesture
     }()
@@ -136,9 +137,24 @@ class UIDraggableTaskTableViewCell: UITableViewCell {
 //        }
     }
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(animated, animated: animated)
+        
+        //TODO: hide drag image view when editing
+//        if editing {
+//            viewDragHitBox.isUserInteractionEnabled = false
+//            imageDrag.alpha = 0.0
+//        } else {
+//            viewDragHitBox.isUserInteractionEnabled = true
+//            imageDrag.alpha = 1.0
+//        }
+    }
+    
     // MARK: - IBACTIONS
     
 //    @IBOutlet weak var imagePriority: UIPriorityBox!
+    @IBOutlet weak var viewDragHitBox: UIView!
+    @IBOutlet weak var imageDrag: UIImageView!
     @IBOutlet weak var checkbox: UICheckbox!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtasks: UILabel!
