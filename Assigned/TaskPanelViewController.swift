@@ -77,7 +77,6 @@ class TaskPanelViewController: UIViewController {
     
     enum ViewState {
         case Hidden
-        case Minimized
         case Expanded
         
         /**
@@ -86,8 +85,6 @@ class TaskPanelViewController: UIViewController {
         mutating func colaspe() {
             switch self {
             case .Expanded:
-                self = .Minimized
-            case .Minimized:
                 self = .Hidden
             case .Hidden:
                 break
@@ -101,15 +98,13 @@ class TaskPanelViewController: UIViewController {
             switch self {
             case .Expanded:
                 break
-            case .Minimized:
-                self = .Expanded
             case .Hidden:
-                self = .Minimized
+                self = .Expanded
             }
         }
     }
     
-    var viewState = ViewState.Minimized
+    var viewState = ViewState.Hidden
     
     // MARK: - RETURN VALUES
     
@@ -117,16 +112,6 @@ class TaskPanelViewController: UIViewController {
     
     func setDisplayToExpanded() {
         self.viewState = .Expanded
-        UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
-            self.updateControlButtons()
-            self.labelInstruction.alpha = 1.0
-            self.labelHeadline.alpha = 1.0
-            self.labelBody.alpha = 1.0
-        }
-    }
-    
-    func setDisplayToMinizied() {
-        self.viewState = .Minimized
         UIView.animate(withDuration: TimeInterval.transitionAnimationDuration) { [unowned self] in
             self.updateControlButtons()
             self.labelInstruction.alpha = 1.0
@@ -240,9 +225,6 @@ class TaskPanelViewController: UIViewController {
     }
     
     // MARK: - IBACTIONS
-    
-//    @IBOutlet weak var collectionView: UIBatchableCollectView!
-    @IBOutlet weak var viewHitbox: UIView!
     
     @IBOutlet weak var buttonAddTask: UIButton!
     @IBAction func pressAddTask(_ sender: Any) {

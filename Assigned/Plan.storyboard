@@ -35,7 +35,7 @@
                                 </connections>
                             </navigationBar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-6d-U3H" userLabel="Planner">
-                                <rect key="frame" x="0.0" y="88" width="375" height="626"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="616"/>
                                 <connections>
                                     <segue destination="1Zb-1a-INK" kind="embed" identifier="embed day planner" id="80N-NY-Mzp"/>
                                 </connections>
@@ -91,7 +91,7 @@
                             <constraint firstItem="HzY-xH-kt6" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="RSO-Wd-ffT"/>
                             <constraint firstItem="CP8-i5-z5p" firstAttribute="top" secondItem="oox-cc-Ae0" secondAttribute="top" constant="400" id="g7E-sG-VDe"/>
                             <constraint firstItem="80J-Dg-Rxm" firstAttribute="leading" secondItem="EaC-Jf-Zja" secondAttribute="leading" id="ht7-Y5-ewN"/>
-                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="bottom" secondItem="8FM-6d-U3H" secondAttribute="bottom" constant="64" id="qX9-kc-oTi"/>
+                            <constraint firstItem="EaC-Jf-Zja" firstAttribute="bottom" secondItem="8FM-6d-U3H" secondAttribute="bottom" constant="74" id="qX9-kc-oTi"/>
                             <constraint firstItem="80J-Dg-Rxm" firstAttribute="top" secondItem="EaC-Jf-Zja" secondAttribute="bottom" constant="-8" id="r8J-ds-5IP"/>
                             <constraint firstItem="Ayx-f1-0VL" firstAttribute="trailing" secondItem="EaC-Jf-Zja" secondAttribute="trailing" id="tlZ-GV-qu7"/>
                             <constraint firstAttribute="bottom" secondItem="80J-Dg-Rxm" secondAttribute="bottom" id="w8H-mz-lla"/>
@@ -126,7 +126,7 @@
             <objects>
                 <viewController id="1Zb-1a-INK" customClass="CalendarDayViewController" customModule="Assigned" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wlw-po-ZP0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="626"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="616"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="2lb-nn-puC"/>
@@ -148,10 +148,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="617"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="z24-lD-uZv">
-                                        <rect key="frame" x="16" y="64" width="343" height="457"/>
+                                        <rect key="frame" x="16" y="64" width="343" height="477"/>
                                         <subviews>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="68E-ta-q5M">
-                                                <rect key="frame" x="0.0" y="0.0" width="343" height="363"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="383"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="hHZ-6t-x1H" id="cqt-bd-hFS"/>
@@ -159,7 +159,7 @@
                                                 </connections>
                                             </tableView>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj0-WS-f4x">
-                                                <rect key="frame" x="0.0" y="379" width="343" height="34"/>
+                                                <rect key="frame" x="0.0" y="399" width="343" height="34"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                                 <state key="normal" title="Show Completed Tasks"/>
                                                 <connections>
@@ -167,7 +167,7 @@
                                                 </connections>
                                             </button>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sRB-DU-JGB">
-                                                <rect key="frame" x="0.0" y="429" width="343" height="29"/>
+                                                <rect key="frame" x="0.0" y="449" width="343" height="29"/>
                                                 <segments>
                                                     <segment title="All Tasks"/>
                                                     <segment title="Selected Day"/>
@@ -250,7 +250,7 @@
                                     <constraint firstItem="4wY-VD-2ix" firstAttribute="top" secondItem="jCP-4x-c4K" secondAttribute="top" constant="16" id="3lZ-JN-bQV"/>
                                     <constraint firstAttribute="trailing" secondItem="z24-lD-uZv" secondAttribute="trailing" constant="16" id="Fbq-ud-2vJ"/>
                                     <constraint firstItem="z24-lD-uZv" firstAttribute="top" secondItem="jCP-4x-c4K" secondAttribute="top" constant="64" id="HFS-iV-Acd"/>
-                                    <constraint firstAttribute="bottom" secondItem="z24-lD-uZv" secondAttribute="bottom" constant="96" id="J5t-8V-OaG"/>
+                                    <constraint firstAttribute="bottom" secondItem="z24-lD-uZv" secondAttribute="bottom" constant="76" id="J5t-8V-OaG"/>
                                     <constraint firstAttribute="top" secondItem="Jau-SQ-wtM" secondAttribute="top" id="f1s-dm-kvQ"/>
                                     <constraint firstItem="4wY-VD-2ix" firstAttribute="leading" secondItem="kze-3e-YCi" secondAttribute="leading" constant="16" id="qTO-CG-sgd"/>
                                     <constraint firstItem="z24-lD-uZv" firstAttribute="leading" secondItem="jCP-4x-c4K" secondAttribute="leading" constant="16" id="stc-rh-1gm"/>
