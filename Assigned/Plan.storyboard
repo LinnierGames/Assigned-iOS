@@ -158,10 +158,13 @@
                                                     <outlet property="delegate" destination="hHZ-6t-x1H" id="cpv-M3-RxM"/>
                                                 </connections>
                                             </tableView>
-                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj0-WS-f4x">
+                                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kj0-WS-f4x" customClass="UIBootton" customModule="Assigned" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="399" width="343" height="34"/>
                                                 <inset key="contentEdgeInsets" minX="0.0" minY="8" maxX="0.0" maxY="8"/>
                                                 <state key="normal" title="Show Completed Tasks"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedOutline" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="pressShowCompletedTasks:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="UMd-4b-8D8"/>
                                                 </connections>
@@ -191,10 +194,13 @@
                                                     <action selector="pressAddTask:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="OqW-jF-0Gz"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiB-2F-4Lz">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiB-2F-4Lz" customClass="UIBootton" customModule="Assigned" customModuleProvider="target">
                                                 <rect key="frame" x="292" y="0.0" width="51" height="35"/>
                                                 <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                                 <state key="normal" title="Edit"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="roundedOutline" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="pressEdit:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="WsQ-Kk-5dE"/>
                                                 </connections>
@@ -219,18 +225,24 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="Zwv-Gl-cua" userLabel="Hidden Controls">
                                                 <rect key="frame" x="0.0" y="16" width="343" height="34"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBF-eA-ztg">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBF-eA-ztg" customClass="UIBootton" customModule="Assigned" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="34"/>
                                                         <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                                         <state key="normal" title="Plan"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedOutline" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="pressPlan:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="7Pg-cO-9MU"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srt-Ol-yoS">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srt-Ol-yoS" customClass="UIBootton" customModule="Assigned" customModuleProvider="target">
                                                         <rect key="frame" x="243" y="0.0" width="100" height="34"/>
                                                         <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                                         <state key="normal" title="View Tasks"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="roundedOutline" value="YES"/>
+                                                        </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <action selector="pressViewTasks:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="mrk-XL-ISy"/>
                                                         </connections>

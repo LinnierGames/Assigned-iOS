@@ -151,19 +151,16 @@ class TaskViewController: UIViewController {
             isDiscardButtonHidden = false
             isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
-            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         } else if editingMode.isReading {
             isDeleteButtonHidden = true
             isDiscardButtonHidden = true
             isShowingSubtasksTable = true
             buttonLeft.setTitleWithoutAnimation("Edit", for: .normal)
-            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         } else if editingMode.isUpdating {
             isDeleteButtonHidden = false
             isDiscardButtonHidden = false
             isShowingSubtasksTable = false
             buttonLeft.setTitleWithoutAnimation("Save", for: .normal)
-            buttonLeft.layer.borderColor = UIColor.buttonTint.cgColor
         }
 
         // Update task properties
@@ -322,12 +319,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var imageDraggable: UIImageView!
     @IBOutlet weak var contraintTableViewHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var buttonLeft: UIButton! {
-        didSet {
-            buttonLeft.layer.borderWidth = 1.0
-            buttonLeft.layer.cornerRadius = 4.0
-        }
-    }
+    @IBOutlet weak var buttonLeft: UIButton!
     @IBAction func pressLeft(_ sender: Any) {
         // Save new Task
         if editingMode.isCreating {
@@ -399,25 +391,13 @@ class TaskViewController: UIViewController {
         }
     }
 
-    @IBOutlet weak var buttonDelete: UIButton! {
-        didSet {
-            buttonDelete.layer.cornerRadius = 4.0
-            buttonDelete.layer.borderWidth = 1.0
-            buttonDelete.layer.borderColor = UIColor.red.cgColor
-        }
-    }
+    @IBOutlet weak var buttonDelete: UIButton!
     @IBAction func pressDeleteTask(_ sender: Any) {
         dataModel.deleteTask()
         self.dismissViewController()
     }
 
-    @IBOutlet weak var buttonDiscard: UIButton! {
-        didSet {
-            buttonDiscard.layer.cornerRadius = 4.0
-            buttonDiscard.layer.borderWidth = 1.0
-            buttonDiscard.layer.borderColor = UIColor.red.cgColor
-        }
-    }
+    @IBOutlet weak var buttonDiscard: UIButton!
     @IBAction func pressDiscardChanges(_ sender: Any) {
         if editingMode.isCreating {
             self.dismissViewController()

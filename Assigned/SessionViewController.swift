@@ -71,14 +71,7 @@ class SessionViewController: UIViewController {
     @IBOutlet weak var labelTaskTitle: UILabel!
     @IBOutlet weak var tableSessions: UITableView!
     
-    @IBOutlet weak var buttonAddSession: UIButton! {
-        didSet {
-            buttonAddSession.layer.cornerRadius = 4.0
-            buttonAddSession.layer.borderWidth = 1.0
-            buttonAddSession.layer.borderColor = UIColor.buttonTint.cgColor
-        }
-    }
-    
+    @IBOutlet weak var buttonAddSession: UIButton!
     @IBAction func pressAddSession(_ sender: Any) {
         PrivacyService.Calendar.authorize(
             
@@ -97,14 +90,7 @@ class SessionViewController: UIViewController {
         })
     }
     
-    @IBOutlet weak var buttonPastSessions: UIButton! {
-        didSet {
-            buttonPastSessions.layer.cornerRadius = 4.0
-            buttonPastSessions.layer.borderWidth = 1.0
-            buttonPastSessions.layer.borderColor = UIColor.buttonTint.cgColor
-        }
-    }
-    
+    @IBOutlet weak var buttonPastSessions: UIButton!
     @IBAction func pressTogglePastSessions(_ sender: Any) {
         self.viewModel.toggleShowPastSessions()
         self.tableSessions.reloadData()

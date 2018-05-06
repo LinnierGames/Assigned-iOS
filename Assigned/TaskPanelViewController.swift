@@ -300,9 +300,6 @@ class TaskPanelViewController: UIViewController {
         self.view.addGestureRecognizer(self.panGesture)
         
         self.tableView.alwaysBounceVertical = false
-        
-        self.buttonEdit.layer.roundedOutline()
-        self.buttonShowCompletedTasks.layer.roundedOutline()
     }
     
     override func viewWillAppear(_ animated: Bool) {
