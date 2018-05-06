@@ -91,6 +91,9 @@ class PlanViewController: UIViewController, UINavigationControllerDelegate {
     private let TOP_VERTICAL_MARGIN: CGFloat = 28
     private let BOTTOM_HIDDEN_VERTICAL_MARGIN: CGFloat = 84
     func setTaskPanel(to newState: TaskPanelViewController.ViewState, animated: Bool = true) {
+        
+        //TODO: responsiblity to task panel
+        
         guard let windowSize = self.view?.frame.size else {
             return print("setTaskPanel was invoked before the view was initialized")
         }

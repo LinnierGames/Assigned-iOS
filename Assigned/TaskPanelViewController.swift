@@ -160,12 +160,19 @@ class TaskPanelViewController: UIViewController {
     private func updateControlButtons() {
         if self.viewState == .Hidden {
             self.buttonEdit.alpha = 0.0
+            self.viewHiddenControls.alpha = 1.0
+            self.svShowingControls.alpha = 0.0
+            self.buttonEnlargedAddTask.alpha = 1.0
         } else {
             if viewModel.fetchedNumberOfTasks != 0 {
                 self.buttonEdit.alpha = 1.0
             } else {
                 self.buttonEdit.alpha = 0.0
             }
+            
+            self.viewHiddenControls.alpha = 0.0
+            self.svShowingControls.alpha = 1.0
+            self.buttonEnlargedAddTask.alpha = 0.0
         }
     }
     
@@ -226,6 +233,31 @@ class TaskPanelViewController: UIViewController {
     
     // MARK: - IBACTIONS
     
+    @IBOutlet weak var buttonEnlargedAddTask: UIButton!
+    
+    // buttons when the task view is hidden
+    @IBOutlet weak var viewHiddenControls: UIView!
+    @IBOutlet weak var buttonPlan: UIButton!
+    @IBAction func pressPlan(_ sender: Any) {
+        
+        //TODO: responsiblity to self
+        self.planViewController.setTaskPanel(to: .Expanded)
+        
+        //TODO: layout tableview
+    }
+    
+    @IBOutlet weak var buttonViewTasks: UIButton!
+    @IBAction func pressViewTasks(_ sender: Any) {
+        
+        //TODO: responsiblity to self
+        self.planViewController.setTaskPanel(to: .Expanded)
+        
+        //TODO: layout tableview
+    }
+    
+    // buttons when the task view is expanded
+    @IBOutlet weak var svShowingControls: UIStackView!
+    
     @IBOutlet weak var buttonAddTask: UIButton!
     @IBAction func pressAddTask(_ sender: Any) {
         self.performSegue(withIdentifier: UIStoryboardSegue.showTask, sender: nil)
@@ -240,6 +272,13 @@ class TaskPanelViewController: UIViewController {
     @IBOutlet weak var labelHeadline: UILabel!
     @IBOutlet weak var labelBody: UILabel!
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var buttonShowCompletedTasks: UIButton!
+    @IBAction func pressShowCompletedTasks(_ sender: Any) {
+        self.isShowingCompletedTasks.invert()
+    }
+    
     @IBOutlet weak var segmentFilter: UISegmentedControl!
     @IBAction func didChangeFilter(_ sender: Any) {
         guard let newFilter = TaskPanelViewModel.SearchFilter(rawValue: segmentFilter.selectedSegmentIndex) else {
@@ -248,13 +287,6 @@ class TaskPanelViewController: UIViewController {
         
         selectedFilter = newFilter
         self.updateLabels()
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var buttonShowCompletedTasks: UIButton!
-    @IBAction func pressShowCompletedTasks(_ sender: Any) {
-        self.isShowingCompletedTasks.invert()
     }
     
     // MARK: - LIFE CYCLE

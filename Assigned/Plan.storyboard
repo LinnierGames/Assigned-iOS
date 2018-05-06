@@ -223,11 +223,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="54" height="34"/>
                                                         <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                                         <state key="normal" title="Plan"/>
+                                                        <connections>
+                                                            <action selector="pressPlan:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="7Pg-cO-9MU"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Srt-Ol-yoS">
                                                         <rect key="frame" x="243" y="0.0" width="100" height="34"/>
                                                         <inset key="contentEdgeInsets" minX="12" minY="8" maxX="12" maxY="8"/>
                                                         <state key="normal" title="View Tasks"/>
+                                                        <connections>
+                                                            <action selector="pressViewTasks:" destination="hHZ-6t-x1H" eventType="touchUpInside" id="mrk-XL-ISy"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <viewLayoutGuide key="safeArea" id="yu9-eT-L6N"/>
@@ -286,12 +292,17 @@
                     <connections>
                         <outlet property="buttonAddTask" destination="zf7-Js-c4W" id="nZe-6K-0Da"/>
                         <outlet property="buttonEdit" destination="LiB-2F-4Lz" id="heW-Dc-Jop"/>
+                        <outlet property="buttonEnlargedAddTask" destination="9SL-MH-Evg" id="3aQ-P5-dJi"/>
+                        <outlet property="buttonPlan" destination="cBF-eA-ztg" id="paI-fX-x0e"/>
                         <outlet property="buttonShowCompletedTasks" destination="Kj0-WS-f4x" id="h6T-dP-969"/>
+                        <outlet property="buttonViewTasks" destination="Srt-Ol-yoS" id="1Jo-mS-iQX"/>
                         <outlet property="labelBody" destination="Opw-64-CXl" id="SLf-7f-ZvR"/>
                         <outlet property="labelHeadline" destination="equ-xX-cGB" id="3cH-4h-ZjV"/>
                         <outlet property="labelInstruction" destination="jaR-ET-egw" id="5L2-Pw-5Te"/>
                         <outlet property="segmentFilter" destination="sRB-DU-JGB" id="yQ5-Gr-eVS"/>
+                        <outlet property="svShowingControls" destination="4wY-VD-2ix" id="Q3g-Id-ANw"/>
                         <outlet property="tableView" destination="68E-ta-q5M" id="aDW-Za-Gic"/>
+                        <outlet property="viewHiddenControls" destination="Jau-SQ-wtM" id="CFd-tj-R82"/>
                         <segue destination="Lat-im-YRH" kind="presentation" identifier="show task" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="qWM-uG-2ta"/>
                     </connections>
                 </viewController>
