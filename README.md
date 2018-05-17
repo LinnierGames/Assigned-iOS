@@ -1,3 +1,7 @@
+***
+> Archived due to overscoping. please visit [this](https://github.com/LinnierGames/Assigned) repo for the lastest changes on Assigned!
+---
+
 # Assigned!
 
 The tool the keeps your calendar and your new todo list in sync!
